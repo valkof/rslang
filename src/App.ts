@@ -1,3 +1,4 @@
+import { BaseComponent } from "./Abstract/BaseComponent";
 import { Services } from "./Interfaces/Types";
 import { LangService } from "./Services/LangService";
 
@@ -15,10 +16,17 @@ export class App implements IApp {
   }
 
   render(): void {
-    // new Header(this.root, this.services).render();
-    
-    // new Winners(this.root, this.services).render();
+    const h1 = new BaseComponent('h1');
+    h1.element.innerText = 'Hello, RSlang';
 
-    // new Garage(this.root, this.services).render();
+    const p = new BaseComponent('p');
+
+    this.root.appendChild(h1.element);
+    this.root.appendChild(p.element);
+
+    this.services.Lang.getWordsOfBD().then(words => {
+      const firstWord = words[0].word;
+      p.element.innerText = `Первое слово в БД - ${firstWord}`;
+    })
   }
 }

@@ -1,6 +1,8 @@
 import { BaseComponent } from "./Abstract/BaseComponent";
+import { Router } from "./Components/Router";
 import { Services } from "./Interfaces/Types";
 import { LangService } from "./Services/LangService";
+import { RouterService } from "./Services/RouterService";
 
 interface IApp {
   render: () => void;
@@ -11,7 +13,8 @@ export class App implements IApp {
 
   constructor(private readonly root: HTMLElement) {
     this.services = {
-      Lang: new LangService
+      Lang: new LangService,
+      Router: new RouterService
     };
   }
 
@@ -28,5 +31,10 @@ export class App implements IApp {
       const firstWord = words[0].word;
       p.element.innerText = `Первое слово в БД - ${firstWord}`;
     })
+
+    const main = new BaseComponent('main').element;
+    this.root.appendChild(main);
+
+    new Router(main, this.services).render();
   }
 }

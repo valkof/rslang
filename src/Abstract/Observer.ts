@@ -5,7 +5,7 @@ type TObserver = {
 
 interface IObserver {
   addListener: (name: string, callback: (...params: string[]) => void) => void;
-  dispath: (name: string, ...params: string[]) => void;
+  dispatch: (name: string, ...params: string[]) => void;
 }
 
 export class Observer implements IObserver {
@@ -15,7 +15,7 @@ export class Observer implements IObserver {
     this.listeners.push({ name, callback });
   }
 
-  dispath(name: string, ...params: string[]): void {
+  dispatch(name: string, ...params: string[]): void {
     this.listeners.filter(it => it.name === name).forEach(it => it.callback(...params));
   }
 }

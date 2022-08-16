@@ -1,9 +1,9 @@
-import { Word } from "../Interfaces/Types";
+import { TWord } from "../Interfaces/Types";
 
 const host = 'http://127.0.0.1:8075'; // http://localhost:8075/';
 
 
-export async function getWords(page = 0, group = 0): Promise<Word[]> {
+export async function getWords(page = 0, group = 0): Promise<TWord[]> {
   const response = await fetch(`${host}/words?group=${group}&page=${page}`);
   return response.json();
 }

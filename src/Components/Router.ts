@@ -1,16 +1,16 @@
-import { Services, TRoutes } from "../Interfaces/Types";
-import { About } from "../Pages/About";
-import { Audiocall } from "../Pages/Audiocall";
-import { Authorization } from "../Pages/Authorization";
-import { Main } from "../Pages/Main";
-import { Sprint } from "../Pages/Sprint";
-import { Statistic } from "../Pages/Statistic";
-import { Textbook } from "../Pages/Textbook";
+import { TServices, TRoutes } from "../Interfaces/Types";
+import { About } from "../Pages/About/About";
+import { Audiocall } from "../Pages/Audiocall/Audiocall";
+import { Authorization } from "../Pages/Authorization/Authorization";
+import { Main } from "../Pages/Main/Main";
+import { Sprint } from "../Pages/Sprint/Sprint";
+import { Statistic } from "../Pages/Statistic/Statistic";
+import { Textbook } from "../Pages/Textbook/Textbook";
 
 export class Router {
   private readonly routes: TRoutes[];
 
-  constructor(private readonly root: HTMLElement, private readonly services: Services) {
+  constructor(private readonly root: HTMLElement, private readonly services: TServices) {
     this.routes = [
       { path: '', component: new Main(this.root, this.services) },
       { path: '/about', component: new About(this.root, this.services) },
@@ -30,7 +30,7 @@ export class Router {
   rounting(): void {
     const path = document.location.hash.slice(1).toLowerCase() || '';
 
-    this.services.Router.setRouter(path);
+    this.services.router.setRouter(path);
     const currentRount = this.routes.find(item => item.path === path) || this.routes[0];
     currentRount.component.render();
   }

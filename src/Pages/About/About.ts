@@ -1,8 +1,8 @@
-import { BaseComponent } from "../Abstract/BaseComponent";
-import { Services } from "../Interfaces/Types";
+import { BaseComponent } from "../../Abstract/BaseComponent";
+import { TServices } from "../../Interfaces/Types";
 
 export class About {
-  constructor(private readonly parent: HTMLElement, private readonly services: Services) {}
+  constructor(private readonly parent: HTMLElement, private readonly services: TServices) {}
 
   render(): void {
     this.parent.innerHTML = '';

@@ -5,6 +5,6 @@ export class RouterService extends Observer {
 
   setRouter(router: string): void {
     this.router = router;
-    this.dispath('router', this.router);
+    this.dispatch('router', this.router);
   }
 }

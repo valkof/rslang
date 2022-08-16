@@ -1,19 +1,19 @@
-import { About } from "../Pages/About";
-import { Audiocall } from "../Pages/Audiocall";
-import { Authorization } from "../Pages/Authorization";
-import { Main } from "../Pages/Main";
-import { Sprint } from "../Pages/Sprint";
-import { Statistic } from "../Pages/Statistic";
-import { Textbook } from "../Pages/Textbook";
+import { About } from "../Pages/About/About";
+import { Audiocall } from "../Pages/Audiocall/Audiocall";
+import { Authorization } from "../Pages/Authorization/Authorization";
+import { Main } from "../Pages/Main/Main";
+import { Sprint } from "../Pages/Sprint/Sprint";
+import { Statistic } from "../Pages/Statistic/Statistic";
+import { Textbook } from "../Pages/Textbook/Textbook";
 import { LangService } from "../Services/LangService";
 import { RouterService } from "../Services/RouterService";
 
-export type Services = {
-  Lang: LangService,
-  Router: RouterService,
+export type TServices = {
+  lang: LangService,
+  router: RouterService,
 }
 
-export type Word = {
+export type TWord = {
   "id": string,
   "group": number,
   "page": number,
@@ -30,9 +30,9 @@ export type Word = {
   "wordTranslate": string
 }
 
-export type Page = Main | About | Authorization | Textbook | Audiocall | Sprint | Statistic;
+export type TPage = Main | About | Authorization | Textbook | Audiocall | Sprint | Statistic;
 
 export type TRoutes = {
   path: string;
-  component: Page;
+  component: TPage;
 }

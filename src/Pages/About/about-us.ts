@@ -6,7 +6,7 @@ export class AboutUs extends Component {
     title: Component;
     infoWrapper: Component;
     
-    constructor(parent: HTMLElement,) {
+    constructor(parent: HTMLElement) {
         super(parent, 'div', ['about-us-wrapper']);
         this.title = new Component(this.root, 'h2', [], 'Наши преимущества');
         this.infoWrapper = new Component(this.root, 'div', ['info-wrapper']);

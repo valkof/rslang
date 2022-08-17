@@ -2,7 +2,7 @@ import { TServices, TRoutes } from "../Interfaces/Types";
 import { About } from "../Pages/About/About";
 import { Audiocall } from "../Pages/Audiocall/Audiocall";
 import { Authorization } from "../Pages/Authorization/Authorization";
-import { Developers } from "../Pages/Developers/developers";
+//import { Developers } from "../Pages/Developers/developers";
 import { MainPage } from "../Pages/Main/main_pages/main-page";
 //import { Main } from "../Pages/Main/Main";
 import { Sprint } from "../Pages/Sprint/Sprint";

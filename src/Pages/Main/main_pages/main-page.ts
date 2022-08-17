@@ -19,6 +19,10 @@ export class MainPage extends Component {
         this.aboutText = new Component(this.aboutSite.root, 'p', [], 'С "ABC Language" изучение английского языка будет интересным, легким и весьма продуктивным. Попробуй изучение английских слов в игровой форме, и ты удивишься, как быстро пополнится твой словарный запас. Эффективное обучение не должно быть скучным!')
         this.button = new Component(this.aboutSite.root, 'button', [], 'Узнать больше');
 
+        this.button.root.onclick = () => {
+            document.location.hash = '/about'
+        }
+
         this.mainMenu = new Component(this.mainWrapper.root, 'div', ['main-menu']);
         
         mainMenu.forEach((el, i) => {

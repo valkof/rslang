@@ -16,9 +16,9 @@ interface IApp {
 export class App  {
   private readonly services: TServices;
   
-  header: Header;
-  main: MainPage;
-  footer: Footer;
+  //  header: Header;
+  // // main: MainPage;
+  //  footer: Footer;
 
   constructor(private readonly root: HTMLElement) {
    this.services = {
@@ -27,24 +27,23 @@ export class App  {
     };
   }
 
-  render(): void {
-    const h1 = new BaseComponent('h1');
-    h1.element.innerText = 'Hello, RSlang';
+    render(): void {
+      new Header(document.body);
 
-    const p = new BaseComponent('p');
+      const main = new BaseComponent('main').element;
+      this.root.appendChild(main);
+       
+       new Footer(document.body);
+    new Router(main, this.services).render()
 
-    this.root.appendChild(h1.element);
-    this.root.appendChild(p.element);
 
-    this.services.lang.getWordsOfBD().then(words => {
-      const firstWord = words[0].word;
-      p.element.innerText = `Первое слово в БД - ${firstWord}`;
-    })
 
-    const main = new BaseComponent('main').element;
-    this.root.appendChild(main);
+    //this.header = new Header(document.body);
+   // this.main = new MainPage(document.body);
+    //this.footer = new Footer(document.body);
 
-    //new Router(this.main.root, this.services).render()
+
+    
   }
   
 }

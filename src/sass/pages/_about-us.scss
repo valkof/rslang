@@ -1,0 +1,36 @@
+.about-us-wrapper {
+     width: 80%;
+     margin: auto;
+     margin-bottom: 6%;
+}
+
+.about-us-wrapper h2 {
+    font-size: 5rem;
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+.info-wrapper {
+    display: flex;
+}
+
+.info img {
+    width: 300px;
+}
+
+.info {
+    text-align: center;
+  margin-right: 2%;
+}
+
+.info h3 {
+    font-size: 3rem;
+    margin-bottom: 3%;
+    margin-top: 3%;
+}
+
+.info p {
+    font-size: 3rem;
+    text-align: justify;
+    line-height: 42px;
+}

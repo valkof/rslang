@@ -1,0 +1,50 @@
+
+.developers-wrapper {
+    width: 100%;
+    margin-bottom: 3%;
+  
+}
+
+.developers {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+}
+
+.developers-wrapper h2 {
+    font-size: 5rem;
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+.developers img {
+    width: 400px;
+    height: 400px;
+    cursor: pointer;
+}
+
+.developers {
+    transition: 1.2s; 
+   }
+
+.developers img:hover {
+    transform: scale(1.2);
+}
+
+.developer {
+    text-align: center;
+}
+
+.developer h3 {
+    font-size: 3rem;
+    margin-top: 10%;
+    margin-bottom: 2%;
+    text-align: center;
+}
+
+.developer p {
+    font-size: 3rem;
+    text-align: center;
+}
+

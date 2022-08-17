@@ -39,15 +39,13 @@ export type TRoutes = {
   component: TPage;
 }
 
-
 export type TUser = {
   email: string,
   password: string,
   name?: string,
 }
 
-export type TAuthResponse =
-  {
+export type TAuthResponse = {
     message: string,
     token: string,
     refreshToken: string,
@@ -55,14 +53,12 @@ export type TAuthResponse =
     name: string,
   }
 
-export type TUserStatistic =
-  {
+export type TUserStatistic = {
     learnedWords: number,
     optional: any
   }
 
-export type TUserSetting =
-  {
+export type TUserSetting = {
     wordsPerDay: number,
     optional: any
   }

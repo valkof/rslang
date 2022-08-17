@@ -1,27 +1,28 @@
 import { IAgrQerry } from "../Interfaces/Interfaces";
-import { TAuthResponse, TUser, TUserSetting, TUserStatistic, TWord } from "../Interfaces/Types";
+import { TUser, TUserSetting, TUserStatistic, TWord } from "../Interfaces/Types";
+import { host } from "../config";
 
 
 export default class APIService {
-  private readonly host: string;
-  constructor(host: string) {
-    this.host = host;
-  }
   // Words
-  async getWords(page = 0, group = 0): Promise<TWord[]> {
-    const response = await fetch(`${this.host}/words?group=${group}&page=${page}`);
-    return response.json();
+  static async getWords(page = 0, group = 0): Promise<TWord[]> {
+    try {
+      const response = await fetch(`${host}/words?group=${group}&page=${page}`);
+      return response.json();
+    } catch (error) {
+      console.error(error);
+      throw new Error("Ошибка запроса getWords");
+    }
   }
 
-  async getWord(id: string): Promise<TWord> {
-    const response = await fetch(`${this.host}/words/${id}`);
-    const content: TWord = await response.json();
-    return content;
+  static async getWord(id: string): Promise<TWord> {
+    const response = await fetch(`${host}/words/${id}`);
+    return await response.json();
   }
 
   // Users
-  async getUser(userId: string, token: string): Promise<TUser> {
-    const rawResponse = await fetch(`${this.host}/users/${userId}`, {
+  static async getUser(userId: string, token: string): Promise<TUser> {
+    const rawResponse = await fetch(`${host}/users/${userId}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -29,12 +30,11 @@ export default class APIService {
         'Content-Type': 'application/json'
       }
     });
-    const content: TUser = await rawResponse.json();
-    return content;
+    return await rawResponse.json();
   };
 
-  async createUser(user: TUser) {
-    const rawResponse = await fetch(`${this.host}/users`, {
+  static async createUser(user: TUser) {
+    const rawResponse = await fetch(`${host}/users`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -42,12 +42,11 @@ export default class APIService {
       },
       body: JSON.stringify(user)
     });
-    const content: TUser = await rawResponse.json();
-    return content;
+    return await rawResponse.json();
   };
 
-  async updateUser(userId: string, user: TUser, token: string) {
-    const rawResponse = await fetch(`${this.host}/users/${userId}`, {
+  static async updateUser(userId: string, user: TUser, token: string) {
+    const rawResponse = await fetch(`${host}/users/${userId}`, {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -56,12 +55,11 @@ export default class APIService {
       },
       body: JSON.stringify(user)
     });
-    const content: TUser = await rawResponse.json();
-    return content;
+    return await rawResponse.json();
   };
 
-  async deleteUser(userId: string, token: string) {
-    const rawResponse = await fetch(`${this.host}/users/${userId}`, {
+  static async deleteUser(userId: string, token: string) {
+    const rawResponse = await fetch(`${host}/users/${userId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -69,12 +67,11 @@ export default class APIService {
         'Content-Type': 'application/json'
       }
     });
-    const content = await rawResponse.status;
-    return content;
+    return await rawResponse.json();
   };
 
-  async getNewToken(userId: string, token: string) {
-    const rawResponse = await fetch(`${this.host}/users/${userId}/tokens`, {
+  static async getNewToken(userId: string, token: string) {
+    const rawResponse = await fetch(`${host}/users/${userId}/tokens`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -82,13 +79,12 @@ export default class APIService {
         'Content-Type': 'application/json'
       }
     });
-    const content = await rawResponse.json();
-    return content;
+    return await rawResponse.json();
   };
 
   // Login
-  async loginUser(user: TUser) {
-    const rawResponse = await fetch(`${this.host}/signin`, {
+  static async loginUser(user: TUser) {
+    const rawResponse = await fetch(`${host}/signin`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -96,13 +92,12 @@ export default class APIService {
       },
       body: JSON.stringify(user)
     });
-    const content: TAuthResponse = await rawResponse.json();
-    return content;
+    return await rawResponse.json();
   };
 
   // Users/Words
-  async getUserWords(userId: string, token: string) {
-    const rawResponse = await fetch(`${this.host}/users/${userId}/words`, {
+  static async getUserWords(userId: string, token: string) {
+    const rawResponse = await fetch(`${host}/users/${userId}/words`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -110,12 +105,11 @@ export default class APIService {
         'Content-Type': 'application/json'
       }
     });
-    const content = await rawResponse.json();
-    return content;
+    return await rawResponse.json();
   };
 
-  async createUserWord(userId: string, wordId: string, word: any, token: string) {
-    const rawResponse = await fetch(`${this.host}/users/${userId}/words/${wordId}`, {
+  static async createUserWord(userId: string, wordId: string, word: any, token: string) {
+    const rawResponse = await fetch(`${host}/users/${userId}/words/${wordId}`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -124,12 +118,11 @@ export default class APIService {
       },
       body: JSON.stringify(word)
     });
-    const content = await rawResponse.json();
-    return content;
+    return await rawResponse.json();
   };
 
-  async updateUserWord(userId: string, wordId: string, word: any, token: string) {
-    const rawResponse = await fetch(`${this.host}/users/${userId}/words/${wordId}`, {
+  static async updateUserWord(userId: string, wordId: string, word: any, token: string) {
+    const rawResponse = await fetch(`${host}/users/${userId}/words/${wordId}`, {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -138,12 +131,11 @@ export default class APIService {
       },
       body: JSON.stringify(word)
     });
-    const content = await rawResponse.json();
-    return content;
+    return await rawResponse.json();
   };
 
-  async deleteUserWord(userId: string, wordId: string, token: string) {
-    const rawResponse = await fetch(`${this.host}/users/${userId}/words/${wordId}`, {
+  static async deleteUserWord(userId: string, wordId: string, token: string) {
+    const rawResponse = await fetch(`${host}/users/${userId}/words/${wordId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -151,12 +143,11 @@ export default class APIService {
         'Content-Type': 'application/json'
       }
     });
-    const content = await rawResponse.json();
-    return content;
+    return await rawResponse.json();
   };
 
-  async getUserWordsById(userId: string, wordId: string, token: string) {
-    const rawResponse = await fetch(`${this.host}/users/${userId}/words/${wordId}`, {
+  static async getUserWordsById(userId: string, wordId: string, token: string) {
+    const rawResponse = await fetch(`${host}/users/${userId}/words/${wordId}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -164,12 +155,11 @@ export default class APIService {
         'Content-Type': 'application/json'
       }
     });
-    const content = await rawResponse.json();
-    return content;
+    return await rawResponse.json();
   };
 
-  async getUserStatistics(userId: string, token: string): Promise<TUserStatistic> {
-    const rawResponse = await fetch(`${this.host}/users/${userId}/statistics`, {
+  static async getUserStatistics(userId: string, token: string): Promise<TUserStatistic> {
+    const rawResponse = await fetch(`${host}/users/${userId}/statistics`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -177,12 +167,11 @@ export default class APIService {
         'Content-Type': 'application/json'
       }
     });
-    const content: TUserStatistic = await rawResponse.json();
-    return content;
+    return await rawResponse.json();
   };
 
-  async upsertUserStatistics(userId: string, stat: TUserStatistic, token: string) {
-    const rawResponse = await fetch(`${this.host}/users/${userId}/statistics`, {
+  static async upsertUserStatistics(userId: string, stat: TUserStatistic, token: string) {
+    const rawResponse = await fetch(`${host}/users/${userId}/statistics`, {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -191,12 +180,11 @@ export default class APIService {
       },
       body: JSON.stringify(stat)
     });
-    const content = await rawResponse.json();
-    return content;
+    return await rawResponse.json();
   };
 
-  async getUserSetting(userId: string, token: string): Promise<TUserSetting> {
-    const rawResponse = await fetch(`${this.host}/users/${userId}/settings`, {
+  static async getUserSetting(userId: string, token: string): Promise<TUserSetting> {
+    const rawResponse = await fetch(`${host}/users/${userId}/settings`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -204,12 +192,11 @@ export default class APIService {
         'Content-Type': 'application/json'
       }
     });
-    const content: TUserSetting = await rawResponse.json();
-    return content;
+    return await rawResponse.json();
   };
 
-  async upsertUserSetting(userId: string, stat: TUserSetting, token: string) {
-    const rawResponse = await fetch(`${this.host}/users/${userId}/settings`, {
+  static async upsertUserSetting(userId: string, stat: TUserSetting, token: string) {
+    const rawResponse = await fetch(`${host}/users/${userId}/settings`, {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -218,12 +205,11 @@ export default class APIService {
       },
       body: JSON.stringify(stat)
     });
-    const content = await rawResponse.json();
-    return content;
+    return await rawResponse.json();
   };
 
-  async getAgrWordById(userId: string, wordId: string, token: string): Promise<TWord> {
-    const rawResponse = await fetch(`${this.host}/users/${userId}/aggregatedWords/${wordId}`, {
+  static async getAgrWordById(userId: string, wordId: string, token: string): Promise<TWord> {
+    const rawResponse = await fetch(`${host}/users/${userId}/aggregatedWords/${wordId}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -231,12 +217,11 @@ export default class APIService {
         'Content-Type': 'application/json'
       }
     });
-    const content: TWord = await rawResponse.json();
-    return content;
+    return await rawResponse.json();
   };
 
-  async getAgrWord(userId: string, token: string, qerry?: IAgrQerry) {
-    const base = `${this.host}/users/${userId}/aggregatedWords/`
+  static async getAgrWord(userId: string, token: string, qerry?: IAgrQerry) {
+    const base = `${host}/users/${userId}/aggregatedWords/`
     let qerryStr = '';
     let flag = false;
     if (qerry) qerryStr = `?`
@@ -273,7 +258,6 @@ export default class APIService {
         'Content-Type': 'application/json'
       }
     });
-    const content = await rawResponse.json();
-    return content;
+    return await rawResponse.json();
   };
 }

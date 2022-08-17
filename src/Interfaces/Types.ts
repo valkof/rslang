@@ -55,3 +55,14 @@ export type TAuthResponse =
     name: string,
   }
 
+export type TUserStatistic =
+  {
+    learnedWords: number,
+    optional: any
+  }
+
+export type TUserSetting =
+  {
+    wordsPerDay: number,
+    optional: any
+  }

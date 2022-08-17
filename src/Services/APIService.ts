@@ -1,4 +1,4 @@
-import { TAuthResponse, TUser, TWord } from "../Interfaces/Types";
+import { TAuthResponse, TUser, TUserSetting, TUserStatistic, TWord } from "../Interfaces/Types";
 
 
 const host = 'https://app-rsslang.herokuapp.com'; // http://localhost:8075/';
@@ -31,7 +31,6 @@ export default class APIService {
       }
     });
     const content: TUser = await rawResponse.json();
-    console.log(content);
     return content;
   };
 
@@ -45,7 +44,6 @@ export default class APIService {
       body: JSON.stringify(user)
     });
     const content: TUser = await rawResponse.json();
-    console.log(content);
     return content;
   };
 
@@ -60,7 +58,6 @@ export default class APIService {
       body: JSON.stringify(user)
     });
     const content: TUser = await rawResponse.json();
-    console.log(content);
     return content;
   };
 
@@ -74,7 +71,6 @@ export default class APIService {
       }
     });
     const content = await rawResponse.status;
-    console.log(content);
     return content;
   };
 
@@ -88,7 +84,6 @@ export default class APIService {
       }
     });
     const content = await rawResponse.json();
-    console.log(content);
     return content;
   };
 
@@ -103,7 +98,6 @@ export default class APIService {
       body: JSON.stringify(user)
     });
     const content: TAuthResponse = await rawResponse.json();
-    console.log(content);
     return content;
   };
 
@@ -118,7 +112,6 @@ export default class APIService {
       }
     });
     const content = await rawResponse.json();
-    console.log(content);
     return content;
   };
 
@@ -133,7 +126,6 @@ export default class APIService {
       body: JSON.stringify(word)
     });
     const content = await rawResponse.json();
-    console.log(content);
     return content;
   };
 
@@ -148,7 +140,6 @@ export default class APIService {
       body: JSON.stringify(word)
     });
     const content = await rawResponse.json();
-    console.log(content);
     return content;
   };
 
@@ -162,7 +153,6 @@ export default class APIService {
       }
     });
     const content = await rawResponse.json();
-    console.log(content);
     return content;
   };
 
@@ -176,7 +166,61 @@ export default class APIService {
       }
     });
     const content = await rawResponse.json();
-    console.log(content);
     return content;
   };
+
+  async getUserStatistics(id: string, token: string): Promise<TUserStatistic> {
+    const rawResponse = await fetch(`${host}/users/${id}/statistics`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+    const content: TUserStatistic = await rawResponse.json();
+    return content;
+  };
+
+  async upsertUserStatistics(id: string, stat: TUserStatistic, token: string) {
+    const rawResponse = await fetch(`${host}/users/${id}/statistics`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(stat)
+    });
+    const content = await rawResponse.json();
+    return content;
+  };
+
+  async getUserSetting(id: string, token: string): Promise<TUserSetting> {
+    const rawResponse = await fetch(`${host}/users/${id}/settings`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+    const content: TUserSetting = await rawResponse.json();
+    return content;
+  };
+
+  async upsertUserSetting(id: string, stat: TUserSetting, token: string) {
+    const rawResponse = await fetch(`${host}/users/${id}/settings`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(stat)
+    });
+    const content = await rawResponse.json();
+    return content;
+  };
+
 }

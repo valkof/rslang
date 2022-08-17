@@ -17,4 +17,8 @@ getUserWordsById("62fb597ab24caa0016fc64ea",
 )
 */
 const api = new APIService(host);
-console.log(api.getWords());
+//api.loginUser({ "email": "hell@user.com", "password": "12345678" });
+api.getUserStatistics(
+  '62fb597ab24caa0016fc64ea',
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZmI1OTdhYjI0Y2FhMDAxNmZjNjRlYSIsImlhdCI6MTY2MDcxOTcxMSwiZXhwIjoxNjYwNzM0MTExfQ.5rjOaQutPHmU9a0NslBdKbvdpQsK1kTaIRhsYHf4UaU"
+)

@@ -1,4 +1,4 @@
-import { IAgrQerry } from '../Interfaces/Interfaces';
+import { IAgrQery } from '../Interfaces/Interfaces';
 import { TUser, TUserSetting, TUserStatistic, TWord } from '../Interfaces/Types';
 import { HOST } from '../config';
 
@@ -286,38 +286,38 @@ export default class APIService {
     }
   }
 
-  static async getAgrWord(userId: string, token: string, qerry?: IAgrQerry) {
+  static async getAgrWord(userId: string, token: string, qery?: IAgrQery) {
     try {
       const base = `${HOST}/users/${userId}/aggregatedWords/`;
-      let qerryStr = '';
+      let qeryStr = '';
       let flag = false;
-      if (qerry) qerryStr = `?`;
-      if (qerry?.page) {
+      if (qery) qeryStr = `?`;
+      if (qery?.page) {
         if (!flag) {
           flag = true;
-          qerryStr += `page=${qerry?.page}`;
-        } else qerryStr += `&page=${qerry?.page}`;
+          qeryStr += `page=${qery?.page}`;
+        } else qeryStr += `&page=${qery?.page}`;
       }
-      if (qerry?.group) {
+      if (qery?.group) {
         if (!flag) {
           flag = true;
-          qerryStr += `group=${qerry?.group}`;
-        } else qerryStr += `&group=${qerry?.group}`;
+          qeryStr += `group=${qery?.group}`;
+        } else qeryStr += `&group=${qery?.group}`;
       }
-      if (qerry?.wordsPerPage) {
+      if (qery?.wordsPerPage) {
         if (!flag) {
           flag = true;
-          qerryStr += `wordsPerPage=${qerry?.wordsPerPage}`;
-        } else qerryStr += `&wordsPerPage=${qerry?.wordsPerPage}`;
+          qeryStr += `wordsPerPage=${qery?.wordsPerPage}`;
+        } else qeryStr += `&wordsPerPage=${qery?.wordsPerPage}`;
       }
-      if (qerry?.filter) {
+      if (qery?.filter) {
         if (!flag) {
           flag = true;
-          qerryStr += `filter=${qerry?.filter}`;
-        } else qerryStr += `&filter=${qerry?.filter}`;
+          qeryStr += `filter=${qery?.filter}`;
+        } else qeryStr += `&filter=${qery?.filter}`;
       }
 
-      const rawResponse = await fetch(`${base}${qerryStr}`, {
+      const rawResponse = await fetch(`${base}${qeryStr}`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,

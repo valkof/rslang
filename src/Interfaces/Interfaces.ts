@@ -3,8 +3,8 @@ export interface IBaseInterface {
 }
 
 export interface IAgrQerry {
-  group?: number | string,
-  page?: number | string,
-  wordsPerPage?: number | string,
+  group?: string,
+  page?: string,
+  wordsPerPage?: string,
   filter?: string
 }

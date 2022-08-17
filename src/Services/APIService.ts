@@ -1,13 +1,13 @@
 import { IAgrQery } from '../Interfaces/Interfaces';
 import { TUser, TUserSetting, TUserStatistic, TWord } from '../Interfaces/Types';
-import { HOST } from '../config';
+import { HOST } from '../config/index';
 
 export default class APIService {
   // Words
   static async getWords(page = 0, group = 0): Promise<TWord[]> {
     try {
       const response = await fetch(`${HOST}/words?group=${group}&page=${page}`);
-      return response.json();
+      return await response.json();
     } catch (error) {
       throw new Error(`${error}`);
     }

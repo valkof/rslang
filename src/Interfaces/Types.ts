@@ -30,9 +30,26 @@ export type TWord = {
   "wordTranslate": string
 }
 
+
 export type TPage = Main | About | Authorization | Textbook | Audiocall | Sprint | Statistic;
 
 export type TRoutes = {
   path: string;
   component: TPage;
 }
+
+export type TUser = {
+  email: string,
+  password: string,
+  name?: string,
+}
+
+export type TAuthResponse =
+  {
+    message: string,
+    token: string,
+    refreshToken: string,
+    userId: string,
+    name: string,
+  }
+

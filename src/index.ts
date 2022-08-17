@@ -1,7 +1,8 @@
 import { App } from './App';
-import { createUser, createUserWord, deleteUser, deleteUserWord, getNewToken, getUser, getUserWords, getUserWordsById, getWord, loginUser, updateUser, updateUserWord } from './Services/APIService';
+import  APIService  from './Services/APIService';
 import './style.scss';
 
+const host = 'https://app-rsslang.herokuapp.com'; // http://localhost:8075/';
 new App(document.body).render();
 //getWord(`5e9f5ee35eb9e72bc21af4a5`).then((word)=> console.log(word));
 //createUser({ "email": "hell@user.com", "password": "12345678" });
@@ -15,3 +16,5 @@ getUserWordsById("62fb597ab24caa0016fc64ea",
 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZmI1OTdhYjI0Y2FhMDAxNmZjNjRlYSIsImlhdCI6MTY2MDY1NDkxNSwiZXhwIjoxNjYwNjY5MzE1fQ.lHtygKLAMH30pfn9VoX0lX-qE5YUrF2aUlVkh17iAMw"
 )
 */
+const api = new APIService(host);
+console.log(api.getWords());

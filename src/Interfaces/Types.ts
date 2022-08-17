@@ -1,12 +1,14 @@
-import { About } from '../Pages/About/About';
-import { Audiocall } from '../Pages/Audiocall/Audiocall';
-import { Authorization } from '../Pages/Authorization/Authorization';
-import { Main } from '../Pages/Main/Main';
-import { Sprint } from '../Pages/Sprint/Sprint';
-import { Statistic } from '../Pages/Statistic/Statistic';
-import { Textbook } from '../Pages/Textbook/Textbook';
-import { LangService } from '../Services/LangService';
-import { RouterService } from '../Services/RouterService';
+
+import { About } from "../Pages/About/About";
+import { Audiocall } from "../Pages/Audiocall/Audiocall";
+import { Authorization } from "../Pages/Authorization/Authorization";
+import { MainPage } from "../Pages/Main/main_pages/main-page";
+//import { Main } from "../Pages/Main/Main";
+import { Sprint } from "../Pages/Sprint/Sprint";
+import { Statistic } from "../Pages/Statistic/Statistic";
+import { Textbook } from "../Pages/Textbook/Textbook";
+import { LangService } from "../Services/LangService";
+import { RouterService } from "../Services/RouterService";
 
 export type TServices = {
   lang: LangService;
@@ -30,7 +32,7 @@ export type TWord = {
   wordTranslate: string;
 };
 
-export type TPage = Main | About | Authorization | Textbook | Audiocall | Sprint | Statistic;
+export type TPage = MainPage | About | Authorization | Textbook | Audiocall | Sprint | Statistic;
 
 export type TRoutes = {
   path: string;

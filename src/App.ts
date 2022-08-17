@@ -1,12 +1,11 @@
 import { BaseComponent } from "./Abstract/BaseComponent";
 import { Footer } from "./common/footer/footer";
-import { Header } from "./common/header/header";
 
+import { Header } from "./common/header/header";
 import { Router } from "./Components/Router";
 import { TServices } from "./Interfaces/Types";
-import { AboutUsMore } from "./Pages/main_pages/about-us/about-us-more";
-
-import { Main } from "./Pages/main_pages/main";
+import { MainPage } from "./Pages/Main/main_pages/main-page";
+//import { Main } from "./Pages/Main/Main";
 import { LangService } from "./Services/LangService";
 import { RouterService } from "./Services/RouterService";
 
@@ -14,21 +13,15 @@ interface IApp {
   render: () => void;
 }
 
-export class App implements IApp {
+export class App  {
   private readonly services: TServices;
   
   header: Header;
-  //main: Main;
-  //aboutUsMore: AboutUsMore;
+  main: MainPage;
   footer: Footer;
 
   constructor(private readonly root: HTMLElement) {
-    this.header = new Header(document.body);
-   // this.aboutUsMore = new AboutUsMore(document.body)
-    //this.main = new Main(document.body);
-    this.footer = new Footer(document.body);
-
-    this.services = {
+   this.services = {
       lang: new LangService,
       router: new RouterService
     };
@@ -44,13 +37,14 @@ export class App implements IApp {
     this.root.appendChild(p.element);
 
     this.services.lang.getWordsOfBD().then(words => {
-      const firstWord = words?.data[0].word || '';
+      const firstWord = words[0].word;
       p.element.innerText = `Первое слово в БД - ${firstWord}`;
     })
 
     const main = new BaseComponent('main').element;
     this.root.appendChild(main);
 
-    new Router(main, this.services).render();
+    //new Router(this.main.root, this.services).render()
   }
+  
 }

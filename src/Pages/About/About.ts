@@ -1,5 +1,6 @@
 import { BaseComponent } from "../../Abstract/BaseComponent";
 import { TServices } from "../../Interfaces/Types";
+import { AboutUs } from "./about-us";
 
 export class About {
   constructor(private readonly parent: HTMLElement, private readonly services: TServices) {}
@@ -7,9 +8,6 @@ export class About {
   render(): void {
     this.parent.innerHTML = '';
 
-    const container = new BaseComponent('div', ['about']).element;
-    container.innerHTML = `<h1>Page About</h1>`;
-
-    this.parent.appendChild(container);
+    const container = new AboutUs(this.parent);
   }
 }

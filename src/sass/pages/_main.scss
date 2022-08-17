@@ -1,49 +1,61 @@
+
 .main-wrapper {
     width: 80%;
     margin: auto;
+    display: flex;
+    
 }
 
 
 .about-site {
     width: 50%;
+    margin: auto 0;
 }
 
 .about-site h2 {
-    font-size: 4rem;
+    font-size: 7rem;
     margin-bottom: 2%;
+    font-family: cursive;
 }
 
 .about-site p {
-    font-size: 3rem;
+    font-size: 3.5rem;
     text-align: justify;
-
+    line-height: 48px;
+    font-family: cursive;
 }
 
 .about-site button {
     cursor: pointer;
     font-size: 2rem;
-    background: #f9d49d;
+    color: #916546;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 3px;
+    font-family: cursive;
+    border: none;   
   
+    background: #f5a329;
     text-shadow: 0px 2px 0px rgb(209 151 51 / 30%);
-  font-size: 22px;
-  height: 58px;
-  width: 240px;
-  margin: 50px 0 0 50px;
-  overflow: hidden;
-  display: block;
-  text-align: center;
-  line-height: 58px;
-  -webkit-border-radius: 5px;
--moz-border-radius: 5px;
-border-radius: 5px;
--webkit-box-shadow: 0px 6px 0px rgba(168, 116, 116, 0.8);
--moz-box-shadow: 0px 6px 0px rgba(187, 141, 141, 0.8);
-box-shadow: 6px 8px 6px rgb(104 75 21 / 80%);
-background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
-background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
-background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
-background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
-background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    font-size: 22px;
+    height: 58px;
+    width: 240px;
+    margin: 50px 0 0 50px;
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    line-height: 58px;
+    -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 6px 0px rgba(168, 116, 116, 0.8);
+  -moz-box-shadow: 0px 6px 0px rgba(187, 141, 141, 0.8);
+  box-shadow: 6px 8px 6px rgb(104 75 21 / 80%);
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
 }
 
 .about-site button:hover {
@@ -58,3 +70,34 @@ background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
     background-image: linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
 }
 
+.menu-img0, .menu-img1,  .menu-img2, .menu-img3 {
+    width: 300px;
+    height: 300px;
+    background-size: cover;
+    cursor: pointer;
+}
+
+.menu-img0 {
+    margin-left: 100%;
+}
+
+.menu-img1 {
+    margin-left: 250%;
+    margin-top: -50%;
+}
+
+.menu-img2{
+    margin-left: 100%;
+    margin-top: -30%;
+}
+
+.menu-img3 {
+    margin-left: 250%;
+    margin-top: -30%;
+}
+
+.menu-img0:hover::after, .menu-img1:hover::after,  .menu-img2:hover::after, .menu-img3:hover::after { 
+    content: attr(data-title); 
+    font-size: 3rem;
+    color: #c47136;
+   }

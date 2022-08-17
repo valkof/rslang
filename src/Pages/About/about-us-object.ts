@@ -1,4 +1,4 @@
-export const aboutUs = [  
+export const aboutUsObj = [  
 {
 src: 'assets/about-us/learn.png',
 title: "Изучай новое",
@@ -16,6 +16,11 @@ text: "В учебнике собраны 3600 самых используемы
         title: "Отслеживай свой прогресс",
         text: "В личном кабинете ты можешь следить за своим прогрессом: сколько слов ты уже выучил всего и за каждый день.",
         },
-    
 
 ]
+
+export interface IAboutUsObj {
+    src: string,
+    title: string,
+    text: string,
+}

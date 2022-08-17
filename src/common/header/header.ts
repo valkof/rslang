@@ -1,6 +1,7 @@
 
 import { Component } from "../../Abstract/component";
-import { Enter } from "./enter";
+import { AuturizationButton } from "./autorization-btn";
+
 
 export class Header extends Component {
   headerWrapper: Component;
@@ -8,7 +9,7 @@ export class Header extends Component {
   navigationWrapper: Component;
   navigation: Component;
   ul: Component;
-  enter: Enter;
+  autorisationButton: AuturizationButton;
   
 
   constructor(parent: HTMLElement) {
@@ -19,12 +20,12 @@ export class Header extends Component {
     this.navigation = new Component(this.navigationWrapper.root, 'nav', []);
     this.ul = new Component(this.navigation.root, 'ul');
   
-    ['Наша команда', 'Электронный учебник', 'Спринт', 'Аудиовызов', 'Статистика'].forEach((el) => {
+    ['Наша команда', 'Учебник', 'Спринт', 'Аудиовызов', 'Статистика'].forEach((el) => {
       const navigation = new Component(this.ul.root, 'li', [], el)
        
     });
 
-    this.enter = new Enter(this.headerWrapper.root);
+    this.autorisationButton = new AuturizationButton(this.headerWrapper.root);
     
   }
 

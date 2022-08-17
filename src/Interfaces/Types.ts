@@ -31,12 +31,14 @@ export type TWord = {
 }
 
 
+
 export type TPage = Main | About | Authorization | Textbook | Audiocall | Sprint | Statistic;
 
 export type TRoutes = {
   path: string;
   component: TPage;
 }
+
 
 export type TUser = {
   email: string,

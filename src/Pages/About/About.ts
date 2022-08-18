@@ -1,4 +1,5 @@
 import { Component } from "../../Abstract/component";
+import { TServices } from "../../Interfaces/Types";
 import { aboutUs } from "./about-us-obj";
 
 export class About extends Component {
@@ -6,7 +7,7 @@ export class About extends Component {
 
   infoWrapper: Component;
     
-  constructor(parent: HTMLElement) {
+  constructor(parent: HTMLElement, private readonly services: TServices) {
     super(parent, 'div', ['about-us-wrapper']);
     this.title = new Component(this.root, 'h2', [], 'Наши преимущества');
     this.infoWrapper = new Component(this.root, 'div', ['info-wrapper']);

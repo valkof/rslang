@@ -1,0 +1,71 @@
+.section_authorization {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  width: 300px;
+  margin: auto;
+  border-radius: 10px;
+  border: 1px solid gray;
+  background-color: white;
+  padding: 10px;
+  position: relative;
+
+  div {
+    position: relative;
+    width: 100%;
+  }
+  
+  .email__input,
+  .password__input {
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    padding: 0px 10px;
+  }
+
+  .email__span,
+  .password__span {
+    position: absolute;
+    left: 10px;
+    top: -6px;
+    font-size: 10px;
+    background-color: white;
+    padding: 0px 5px;
+  }
+
+  .section__massage {
+    font-size: 12px;
+  }
+
+  .section__buttons {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .button {
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+  }
+
+  div.section__spinner {
+    position: absolute;
+    width: 80px;
+    top: calc(50% - 40px);
+    z-index: -1;
+    display: flex;
+    justify-content: center;
+    
+    &.disable {
+      z-index: 1;
+      opacity: 1;
+    }
+  }
+}
+
+.disable {
+  pointer-events: none;
+  opacity: 0.5;
+}

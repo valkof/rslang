@@ -1,5 +1,6 @@
 
 import { Component } from "../../Abstract/component";
+import { TServices } from "../../Interfaces/Types";
 import { AuturizationButton } from "./autorization-btn";
 
 
@@ -14,7 +15,7 @@ export class Header extends Component {
 
   pathTitle: Component;
   
-  constructor(parent: HTMLElement) {
+  constructor(parent: HTMLElement, private readonly services: TServices) {
     super(parent, "header");
     this.headerWrapper = new Component(this.root, "div", ["header-wrapper"]);
     this.pathTitle = new Component(this.headerWrapper.root, 'a', [], null, 'href', '#')
@@ -24,8 +25,13 @@ export class Header extends Component {
     this.navigationWrapper = new Component(this.headerWrapper.root, 'div', ['navigation-wrapper']);
     
     
-  const nav = [{name: 'Наша команда', href: 'developers'}, {name: 'Учебник', href: 'textbook'}, {name:'Спринт', href: 'sprint'}, {name: 'Аудиовызов', href: 'audiocall'}, {name:'Статистика', href: 'statistic'}];
-     nav.forEach(({name, href}) => {
+    const nav = [
+      {name: 'Наша команда', href: 'developers'},
+      {name: 'Учебник', href: 'textbook'},
+      {name:'Спринт', href: 'sprint'},
+      {name: 'Аудиовызов', href: 'audiocall'},
+      {name:'Статистика', href: 'statistic'}];
+    nav.forEach(({name, href}) => {
       const navigation = new Component(this.navigationWrapper.root, 'a', [], name, 'href', '#' + href)
     });
 

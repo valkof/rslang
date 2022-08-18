@@ -60,3 +60,8 @@ export type TUserSetting = {
   wordsPerDay: number;
   optional: any;
 };
+
+export type TAgrWordById = {
+  difficulty: string;
+  optional: any;
+}

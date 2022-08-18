@@ -8,3 +8,8 @@ export interface IAgrParams {
   wordsPerPage?: string,
   filter?: string
 }
+
+export interface IResponse<T> {
+  status: number,
+  data: T
+}

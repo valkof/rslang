@@ -2,7 +2,7 @@ export interface IBaseInterface {
   render: () => void;
 }
 
-export interface IAgrQery {
+export interface IAgrParams {
   group?: string,
   page?: string,
   wordsPerPage?: string,

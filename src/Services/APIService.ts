@@ -1,29 +1,31 @@
-import { IAgrQery } from '../Interfaces/Interfaces';
+import { IAgrParams } from '../Interfaces/Interfaces';
 import { TUser, TUserSetting, TUserStatistic, TWord } from '../Interfaces/Types';
 import { HOST } from '../config/index';
 
 export default class APIService {
   // Words
-  static async getWords(page = 0, group = 0): Promise<TWord[]> {
+  static async getWords(page = 0, group = 0): Promise<TWord[] | null> {
     try {
       const response = await fetch(`${HOST}/words?group=${group}&page=${page}`);
       return await response.json();
     } catch (error) {
-      throw new Error(`${error}`);
+      console.error(`getWords ${error}`);
+      return null;
     }
   }
 
-  static async getWord(id: string): Promise<TWord> {
+  static async getWord(id: string): Promise<TWord | null> {
     try {
       const response = await fetch(`${HOST}/words/${id}`);
       return await response.json();
     } catch (error) {
-      throw new Error(`${error}`);
+      console.error(`getWord ${error}`);
+      return null;
     }
   }
 
   // Users
-  static async getUser(userId: string, token: string): Promise<TUser> {
+  static async getUser(userId: string, token: string): Promise<TUser | null> {
     try {
       const rawResponse = await fetch(`${HOST}/users/${userId}`, {
         method: 'GET',
@@ -35,7 +37,8 @@ export default class APIService {
       });
       return await rawResponse.json();
     } catch (error) {
-      throw new Error(`${error}`);
+      console.error(`getUser ${error}`);
+      return null;
     }
   }
 
@@ -51,7 +54,8 @@ export default class APIService {
       });
       return await rawResponse.json();
     } catch (error) {
-      throw new Error(`${error}`);
+      console.error(`createUser ${error}`);
+      return null;
     }
   }
 
@@ -68,7 +72,8 @@ export default class APIService {
       });
       return await rawResponse.json();
     } catch (error) {
-      throw new Error(`${error}`);
+      console.error(`updateUser ${error}`);
+      return null;
     }
   }
 
@@ -84,7 +89,8 @@ export default class APIService {
       });
       return await rawResponse.json();
     } catch (error) {
-      throw new Error(`${error}`);
+      console.error(`deleteUser ${error}`);
+      return null;
     }
   }
 
@@ -100,7 +106,8 @@ export default class APIService {
       });
       return await rawResponse.json();
     } catch (error) {
-      throw new Error(`${error}`);
+      console.error(`getNewToken ${error}`);
+      return null;
     }
   }
 
@@ -117,7 +124,8 @@ export default class APIService {
       });
       return await rawResponse.json();
     } catch (error) {
-      throw new Error(`${error}`);
+      console.error(`loginUser ${error}`);
+      return null;
     }
   }
 
@@ -134,7 +142,8 @@ export default class APIService {
       });
       return await rawResponse.json();
     } catch (error) {
-      throw new Error(`${error}`);
+      console.error(`getUserWords ${error}`);
+      return null;
     }
   }
 
@@ -151,7 +160,8 @@ export default class APIService {
       });
       return await rawResponse.json();
     } catch (error) {
-      throw new Error(`${error}`);
+      console.error(`createUserWord ${error}`);
+      return null;
     }
   }
 
@@ -168,7 +178,8 @@ export default class APIService {
       });
       return await rawResponse.json();
     } catch (error) {
-      throw new Error(`${error}`);
+      console.error(`updateUserWord ${error}`);
+      return null;
     }
   }
 
@@ -184,7 +195,8 @@ export default class APIService {
       });
       return await rawResponse.json();
     } catch (error) {
-      throw new Error(`${error}`);
+      console.error(`deleteUserWord ${error}`);
+      return null;
     }
   }
 
@@ -200,11 +212,12 @@ export default class APIService {
       });
       return await rawResponse.json();
     } catch (error) {
-      throw new Error(`${error}`);
+      console.error(`getUserWordsById ${error}`);
+      return null;
     }
   }
 
-  static async getUserStatistics(userId: string, token: string): Promise<TUserStatistic> {
+  static async getUserStatistics(userId: string, token: string): Promise<TUserStatistic | null> {
     try {
       const rawResponse = await fetch(`${HOST}/users/${userId}/statistics`, {
         method: 'GET',
@@ -216,7 +229,8 @@ export default class APIService {
       });
       return await rawResponse.json();
     } catch (error) {
-      throw new Error(`${error}`);
+      console.error(`getUserStatistics ${error}`);
+      return null;
     }
   }
 
@@ -233,11 +247,12 @@ export default class APIService {
       });
       return await rawResponse.json();
     } catch (error) {
-      throw new Error(`${error}`);
+      console.error(`upsertUserStatistics ${error}`);
+      return null;
     }
   }
 
-  static async getUserSetting(userId: string, token: string): Promise<TUserSetting> {
+  static async getUserSetting(userId: string, token: string): Promise<TUserSetting | null> {
     try {
       const rawResponse = await fetch(`${HOST}/users/${userId}/settings`, {
         method: 'GET',
@@ -249,7 +264,8 @@ export default class APIService {
       });
       return await rawResponse.json();
     } catch (error) {
-      throw new Error(`${error}`);
+      console.error(`getUserSetting ${error}`);
+      return null;
     }
   }
 
@@ -266,11 +282,12 @@ export default class APIService {
       });
       return await rawResponse.json();
     } catch (error) {
-      throw new Error(`${error}`);
+      console.error(`upsertUserSetting ${error}`);
+      return null;
     }
   }
 
-  static async getAgrWordById(userId: string, wordId: string, token: string): Promise<TWord> {
+  static async getAgrWordById(userId: string, wordId: string, token: string): Promise<TWord | null> {
     try {
       const rawResponse = await fetch(`${HOST}/users/${userId}/aggregatedWords/${wordId}`, {
         method: 'GET',
@@ -282,42 +299,17 @@ export default class APIService {
       });
       return await rawResponse.json();
     } catch (error) {
-      throw new Error(`${error}`);
+      console.error(`getAgrWordById ${error}`);
+      return null;
     }
   }
 
-  static async getAgrWord(userId: string, token: string, qery?: IAgrQery) {
+  static async getAgrWord(userId: string, token: string, params?: IAgrParams) {
     try {
-      const base = `${HOST}/users/${userId}/aggregatedWords/`;
-      let qeryStr = '';
-      let flag = false;
-      if (qery) qeryStr = `?`;
-      if (qery?.page) {
-        if (!flag) {
-          flag = true;
-          qeryStr += `page=${qery?.page}`;
-        } else qeryStr += `&page=${qery?.page}`;
-      }
-      if (qery?.group) {
-        if (!flag) {
-          flag = true;
-          qeryStr += `group=${qery?.group}`;
-        } else qeryStr += `&group=${qery?.group}`;
-      }
-      if (qery?.wordsPerPage) {
-        if (!flag) {
-          flag = true;
-          qeryStr += `wordsPerPage=${qery?.wordsPerPage}`;
-        } else qeryStr += `&wordsPerPage=${qery?.wordsPerPage}`;
-      }
-      if (qery?.filter) {
-        if (!flag) {
-          flag = true;
-          qeryStr += `filter=${qery?.filter}`;
-        } else qeryStr += `&filter=${qery?.filter}`;
-      }
-
-      const rawResponse = await fetch(`${base}${qeryStr}`, {
+      const base = `${HOST}/users/${userId}/aggregatedWords`;
+      const buf = params ? Object.entries(params).map((item) => [`${item[0]}=${item[1]}`]) : [];
+      const paramsStr = buf[0] ? `?${buf.join('&')}` : '';
+      const rawResponse = await fetch(`${base}${paramsStr}`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -327,7 +319,8 @@ export default class APIService {
       });
       return await rawResponse.json();
     } catch (error) {
-      throw new Error(`${error}`);
+      console.error(`getAgrWord Error`);
+      return null;
     }
   }
 }

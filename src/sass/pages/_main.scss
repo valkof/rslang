@@ -16,6 +16,7 @@
     font-size: 7rem;
     margin-bottom: 2%;
     font-family: cursive;
+    /*margin-left: 7%;*/
 }
 
 .about-site p {
@@ -40,7 +41,7 @@
     font-size: 22px;
     height: 58px;
     width: 240px;
-    margin: 50px 0 0 50px;
+    margin: 7% 0 0 12%;
     overflow: hidden;
     display: block;
     text-align: center;
@@ -82,24 +83,31 @@
     cursor: pointer;
     border: none;
 }
+.menu-img0 button, .menu-img1 button,  .menu-img2 button, .menu-img3 button {
+    transition: 1.5s; 
+   
+   }
+   .menu-img0 button:hover, .menu-img1 button:hover,  .menu-img2 button:hover, .menu-img3 button:hover {
+    transform: scale(1.1); 
+   }
 
 .menu-img0 {
-    margin-left: 100%;
+    margin-left: 120%;
 }
 
 .menu-img1 {
-    margin-left: 250%;
-    margin-top: -50%;
+    margin-left: 280%;
+    margin-top: -20%;
 }
 
 .menu-img2 {
-    margin-left: 100%;
-    margin-top: -30%;
+    margin-left: 45%;
+    margin-top: -40%;
 }
 
 .menu-img3 {
-    margin-left: 250%;
-    margin-top: -30%;
+    margin-left: 210%;
+    margin-top: -20%;
 }
 
 .menu-img0:hover::after, .menu-img1:hover::after, .menu-img2:hover::after, .menu-img3:hover::after { 

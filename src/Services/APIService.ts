@@ -7,12 +7,13 @@ export default class APIService {
   static async getWords(page = 0, group = 0): Promise<IResponse<TWord[]> | null> {
     try {
       const response = await fetch(`${HOST}/words?group=${group}&page=${page}`);
+      const data = await response.json();
       return {
         status: response.status,
-        data: await response.json()
-      }
+        data
+      };
     } catch (error) {
-      console.error(`getWords ${error}`);
+      console.error(`[APIService.getWords]: ${error}`);
       return null;
     }
   }
@@ -20,12 +21,13 @@ export default class APIService {
   static async getWord(id: string): Promise<IResponse<TWord> | null> {
     try {
       const response = await fetch(`${HOST}/words/${id}`);
+      const data = await response.json();
       return {
         status: response.status,
-        data: await response.json()
-      }
+        data
+      };
     } catch (error) {
-      console.error(`getWord ${error}`);
+      console.error(`[APIService.getWord]: ${error}`);
       return null;
     }
   }
@@ -41,12 +43,13 @@ export default class APIService {
           'Content-Type': 'application/json',
         },
       });
+      const data = await rawResponse.json();
       return {
         status: rawResponse.status,
-        data: await rawResponse.json()
-      }
+        data
+      };
     } catch (error) {
-      console.error(`getUser ${error}`);
+      console.error(`[APIService.getUser]: ${error}`);
       return null;
     }
   }
@@ -61,12 +64,13 @@ export default class APIService {
         },
         body: JSON.stringify(user),
       });
+      const data = await rawResponse.json();
       return {
         status: rawResponse.status,
-        data: await rawResponse.json()
-      }
+        data
+      };
     } catch (error) {
-      console.error(`createUser ${error}`);
+      console.error(`[APIService.createUser]: ${error}`);
       return null;
     }
   }
@@ -82,12 +86,13 @@ export default class APIService {
         },
         body: JSON.stringify(user),
       });
+      const data = await rawResponse.json();
       return {
         status: rawResponse.status,
-        data: await rawResponse.json()
-      }
+        data
+      };
     } catch (error) {
-      console.error(`updateUser ${error}`);
+      console.error(`[APIService.updateUser]: ${error}`);
       return null;
     }
   }
@@ -105,7 +110,7 @@ export default class APIService {
 
       return rawResponse.status;
     } catch (error) {
-      console.error(`deleteUser ${error}`);
+      console.error(`[APIService.deleteUser]: ${error}`);
       return null;
     }
   }
@@ -120,12 +125,13 @@ export default class APIService {
           'Content-Type': 'application/json',
         },
       });
+      const data = await rawResponse.json();
       return {
         status: rawResponse.status,
-        data: await rawResponse.json()
-      }
+        data
+      };
     } catch (error) {
-      console.error(`getNewToken ${error}`);
+      console.error(`[APIService.getNewToken]: ${error}`);
       return null;
     }
   }
@@ -141,12 +147,13 @@ export default class APIService {
         },
         body: JSON.stringify(user),
       });
+      const data = await rawResponse.json();
       return {
         status: rawResponse.status,
-        data: await rawResponse.json()
-      }
+        data
+      };
     } catch (error) {
-      console.error(`loginUser ${error}`);
+      console.error(`[APIService.loginUser]: ${error}`);
       return null;
     }
   }
@@ -162,12 +169,13 @@ export default class APIService {
           'Content-Type': 'application/json',
         },
       });
+      const data = await rawResponse.json();
       return {
         status: rawResponse.status,
-        data: await rawResponse.json()
-      }
+        data
+      };
     } catch (error) {
-      console.error(`getUserWords ${error}`);
+      console.error(`[APIService.getUserWords]: ${error}`);
       return null;
     }
   }
@@ -183,12 +191,13 @@ export default class APIService {
         },
         body: JSON.stringify(word),
       });
+      const data = await rawResponse.json();
       return {
         status: rawResponse.status,
-        data: await rawResponse.json()
-      }
+        data
+      };
     } catch (error) {
-      console.error(`createUserWord ${error}`);
+      console.error(`[APIService.createUserWord]: ${error}`);
       return null;
     }
   }
@@ -204,12 +213,13 @@ export default class APIService {
         },
         body: JSON.stringify(word),
       });
+      const data = await rawResponse.json();
       return {
         status: rawResponse.status,
-        data: await rawResponse.json()
-      }
+        data
+      };
     } catch (error) {
-      console.error(`updateUserWord ${error}`);
+      console.error(`[APIService.updateUserWord]: ${error}`);
       return null;
     }
   }
@@ -226,7 +236,7 @@ export default class APIService {
       });
       return rawResponse.status;
     } catch (error) {
-      console.error(`deleteUserWord ${error}`);
+      console.error(`[APIService.deleteUserWord]: ${error}`);
       return null;
     }
   }
@@ -241,12 +251,13 @@ export default class APIService {
           'Content-Type': 'application/json',
         },
       });
+      const data = await rawResponse.json();
       return {
         status: rawResponse.status,
-        data: await rawResponse.json()
-      }
+        data
+      };
     } catch (error) {
-      console.error(`getUserWordsById ${error}`);
+      console.error(`[APIService.getUserWordsById]: ${error}`);
       return null;
     }
   }
@@ -261,12 +272,13 @@ export default class APIService {
           'Content-Type': 'application/json',
         },
       });
+      const data = await rawResponse.json();
       return {
         status: rawResponse.status,
-        data: await rawResponse.json()
-      }
+        data
+      };
     } catch (error) {
-      console.error(`getUserStatistics ${error}`);
+      console.error(`[APIService.getUserStatistics]: ${error}`);
       return null;
     }
   }
@@ -282,12 +294,13 @@ export default class APIService {
         },
         body: JSON.stringify(stat),
       });
+      const data = await rawResponse.json();
       return {
         status: rawResponse.status,
-        data: await rawResponse.json()
-      }
+        data
+      };
     } catch (error) {
-      console.error(`upsertUserStatistics ${error}`);
+      console.error(`[APIService.upsertUserStatistics]: ${error}`);
       return null;
     }
   }
@@ -302,12 +315,13 @@ export default class APIService {
           'Content-Type': 'application/json',
         },
       });
+      const data = await rawResponse.json();
       return {
         status: rawResponse.status,
-        data: await rawResponse.json()
-      }
+        data
+      };
     } catch (error) {
-      console.error(`getUserSetting ${error}`);
+      console.error(`[APIService.getUserSetting]: ${error}`);
       return null;
     }
   }
@@ -323,12 +337,13 @@ export default class APIService {
         },
         body: JSON.stringify(stat),
       });
+      const data = await rawResponse.json();
       return {
         status: rawResponse.status,
-        data: await rawResponse.json()
+        data
       };
     } catch (error) {
-      console.error(`upsertUserSetting ${error}`);
+      console.error(`[APIService.upsertUserSetting]: ${error}`);
       return null;
     }
   }
@@ -343,12 +358,13 @@ export default class APIService {
           'Content-Type': 'application/json',
         },
       });
+      const data = await rawResponse.json();
       return {
         status: rawResponse.status,
-        data: await rawResponse.json()
+        data
       };
     } catch (error) {
-      console.error(`getAgrWordById ${error}`);
+      console.error(`[APIService.getAgrWordById]: ${error}`);
       return null;
     }
   }
@@ -366,12 +382,13 @@ export default class APIService {
           'Content-Type': 'application/json',
         },
       });
+      const data = await rawResponse.json();
       return {
         status: rawResponse.status,
-        data: await rawResponse.json()
+        data
       };
     } catch (error) {
-      console.error(`getAgrWord Error`);
+      console.error(`[APIService.getAgrWord]: ${error}`);
       return null;
     }
   }

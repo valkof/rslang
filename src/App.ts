@@ -28,7 +28,7 @@ export class App implements IApp {
     this.root.appendChild(p.element);
 
     this.services.lang.getWordsOfBD().then(words => {
-      const firstWord = words ? words.data[0].word : "";
+      const firstWord = words?.data[0].word || '';
       p.element.innerText = `Первое слово в БД - ${firstWord}`;
     })
 

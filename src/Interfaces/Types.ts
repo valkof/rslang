@@ -53,15 +53,15 @@ export type TAuthResponse = {
 
 export type TUserStatistic = {
   learnedWords: number;
-  optional: any;
+  optional: object;
 };
 
 export type TUserSetting = {
   wordsPerDay: number;
-  optional: any;
+  optional: object;
 };
 
 export type TAgrWordById = {
   difficulty: string;
-  optional: any;
+  optional: object;
 }

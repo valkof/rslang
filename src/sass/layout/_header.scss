@@ -5,7 +5,7 @@ height: 15%;
 }
 
 .header-wrapper {
- width: 80%;
+ width: 90%;
  display: flex;
  margin: auto;
  margin-bottom: 2%;
@@ -19,45 +19,35 @@ height: 15%;
 }
 
 .header-wrapper img {
-    transition: 1.2s;
+    transition: 1.7s;
 }
 
 .header-wrapper img:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
-
-
-
-/*.header-wrapper h1 {
-    font-size: 5rem;
-    cursor: pointer;
-}*/
 
 .navigation-wrapper {
-   
+   display: flex;
     margin: auto;
+    width: 60%;
 }
 
-.navigation-wrapper ul {
+.page-link {
     display: flex;
     justify-content: space-between;
     font-size: 3rem;
-}
-
-.navigation-wrapper li {
-    list-style-type: none;
+    text-decoration: none;
     cursor: pointer;
     border-radius: 15px;
     color: white;
     font-weight: bold;
     letter-spacing: 3px;
     font-family: cursive;
-
   background: #f5a329;
   text-shadow: 0px 2px 0px rgb(209 151 51 / 30%);
   font-size: 22px;
   height: 58px;
-  width: 240px;
+  width: 200px;
   margin: 50px 0 0 50px;
   overflow: hidden;
   display: block;
@@ -76,7 +66,7 @@ background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2))
 background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
 }
 
-.navigation-wrapper li:hover {
+.page-link:hover {
     margin-top: 52px;
     -webkit-box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.8);
    -moz-box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.8);
@@ -86,9 +76,11 @@ background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
      background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
      background-image: -ms-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
     background-image: linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
-    
 }
 
+.page-link:active {
+color: rgb(66, 36, 23);
+}
 
 .enter-wrapper button {
     font-size: 3rem;
@@ -98,7 +90,6 @@ background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
     color: white;
     letter-spacing: 3px;
     font-family: cursive;
-
     background: #f5a329;
   text-shadow: 0px 2px 0px rgb(209 151 51 / 30%);
   font-size: 22px;
@@ -133,3 +124,7 @@ background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
      background-image: -ms-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
     background-image: linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
 }
+
+.enter-wrapper button:active {
+    color: rgb(66, 36, 23);
+    }

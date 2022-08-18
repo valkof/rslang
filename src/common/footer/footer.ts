@@ -5,11 +5,17 @@ import { gitDevelopers, IGitDeveloper } from "./git-developers";
 
 export class Footer extends Component{
   footerWrapper: Component;
+
   copyright: Component;
+
   footerSpan: Component;
+
   footerGitWrapper: Component;
+
   rsName: Component;
+
   rsSrc: Component
+
   rsImg: Component;
    
   constructor (parent: HTMLElement) {
@@ -20,14 +26,13 @@ export class Footer extends Component{
 
     this.footerGitWrapper = new Component (this.footerWrapper.root, 'div', ['footer-developers']);
     
-   gitDevelopers.forEach(el => {
-   const a = new Component (this.footerGitWrapper.root, 'a', [], el.gitName, 'href', el.href);
-  
-})
+    gitDevelopers.forEach((el, i) => {
+      const div = new Component(this.footerGitWrapper.root, 'div', ['footer-developer' + i]);
+      const a = new Component (div.root, 'a', [], el.gitName, 'href', el.href);
+    })
              
     this.rsName = new Component (this.footerWrapper.root, 'div', ['rolling-name']);
     this.rsSrc = new Component (this.rsName.root, 'a', [], null, 'href', 'https://rs.school/js/');
-    this.rsImg = new Component (this.rsSrc.root, 'img', [], null, 'src', 'assets/rss.svg')
-
-}
-}
+    this.rsImg = new Component (this.rsSrc.root, 'img', [], null, 'src', 'assets/rss.svg');
+  }
+   }

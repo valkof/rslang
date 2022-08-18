@@ -5,10 +5,11 @@ footer {
      }
   
   .footer-wrapper {
-    width: 95%;
+    width: 90%;
     display: flex;
     justify-content: space-between;
     margin: auto;
+    align-items: center;
   }
   
   .footer-copy {
@@ -17,10 +18,7 @@ footer {
   }
 
   .footer-developers {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 37%;
+    display: flex;      
   }
   
   .footer-developers a {
@@ -31,13 +29,9 @@ footer {
     letter-spacing: 3px;
     font-family: cursive;
     font-weight: bold;
-
-    background: #f5a329;
+  background: #f5a329;
   text-shadow: 0px 2px 0px rgb(209 151 51 / 30%);
   font-size: 22px;
-  height: 58px;
-  width: 240px;
-  margin: 50px 0 0 50px;
   overflow: hidden;
   display: block;
   text-align: center;
@@ -56,8 +50,7 @@ background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
   }
 
   .footer-developers a:hover {
-    margin-top: 52px;
-    -webkit-box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.8);
+   -webkit-box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.8);
    -moz-box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.8);
     box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.8);
     background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
@@ -65,6 +58,16 @@ background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
      background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
      background-image: -ms-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
     background-image: linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
+  }
+
+  .footer-developers a:active {
+    color: rgb(66, 36, 23);
+  }
+
+  .footer-developer0 , .footer-developer1 , .footer-developer2 {
+  height: 58px;
+  width: 230px;
+  margin: 0 50px;
   }
   
   .footer-copy span {
@@ -85,7 +88,6 @@ background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
     color: hsblack;
     text-decoration: none;
   }
-
    
   .rolling-name {
     height: 100%;

@@ -1,11 +1,8 @@
-
 .main-wrapper {
-    width: 80%;
+    width: 90%;
     margin: auto;
-    display: flex;
-    
+    display: flex;   
 }
-
 
 .about-site {
     width: 50%;
@@ -16,7 +13,6 @@
     font-size: 7rem;
     margin-bottom: 2%;
     font-family: cursive;
-    /*margin-left: 7%;*/
 }
 
 .about-site p {
@@ -34,8 +30,7 @@
     color: white;
     letter-spacing: 3px;
     font-family: cursive;
-    border: none;   
-  
+    border: none;     
     background: #f5a329;
     text-shadow: 0px 2px 0px rgb(209 151 51 / 30%);
     font-size: 22px;
@@ -57,18 +52,25 @@
   background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
   background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
   background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
-}
+ }
 
 .about-site button:hover {
-    margin-top: 52px;
-    -webkit-box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.8);
+   -webkit-box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.8);
    -moz-box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.8);
     box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.8);
     background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
      background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
      background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
      background-image: -ms-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
-    background-image: linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
+     background-image: linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
+}
+
+.about-site button:active {
+    color: rgb(66, 36, 23);
+}
+
+.main-menu {
+    width: 50%;
 }
 
 .menu-img0, .menu-img1, .menu-img2, .menu-img3 {
@@ -83,31 +85,32 @@
     cursor: pointer;
     border: none;
 }
+
 .menu-img0 button, .menu-img1 button,  .menu-img2 button, .menu-img3 button {
     transition: 1.5s; 
-   
-   }
-   .menu-img0 button:hover, .menu-img1 button:hover,  .menu-img2 button:hover, .menu-img3 button:hover {
+}
+
+.menu-img0 button:hover, .menu-img1 button:hover,  .menu-img2 button:hover, .menu-img3 button:hover {
     transform: scale(1.1); 
-   }
+}
 
 .menu-img0 {
-    margin-left: 120%;
+    margin-left: 20%;
 }
 
 .menu-img1 {
-    margin-left: 280%;
-    margin-top: -20%;
+    margin-left: 60%;
+    margin-top: -10%;
 }
 
 .menu-img2 {
-    margin-left: 45%;
-    margin-top: -40%;
+    margin-left: 15%;
+    margin-top: -5%;
 }
 
 .menu-img3 {
-    margin-left: 210%;
-    margin-top: -20%;
+    margin-left: 60%;
+    margin-top: -10%;
 }
 
 .menu-img0:hover::after, .menu-img1:hover::after, .menu-img2:hover::after, .menu-img3:hover::after { 
@@ -116,6 +119,4 @@
     color: #c47136;
     position: absolute; 
     z-index: 1; 
-    padding: 5px 10px;
-   
-   }
+}

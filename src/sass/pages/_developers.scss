@@ -1,8 +1,6 @@
-
 .developers-wrapper {
     width: 100%;
     margin-bottom: 3%;
-  
 }
 
 .developers {
@@ -18,18 +16,25 @@
     margin-bottom: 3%;
 }
 
-.developers img {
+.developer0 {
+    width: 380px;
+    height: 400px;
+    cursor: pointer;
+}
+
+.developer1, .developer2 {
     width: 400px;
     height: 400px;
     cursor: pointer;
 }
 
-.developers {
-    transition: 1.2s; 
-   }
+.developers img {
+    transition: 1.7s; 
+    border-radius: 180px;
+}
 
 .developers img:hover {
-    transform: scale(1.2);
+    transform: scale(1.3);
 }
 
 .developer {

@@ -6,5 +6,9 @@ export class AuturizationButton extends Component {
   constructor(parent: HTMLElement) {
     super(parent, 'div', ['enter-wrapper']);
     this.autorizationButton = new Component(this.root, 'button', [], 'Авторизация');
+
+    this.autorizationButton.root.onclick = () => {
+      document.location = '#autorization'
+    }
   }
 }

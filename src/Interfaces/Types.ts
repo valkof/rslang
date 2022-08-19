@@ -61,7 +61,7 @@ export type TUserSetting = {
   optional: object;
 };
 
-export type TAgrWordById = {
+export type TUserWord= {
   difficulty: string;
   optional: object;
 }

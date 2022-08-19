@@ -10,34 +10,25 @@ export class Header extends Component {
 
   navigationWrapper: Component;
 
-  //navigation: Component;
-  //ul: Component;
   autorisationButton: AuturizationButton;
+
+  pathTitle: Component;
   
   constructor(parent: HTMLElement) {
     super(parent, "header");
     this.headerWrapper = new Component(this.root, "div", ["header-wrapper"]);
-    this.title = new Component(this.headerWrapper.root, 'img', [], null,'src', 'assets/logo.png');
-
-    this.title.root.onclick = () => {
-      document.location = '';
-    }
+    this.pathTitle = new Component(this.headerWrapper.root, 'a', [], null, 'href', '#')
+    this.title = new Component(this.pathTitle.root, 'img', [], null,'src', 'assets/logo.png');
+  
 
     this.navigationWrapper = new Component(this.headerWrapper.root, 'div', ['navigation-wrapper']);
     
-    //this.navigation = new Component(this.navigationWrapper.root, 'nav', []);
-    // this.ul = new Component(this.navigation.root, 'ul');
-  
-    /* ['Наша команда', 'Учебник', 'Спринт', 'Аудиовызов', 'Статистика'].forEach((el) => {
-      const navigation = new Component(this.ul.root, 'li', [], el)
-    });*/
+    
+  const nav = [{name: 'Наша команда', href: 'developers'}, {name: 'Учебник', href: 'textbook'}, {name:'Спринт', href: 'sprint'}, {name: 'Аудиовызов', href: 'audiocall'}, {name:'Статистика', href: 'statistic'}];
+     nav.forEach(({name, href}) => {
+      const navigation = new Component(this.navigationWrapper.root, 'a', [], name, 'href', '#' + href)
+    });
 
     this.autorisationButton = new AuturizationButton(this.headerWrapper.root);
-  }
-
-  addLinks(pages: string[]): void {
-    const exclude = ['page404', 'about', ''];
-    pages.forEach(page => (exclude.includes(page)) ? '' : 
-    new Component(this.navigationWrapper.root, 'a', ['page-link'], page,  'href', `#${page}` ));
   }
 }

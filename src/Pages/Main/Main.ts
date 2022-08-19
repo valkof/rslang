@@ -14,7 +14,7 @@ export class Main extends Component {
   mainMenu: Component;
 
   mainWrapper: Component;
-      
+  
   constructor(parent: HTMLElement) {
     super(parent);
     this.mainWrapper = new Component(this.root, 'div', ['main-wrapper'])

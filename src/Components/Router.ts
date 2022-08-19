@@ -1,7 +1,8 @@
 import { Component } from "../Abstract/component";
+import { Footer } from "../common/footer/footer";
 
 export class Router {
-  constructor(private routes: Record<string, Component>) {
+  constructor(private routes: Record<string, Component>, private footer: Footer) {
     window.onhashchange = () => this.handleRoute();
     this.handleRoute();
   }
@@ -12,7 +13,13 @@ export class Router {
     const page = this.routes[route];    
     if (page) {
       page.render()
-    } else this.routes.page404.render();
+    } else this.routes['#'].render();
+
+    if(route === 'Audiocall' || route === 'Sprint') {
+      this.footer.remove();
+    } else {
+      this.footer.render();
+    }
   }
 
   clearPage(): void {

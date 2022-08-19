@@ -16,6 +16,7 @@ import { Statistic } from './Pages/Statistic/Statistic';
 import { About } from './Pages/About/About';
 import { Main } from './Pages/Main/Main';
 import { TextBook } from './Pages/Textbook/Textbook';
+import { Autorization } from './Pages/Authorization/Authorization';
 
 class App {
   header = new Header(this.parent);
@@ -37,20 +38,22 @@ class App {
   sprint = new Sprint(this.pageContainer.root);
 
   statistic = new Statistic(this.pageContainer.root);
+ 
+  autorization = new Autorization(this.pageContainer.root);
 
   constructor(private parent: HTMLElement) {    
     const pages = {
-      '': this.main,
+      '#': this.main,
       about: this.about,
-      TextBook: this.textBook,
-      Developers: this.developers,
-      Audiocall: this.audiocall,
-      Sprint: this.sprint,
-      Statistic: this.statistic,
+      textbook: this.textBook,
+      developers: this.developers,
+      audiocall: this.audiocall,
+      sprint: this.sprint,
+      statistic: this.statistic,
+      autorization: this.autorization,
     };
 
-    new Router(pages);
-    this.header.addLinks(Object.keys(pages));
+    new Router(pages, this.footer);
   }
 }
 

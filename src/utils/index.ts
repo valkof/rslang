@@ -1,6 +1,6 @@
-export function throwConsoleError(message: string, error: unknown) {
+export function logError(message: string, error: unknown) {
   const errMessage = (error instanceof Error) ? error.message : 'Unknown Error';
-  console.error(`${message} ${errMessage}`);
+  console.error(`[${message}]: ${errMessage}`);
 }
 
 // Функция перемешивания массивов https://en.wikipedia.org/wiki/Fisher–Yates_shuffle

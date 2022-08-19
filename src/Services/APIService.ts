@@ -1,7 +1,7 @@
 import { IAgrParams, IResponse } from '../Interfaces/Interfaces';
 import { TAuthResponse, TUser, TUserSetting, TUserStatistic, TUserWord, TWord } from '../Interfaces/Types';
 import { HOST } from '../config/index';
-import { throwConsoleError } from '../utils';
+import { logError } from '../utils';
 
 export default class APIService {
   // Words
@@ -14,7 +14,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      throwConsoleError('[APIService.getWords]', error);
+      logError('APIService.getWords', error);
       return null;
     }
   }
@@ -28,7 +28,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      throwConsoleError('[APIService.getWord]:', error);
+      logError('APIService.getWord', error);
       return null;
     }
   }
@@ -50,7 +50,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      throwConsoleError('[APIService.getUser]:', error);
+      logError('APIService.getUser', error);
       return null;
     }
   }
@@ -71,7 +71,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      throwConsoleError('[APIService.createUser]:', error);
+      logError('APIService.createUser', error);
       return null;
     }
   }
@@ -93,7 +93,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      throwConsoleError('[APIService.updateUser]:', error);
+      logError('APIService.updateUser', error);
       return null;
     }
   }
@@ -111,7 +111,7 @@ export default class APIService {
 
       return rawResponse.status;
     } catch (error) {
-      throwConsoleError('[APIService..deleteUser]:', error);
+      logError('APIService..deleteUser', error);
       return null;
     }
   }
@@ -132,7 +132,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      throwConsoleError('[APIService.getNewToken]:', error);
+      logError('APIService.getNewToken', error);
       return null;
     }
   }
@@ -154,7 +154,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      throwConsoleError('[APIService.loginUser]:', error);
+      logError('APIService.loginUser', error);
       return null;
     }
   }
@@ -176,7 +176,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      throwConsoleError('[APIService.getUserWords]:', error);
+      logError('APIService.getUserWords', error);
       return null;
     }
   }
@@ -198,7 +198,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      throwConsoleError('[APIService.createUserWord]:', error);
+      logError('APIService.createUserWord', error);
       return null;
     }
   }
@@ -220,7 +220,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      throwConsoleError('[APIService.updateUserWord]:', error);
+      logError('APIService.updateUserWord', error);
       return null;
     }
   }
@@ -237,7 +237,7 @@ export default class APIService {
       });
       return rawResponse.status;
     } catch (error) {
-      throwConsoleError('[APIService.deleteUserWord]:', error);
+      logError('APIService.deleteUserWord', error);
       return null;
     }
   }
@@ -258,7 +258,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      throwConsoleError('[APIService.getUserWordsById]:', error);
+      logError('APIService.getUserWordsById', error);
       return null;
     }
   }
@@ -279,7 +279,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      throwConsoleError('[APIService.getUserStatistics]:', error);
+      logError('APIService.getUserStatistics', error);
       return null;
     }
   }
@@ -301,7 +301,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      throwConsoleError('[APIService.upsertUserStatistics]:', error);
+      logError('APIService.upsertUserStatistics', error);
       return null;
     }
   }
@@ -322,7 +322,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      throwConsoleError('[APIService.getUserSetting]:', error);
+      logError('APIService.getUserSetting', error);
       return null;
     }
   }
@@ -344,7 +344,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      throwConsoleError('[APIService.upsertUserSetting]:', error);
+      logError('APIService.upsertUserSetting', error);
       return null;
     }
   }
@@ -365,7 +365,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      throwConsoleError('[APIService.getAgrWordById]:', error);
+      logError('APIService.getAgrWordById', error);
       return null;
     }
   }
@@ -389,7 +389,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      throwConsoleError('[APIService.getAgrWord]:', error);
+      logError('APIService.getAgrWord', error);
       return null;
     }
   }

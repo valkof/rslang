@@ -1,6 +1,7 @@
 import { IAgrParams, IResponse } from '../Interfaces/Interfaces';
-import { TAgrWordById, TAuthResponse, TUser, TUserSetting, TUserStatistic, TWord } from '../Interfaces/Types';
+import { TAuthResponse, TUser, TUserSetting, TUserStatistic, TUserWord, TWord } from '../Interfaces/Types';
 import { HOST } from '../config/index';
+import { throwConsoleError } from '../utils';
 
 export default class APIService {
   // Words
@@ -13,7 +14,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      console.error(`[APIService.getWords]: ${error}`);
+      throwConsoleError('[APIService.getWords]', error);
       return null;
     }
   }
@@ -27,7 +28,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      console.error(`[APIService.getWord]: ${error}`);
+      throwConsoleError('[APIService.getWord]:', error);
       return null;
     }
   }
@@ -49,7 +50,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      console.error(`[APIService.getUser]: ${error}`);
+      throwConsoleError('[APIService.getUser]:', error);
       return null;
     }
   }
@@ -70,7 +71,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      console.error(`[APIService.createUser]: ${error}`);
+      throwConsoleError('[APIService.createUser]:', error);
       return null;
     }
   }
@@ -92,7 +93,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      console.error(`[APIService.updateUser]: ${error}`);
+      throwConsoleError('[APIService.updateUser]:', error);
       return null;
     }
   }
@@ -110,7 +111,7 @@ export default class APIService {
 
       return rawResponse.status;
     } catch (error) {
-      console.error(`[APIService.deleteUser]: ${error}`);
+      throwConsoleError('[APIService..deleteUser]:', error);
       return null;
     }
   }
@@ -131,13 +132,13 @@ export default class APIService {
         data
       };
     } catch (error) {
-      console.error(`[APIService.getNewToken]: ${error}`);
+      throwConsoleError('[APIService.getNewToken]:', error);
       return null;
     }
   }
 
   // Login
-  static async loginUser(user: TUser): Promise<IResponse<TAuthResponse> | null>  {
+  static async loginUser(user: TUser): Promise<IResponse<TAuthResponse> | null> {
     try {
       const rawResponse = await fetch(`${HOST}/signin`, {
         method: 'POST',
@@ -153,7 +154,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      console.error(`[APIService.loginUser]: ${error}`);
+      throwConsoleError('[APIService.loginUser]:', error);
       return null;
     }
   }
@@ -175,12 +176,12 @@ export default class APIService {
         data
       };
     } catch (error) {
-      console.error(`[APIService.getUserWords]: ${error}`);
+      throwConsoleError('[APIService.getUserWords]:', error);
       return null;
     }
   }
 
-  static async createUserWord(userId: string, wordId: string, word: any, token: string) {
+  static async createUserWord(userId: string, wordId: string, word: TUserWord, token: string) {
     try {
       const rawResponse = await fetch(`${HOST}/users/${userId}/words/${wordId}`, {
         method: 'POST',
@@ -197,12 +198,12 @@ export default class APIService {
         data
       };
     } catch (error) {
-      console.error(`[APIService.createUserWord]: ${error}`);
+      throwConsoleError('[APIService.createUserWord]:', error);
       return null;
     }
   }
 
-  static async updateUserWord(userId: string, wordId: string, word: any, token: string) {
+  static async updateUserWord(userId: string, wordId: string, word: TUserWord, token: string) {
     try {
       const rawResponse = await fetch(`${HOST}/users/${userId}/words/${wordId}`, {
         method: 'PUT',
@@ -219,7 +220,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      console.error(`[APIService.updateUserWord]: ${error}`);
+      throwConsoleError('[APIService.updateUserWord]:', error);
       return null;
     }
   }
@@ -236,7 +237,7 @@ export default class APIService {
       });
       return rawResponse.status;
     } catch (error) {
-      console.error(`[APIService.deleteUserWord]: ${error}`);
+      throwConsoleError('[APIService.deleteUserWord]:', error);
       return null;
     }
   }
@@ -257,7 +258,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      console.error(`[APIService.getUserWordsById]: ${error}`);
+      throwConsoleError('[APIService.getUserWordsById]:', error);
       return null;
     }
   }
@@ -278,7 +279,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      console.error(`[APIService.getUserStatistics]: ${error}`);
+      throwConsoleError('[APIService.getUserStatistics]:', error);
       return null;
     }
   }
@@ -300,7 +301,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      console.error(`[APIService.upsertUserStatistics]: ${error}`);
+      throwConsoleError('[APIService.upsertUserStatistics]:', error);
       return null;
     }
   }
@@ -321,7 +322,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      console.error(`[APIService.getUserSetting]: ${error}`);
+      throwConsoleError('[APIService.getUserSetting]:', error);
       return null;
     }
   }
@@ -343,12 +344,12 @@ export default class APIService {
         data
       };
     } catch (error) {
-      console.error(`[APIService.upsertUserSetting]: ${error}`);
+      throwConsoleError('[APIService.upsertUserSetting]:', error);
       return null;
     }
   }
 
-  static async getAgrWordById(userId: string, wordId: string, token: string): Promise<IResponse<TAgrWordById> | null> {
+  static async getAgrWordById(userId: string, wordId: string, token: string): Promise<IResponse<TUserWord> | null> {
     try {
       const rawResponse = await fetch(`${HOST}/users/${userId}/aggregatedWords/${wordId}`, {
         method: 'GET',
@@ -364,7 +365,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      console.error(`[APIService.getAgrWordById]: ${error}`);
+      throwConsoleError('[APIService.getAgrWordById]:', error);
       return null;
     }
   }
@@ -388,7 +389,7 @@ export default class APIService {
         data
       };
     } catch (error) {
-      console.error(`[APIService.getAgrWord]: ${error}`);
+      throwConsoleError('[APIService.getAgrWord]:', error);
       return null;
     }
   }

@@ -83,11 +83,10 @@
     height: 100%;
     background-size: cover;
     cursor: pointer;
-    border: none;
-}
-
-.menu-img0 button, .menu-img1 button,  .menu-img2 button, .menu-img3 button {
+    border: 9px double grey;
+    
     transition: 1.5s; 
+    border-radius: 50%;
 }
 
 .menu-img0 button:hover, .menu-img1 button:hover,  .menu-img2 button:hover, .menu-img3 button:hover {

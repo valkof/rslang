@@ -3,7 +3,7 @@ import { TAuthResponse, TUser, TUserSetting, TUserStatistic, TUserWord, TWord } 
 import { HOST } from '../config/index';
 import { logError } from '../utils';
 
-export default class APIService {
+export default abstract class APIService {
   // Words
   static async getWords(page = 0, group = 0): Promise<IResponse<TWord[]> | null> {
     try {

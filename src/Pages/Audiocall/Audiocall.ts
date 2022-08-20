@@ -1,15 +1,7 @@
-import { BaseComponent } from "../../Abstract/BaseComponent";
-import { TServices } from "../../Interfaces/Types";
+import { Component } from "../../Abstract/component";
 
-export class Audiocall {
-  constructor(private readonly parent: HTMLElement, private readonly services: TServices) {}
-
-  render(): void {
-    this.parent.innerHTML = '';
-
-    const container = new BaseComponent('div', ['audiocall']).element;
-    container.innerHTML = `<h1>Page Audiocall</h1>`;
-
-    this.parent.appendChild(container);
+export class AudioCall extends Component {
+  constructor(parent: HTMLElement) {
+    super(parent, 'div', ['audiocall-wrapper']);
   }
 }

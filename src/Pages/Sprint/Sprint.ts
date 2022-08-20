@@ -1,15 +1,8 @@
-import { BaseComponent } from "../../Abstract/BaseComponent";
-import { TServices } from "../../Interfaces/Types";
 
-export class Sprint {
-  constructor(private readonly parent: HTMLElement, private readonly services: TServices) {}
+import { Component } from "../../Abstract/component";
 
-  render(): void {
-    this.parent.innerHTML = '';
-
-    const container = new BaseComponent('div', ['sprint']).element;
-    container.innerHTML = `<h1>Page Sprint</h1>`;
-
-    this.parent.appendChild(container);
+export class Sprint extends Component {
+  constructor(parent: HTMLElement) {
+    super(parent, 'div', ['sprint-wrapper']);
   }
 }

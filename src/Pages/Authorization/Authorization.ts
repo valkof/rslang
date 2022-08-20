@@ -1,15 +1,9 @@
-import { BaseComponent } from "../../Abstract/BaseComponent";
-import { TServices } from "../../Interfaces/Types";
+import { Component } from "../../Abstract/component";
 
-export class Authorization {
-  constructor(private readonly parent: HTMLElement, private readonly services: TServices) {}
-
-  render(): void {
-    this.parent.innerHTML = '';
-
-    const container = new BaseComponent('div', ['authorization']).element;
-    container.innerHTML = `<h1>Page Authorization</h1>`;
-
-    this.parent.appendChild(container);
-  }
+/* Обратите внимание: сама кнопка "Авторизация" создана в heder. Здесь, я думаю, 
+нужно писать непосредственно логику для страницы авторизации и взаимоувязать ее с кнопкой "Авторизация" из hedera */
+export class Autorization extends Component {
+    constructor(parent: HTMLElement) {
+        super(parent, 'div', ['autorization-wrapper']);
+    }
 }

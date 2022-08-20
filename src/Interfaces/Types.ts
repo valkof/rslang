@@ -1,11 +1,13 @@
 
 import { AudioGameService } from "../Services/AudioGameService";
 import { LangService } from "../Services/LangService";
+import SprintService from './../Services/SprintService';
 
 
 export type TServices = {
   lang: LangService,
   audioGame: AudioGameService
+  sprint: SprintService
 };
 
 export type TWord = {

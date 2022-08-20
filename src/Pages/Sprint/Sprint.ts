@@ -9,7 +9,7 @@ enum ESprintEvents  {
 }
 
 export class Sprint extends Component {
-  private service: SprintService;
+  private service: TServices;
 
   private dificulty: Component;
 
@@ -35,7 +35,7 @@ export class Sprint extends Component {
 
   constructor(parent: HTMLElement, private readonly services: TServices) {
     super(parent, 'div', ['sprint-wrapper']);
-    this.service = new SprintService();
+    this.service = services;
     this.dificulty = new DifficultySelector(
       this.root,
       'sprint',
@@ -55,14 +55,14 @@ export class Sprint extends Component {
     this.scoreValue = new Component(this.scoreContainer.root, 'h3', ['sprint-game__timer-container__text']);
     this.scoreValue.root.textContent = 'Очков';
 
-    this.service.addListener(ESprintEvents.timerTick, this.setTimer.bind(this))
+    this.service.sprint.addListener(ESprintEvents.timerTick, this.setTimer.bind(this))
   }
 
   startGame(i: number): void {
     const dificulty = i < 7 && i >= 0 ? i : 0;
     this.dificulty.remove();
     this.game.render();
-    console.log(this.service.generateWords(dificulty as TDifficulty));
+    console.log(this.service.sprint.generateWords(dificulty as TDifficulty));
   }
 
   setTimer(time: string): void {

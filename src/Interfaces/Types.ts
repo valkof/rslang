@@ -1,11 +1,9 @@
 
 import { LangService } from "../Services/LangService";
-import { RouterService } from "../Services/RouterService";
 
 
 export type TServices = {
-  lang: LangService;
-  router: RouterService;
+  lang: LangService
 };
 
 export type TWord = {

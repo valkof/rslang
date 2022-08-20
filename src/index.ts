@@ -16,32 +16,38 @@ import { Statistic } from './Pages/Statistic/Statistic';
 import { About } from './Pages/About/About';
 import { Main } from './Pages/Main/Main';
 import { TextBook } from './Pages/Textbook/Textbook';
-import { Autorization } from './Pages/Authorization/Authorization';
+import { Authorization } from './Pages/Authorization/Authorization';
+import { TServices } from './Interfaces/Types';
+import { LangService } from './Services/LangService';
 
 class App {
-  header = new Header(this.parent);
+  private readonly services = {
+    lang: new LangService
+  } as TServices;
+
+  header = new Header(this.parent, this.services);
 
   pageContainer = new Component(this.parent, 'main');
 
-  footer = new Footer(this.parent);
+  footer = new Footer(this.parent, this.services);
 
-  main = new Main(this.pageContainer.root);
+  main = new Main(this.pageContainer.root, this.services);
 
-  about = new About(this.pageContainer.root);
+  about = new About(this.pageContainer.root, this.services);
 
-  textBook = new TextBook(this.pageContainer.root);
+  textBook = new TextBook(this.pageContainer.root, this.services);
 
-  developers = new Developers(this.pageContainer.root);
+  developers = new Developers(this.pageContainer.root, this.services);
 
-  audiocall = new AudioCall(this.pageContainer.root);
+  audiocall = new AudioCall(this.pageContainer.root, this.services);
 
-  sprint = new Sprint(this.pageContainer.root);
+  sprint = new Sprint(this.pageContainer.root, this.services);
 
-  statistic = new Statistic(this.pageContainer.root);
+  statistic = new Statistic(this.pageContainer.root, this.services);
  
-  autorization = new Autorization(this.pageContainer.root);
+  authorization = new Authorization(this.pageContainer.root, this.services);
 
-  constructor(private parent: HTMLElement) {    
+  constructor(private parent: HTMLElement) {
     const pages = {
       '#': this.main,
       about: this.about,
@@ -50,7 +56,7 @@ class App {
       audiocall: this.audiocall,
       sprint: this.sprint,
       statistic: this.statistic,
-      autorization: this.autorization,
+      autorization: this.authorization,
     };
 
     new Router(pages, this.footer);

@@ -1,5 +1,6 @@
 
 import { Component } from "../../Abstract/component";
+import { TServices } from "../../Interfaces/Types";
 import { gitDevelopers, IGitDeveloper } from "./git-developers";
 
 
@@ -18,7 +19,7 @@ export class Footer extends Component{
 
   rsImg: Component;
    
-  constructor (parent: HTMLElement) {
+  constructor (parent: HTMLElement, private readonly services: TServices) {
     super (parent, 'footer', []);
     this.footerWrapper = new Component (this.root, 'div', ['footer-wrapper']);
     this.copyright = new Component (this.footerWrapper.root, 'div', ['footer-copy']);
@@ -35,4 +36,4 @@ export class Footer extends Component{
     this.rsSrc = new Component (this.rsName.root, 'a', [], null, 'href', 'https://rs.school/js/');
     this.rsImg = new Component (this.rsSrc.root, 'img', [], null, 'src', 'assets/rss.svg');
   }
-   }
+}

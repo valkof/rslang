@@ -1,4 +1,5 @@
 import { Component } from "../../Abstract/component";
+import { TServices } from "../../Interfaces/Types";
 import { developers } from "./developers-obj";
 
 export class Developers extends Component {
@@ -6,7 +7,7 @@ export class Developers extends Component {
 
   developers: Component;
         
-  constructor(parent: HTMLElement) {
+  constructor(parent: HTMLElement, private readonly services: TServices) {
     super(parent, 'div', ['developers-wrapper']);
     this.titleDevelopers = new Component(this.root, 'h2', [], 'Наши разработчики');
     this.developers = new Component(this.root, 'div', ['developers']);

@@ -1,10 +1,10 @@
-import { TWord } from "../Interfaces/Types";
+import { PAGESCOUNT } from "../config";
+import { TDifficulty, TWord } from "../Interfaces/Types";
 import { shuffle } from "../utils";
 import APIService from "./APIService";
+import { Observer } from './../Abstract/Observer';
 
-const pagesCount = 29;
-type TDifficulty = 0 | 1 | 2 | 3 | 4 | 5 | 6;
-export default class SprintService {
+export default class SprintService extends Observer{
   currentWords = [];
 
   correctAnswers =[];
@@ -27,7 +27,7 @@ export default class SprintService {
   generateRandomNums(): number[] {
     const arr: number[] = [];
     while (arr.length < 5) {
-      const num = Math.floor(Math.random() * pagesCount)
+      const num = Math.floor(Math.random() * PAGESCOUNT)
       if (!arr.includes(num)) {
         arr.push(num)
       }

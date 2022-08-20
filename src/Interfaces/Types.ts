@@ -49,7 +49,7 @@ export type TUserSetting = {
   optional: object;
 };
 
-export type TUserWord= {
+export type TUserWord = {
   difficulty: string;
   optional: object;
 }
@@ -58,3 +58,5 @@ export type TLearnWords = {
   learn: boolean;
   word: TWord;
 }
+
+export type TDifficulty = 0 | 1 | 2 | 3 | 4 | 5 | 6;

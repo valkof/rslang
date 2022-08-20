@@ -16,8 +16,13 @@ export class Sprint extends Component {
       'sprint',
       'Спринт',
       'Тренирует навык быстрого перевода с английского языка на русский. Вам нужно выбрать соответствует ли перевод предложенному слову.',
+      this.test
     );
 
     console.log(this.service.generateWords(2));
+  }
+
+  test(i: number): void {
+    alert(i);
   }
 }

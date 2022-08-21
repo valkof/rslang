@@ -12,8 +12,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 900px;
-  height: 600px;
+  width: 50%;
   background: #f5a329;
   border-radius: 20px;
 }
@@ -38,4 +37,52 @@
   font-size: 28px;
   margin-left: 20px;
   margin-right: 20px;
+}
+
+.sprint-game__center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sprint-game__footer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.sprint-game__button-container {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.sprint-game__false-btn, .sprint-game__true-btn {
+  cursor: pointer;
+  width: 120px;
+  border: 2px solid white;
+  text-align: center;
+  font-size: 22px;
+  color: white;
+  border-radius: 25px;
+}
+
+.sprint-game__false-btn {
+  background-color: #eb5757;
+  transition: 0.25s;
+  &:hover {
+    background-color: #aa1010;
+  }
+}
+
+.sprint-game__true-btn {
+  background-color: #63eb57;
+  transition: 0.25s;
+  &:hover {
+    background-color: #17d306;
+  }
 }

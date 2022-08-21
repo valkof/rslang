@@ -1,19 +1,27 @@
-import { PAGESCOUNT } from "../config";
-import { TDifficulty, TWord } from "../Interfaces/Types";
-import { shuffle } from "../utils";
-import APIService from "./APIService";
+import { PAGESCOUNT } from '../config';
+import { TDifficulty, TWord } from '../Interfaces/Types';
+import { shuffle } from '../utils';
+import APIService from './APIService';
 import { Observer } from './../Abstract/Observer';
 
-export default class SprintService extends Observer{
-  currentWords = [];
+export enum ESprintEvents {
+  timerTick = 'timerTick',
+  score = 'score',
+  startGame = 'start',
+  trueBtn = 'true',
+  falseBtn = 'false',
+}
 
-  correctAnswers =[];
+export default class SprintService extends Observer {
+  currentWords: TWord[] = [];
 
-  incorrectAnswers =[];
+  correctAnswers = [];
+
+  incorrectAnswers = [];
 
   rightChoise = true;
 
-  async generateWords(difficulty: TDifficulty): Promise<TWord[]> {
+  async generateWords(difficulty: TDifficulty) {
     const pages = this.generateRandomNums();
     let array: TWord[] = [];
     for (let i = 0; i < pages.length; i++) {
@@ -21,18 +29,21 @@ export default class SprintService extends Observer{
       array = words ? [...array, ...words.data] : array;
     }
     shuffle(array);
-    return array
+    this.currentWords = array ? array : [];
   }
 
   generateRandomNums(): number[] {
     const arr: number[] = [];
     while (arr.length < 5) {
-      const num = Math.floor(Math.random() * PAGESCOUNT)
+      const num = Math.floor(Math.random() * PAGESCOUNT);
       if (!arr.includes(num)) {
-        arr.push(num)
+        arr.push(num);
       }
     }
     return arr;
   }
 
+  startGame() {
+    this.dispatch(ESprintEvents.startGame);
+  }
 }

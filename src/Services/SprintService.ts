@@ -8,18 +8,28 @@ export enum ESprintEvents {
   timerTick = 'timerTick',
   score = 'score',
   startGame = 'start',
-  trueBtn = 'true',
-  falseBtn = 'false',
+  changeWord = 'changeWord',
+  changeTranslate = 'changeTranslate',
 }
 
 export default class SprintService extends Observer {
-  currentWords: TWord[] = [];
+  private currentWords: TWord[] = [];
 
-  correctAnswers = [];
+  private incorrectVariants: string[] = [];
 
-  incorrectAnswers = [];
+  private correctAnswers = [];
 
-  rightChoise = true;
+  private incorrectAnswers = [];
+
+  private rightChoise = true;
+
+  private timer = 60;
+
+  private score = 0;
+
+  private bonusScore = 0;
+
+  private combo = 0;
 
   async generateWords(difficulty: TDifficulty) {
     const pages = this.generateRandomNums();
@@ -44,6 +54,62 @@ export default class SprintService extends Observer {
   }
 
   startGame() {
+    this.incorrectVariants = this.currentWords.map(el => el.wordTranslate) as string[];
+    this.incorrectVariants.reverse();
+    this.timer = 60;
+    this.score = 0;
     this.dispatch(ESprintEvents.startGame);
+    this.dispatch(ESprintEvents.timerTick, '60');
+    this.dispatch(ESprintEvents.score, '0');
+    this.changeWord();
+    const timer = setInterval(() => {
+      if (this.timer > 0) {
+        this.timer--;
+      } else {
+        clearInterval(timer);
+        this.stopGame();
+      }
+      const time = this.timer;
+      this.dispatch(ESprintEvents.timerTick, this.timer.toString());
+    }, 1000);
+  }
+
+  changeWord() {
+    let word: TWord;
+    if (this.currentWords.length > 0) {
+      word = this.currentWords.pop() as TWord;
+      this.dispatch(ESprintEvents.changeWord, JSON.stringify(word.word));
+      if (Math.random() > 0.5) {
+        this.rightChoise = true;
+        this.dispatch(ESprintEvents.changeTranslate, JSON.stringify(word.wordTranslate));
+      } else {
+        this.rightChoise = false;
+        const incorectWord = this.incorrectVariants[this.currentWords.length];
+        this.dispatch(ESprintEvents.changeTranslate, JSON.stringify(incorectWord));
+      }
+    } else this.stopGame();
+  }
+
+  stopGame() {
+    alert(`${this.score}`);
+  }
+
+  answer(answer: boolean) {
+    if (answer === this.rightChoise) {
+      if (this.combo < 3) {
+        this.combo++;
+      } else {
+        this.combo = 0;
+        this.bonusScore = this.bonusScore < 40 ? (this.bonusScore += 10) : this.bonusScore;
+      }
+      this.score += 20 + this.bonusScore;
+      this.dispatch(ESprintEvents.score, this.score.toString());
+    } else {
+      this.combo = 0;
+      this.bonusScore = 0;
+      this.score = this.score >= 20 ? (this.score -= 20) : this.score;
+      this.dispatch(ESprintEvents.score, this.score.toString());
+    }
+    this.changeWord();
   }
 }

@@ -1,9 +1,7 @@
 import { Component } from '../../Abstract/component';
-import { TDifficulty, TServices } from '../../Interfaces/Types';
+import { TDifficulty, TServices, TWord } from '../../Interfaces/Types';
 import { ESprintEvents } from '../../Services/SprintService';
 import { DifficultySelector } from './../../Components/DifficultySelector';
-
-
 
 export class Sprint extends Component {
   private service: TServices;
@@ -42,7 +40,6 @@ export class Sprint extends Component {
 
   buttons: Component;
 
-
   constructor(parent: HTMLElement, private readonly services: TServices) {
     super(parent, 'div', ['sprint-wrapper']);
     this.service = services;
@@ -56,12 +53,12 @@ export class Sprint extends Component {
 
     this.timerContainer = new Component(this.gameHeader.root, 'div', ['sprint-game__timer-container']);
     this.timerText = new Component(this.timerContainer.root, 'h3', ['sprint-game__timer-container__text']);
-    this.timerText.root.textContent = "Время: "
+    this.timerText.root.textContent = 'Время: ';
     this.timerTime = new Component(this.timerContainer.root, 'h3', ['sprint-game__timer-container__text']);
     this.timerTime.root.textContent = '60';
     this.scoreContainer = new Component(this.gameHeader.root, 'div', ['sprint-game__score-container']);
     this.scoreText = new Component(this.scoreContainer.root, 'h3', ['sprint-game__timer-container__text']);
-    this.scoreText.root.textContent = "0"
+    this.scoreText.root.textContent = '0';
     this.scoreValue = new Component(this.scoreContainer.root, 'h3', ['sprint-game__timer-container__text']);
     this.scoreValue.root.textContent = 'Очков';
 
@@ -71,22 +68,25 @@ export class Sprint extends Component {
     this.wordTranslane = new Component(this.gameCenter.root, 'h3', ['sprint-game__translate']);
     this.wordTranslane.root.textContent = 'Привет';
 
-    this.buttons =  new Component(this.gameFooter.root, 'div', ['sprint-game__button-container']);
+    this.buttons = new Component(this.gameFooter.root, 'div', ['sprint-game__button-container']);
     this.falseBtn = new Component(this.buttons.root, 'div', ['sprint-game__false-btn']);
-    this.falseBtn.root.textContent = "Неверно"
+    this.falseBtn.root.textContent = 'Неверно';
+    this.falseBtn.root.onclick = () => this.service.sprint.answer(false);
     this.trueBtn = new Component(this.buttons.root, 'div', ['sprint-game__true-btn']);
-    this.trueBtn.root.textContent = "Верно"
+    this.trueBtn.root.textContent = 'Верно';
+    this.trueBtn.root.onclick = () => this.service.sprint.answer(true);
 
     this.game.remove();
     this.service.sprint.addListener(ESprintEvents.timerTick, this.setTimer.bind(this));
     this.service.sprint.addListener(ESprintEvents.score, this.setScore.bind(this));
     this.service.sprint.addListener(ESprintEvents.startGame, this.start.bind(this));
+    this.service.sprint.addListener(ESprintEvents.changeWord, this.setWord.bind(this));
+    this.service.sprint.addListener(ESprintEvents.changeTranslate, this.setTranslate.bind(this));
   }
 
   startGameWithDificulty(i: number): void {
     const dificultyLevel = i < 7 && i >= 0 ? i : 0;
-    this.service.sprint.generateWords(dificultyLevel as TDifficulty);
-    this.service.sprint.startGame();
+    this.service.sprint.generateWords(dificultyLevel as TDifficulty).then(() => this.service.sprint.startGame());
     //const a = this.parent as HTMLElement;
     //a.requestFullscreen();
   }
@@ -96,11 +96,19 @@ export class Sprint extends Component {
     this.game.render();
   }
 
-  setTimer(time: string): void {
+  private setTimer(time: string): void {
     this.timerTime.root.textContent = time;
   }
 
-  setScore(score: string): void {
+  private setScore(score: string): void {
     this.scoreText.root.textContent = score;
+  }
+
+  private setWord(word: string) {
+    this.word.root.textContent = word.replace('"', '').replace('"', '').toUpperCase();
+  }
+
+  private setTranslate(word: string) {
+    this.wordTranslane.root.textContent = word.replace('"', '').replace('"', '').toUpperCase();
   }
 }

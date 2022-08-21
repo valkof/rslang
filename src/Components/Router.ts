@@ -15,7 +15,7 @@ export class Router {
       page.render()
     } else this.routes['#'].render();
 
-    if(route === 'Audiocall' || route === 'Sprint') {
+    if(route === 'audiocall' || route === 'sprint') {
       this.footer.remove();
     } else {
       this.footer.render();

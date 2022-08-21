@@ -31,8 +31,6 @@ export default class SprintService extends Observer {
 
   private combo = 0;
 
-  private isGame = false;
-
   async generateWords(difficulty: TDifficulty) {
     const pages = this.generateRandomNums();
     let array: TWord[] = [];
@@ -60,21 +58,18 @@ export default class SprintService extends Observer {
     this.incorrectVariants.reverse();
     this.timer = 60;
     this.score = 0;
-    this.isGame = true;
     this.dispatch(ESprintEvents.startGame);
     this.dispatch(ESprintEvents.timerTick, '60');
     this.dispatch(ESprintEvents.score, '0');
     this.changeWord();
     const timer = setInterval(() => {
-      if (!this.isGame) {
-        clearInterval(timer);
-      }
       if (this.timer > 0) {
         this.timer--;
       } else {
         clearInterval(timer);
         this.stopGame();
       }
+      const time = this.timer;
       this.dispatch(ESprintEvents.timerTick, this.timer.toString());
     }, 1000);
   }
@@ -96,28 +91,25 @@ export default class SprintService extends Observer {
   }
 
   stopGame() {
-    this.isGame = false;
     alert(`${this.score}`);
   }
 
   answer(answer: boolean) {
-    if (this.isGame) {
-      if (answer === this.rightChoise) {
-        if (this.combo < 3) {
-          this.combo++;
-        } else {
-          this.combo = 0;
-          this.bonusScore = this.bonusScore < 40 ? (this.bonusScore += 10) : this.bonusScore;
-        }
-        this.score += 20 + this.bonusScore;
-        this.dispatch(ESprintEvents.score, this.score.toString());
+    if (answer === this.rightChoise) {
+      if (this.combo < 3) {
+        this.combo++;
       } else {
         this.combo = 0;
-        this.bonusScore = 0;
-        this.score = this.score >= 20 ? (this.score -= 20) : this.score;
-        this.dispatch(ESprintEvents.score, this.score.toString());
+        this.bonusScore = this.bonusScore < 40 ? (this.bonusScore += 10) : this.bonusScore;
       }
-      this.changeWord();
+      this.score += 20 + this.bonusScore;
+      this.dispatch(ESprintEvents.score, this.score.toString());
+    } else {
+      this.combo = 0;
+      this.bonusScore = 0;
+      this.score = this.score >= 20 ? (this.score -= 20) : this.score;
+      this.dispatch(ESprintEvents.score, this.score.toString());
     }
+    this.changeWord();
   }
 }

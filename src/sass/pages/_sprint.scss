@@ -35,8 +35,8 @@
 .sprint-game__timer-container__text {
   color: white;
   font-size: 28px;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .sprint-game__center {
@@ -55,18 +55,19 @@
 }
 
 .sprint-game__button-container {
-  width: 90%;
+  width: 50%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-top: 20px;
 }
 
 .sprint-game__false-btn, .sprint-game__true-btn {
   cursor: pointer;
-  width: 120px;
+  width: 150px;
   border: 2px solid white;
   text-align: center;
-  font-size: 22px;
+  font-size: 28px;
   color: white;
   border-radius: 25px;
 }
@@ -85,4 +86,60 @@
   &:hover {
     background-color: #17d306;
   }
+}
+
+.sprint-game__combo-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+  height: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.sprint-game__combo {
+  width: 35px;
+  height: 35px;
+  border: 3px solid white;
+  border-radius: 50%;
+}
+
+.sprint-game__combo_active {
+  background-color: #17d306;
+}
+
+.sprint-game__word {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 38px;
+  font-family: cursive;
+  color: white
+}
+
+.sprint-game__translate {
+  color: white;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.sprint-game__reward-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 320px;
+  height: 80px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.sprint-game__reward__branch {
+  position: absolute;
+  z-index: 1;
+  top: -55px;
+  right: 10px;
+  width: 280px;
+  transform: rotate(45deg);
 }

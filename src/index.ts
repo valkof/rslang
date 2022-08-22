@@ -19,10 +19,12 @@ import { TextBook } from './Pages/Textbook/Textbook';
 import { Authorization } from './Pages/Authorization/Authorization';
 import { TServices } from './Interfaces/Types';
 import { LangService } from './Services/LangService';
+import { AudioGameService } from './Services/AudioGameService';
 
 class App {
   private readonly services = {
-    lang: new LangService
+    lang: new LangService,
+    audioGame: new AudioGameService
   } as TServices;
 
   header = new Header(this.parent, this.services);

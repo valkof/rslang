@@ -1,9 +1,11 @@
 
+import { AudioGameService } from "../Services/AudioGameService";
 import { LangService } from "../Services/LangService";
 
 
 export type TServices = {
-  lang: LangService
+  lang: LangService,
+  audioGame: AudioGameService
 };
 
 export type TWord = {
@@ -50,4 +52,9 @@ export type TUserSetting = {
 export type TUserWord= {
   difficulty: string;
   optional: object;
+}
+
+export type TLearnWords = {
+  learn: boolean;
+  word: TWord;
 }

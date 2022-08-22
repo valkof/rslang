@@ -39,7 +39,6 @@ export default class SprintService extends Observer {
 
   private interval: NodeJS.Timer | null = null;
 
-
   async generateWords(difficulty: TDifficulty) {
     const pages = this.generateRandomNums();
     let array: TWord[] = [];

@@ -124,6 +124,7 @@ export default class SprintService extends Observer {
         this.bonusScore = 0;
         this.score = this.score >= 20 ? (this.score -= 20) : this.score;
       }
+
       this.dispatch(ESprintEvents.score, this.score.toString());
       this.dispatch(ESprintEvents.changeCombo, this.combo.toString());
       this.dispatch(ESprintEvents.changeReward, this.bonusScore.toString());

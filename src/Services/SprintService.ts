@@ -1,4 +1,4 @@
-import { PAGES_COUNT } from '../config';
+import { PAGES_COUNT, SPRINT_DURATION } from '../config';
 import { TDifficulty, TWord } from '../Interfaces/Types';
 import { getRandomNumber, shuffle } from '../utils';
 import APIService from './APIService';
@@ -15,11 +15,6 @@ export enum ESprintEvents {
   renderStatistic = 'statistic',
 }
 
-export type TSprintAnswers = {
-  correct: TWord[];
-  incorrect: TWord[];
-};
-
 export default class SprintService extends Observer {
   private currentWords: TWord[] = [];
 
@@ -33,7 +28,7 @@ export default class SprintService extends Observer {
 
   private rightChoise = true;
 
-  private timer = 60;
+  private timer = SPRINT_DURATION;
 
   private score = 0;
 
@@ -142,7 +137,7 @@ export default class SprintService extends Observer {
   }
 
   reset() {
-    this.timer = 1;
+    this.timer = SPRINT_DURATION;
     this.score = 0;
     this.combo = 0;
     this.bonusScore = 0;
@@ -150,7 +145,7 @@ export default class SprintService extends Observer {
     this.incorrectAnswers = [];
 
     this.dispatch(ESprintEvents.startGame);
-    this.dispatch(ESprintEvents.timerTick, '60');
+    this.dispatch(ESprintEvents.timerTick, SPRINT_DURATION.toString());
     this.dispatch(ESprintEvents.score, '0');
     this.dispatch(ESprintEvents.score, this.score.toString());
     this.dispatch(ESprintEvents.changeCombo, this.combo.toString());

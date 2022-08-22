@@ -62,3 +62,8 @@ export type TLearnWords = {
 }
 
 export type TDifficulty = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+
+export type TSprintAnswers = {
+  correct: TWord[];
+  incorrect: TWord[];
+};

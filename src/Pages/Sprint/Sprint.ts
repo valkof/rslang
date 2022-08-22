@@ -1,6 +1,7 @@
 import { Component } from '../../Abstract/component';
-import { TDifficulty, TServices, TWord } from '../../Interfaces/Types';
-import { ESprintEvents, TSprintAnswers } from '../../Services/SprintService';
+import { SPRINT_DURATION } from '../../config';
+import { TDifficulty, TServices, TSprintAnswers, TWord } from '../../Interfaces/Types';
+import { ESprintEvents } from '../../Services/SprintService';
 import { DifficultySelector } from './../../Components/DifficultySelector';
 import StatisticPopup from './../../Components/Statistic/StatisticPopup';
 
@@ -120,7 +121,7 @@ export class Sprint extends Component {
 
   private init() {
     this.timerText.root.textContent = 'Время: ';
-    this.timerTime.root.textContent = '60';
+    this.timerTime.root.textContent = SPRINT_DURATION.toString();
     this.scoreText.root.textContent = '0';
     this.scoreValue.root.textContent = 'Очков';
     this.falseBtn.root.textContent = '2 Неверно';

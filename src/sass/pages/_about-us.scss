@@ -1,5 +1,5 @@
 .about-us-wrapper {
-     width: 80%;
+     width: 90%;
      margin: auto;
      margin-bottom: 6%;
 }
@@ -12,6 +12,7 @@
 
 .info-wrapper {
     display: flex;
+    justify-content: space-between;
 }
 
 .info img {
@@ -21,6 +22,7 @@
 .info {
     text-align: center;
   margin-right: 2%;
+  width: 25%;
 }
 
 .info h3 {

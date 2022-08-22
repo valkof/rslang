@@ -16,23 +16,28 @@ export class Pagination extends Component {
         this.pageNumber = new Component(this.pagesWrapper.root, 'div', ['page-number'], this.currentPage.toString());
         this.pageNumber.remove();
         this.createCategories();
-        this.createPageControl();
-        
+        this.createPageControl(); 
     }
 
     private createCategories() {
-        const names = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
-        this.categories = names.map(cat => { 
-            const category = new Component(this.catWrapper.root, 'div', ['category'], cat);
+        const names = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Словарь'];
+        this.categories = names.map((cat, i) => { 
+            const category = new Component(this.catWrapper.root, 'div', ['category' + i], cat);
             category.root.onclick = () => {
                 this.currentCategory = names.indexOf(category.root.textContent!);
                 this.currentPage = 0;
                 this.pageNumber.root.innerHTML = this.currentPage.toString();
                 this.changeCategory({page: this.currentPage, group: this.currentCategory});
+
+                this.categories.forEach(el => { 
+                    el.root.classList.remove('active-link')
+                });
+                category.root.classList.add('active-link'); 
             }        
             return category
-        })
-    }
+        });
+    
+        }
 
     private createPageControl() {
         const leftRow = new Component(this.pagesWrapper.root, 'div', ['left-row'], '🡄 ');
@@ -52,7 +57,5 @@ export class Pagination extends Component {
             this.changeCategory({page: this.currentPage, group: this.currentCategory});
             this.pageNumber.root.innerHTML = this.currentPage.toString()
         }
-
-        
-    }
+      }
 }

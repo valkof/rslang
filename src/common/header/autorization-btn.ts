@@ -8,7 +8,7 @@ export class AuturizationButton extends Component {
     this.autorizationButton = new Component(this.root, 'button', [], 'Авторизация');
 
     this.autorizationButton.root.onclick = () => {
-      document.location = '#autorization'
+      document.location = '#autorization';     
     }
   }
 }

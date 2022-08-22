@@ -1,0 +1,124 @@
+.audiocall__select_game {
+  width: 500px;
+  margin: auto;
+}
+
+.select_game__popup {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+
+}
+
+.popup__title {
+  text-align: center;
+}
+
+.popup__rules {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.popup__set_buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.set_buttons__button {
+  padding: 5px 10px;
+}
+
+.audiocall__game {
+  width: 1000px;
+  margin: auto;
+}
+
+.game__process {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.process__status {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.status__error {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 2px solid black;
+}
+
+.fill_backgroud {
+  background-color: red;
+}
+
+.process__audio {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.audio__sound {
+  display: inline-block;
+  width: 100px;
+  height: 75px;
+  background-image: url('../../../public/assets/audiocall/megafon.png');
+  background-size: cover;
+}
+
+.process_versions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+.button_version {
+  width: 100px;
+  height: 50px;
+}
+
+.audiocall__result_game {
+  width: 400px;
+  margin: auto;
+}
+
+.result_game__result {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.result__table {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background-color: #f5a329;
+  padding: 10px;
+  border-radius: 10px;
+
+  .table__row {
+    padding: 5px;
+    border-radius: 5px;
+
+    display: grid;
+    grid-template-columns: 25px 1fr 1fr 1fr;
+  }
+}
+
+.result__set_buttons .button {
+  width: 150px;
+  height: 50px;
+}

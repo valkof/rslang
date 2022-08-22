@@ -60,6 +60,8 @@ export class Sprint extends Component {
 
   private rewardBird4: Component;
 
+  private statistic: StatisticPopup | undefined;
+
   constructor(parent: HTMLElement, private readonly services: TServices) {
     super(parent, 'div', ['sprint-wrapper']);
     this.service = services;
@@ -145,12 +147,6 @@ export class Sprint extends Component {
 
     this.game.remove();
     window.addEventListener('keydown', this.keyHandler.bind(this));
-    window.addEventListener('hashchange', e => {
-      if (window.location.hash === '#sprint') {
-        this.dificulty.render();
-        this.game.remove();
-      }
-    });
   }
 
   private startGameWithDificulty(i: number): void {
@@ -247,6 +243,13 @@ export class Sprint extends Component {
     this.game.remove();
     this.dificulty.remove();
     const answers = JSON.parse(data) as TSprintAnswers ;
-    const a = new StatisticPopup(this.root, answers.correct, answers.incorrect);
+    this.statistic = new StatisticPopup(this.root, answers.correct, answers.incorrect);
+  }
+
+  render(): void {
+    if (this.parent) this.parent.append(this.root);
+    this.statistic?.remove();
+    this.game.remove();
+    this.dificulty.render();
   }
 }

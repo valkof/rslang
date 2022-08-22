@@ -10,3 +10,7 @@ export function shuffle<T>(arr: Array<T>) {
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
 }
+
+export function getRandomNumber(max: number) {
+  return Math.floor(Math.random() * max );
+}

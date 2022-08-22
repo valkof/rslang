@@ -1,6 +1,6 @@
-import { PAGESCOUNT } from '../config';
+import { PAGES_COUNT } from '../config';
 import { TDifficulty, TWord } from '../Interfaces/Types';
-import { shuffle } from '../utils';
+import { getRandomNumber, shuffle } from '../utils';
 import APIService from './APIService';
 import { Observer } from './../Abstract/Observer';
 
@@ -53,7 +53,7 @@ export default class SprintService extends Observer {
   generateRandomNums(): number[] {
     const arr: number[] = [];
     while (arr.length < 5) {
-      const num = Math.floor(Math.random() * PAGESCOUNT);
+      const num = getRandomNumber(PAGES_COUNT);
       if (!arr.includes(num)) {
         arr.push(num);
       }
@@ -66,7 +66,6 @@ export default class SprintService extends Observer {
     this.incorrectVariants.reverse();
     this.isGame = true;
     this.reset();
-
 
     this.changeWord();
     this.interval = setInterval(() => {
@@ -136,12 +135,16 @@ export default class SprintService extends Observer {
     this.score = 0;
     this.combo = 0;
     this.bonusScore = 0;
+    this.correctAnswers = [];
+    this.incorrectAnswers = [];
+
     this.dispatch(ESprintEvents.startGame);
     this.dispatch(ESprintEvents.timerTick, '60');
     this.dispatch(ESprintEvents.score, '0');
     this.dispatch(ESprintEvents.score, this.score.toString());
     this.dispatch(ESprintEvents.changeCombo, this.combo.toString());
     this.dispatch(ESprintEvents.changeReward, this.bonusScore.toString());
+
     if (this.interval) clearInterval(this.interval);
   }
 }

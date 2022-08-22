@@ -22,13 +22,11 @@ import { LangService } from './Services/LangService';
 import { AudioGameService } from './Services/AudioGameService';
 import SprintService from './Services/SprintService';
 
-
 class App {
   private readonly services = {
-    lang: new LangService,
-    audioGame: new AudioGameService,
-    sprint: new SprintService
-
+    lang: new LangService(),
+    audioGame: new AudioGameService(),
+    sprint: new SprintService(),
   } as TServices;
 
   header = new Header(this.parent, this.services);

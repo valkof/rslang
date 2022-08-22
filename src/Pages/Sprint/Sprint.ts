@@ -224,6 +224,7 @@ export class Sprint extends Component {
     }
   }
 
+
   private keyHandler(e: KeyboardEvent) {
     if (window.location.hash === '#sprint') {
       switch (e.key) {

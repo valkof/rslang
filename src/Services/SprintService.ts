@@ -71,12 +71,12 @@ export default class SprintService extends Observer {
     this.changeWord();
     this.interval = setInterval(() => {
       if (!this.isGame) {
-        if(this.interval) clearInterval(this.interval);
+        if (this.interval) clearInterval(this.interval);
       }
       if (this.timer > 0) {
         this.timer--;
       } else {
-        if(this.interval) clearInterval(this.interval);
+        if (this.interval) clearInterval(this.interval);
         this.stopGame();
       }
       this.dispatch(ESprintEvents.timerTick, this.timer.toString());
@@ -124,7 +124,6 @@ export default class SprintService extends Observer {
         this.bonusScore = 0;
         this.score = this.score >= 20 ? (this.score -= 20) : this.score;
       }
-
       this.dispatch(ESprintEvents.score, this.score.toString());
       this.dispatch(ESprintEvents.changeCombo, this.combo.toString());
       this.dispatch(ESprintEvents.changeReward, this.bonusScore.toString());
@@ -143,6 +142,6 @@ export default class SprintService extends Observer {
     this.dispatch(ESprintEvents.score, this.score.toString());
     this.dispatch(ESprintEvents.changeCombo, this.combo.toString());
     this.dispatch(ESprintEvents.changeReward, this.bonusScore.toString());
-    if(this.interval) clearInterval(this.interval);
+    if (this.interval) clearInterval(this.interval);
   }
 }

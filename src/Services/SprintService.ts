@@ -12,7 +12,13 @@ export enum ESprintEvents {
   changeTranslate = 'changeTranslate',
   changeCombo = 'changeCombo',
   changeReward = 'changeReward',
+  renderStatistic = 'statistic',
 }
+
+export type TSprintAnswers = {
+  correct: TWord[];
+  incorrect: TWord[];
+};
 
 export default class SprintService extends Observer {
   private currentWords: TWord[] = [];
@@ -101,6 +107,11 @@ export default class SprintService extends Observer {
 
   stopGame() {
     this.isGame = false;
+    const dataObj = JSON.stringify({
+      correct: this.correctAnswers,
+      incorrect: this.incorrectAnswers,
+    });
+    this.dispatch(ESprintEvents.renderStatistic, dataObj);
     // Потом консоль лог заменю на вывод статистики
     console.log(this.correctAnswers);
     console.log(this.incorrectAnswers);
@@ -131,7 +142,7 @@ export default class SprintService extends Observer {
   }
 
   reset() {
-    this.timer = 60;
+    this.timer = 1;
     this.score = 0;
     this.combo = 0;
     this.bonusScore = 0;

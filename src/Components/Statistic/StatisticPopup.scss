@@ -1,0 +1,45 @@
+.statistic-popup {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-self: center;
+  width: 50%;
+  background-color: #f5a329;
+  border-radius: 20px;
+  color: white;
+  font-size: 28px;
+}
+
+.statistic-title {
+  margin-top: 20px;
+  align-self: center;
+}
+
+.row-container {
+  margin-top: 5px;
+  border-radius: 22px;
+  width: 95%;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  &_correct {
+    background-color: #17d306;
+  }
+
+  &_incorrect {
+    background-color: #eb5757;
+  }
+
+  &:last-child {
+    margin-bottom: 20px;
+  }
+}
+
+.row-word {
+  text-align: center;
+  width: 20%;
+  font-size: 20px;
+}

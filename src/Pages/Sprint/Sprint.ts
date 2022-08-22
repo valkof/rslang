@@ -1,7 +1,8 @@
 import { Component } from '../../Abstract/component';
-import { TDifficulty, TServices } from '../../Interfaces/Types';
-import { ESprintEvents } from '../../Services/SprintService';
+import { TDifficulty, TServices, TWord } from '../../Interfaces/Types';
+import { ESprintEvents, TSprintAnswers } from '../../Services/SprintService';
 import { DifficultySelector } from './../../Components/DifficultySelector';
+import StatisticPopup from './../../Components/Statistic/StatisticPopup';
 
 export class Sprint extends Component {
   private service: TServices;
@@ -126,10 +127,12 @@ export class Sprint extends Component {
     this.falseBtn.root.onclick = () => this.service.sprint.answer(false);
     this.trueBtn.root.textContent = '1 Верно';
     this.trueBtn.root.onclick = () => this.service.sprint.answer(true);
+
     this.rewardBird1.remove();
     this.rewardBird2.remove();
     this.rewardBird3.remove();
     this.rewardBird4.remove();
+
     this.service.sprint.addListener(ESprintEvents.timerTick, this.setTimer.bind(this));
     this.service.sprint.addListener(ESprintEvents.score, this.setScore.bind(this));
     this.service.sprint.addListener(ESprintEvents.startGame, this.start.bind(this));
@@ -137,14 +140,16 @@ export class Sprint extends Component {
     this.service.sprint.addListener(ESprintEvents.changeTranslate, this.setTranslate.bind(this));
     this.service.sprint.addListener(ESprintEvents.changeCombo, this.setCombo.bind(this));
     this.service.sprint.addListener(ESprintEvents.changeReward, this.setReward.bind(this));
+    this.service.sprint.addListener(ESprintEvents.renderStatistic, this.renderStatistic.bind(this));
+
     this.game.remove();
-    window.addEventListener("keydown", this.keyHandler.bind(this));
-    window.addEventListener('hashchange', (e) => {
+    window.addEventListener('keydown', this.keyHandler.bind(this));
+    window.addEventListener('hashchange', e => {
       if (window.location.hash === '#sprint') {
         this.dificulty.render();
         this.game.remove();
       }
-    })
+    });
   }
 
   private startGameWithDificulty(i: number): void {
@@ -237,4 +242,10 @@ export class Sprint extends Component {
     }
   }
 
+  private renderStatistic(data: string) {
+    this.game.remove();
+    this.dificulty.remove();
+    const answers = JSON.parse(data) as TSprintAnswers ;
+    const a = new StatisticPopup(this.root, answers.correct, answers.incorrect);
+  }
 }

@@ -1,5 +1,5 @@
 import { Component } from '../../Abstract/component';
-import { TDifficulty, TServices, TWord } from '../../Interfaces/Types';
+import { TDifficulty, TServices } from '../../Interfaces/Types';
 import { ESprintEvents } from '../../Services/SprintService';
 import { DifficultySelector } from './../../Components/DifficultySelector';
 
@@ -16,29 +16,47 @@ export class Sprint extends Component {
 
   private gameFooter = new Component(this.game.root, 'div', ['sprint-game__footer']);
 
-  private timerContainer: Component;
+  private timerContainer = new Component(this.gameHeader.root, 'div', ['sprint-game__timer-container']);
 
-  private timerText: Component;
+  private timerText = new Component(this.timerContainer.root, 'h3', ['sprint-game__timer-container__text']);
 
-  private timerTime: Component;
+  private timerTime = new Component(this.timerContainer.root, 'h3', ['sprint-game__timer-container__text']);
 
-  private scoreContainer: Component;
+  private scoreContainer = new Component(this.gameHeader.root, 'div', ['sprint-game__score-container']);
 
-  private scoreText: Component;
+  private scoreText = new Component(this.scoreContainer.root, 'h3', ['sprint-game__timer-container__text']);
 
-  private scoreValue: Component;
+  private scoreValue = new Component(this.scoreContainer.root, 'h3', ['sprint-game__timer-container__text']);
 
-  private comboContainer: Component;
+  private rewardContainer = new Component(this.gameCenter.root, 'div', ['sprint-game__reward-container']);
 
-  word: Component;
+  private comboContainer = new Component(this.gameCenter.root, 'div', ['sprint-game__combo-container']);
 
-  wordTranslane: Component;
+  private word = new Component(this.gameCenter.root, 'h3', ['sprint-game__word']);
 
-  trueBtn: Component;
+  private wordTranslane = new Component(this.gameCenter.root, 'h3', ['sprint-game__translate']);
 
-  falseBtn: Component;
+  private buttons = new Component(this.gameFooter.root, 'div', ['sprint-game__button-container']);
 
-  buttons: Component;
+  private trueBtn = new Component(this.buttons.root, 'div', ['sprint-game__true-btn']);
+
+  private falseBtn = new Component(this.buttons.root, 'div', ['sprint-game__false-btn']);
+
+  private combo1 = new Component(this.comboContainer.root, 'div', ['sprint-game__combo']);
+
+  private combo2 = new Component(this.comboContainer.root, 'div', ['sprint-game__combo']);
+
+  private combo3 = new Component(this.comboContainer.root, 'div', ['sprint-game__combo']);
+
+  private rewardBranch: Component;
+
+  private rewardBird1: Component;
+
+  private rewardBird2: Component;
+
+  private rewardBird3: Component;
+
+  private rewardBird4: Component;
 
   constructor(parent: HTMLElement, private readonly services: TServices) {
     super(parent, 'div', ['sprint-wrapper']);
@@ -51,47 +69,90 @@ export class Sprint extends Component {
       this.startGameWithDificulty.bind(this),
     );
 
-    this.timerContainer = new Component(this.gameHeader.root, 'div', ['sprint-game__timer-container']);
-    this.timerText = new Component(this.timerContainer.root, 'h3', ['sprint-game__timer-container__text']);
+    this.rewardBranch = new Component(
+      this.rewardContainer.root,
+      'img',
+      ['sprint-game__reward__branch'],
+      null,
+      'src',
+      'assets/sprint/branch29deg.png',
+    );
+
+    this.rewardBird1 = new Component(
+      this.rewardContainer.root,
+      'img',
+      ['sprint-game__reward__bird'],
+      null,
+      'src',
+      'assets/sprint/bird1.png',
+    );
+
+    this.rewardBird2 = new Component(
+      this.rewardContainer.root,
+      'img',
+      ['sprint-game__reward__bird'],
+      null,
+      'src',
+      'assets/sprint/bird2.png',
+    );
+
+    this.rewardBird3 = new Component(
+      this.rewardContainer.root,
+      'img',
+      ['sprint-game__reward__bird'],
+      null,
+      'src',
+      'assets/sprint/bird3.png',
+    );
+
+    this.rewardBird4 = new Component(
+      this.rewardContainer.root,
+      'img',
+      ['sprint-game__reward__bird'],
+      null,
+      'src',
+      'assets/sprint/bird4.png',
+    );
+
+    this.init();
+  }
+
+  private init() {
     this.timerText.root.textContent = 'Время: ';
-    this.timerTime = new Component(this.timerContainer.root, 'h3', ['sprint-game__timer-container__text']);
     this.timerTime.root.textContent = '60';
-    this.scoreContainer = new Component(this.gameHeader.root, 'div', ['sprint-game__score-container']);
-    this.scoreText = new Component(this.scoreContainer.root, 'h3', ['sprint-game__timer-container__text']);
     this.scoreText.root.textContent = '0';
-    this.scoreValue = new Component(this.scoreContainer.root, 'h3', ['sprint-game__timer-container__text']);
     this.scoreValue.root.textContent = 'Очков';
-
-    this.comboContainer = new Component(this.gameCenter.root, 'div', ['sprint-game__combo-container']);
-    this.word = new Component(this.gameCenter.root, 'h3', ['sprint-game__word']);
-    this.word.root.textContent = 'HELLO';
-    this.wordTranslane = new Component(this.gameCenter.root, 'h3', ['sprint-game__translate']);
-    this.wordTranslane.root.textContent = 'Привет';
-
-    this.buttons = new Component(this.gameFooter.root, 'div', ['sprint-game__button-container']);
-    this.falseBtn = new Component(this.buttons.root, 'div', ['sprint-game__false-btn']);
-    this.falseBtn.root.textContent = 'Неверно';
+    this.falseBtn.root.textContent = '2 Неверно';
     this.falseBtn.root.onclick = () => this.service.sprint.answer(false);
-    this.trueBtn = new Component(this.buttons.root, 'div', ['sprint-game__true-btn']);
-    this.trueBtn.root.textContent = 'Верно';
+    this.trueBtn.root.textContent = '1 Верно';
     this.trueBtn.root.onclick = () => this.service.sprint.answer(true);
-
-    this.game.remove();
+    this.rewardBird1.remove();
+    this.rewardBird2.remove();
+    this.rewardBird3.remove();
+    this.rewardBird4.remove();
     this.service.sprint.addListener(ESprintEvents.timerTick, this.setTimer.bind(this));
     this.service.sprint.addListener(ESprintEvents.score, this.setScore.bind(this));
     this.service.sprint.addListener(ESprintEvents.startGame, this.start.bind(this));
     this.service.sprint.addListener(ESprintEvents.changeWord, this.setWord.bind(this));
     this.service.sprint.addListener(ESprintEvents.changeTranslate, this.setTranslate.bind(this));
+    this.service.sprint.addListener(ESprintEvents.changeCombo, this.setCombo.bind(this));
+    this.service.sprint.addListener(ESprintEvents.changeReward, this.setReward.bind(this));
+    this.game.remove();
+    window.addEventListener("keydown", this.keyHandler.bind(this));
+    window.addEventListener('hashchange', (e) => {
+      if (window.location.hash === '#sprint') {
+        this.dificulty.render();
+        this.game.remove();
+      }
+    })
   }
 
-  startGameWithDificulty(i: number): void {
+  private startGameWithDificulty(i: number): void {
     const dificultyLevel = i < 7 && i >= 0 ? i : 0;
     this.service.sprint.generateWords(dificultyLevel as TDifficulty).then(() => this.service.sprint.startGame());
-    //const a = this.parent as HTMLElement;
-    //a.requestFullscreen();
   }
 
-  start() {
+  private start() {
     this.dificulty.remove();
     this.game.render();
   }
@@ -111,4 +172,69 @@ export class Sprint extends Component {
   private setTranslate(word: string) {
     this.wordTranslane.root.textContent = word.replace('"', '').replace('"', '').toUpperCase();
   }
+
+  private setCombo(combo: string) {
+    switch (combo) {
+      case '0':
+        this.combo1.root.classList.remove('sprint-game__combo_active');
+        this.combo2.root.classList.remove('sprint-game__combo_active');
+        this.combo3.root.classList.remove('sprint-game__combo_active');
+        break;
+
+      case '1':
+        this.combo1.root.classList.add('sprint-game__combo_active');
+        break;
+
+      case '2':
+        this.combo1.root.classList.add('sprint-game__combo_active');
+        this.combo2.root.classList.add('sprint-game__combo_active');
+        break;
+
+      case '3':
+        this.combo1.root.classList.add('sprint-game__combo_active');
+        this.combo2.root.classList.add('sprint-game__combo_active');
+        this.combo3.root.classList.add('sprint-game__combo_active');
+        break;
+    }
+  }
+
+  private setReward(combo: string) {
+    switch (combo) {
+      case '0':
+        this.rewardBird1.remove();
+        this.rewardBird2.remove();
+        this.rewardBird3.remove();
+        this.rewardBird4.remove();
+        break;
+
+      case '10':
+        this.rewardBird1.render();
+        break;
+
+      case '20':
+        this.rewardBird2.render();
+        break;
+
+      case '30':
+        this.rewardBird3.render();
+        break;
+      case '40':
+        this.rewardBird4.render();
+        break;
+    }
+  }
+
+  private keyHandler(e: KeyboardEvent) {
+    if (window.location.hash === '#sprint') {
+      switch (e.key) {
+        case '2':
+          this.service.sprint.answer(false);
+          break;
+        case '1':
+          this.service.sprint.answer(true);
+          break;
+      }
+    }
+  }
+
 }

@@ -10,7 +10,7 @@ export class Router {
   handleRoute(): void {
     this.clearPage();
     const route = window.location.hash.replace('#', '');
-    const page = this.routes[route];    
+    const page = this.routes[route];
     if (page) {
       page.render()
     } else this.routes['#'].render();

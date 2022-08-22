@@ -10,16 +10,20 @@ export enum ESprintEvents {
   startGame = 'start',
   changeWord = 'changeWord',
   changeTranslate = 'changeTranslate',
+  changeCombo = 'changeCombo',
+  changeReward = 'changeReward',
 }
 
 export default class SprintService extends Observer {
   private currentWords: TWord[] = [];
 
+  private currentWord: TWord | null = null;
+
   private incorrectVariants: string[] = [];
 
-  private correctAnswers = [];
+  private correctAnswers: Array<TWord | null> = [];
 
-  private incorrectAnswers = [];
+  private incorrectAnswers: Array<TWord | null> = [];
 
   private rightChoise = true;
 
@@ -30,6 +34,11 @@ export default class SprintService extends Observer {
   private bonusScore = 0;
 
   private combo = 0;
+
+  private isGame = false;
+
+  private interval: NodeJS.Timer | null = null;
+
 
   async generateWords(difficulty: TDifficulty) {
     const pages = this.generateRandomNums();
@@ -56,20 +65,21 @@ export default class SprintService extends Observer {
   startGame() {
     this.incorrectVariants = this.currentWords.map(el => el.wordTranslate) as string[];
     this.incorrectVariants.reverse();
-    this.timer = 60;
-    this.score = 0;
-    this.dispatch(ESprintEvents.startGame);
-    this.dispatch(ESprintEvents.timerTick, '60');
-    this.dispatch(ESprintEvents.score, '0');
+    this.isGame = true;
+    this.reset();
+
+
     this.changeWord();
-    const timer = setInterval(() => {
+    this.interval = setInterval(() => {
+      if (!this.isGame) {
+        if(this.interval) clearInterval(this.interval);
+      }
       if (this.timer > 0) {
         this.timer--;
       } else {
-        clearInterval(timer);
+        if(this.interval) clearInterval(this.interval);
         this.stopGame();
       }
-      const time = this.timer;
       this.dispatch(ESprintEvents.timerTick, this.timer.toString());
     }, 1000);
   }
@@ -78,6 +88,7 @@ export default class SprintService extends Observer {
     let word: TWord;
     if (this.currentWords.length > 0) {
       word = this.currentWords.pop() as TWord;
+      this.currentWord = word;
       this.dispatch(ESprintEvents.changeWord, JSON.stringify(word.word));
       if (Math.random() > 0.5) {
         this.rightChoise = true;
@@ -91,25 +102,47 @@ export default class SprintService extends Observer {
   }
 
   stopGame() {
-    alert(`${this.score}`);
+    this.isGame = false;
+    // Потом консоль лог заменю на вывод статистики
+    console.log(this.correctAnswers);
+    console.log(this.incorrectAnswers);
   }
 
   answer(answer: boolean) {
-    if (answer === this.rightChoise) {
-      if (this.combo < 3) {
-        this.combo++;
+    if (this.isGame) {
+      if (answer === this.rightChoise) {
+        this.correctAnswers.push(this.currentWord);
+        if (this.combo < 3) {
+          this.combo++;
+        } else {
+          this.combo = 0;
+          this.bonusScore = this.bonusScore < 40 ? (this.bonusScore += 10) : this.bonusScore;
+        }
+        this.score += 20 + this.bonusScore;
       } else {
+        this.incorrectAnswers.push(this.currentWord);
         this.combo = 0;
-        this.bonusScore = this.bonusScore < 40 ? (this.bonusScore += 10) : this.bonusScore;
+        this.bonusScore = 0;
+        this.score = this.score >= 20 ? (this.score -= 20) : this.score;
       }
-      this.score += 20 + this.bonusScore;
       this.dispatch(ESprintEvents.score, this.score.toString());
-    } else {
-      this.combo = 0;
-      this.bonusScore = 0;
-      this.score = this.score >= 20 ? (this.score -= 20) : this.score;
-      this.dispatch(ESprintEvents.score, this.score.toString());
+      this.dispatch(ESprintEvents.changeCombo, this.combo.toString());
+      this.dispatch(ESprintEvents.changeReward, this.bonusScore.toString());
+      this.changeWord();
     }
-    this.changeWord();
+  }
+
+  reset() {
+    this.timer = 60;
+    this.score = 0;
+    this.combo = 0;
+    this.bonusScore = 0;
+    this.dispatch(ESprintEvents.startGame);
+    this.dispatch(ESprintEvents.timerTick, '60');
+    this.dispatch(ESprintEvents.score, '0');
+    this.dispatch(ESprintEvents.score, this.score.toString());
+    this.dispatch(ESprintEvents.changeCombo, this.combo.toString());
+    this.dispatch(ESprintEvents.changeReward, this.bonusScore.toString());
+    if(this.interval) clearInterval(this.interval);
   }
 }

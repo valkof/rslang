@@ -247,7 +247,7 @@ export class Sprint extends Component {
   }
 
   render(): void {
-    if (this.parent) this.parent.append(this.root);
+    super.render();
     this.statistic?.remove();
     this.game.remove();
     this.dificulty.render();

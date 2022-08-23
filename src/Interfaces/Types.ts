@@ -1,11 +1,13 @@
 
 import { AudioGameService } from "../Services/AudioGameService";
 import { LangService } from "../Services/LangService";
+import SprintService from './../Services/SprintService';
 
 
 export type TServices = {
   lang: LangService,
   audioGame: AudioGameService
+  sprint: SprintService
 };
 
 export type TWord = {
@@ -49,7 +51,7 @@ export type TUserSetting = {
   optional: object;
 };
 
-export type TUserWord= {
+export type TUserWord = {
   difficulty: string;
   optional: object;
 }
@@ -57,4 +59,19 @@ export type TUserWord= {
 export type TLearnWords = {
   learn: boolean;
   word: TWord;
+}
+
+export type TDifficulty = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+
+export type TSprintAnswers = {
+  correct: TWord[];
+  incorrect: TWord[];
+};
+
+export type TAuthData = {
+  message: string;
+  name: string;
+  refreshToken: string;
+  token: string;
+  userId: string;
 }

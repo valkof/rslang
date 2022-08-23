@@ -20,11 +20,13 @@ import { Authorization } from './Pages/Authorization/Authorization';
 import { TServices } from './Interfaces/Types';
 import { LangService } from './Services/LangService';
 import { AudioGameService } from './Services/AudioGameService';
+import SprintService from './Services/SprintService';
 
 class App {
   private readonly services = {
-    lang: new LangService,
-    audioGame: new AudioGameService
+    lang: new LangService(),
+    audioGame: new AudioGameService(),
+    sprint: new SprintService(),
   } as TServices;
 
   header = new Header(this.parent, this.services);
@@ -46,7 +48,7 @@ class App {
   sprint = new Sprint(this.pageContainer.root, this.services);
 
   statistic = new Statistic(this.pageContainer.root, this.services);
- 
+
   authorization = new Authorization(this.pageContainer.root, this.services);
 
   constructor(private parent: HTMLElement) {

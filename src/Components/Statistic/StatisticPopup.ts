@@ -5,9 +5,33 @@ import './StatisticPopup.scss';
 export default class StatisticPopup extends Component {
   correctAnswers: TWord[];
 
-  constructor(parent: HTMLElement, correctAnswers: TWord[], incorrectAnswers: TWord[]) {
+  repeatbtn: Component | undefined;
+
+  backBtn: Component | undefined;
+
+  btnContainer: Component;
+
+  constructor(
+    parent: HTMLElement,
+    correctAnswers: TWord[],
+    incorrectAnswers: TWord[],
+    repeatGame?: () => void,
+    back?: () => void) {
+
     super(parent, 'div', ['statistic-popup']);
     this.correctAnswers = correctAnswers;
+
+    this.btnContainer = new Component(this.root, 'div', ['statistic-popup__btnContainer']);
+
+    if (repeatGame) {
+      this.repeatbtn = new Component(this.btnContainer.root, 'div', ['repeat-btn'], 'Повторить');
+      this.repeatbtn.root.onclick = repeatGame;
+    }
+
+    if (back) {
+      this.backBtn = new Component(this.btnContainer.root, 'div', ['repeat-btn'], 'Назад');
+      this.backBtn.root.onclick = back;
+    }
 
     this.renderAnswers(correctAnswers, true);
     this.renderAnswers(incorrectAnswers, false);
@@ -24,7 +48,7 @@ export default class StatisticPopup extends Component {
   private renderRow(word: TWord, index: number, correct: boolean) {
     const status = correct ? 'row-container_correct' : 'row-container_incorrect';
     const container = new Component(this.root, 'div', ['row-container', status]);
-    const indexEl = new Component(container.root, 'h3', ['row-word'], `${index}`);
+    const indexEl = new Component(container.root, 'h3', ['row-index'], `${index}`);
     const enWord = new Component(container.root, 'h3', ['row-word'], ` ${word.word}`);
     const enTranscription = new Component(container.root, 'h3', ['row-word'], ` ${word.transcription}`);
     const enTranslate = new Component(container.root, 'h3', ['row-word'], ` ${word.wordTranslate}`);

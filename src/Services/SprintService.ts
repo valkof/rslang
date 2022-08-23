@@ -83,6 +83,28 @@ export default class SprintService extends Observer {
     }, 1000);
   }
 
+  refreshGame() {
+    this.currentWords = [...this.currentWords, ...this.correctAnswers as TWord[],...this.incorrectAnswers as TWord[] ];
+    this.incorrectVariants = this.currentWords.map(el => el.wordTranslate) as string[];
+    this.incorrectVariants.reverse();
+    this.isGame = true;
+    this.reset();
+
+    this.changeWord();
+    this.interval = setInterval(() => {
+      if (!this.isGame) {
+        if (this.interval) clearInterval(this.interval);
+      }
+      if (this.timer > 0) {
+        this.timer--;
+      } else {
+        if (this.interval) clearInterval(this.interval);
+        this.stopGame();
+      }
+      this.dispatch(ESprintEvents.timerTick, this.timer.toString());
+    }, 1000);
+  }
+
   changeWord() {
     let word: TWord;
     if (this.currentWords.length > 0) {
@@ -107,9 +129,6 @@ export default class SprintService extends Observer {
       incorrect: this.incorrectAnswers,
     });
     this.dispatch(ESprintEvents.renderStatistic, dataObj);
-    // Потом консоль лог заменю на вывод статистики
-    console.log(this.correctAnswers);
-    console.log(this.incorrectAnswers);
   }
 
   answer(answer: boolean) {

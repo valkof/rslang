@@ -156,6 +156,7 @@ export class Sprint extends Component {
 
   private start() {
     this.dificulty.remove();
+    this.statistic?.remove();
     this.game.render();
   }
 
@@ -242,8 +243,13 @@ export class Sprint extends Component {
   private renderStatistic(data: string) {
     this.game.remove();
     this.dificulty.remove();
-    const answers = JSON.parse(data) as TSprintAnswers ;
-    this.statistic = new StatisticPopup(this.root, answers.correct, answers.incorrect);
+    const answers = JSON.parse(data) as TSprintAnswers;
+    this.statistic = new StatisticPopup(
+      this.root, answers.correct,
+      answers.incorrect,
+      this.service.sprint.refreshGame.bind(this.service.sprint),
+      this.render.bind(this)
+    );
   }
 
   render(): void {

@@ -67,3 +67,11 @@ export type TSprintAnswers = {
   correct: TWord[];
   incorrect: TWord[];
 };
+
+export type TAuthData = {
+  message: string;
+  name: string;
+  refreshToken: string;
+  token: string;
+  userId: string;
+}

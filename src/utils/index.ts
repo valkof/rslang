@@ -1,3 +1,6 @@
+import { TAuthData } from "../Interfaces/Types";
+import APIService from '../Services/APIService';
+
 export function logError(message: string, error: unknown) {
   const errMessage = (error instanceof Error) ? error.message : 'Unknown Error';
   console.error(`[${message}]: ${errMessage}`);
@@ -12,5 +15,24 @@ export function shuffle<T>(arr: Array<T>) {
 }
 
 export function getRandomNumber(max: number) {
-  return Math.floor(Math.random() * max );
+  return Math.floor(Math.random() * max);
+}
+
+// Получение токена из локалстора
+export function getToken(): string {
+  const data = JSON.parse(localStorage.getItem('rslang')!) as TAuthData;
+  return data ? data.token : '';
+}
+
+// Получение объекта пользователя из локалстора
+export function getUserInfo(): TAuthData | null {
+  const data = localStorage.getItem('rslang') ?  JSON.parse(localStorage.getItem('rslang')!) as TAuthData : null;
+  return data;
+}
+
+// Проверка или пользователь авторизирован
+export async function isAuthorizated(data: TAuthData | null): Promise<boolean> {
+  if(!data) return false;
+  const resp =  await APIService.getUser(data.userId!,data.token)
+  return (resp?.status === 200) ? true : false;
 }

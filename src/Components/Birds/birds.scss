@@ -1,0 +1,18 @@
+.birds {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 256px;
+  height: 120px;
+  overflow: hidden;
+}
+
+.birds__branch {
+  position: absolute;
+  z-index: 1;
+  top: -2px;
+  right: 15px;
+  width: 209px;
+  transform: rotate(45deg);
+}

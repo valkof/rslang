@@ -24,7 +24,7 @@ export class ResultGame extends Component {
     const button = new Component(divSetButtons.root, 'button', ['button'], 'Старт Аудиовызов');
     button.root.onclick = () => this.services.audioGame.selectGame();
     
-    this.services.audioGame.addListener('score', (words) => {
+    this.services.audioGame.addListener('result', (words) => {
       if (words) {
         const learnWords = words as TLearnWords[];
         const countWords = learnWords.length;

@@ -1,7 +1,7 @@
 import { Component } from '../../Abstract/component';
 import { SelectDifficultGame } from '../../Components/SelectDifficult/SelectDifficult';
 import { SPRINT_DURATION } from '../../config';
-import { TDifficulty, TServices, TSprintAnswers } from '../../Interfaces/Types';
+import { TDifficulty, TParams, TServices, TSprintAnswers } from '../../Interfaces/Types';
 import { ESprintEvents } from '../../Services/SprintService';
 import StatisticPopup from './../../Components/Statistic/StatisticPopup';
 
@@ -160,24 +160,24 @@ export class Sprint extends Component {
     this.game.render();
   }
 
-  private setTimer(time: string): void {
-    this.timerTime.root.textContent = time;
+  private setTimer(time: TParams): void {
+    this.timerTime.root.textContent = time as string;
   }
 
-  private setScore(score: string): void {
-    this.scoreText.root.textContent = score;
+  private setScore(score: TParams): void {
+    this.scoreText.root.textContent = score as string;
   }
 
-  private setWord(word: string) {
-    this.word.root.textContent = word.replace('"', '').replace('"', '').toUpperCase();
+  private setWord(word: TParams) {
+    this.word.root.textContent = (word as string).replace('"', '').replace('"', '').toUpperCase();
   }
 
-  private setTranslate(word: string) {
-    this.wordTranslane.root.textContent = word.replace('"', '').replace('"', '').toUpperCase();
+  private setTranslate(word: TParams) {
+    this.wordTranslane.root.textContent = (word as string).replace('"', '').replace('"', '').toUpperCase();
   }
 
-  private setCombo(combo: string) {
-    switch (combo) {
+  private setCombo(combo: TParams) {
+    switch (combo as string) {
       case '0':
         this.combo1.root.classList.remove('sprint-game__combo_active');
         this.combo2.root.classList.remove('sprint-game__combo_active');
@@ -201,8 +201,8 @@ export class Sprint extends Component {
     }
   }
 
-  private setReward(combo: string) {
-    switch (combo) {
+  private setReward(combo: TParams) {
+    switch (combo as string) {
       case '0':
         this.rewardBird1.remove();
         this.rewardBird2.remove();
@@ -240,10 +240,10 @@ export class Sprint extends Component {
     }
   }
 
-  private renderStatistic(data: string) {
+  private renderStatistic(data: TParams) {
     this.game.remove();
     this.dificulty.remove();
-    const answers = JSON.parse(data) as TSprintAnswers;
+    const answers = data as TSprintAnswers;
     this.statistic = new StatisticPopup(
       this.root, answers.correct,
       answers.incorrect,

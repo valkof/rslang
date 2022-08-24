@@ -75,3 +75,5 @@ export type TAuthData = {
   token: string;
   userId: string;
 }
+
+export type TParams = string | number | boolean | object | null;

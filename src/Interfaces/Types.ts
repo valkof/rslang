@@ -87,6 +87,7 @@ export type TAuthData = {
 
 export type TParams = string | number | boolean | object | null;
 
+
 export type TGameStatistic = {
   date: Date;
   newWordsCount: number;
@@ -107,3 +108,4 @@ export type TUserStatistic = {
   }
 };
 */
+

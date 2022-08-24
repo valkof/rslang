@@ -45,10 +45,10 @@ export default class SprintService extends Observer {
     let array: TWord[] = [];
     for (let i = 0; i < pages.length; i++) {
       const words = await APIService.getWords(pages[i], difficulty);
-      array = words ? [...array, ...words.data] : array;
+      array = words ? [...words.data] : array;
     }
     shuffle(array);
-    this.currentWords = array ? array : [];
+    this.currentWords = array;
   }
 
   generateRandomNums(): number[] {
@@ -67,6 +67,7 @@ export default class SprintService extends Observer {
     this.incorrectVariants.reverse();
     this.isGame = true;
     this.reset();
+    this.dispatch(ESprintEvents.startGame);
 
     this.changeWord();
     this.interval = setInterval(() => {
@@ -93,6 +94,7 @@ export default class SprintService extends Observer {
     this.incorrectVariants.reverse();
     this.isGame = true;
     this.reset();
+    this.dispatch(ESprintEvents.startGame);
 
     this.changeWord();
     this.interval = setInterval(() => {
@@ -167,7 +169,6 @@ export default class SprintService extends Observer {
     this.correctAnswers = [];
     this.incorrectAnswers = [];
 
-    this.dispatch(ESprintEvents.startGame);
     this.dispatch(ESprintEvents.timerTick, SPRINT_DURATION.toString());
     this.dispatch(ESprintEvents.score, '0');
     this.dispatch(ESprintEvents.score, this.score.toString());

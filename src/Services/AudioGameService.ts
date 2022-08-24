@@ -5,13 +5,19 @@ import APIService from "./APIService";
 
 export class AudioGameService extends Observer {
   
-  roundGame = 0;
+  private roundGame = 0;
 
-  countError = 0;
+  private score = 0;
 
-  wordsGame = [] as TWord[][];
+  private countError = 0;
 
-  learnWords = [] as TLearnWords[];
+  private countTrueWords = 0;
+
+  private multiBonus = 1;
+
+  private wordsGame = [] as TWord[][];
+
+  private learnWords = [] as TLearnWords[];
   
   private async getWordsByBook(group: number): Promise<TWord[][] | null> {
     const numberPage = Math.floor(Math.random() * 30);
@@ -39,6 +45,9 @@ export class AudioGameService extends Observer {
   private resetSettingGame(words: TWord[][]): void {
     this.roundGame = 0;
     this.countError = 0;
+    this.score = 0;
+    this.countTrueWords = 0;
+    this.multiBonus = 1;
     this.dispatch('status', this.countError);
     this.learnWords = [];
     this.wordsGame = words;
@@ -62,29 +71,47 @@ export class AudioGameService extends Observer {
   stageGame(): void {
     this.dispatch('audio', `${HOST}/${this.wordsGame[this.roundGame][0].audio}`);
     const shuffleVersion = this.shuffleArray(this.wordsGame[this.roundGame]);
+    // console.log(this.wordsGame[this.roundGame][0].wordTranslate);
     const shuffleWords = shuffleVersion.map(word => word.wordTranslate);
     this.dispatch('vesrsion', shuffleWords);
   }
 
   vereficationStageGame(word: string): void {
     const trueWord = this.wordsGame[this.roundGame][0].wordTranslate;
-    if (word !== trueWord) {
+    if (word === trueWord) {
+      this.score += 10 * this.multiBonus;
+      this.countTrueWords += 1;
+      if (this.countTrueWords === 4) {
+        this.multiBonus = Math.min(this.multiBonus + 1, 5);
+        this.countTrueWords = 0;
+      }
+    } else {
       this.countError += 1;
       this.dispatch('status', this.countError);
+      if (this.countTrueWords === 0) {
+        this.multiBonus = Math.max(this.multiBonus - 1, 1);
+      }
+      this.countTrueWords = 0;
     }
     this.learnWords.push({
       learn: word === trueWord,
       word: this.wordsGame[this.roundGame][0]
-    })
+    });
+    
+    this.dispatch('score', this.score);
+    this.dispatch('bonus', this.countTrueWords);
+    this.dispatch('birds', this.multiBonus);
+    
     if (this.countError === 5 || this.roundGame === 19) {
       return this.resultGame();
     }
+
     this.roundGame += 1;
     this.stageGame();
   }
 
   resultGame(): void {
-    this.dispatch('score', this.getResultGame());
+    this.dispatch('result', this.getResultGame());
     this.dispatch('audioCallGame', 'result');
   }
 

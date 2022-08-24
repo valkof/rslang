@@ -8,20 +8,41 @@
   flex-direction: column;
   gap: 10px;
   align-items: center;
+  background-color: #f5a329;
+  border-radius: 50px;
+  padding: 30px 100px;
 }
 
+.process__score {
+  display: flex;
+  justify-content: right;
+  width: 100%;
+}
+
+.score {
+  display: inline-block;
+  font-size: 30px;
+  color: white;
+}
+
+.process__bonus,
 .process__status {
   display: flex;
   justify-content: center;
   gap: 20px;
 }
 
+.bonus__score,
 .status__error {
   display: inline-block;
   width: 25px;
   height: 25px;
   border-radius: 50%;
   border: 2px solid black;
+}
+
+.fill_backgroud_bonus {
+  background-color: green;
 }
 
 .fill_backgroud {

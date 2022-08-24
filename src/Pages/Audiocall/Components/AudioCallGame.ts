@@ -1,4 +1,5 @@
 import { Component } from "../../../Abstract/component";
+import { Birds } from "../../../Components/Birds/Birds";
 import { TServices } from "../../../Interfaces/Types";
 
 export class AudioCallGame extends Component {
@@ -7,15 +8,25 @@ export class AudioCallGame extends Component {
     super(parent, 'div', ['audiocall__game']);
 
     const divGame = new Component(this.root, 'div', ['game__process']);
-    
-    const divStatus = new Component(divGame.root, 'div', ['process__status']);
-    [1, 2, 3, 4, 5].forEach(el => {
-      const span = new Component(divStatus.root, 'span', ['status__error']);
-      this.services.audioGame.addListener('status', (countError) => {
-        if (countError as number >= el) {
-          span.root.classList.add('fill_backgroud');
+
+    const divScore = new Component(divGame.root, 'div', ['process__score']);
+    const spanScore = new Component(divScore.root, 'span', ['score'], '0');
+    this.services.audioGame.addListener('score', (score) => {
+      spanScore.root.innerText = score as string;
+    })
+
+    const divBirds = new Birds(divGame.root, 'progress');
+    this.services.audioGame.addListener('birds', (multiBonus) => divBirds.show(multiBonus as number - 1));
+
+
+    const divBonus = new Component(divGame.root, 'div', ['process__bonus']);
+    [1, 2, 3].forEach(el => {
+      const span = new Component(divBonus.root, 'span', ['bonus__score']);
+      this.services.audioGame.addListener('bonus', (countBonus) => {
+        if (countBonus as number >= el) {
+          span.root.classList.add('fill_backgroud_bonus');
         } else {
-          span.root.classList.remove('fill_backgroud');
+          span.root.classList.remove('fill_backgroud_bonus');
         }
       })
     })
@@ -26,6 +37,19 @@ export class AudioCallGame extends Component {
       const audio = new Audio(sound as string);
       audio.play();
       spanAudio.root.onclick = () => audio.play();
+    })
+
+
+    const divStatus = new Component(divGame.root, 'div', ['process__status']);
+    [1, 2, 3, 4, 5].forEach(el => {
+      const span = new Component(divStatus.root, 'span', ['status__error']);
+      this.services.audioGame.addListener('status', (countError) => {
+        if (countError as number >= el) {
+          span.root.classList.add('fill_backgroud');
+        } else {
+          span.root.classList.remove('fill_backgroud');
+        }
+      })
     })
 
     const divVersions = new Component(divGame.root, 'div', ['process_versions']);

@@ -1,6 +1,6 @@
 import { PAGES_COUNT, SPRINT_DURATION } from '../config';
-import { TDifficulty, TWord } from '../Interfaces/Types';
-import { getRandomNumber, shuffle } from '../utils';
+import { TDifficulty, TWord, TUserWord, TUserSetting } from '../Interfaces/Types';
+import { getRandomNumber, getUserInfo, isAuthorizated, shuffle } from '../utils';
 import APIService from './APIService';
 import { Observer } from './../Abstract/Observer';
 
@@ -84,7 +84,11 @@ export default class SprintService extends Observer {
   }
 
   refreshGame() {
-    this.currentWords = [...this.currentWords, ...this.correctAnswers as TWord[], ...this.incorrectAnswers as TWord[]];
+    this.currentWords = [
+      ...this.currentWords,
+      ...(this.correctAnswers as TWord[]),
+      ...(this.incorrectAnswers as TWord[]),
+    ];
     this.incorrectVariants = this.currentWords.map(el => el.wordTranslate) as string[];
     this.incorrectVariants.reverse();
     this.isGame = true;

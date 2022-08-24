@@ -1,5 +1,5 @@
 import { Component } from "../../../Abstract/component";
-import { TServices } from "../../../Interfaces/Types";
+import { TLearnWords, TServices } from "../../../Interfaces/Types";
 import { RowResults } from "./RowResults";
 
 export class ResultGame extends Component {
@@ -24,9 +24,9 @@ export class ResultGame extends Component {
     const button = new Component(divSetButtons.root, 'button', ['button'], 'Старт Аудиовызов');
     button.root.onclick = () => this.services.audioGame.selectGame();
     
-    this.services.audioGame.addListener('score', () => {
-      const learnWords = this.services.audioGame.getResultGame();
-      if (learnWords) {
+    this.services.audioGame.addListener('score', (words) => {
+      if (words) {
+        const learnWords = words as TLearnWords[];
         const countWords = learnWords.length;
         table.forEach((row, i) => {
           if (countWords >= i + 1) {

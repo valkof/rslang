@@ -39,7 +39,7 @@ export class AudioGameService extends Observer {
   private resetSettingGame(words: TWord[][]): void {
     this.roundGame = 0;
     this.countError = 0;
-    this.dispatch('status', `${this.countError}`);
+    this.dispatch('status', this.countError);
     this.learnWords = [];
     this.wordsGame = words;
   }
@@ -63,14 +63,14 @@ export class AudioGameService extends Observer {
     this.dispatch('audio', `${HOST}/${this.wordsGame[this.roundGame][0].audio}`);
     const shuffleVersion = this.shuffleArray(this.wordsGame[this.roundGame]);
     const shuffleWords = shuffleVersion.map(word => word.wordTranslate);
-    this.dispatch('vesrsion', ...shuffleWords);
+    this.dispatch('vesrsion', shuffleWords);
   }
 
   vereficationStageGame(word: string): void {
     const trueWord = this.wordsGame[this.roundGame][0].wordTranslate;
     if (word !== trueWord) {
       this.countError += 1;
-      this.dispatch('status', `${this.countError}`);
+      this.dispatch('status', this.countError);
     }
     this.learnWords.push({
       learn: word === trueWord,
@@ -84,7 +84,7 @@ export class AudioGameService extends Observer {
   }
 
   resultGame(): void {
-    this.dispatch('score');
+    this.dispatch('score', this.getResultGame());
     this.dispatch('audioCallGame', 'result');
   }
 

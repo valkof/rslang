@@ -124,10 +124,10 @@ export default class SprintService extends Observer {
 
   stopGame() {
     this.isGame = false;
-    const dataObj = JSON.stringify({
+    const dataObj = {
       correct: this.correctAnswers,
       incorrect: this.incorrectAnswers,
-    });
+    };
     this.dispatch(ESprintEvents.renderStatistic, dataObj);
   }
 

@@ -50,7 +50,9 @@ export type TUserStatistic = {
 export type TUserSetting = {
   id?: string;
   wordsPerDay: number;
-  optional: object;
+  optional: {
+    date: Date;
+  }
 };
 
 export type TUserWord = {

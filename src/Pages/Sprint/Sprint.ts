@@ -1,8 +1,8 @@
 import { Component } from '../../Abstract/component';
+import { SelectDifficultGame } from '../../Components/SelectDifficult/SelectDifficult';
 import { SPRINT_DURATION } from '../../config';
-import { TDifficulty, TServices, TSprintAnswers, TWord } from '../../Interfaces/Types';
+import { TDifficulty, TServices, TSprintAnswers } from '../../Interfaces/Types';
 import { ESprintEvents } from '../../Services/SprintService';
-import { DifficultySelector } from './../../Components/DifficultySelector';
 import StatisticPopup from './../../Components/Statistic/StatisticPopup';
 
 export class Sprint extends Component {
@@ -65,12 +65,12 @@ export class Sprint extends Component {
   constructor(parent: HTMLElement, private readonly services: TServices) {
     super(parent, 'div', ['sprint-wrapper']);
     this.service = services;
-    this.dificulty = new DifficultySelector(
-      this.root,
-      'sprint',
-      'Спринт',
-      'Тренирует навык быстрого перевода с английского языка на русский. Вам нужно выбрать соответствует ли перевод предложенному слову.',
-      this.startGameWithDificulty.bind(this),
+
+    this.dificulty = new SelectDifficultGame(
+      this.root, 'sprint', 'Спринт',
+      `<p>Тренирует навык быстрого перевода с английского языка на русский. 
+      Вам нужно выбрать соответствует ли перевод предложенному слову.</p>`,
+      this.startGameWithDificulty.bind(this)
     );
 
     this.rewardBranch = new Component(

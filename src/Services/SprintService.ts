@@ -84,7 +84,7 @@ export default class SprintService extends Observer {
   }
 
   refreshGame() {
-    this.currentWords = [...this.currentWords, ...this.correctAnswers as TWord[],...this.incorrectAnswers as TWord[] ];
+    this.currentWords = [...this.currentWords, ...this.correctAnswers as TWord[], ...this.incorrectAnswers as TWord[]];
     this.incorrectVariants = this.currentWords.map(el => el.wordTranslate) as string[];
     this.incorrectVariants.reverse();
     this.isGame = true;

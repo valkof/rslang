@@ -18,11 +18,12 @@ export class Card extends Component {
     wordTitle: Component;
     hardWord: HardWord;
 
-    constructor(parent: HTMLElement, private data: TWord ) {
+    constructor(parent: HTMLElement, public data: TWord) {
         super(parent, 'div', ['card']);
+        //console.log(data)
                
         this.wordBlock = new Component(this.root, 'div', ['word-block']);
-        this.wordBlock.root.style.backgroundImage = `url(${HOST}/${this.data.image})`;
+        this.wordBlock.root.style.backgroundImage = `url(${HOST}/${this.data?.image})`;
         
         this.wordBlockRgba = new Component(this.wordBlock.root, 'div', ['word-block-rgba']);
         this.wordTitle = new Component(this.wordBlockRgba.root, 'div', ['word-title'])
@@ -43,7 +44,7 @@ export class Card extends Component {
         new Component(this.exampleTranslate.root, 'p', ['example-translate-one'], data.textMeaningTranslate);
         new Component(this.exampleTranslate.root, 'p', ['example-translate-two'], data.textExampleTranslate);
        
-        this.hardWord = new HardWord(this.root);
+        this.hardWord = new HardWord(this.root, data);
        
     }
 
@@ -61,4 +62,13 @@ export class Card extends Component {
             audio.play();
         }
     }
+
+    removeInputs() {
+        this.hardWord.remove()
+    }
+
+    renderInputs() {
+        this.hardWord.render();
+    }
+    
 }

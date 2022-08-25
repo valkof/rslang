@@ -66,15 +66,19 @@ export type TUserSetting = {
   };
 };
 
+
 export type TUserWord = {
   wordId?: string;
   id?: string;
-  difficulty: 'easy' | 'learned' | 'hard';
-  optional: {
+  difficulty?: 'easy' | 'learned' | 'hard';
+  optional?: {
     count: number;
     maxCount: 3 | 5;
     guessed: number;
     shown: number;
+    isHardWord: boolean;
+    isLearningWord: boolean;
+    cardData: TWord
   };
 };
 

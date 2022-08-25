@@ -7,7 +7,8 @@ export class Pagination extends Component {
     currentCategory = 0;
     currentPage = 0;
     pageNumber: Component;
-    changeCategory: (data: {page: number, group: number}) => void = () => {};
+    changeCategory: (data: {page: number, group: number, glossary?: boolean | undefined}) => void = () => {};
+    changeBackg:  (color: string) => void = () => {};
 
     constructor(parent: HTMLElement) {
         super(parent, 'div', ['pagination-wrapper']);
@@ -21,22 +22,30 @@ export class Pagination extends Component {
 
     private createCategories() {
         const names = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Словарь'];
+        const backgrColor = ['#8f8282', '#a0c3a0', '#9494b3', '#cdcd7a', '#624510', '#662323', '#402140'];
         this.categories = names.map((cat, i) => { 
             const category = new Component(this.catWrapper.root, 'div', ['category' + i], cat);
+            
             category.root.onclick = () => {
                 this.currentCategory = names.indexOf(category.root.textContent!);
                 this.currentPage = 0;
                 this.pageNumber.root.innerHTML = this.currentPage.toString();
-                this.changeCategory({page: this.currentPage, group: this.currentCategory});
+                if (cat != 'Словарь') this.changeCategory({page: this.currentPage, group: this.currentCategory});
 
                 this.categories.forEach(el => { 
-                    el.root.classList.remove('active-link')
+                    el.root.classList.remove('active-link');
                 });
                 category.root.classList.add('active-link'); 
-            }        
+
+                if (cat == 'Словарь') {
+                    this.changeCategory({page: this.currentPage, group: this.currentCategory, glossary: true});
+                }                 
+                this.changeBackg(backgrColor[this.currentCategory]);
+            }
+                        
+            if (cat == 'Словарь') category.root.remove();
             return category
         });
-    
         }
 
     private createPageControl() {
@@ -58,4 +67,11 @@ export class Pagination extends Component {
             this.pageNumber.root.innerHTML = this.currentPage.toString()
         }
       }
+    
+    addRemoveGlossary(add: boolean = true) {
+        const glossary = this.categories.find(el => el.root.textContent == 'Словарь');
+        if (add) {
+            glossary?.render() 
+        } else glossary?.remove()
+    }
 }

@@ -63,7 +63,6 @@ export type TUserWord = {
     guessed: number;
     shown: number;
   }
-
 }
 
 export type TLearnWords = {
@@ -87,3 +86,25 @@ export type TAuthData = {
 }
 
 export type TParams = string | number | boolean | object | null;
+
+export type TGameStatistic = {
+  date: Date;
+  newWordsCount: number;
+  incorrectAnswers: number;
+  correctAnswers: number;
+  streak?: number;
+}
+
+
+/*
+export type TUserStatistic = {
+  id?: string;
+  learnedWords: number;
+  optional: {
+    sprint: TGameStatistic;
+    audiocall: TGameStatistic;
+    globalStat: TGameStatistic; // без streak
+    archive: Array<object>;
+  }
+};
+*/

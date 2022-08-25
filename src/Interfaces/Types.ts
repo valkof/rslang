@@ -42,18 +42,27 @@ export type TAuthResponse = {
 };
 
 export type TUserStatistic = {
+  id?: string;
   learnedWords: number;
   optional: object;
 };
 
 export type TUserSetting = {
+  id?: string;
   wordsPerDay: number;
   optional: object;
 };
 
 export type TUserWord = {
-  difficulty: string;
-  optional: object;
+  wordId?: string;
+  id?: string;
+  difficulty: 'new' | 'learn' | 'hard';
+  optional: {
+    count: number;
+    maxCount: 3 | 5,
+    guessed: number;
+    shown: number;
+  }
 }
 
 export type TLearnWords = {
@@ -77,3 +86,24 @@ export type TAuthData = {
 }
 
 export type TParams = string | number | boolean | object | null;
+
+export type TGameStatistic = {
+  date: Date;
+  newWordsCount: number;
+  incorrectAnswers: number;
+  correctAnswers: number;
+  streak?: number;
+}
+
+/*
+export type TUserStatistic = {
+  id?: string;
+  learnedWords: number;
+  optional: {
+    sprint: TGameStatistic;
+    audiocall: TGameStatistic;
+    globalStat: TGameStatistic; // без streak
+    archive: Array<TGameStatistic>;
+  }
+};
+*/

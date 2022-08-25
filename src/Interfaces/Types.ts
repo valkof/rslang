@@ -95,7 +95,6 @@ export type TGameStatistic = {
   streak?: number;
 }
 
-
 /*
 export type TUserStatistic = {
   id?: string;
@@ -104,7 +103,7 @@ export type TUserStatistic = {
     sprint: TGameStatistic;
     audiocall: TGameStatistic;
     globalStat: TGameStatistic; // без streak
-    archive: Array<object>;
+    archive: Array<TGameStatistic>;
   }
 };
 */

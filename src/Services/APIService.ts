@@ -1,4 +1,4 @@
-import { IAgrParams, IResponse } from '../Interfaces/Interfaces';
+import { IAgrParams, IData, IResponse, IUserWords } from '../Interfaces/Interfaces';
 import { TAuthResponse, TUser, TUserSetting, TUserStatistic, TUserWord, TWord } from '../Interfaces/Types';
 import { HOST } from '../config/index';
 import { logError } from '../utils';
@@ -160,7 +160,7 @@ export default abstract class APIService {
   }
 
   // Users/Words
-  static async getUserWords(userId: string, token: string) {
+  static async getUserWords(userId: string, token: string): Promise<IUserWords | undefined> {
     try {
       const rawResponse = await fetch(`${HOST}/users/${userId}/words`, {
         method: 'GET',
@@ -176,8 +176,7 @@ export default abstract class APIService {
         data
       };
     } catch (error) {
-      logError('APIService.getUserWords', error);
-      return null;
+      logError('APIService.getUserWords', error);      
     }
   }
 

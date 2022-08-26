@@ -1,6 +1,6 @@
 import { PAGES_COUNT, SPRINT_DURATION } from '../config';
-import { TDifficulty, TWord, TUserWord, TUserSetting } from '../Interfaces/Types';
-import { getRandomNumber, getUserInfo, isAuthorizated, shuffle } from '../utils';
+import { TDifficulty, TWord } from '../Interfaces/Types';
+import { getRandomNumber, shuffle } from '../utils';
 import APIService from './APIService';
 import { Observer } from './../Abstract/Observer';
 
@@ -15,6 +15,11 @@ export enum ESprintEvents {
   renderStatistic = 'statistic',
 }
 
+type TAnswers = {
+  correct: boolean;
+  word: TWord | null;
+};
+
 export default class SprintService extends Observer {
   private currentWords: TWord[] = [];
 
@@ -22,9 +27,7 @@ export default class SprintService extends Observer {
 
   private incorrectVariants: string[] = [];
 
-  private correctAnswers: Array<TWord | null> = [];
-
-  private incorrectAnswers: Array<TWord | null> = [];
+  private answers: TAnswers[] = [];
 
   private rightChoise = true;
 
@@ -45,7 +48,7 @@ export default class SprintService extends Observer {
     let array: TWord[] = [];
     for (let i = 0; i < pages.length; i++) {
       const words = await APIService.getWords(pages[i], difficulty);
-      array = words ? [...array,...words.data] : array;
+      array = words ? [...array, ...words.data] : array;
     }
     shuffle(array);
     this.currentWords = [...array];
@@ -92,11 +95,8 @@ export default class SprintService extends Observer {
   }
 
   refreshGame() {
-    this.currentWords = [
-      ...this.currentWords,
-      ...(this.correctAnswers as TWord[]),
-      ...(this.incorrectAnswers as TWord[]),
-    ];
+    const bufArr = this.answers ? this.answers.map(el => el.word) : [];
+    this.currentWords = [...this.currentWords, ...(bufArr as TWord[])];
     this.incorrectVariants = this.currentWords.map(el => el.wordTranslate) as string[];
     this.incorrectVariants.reverse();
     this.isGame = true;
@@ -137,17 +137,16 @@ export default class SprintService extends Observer {
 
   stopGame() {
     this.isGame = false;
-    const dataObj = {
-      correct: this.correctAnswers,
-      incorrect: this.incorrectAnswers,
-    };
-    this.dispatch(ESprintEvents.renderStatistic, dataObj);
+    this.dispatch(ESprintEvents.renderStatistic, this.answers);
   }
 
   answer(answer: boolean) {
     if (this.isGame) {
       if (answer === this.rightChoise) {
-        this.correctAnswers.push(this.currentWord);
+        this.answers.push({
+          correct: true,
+          word: this.currentWord,
+        });
         if (this.combo < 3) {
           this.combo++;
         } else {
@@ -156,7 +155,10 @@ export default class SprintService extends Observer {
         }
         this.score += 20 + this.bonusScore;
       } else {
-        this.incorrectAnswers.push(this.currentWord);
+        this.answers.push({
+          correct: false,
+          word: this.currentWord,
+        });
         this.combo = 0;
         this.bonusScore = 0;
         this.score = this.score >= 20 ? (this.score -= 20) : this.score;
@@ -173,8 +175,7 @@ export default class SprintService extends Observer {
     this.score = 0;
     this.combo = 0;
     this.bonusScore = 0;
-    this.correctAnswers = [];
-    this.incorrectAnswers = [];
+    this.answers = [];
 
     this.dispatch(ESprintEvents.timerTick, SPRINT_DURATION.toString());
     this.dispatch(ESprintEvents.score, '0');

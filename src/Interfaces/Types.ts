@@ -92,6 +92,11 @@ export type TSprintAnswers = {
   incorrect: TWord[];
 };
 
+export type TGameAnswer = {
+  correct: boolean;
+  word: TWord;
+};
+
 export type TAuthData = {
   message: string;
   name: string;

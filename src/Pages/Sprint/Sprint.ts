@@ -68,7 +68,7 @@ export class Sprint extends Component {
 
     this.dificulty = new SelectDifficultGame(
       this.root, 'sprint', 'Спринт',
-      `<p>Тренирует навык быстрого перевода с английского языка на русский. 
+      `<p>Тренирует навык быстрого перевода с английского языка на русский.
       Вам нужно выбрать соответствует ли перевод предложенному слову.</p>`,
       this.startGameWithDificulty.bind(this)
     );
@@ -147,6 +147,7 @@ export class Sprint extends Component {
 
     this.game.remove();
     window.addEventListener('keydown', this.keyHandler.bind(this));
+    window.addEventListener('hashchange', this.service.sprint.reset.bind(this.service.sprint));
   }
 
   private startGameWithDificulty(i: number): void {
@@ -243,6 +244,7 @@ export class Sprint extends Component {
   private renderStatistic(data: TParams) {
     this.game.remove();
     this.dificulty.remove();
+    this.statistic?.remove();
     const answers = data as TSprintAnswers;
     this.statistic = new StatisticPopup(
       this.root, answers.correct,

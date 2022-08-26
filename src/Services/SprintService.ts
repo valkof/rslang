@@ -1,6 +1,6 @@
 import { PAGES_COUNT, SPRINT_DURATION } from '../config';
-import { TDifficulty, TWord } from '../Interfaces/Types';
-import { getRandomNumber, shuffle } from '../utils';
+import { TDifficulty, TWord, TUserWord, TUserSetting } from '../Interfaces/Types';
+import { getRandomNumber, getUserInfo, isAuthorizated, shuffle } from '../utils';
 import APIService from './APIService';
 import { Observer } from './../Abstract/Observer';
 
@@ -45,15 +45,15 @@ export default class SprintService extends Observer {
     let array: TWord[] = [];
     for (let i = 0; i < pages.length; i++) {
       const words = await APIService.getWords(pages[i], difficulty);
-      array = words ? [...array, ...words.data] : array;
+      array = words ? [...words.data] : array;
     }
     shuffle(array);
-    this.currentWords = array ? array : [];
+    this.currentWords = [...array];
   }
 
   generateRandomNums(): number[] {
     const arr: number[] = [];
-    while (arr.length < 5) {
+    while (arr.length < 3) {
       const num = getRandomNumber(PAGES_COUNT);
       if (!arr.includes(num)) {
         arr.push(num);
@@ -67,6 +67,7 @@ export default class SprintService extends Observer {
     this.incorrectVariants.reverse();
     this.isGame = true;
     this.reset();
+    this.dispatch(ESprintEvents.startGame);
 
     this.changeWord();
     this.interval = setInterval(() => {
@@ -83,12 +84,24 @@ export default class SprintService extends Observer {
     }, 1000);
   }
 
+  // для запуска игры из других страниц, перед вызовом нужно изменить хеш document.location='#sprint'
+  dictionaryStart(arr: TWord[]) {
+    shuffle(arr);
+    this.currentWords = [...arr];
+    this.startGame();
+  }
+
   refreshGame() {
-    this.currentWords = [...this.currentWords, ...this.correctAnswers as TWord[], ...this.incorrectAnswers as TWord[]];
+    this.currentWords = [
+      ...this.currentWords,
+      ...(this.correctAnswers as TWord[]),
+      ...(this.incorrectAnswers as TWord[]),
+    ];
     this.incorrectVariants = this.currentWords.map(el => el.wordTranslate) as string[];
     this.incorrectVariants.reverse();
     this.isGame = true;
     this.reset();
+    this.dispatch(ESprintEvents.startGame);
 
     this.changeWord();
     this.interval = setInterval(() => {
@@ -163,7 +176,6 @@ export default class SprintService extends Observer {
     this.correctAnswers = [];
     this.incorrectAnswers = [];
 
-    this.dispatch(ESprintEvents.startGame);
     this.dispatch(ESprintEvents.timerTick, SPRINT_DURATION.toString());
     this.dispatch(ESprintEvents.score, '0');
     this.dispatch(ESprintEvents.score, this.score.toString());

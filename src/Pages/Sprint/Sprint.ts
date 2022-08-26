@@ -244,6 +244,7 @@ export class Sprint extends Component {
   private renderStatistic(data: TParams) {
     this.game.remove();
     this.dificulty.remove();
+    this.statistic?.remove();
     const answers = data as TSprintAnswers;
     this.statistic = new StatisticPopup(
       this.root, answers.correct,

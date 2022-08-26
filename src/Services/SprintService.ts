@@ -84,6 +84,7 @@ export default class SprintService extends Observer {
     }, 1000);
   }
 
+  // для запуска игры из дрегих страниц, перед вызовом нужно изменить хеш document.location='#sprint'
   dictionaryStart (arr: TWord[]) {
     shuffle(arr);
     this.currentWords = [...arr];

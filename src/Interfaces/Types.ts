@@ -69,7 +69,7 @@ export type TUserSetting = {
 export type TUserWord = {
   wordId?: string;
   id?: string;
-  difficulty: 'new' | 'learn' | 'hard';
+  difficulty: 'easy' | 'learned' | 'hard';
   optional: {
     count: number;
     maxCount: 3 | 5;

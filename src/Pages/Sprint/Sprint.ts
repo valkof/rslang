@@ -1,7 +1,7 @@
 import { Component } from '../../Abstract/component';
 import { SelectDifficultGame } from '../../Components/SelectDifficult/SelectDifficult';
 import { SPRINT_DURATION } from '../../config';
-import { TDifficulty, TParams, TServices, TSprintAnswers } from '../../Interfaces/Types';
+import { TDifficulty, TGameAnswer, TParams, TServices } from '../../Interfaces/Types';
 import { ESprintEvents } from '../../Services/SprintService';
 import StatisticPopup from './../../Components/Statistic/StatisticPopup';
 
@@ -245,10 +245,10 @@ export class Sprint extends Component {
     this.game.remove();
     this.dificulty.remove();
     this.statistic?.remove();
-    const answers = data as TSprintAnswers;
+
     this.statistic = new StatisticPopup(
-      this.root, answers.correct,
-      answers.incorrect,
+      this.root,
+      data as TGameAnswer[],
       this.service.sprint.refreshGame.bind(this.service.sprint),
       this.render.bind(this)
     );

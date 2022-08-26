@@ -48,12 +48,12 @@ export default class SprintService extends Observer {
       array = words ? [...words.data] : array;
     }
     shuffle(array);
-    this.currentWords = array;
+    this.currentWords = [...array];
   }
 
   generateRandomNums(): number[] {
     const arr: number[] = [];
-    while (arr.length < 5) {
+    while (arr.length < 3) {
       const num = getRandomNumber(PAGES_COUNT);
       if (!arr.includes(num)) {
         arr.push(num);
@@ -82,6 +82,12 @@ export default class SprintService extends Observer {
       }
       this.dispatch(ESprintEvents.timerTick, this.timer.toString());
     }, 1000);
+  }
+
+  dictionaryStart (arr: TWord[]) {
+    shuffle(arr);
+    this.currentWords = [...arr];
+    this.startGame();
   }
 
   refreshGame() {

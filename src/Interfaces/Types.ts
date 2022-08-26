@@ -50,9 +50,7 @@ export type TUserStatistic = {
 export type TUserSetting = {
   id?: string;
   wordsPerDay: number;
-  optional: {
-    date: Date;
-  }
+  optional: object;
 };
 
 export type TUserWord = {
@@ -89,7 +87,6 @@ export type TAuthData = {
 
 export type TParams = string | number | boolean | object | null;
 
-
 export type TGameStatistic = {
   date: Date;
   newWordsCount: number;
@@ -110,4 +107,3 @@ export type TUserStatistic = {
   }
 };
 */
-

@@ -147,7 +147,7 @@ export class Sprint extends Component {
 
     this.game.remove();
     window.addEventListener('keydown', this.keyHandler.bind(this));
-    window.addEventListener('hashchange', this.service.sprint.reset.bind(this.service.sprint))
+    window.addEventListener('hashchange', this.service.sprint.reset.bind(this.service.sprint));
   }
 
   private startGameWithDificulty(i: number): void {

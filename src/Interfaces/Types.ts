@@ -1,13 +1,11 @@
-
-import { AudioGameService } from "../Services/AudioGameService";
-import { LangService } from "../Services/LangService";
+import { AudioGameService } from '../Services/AudioGameService';
+import { LangService } from '../Services/LangService';
 import SprintService from './../Services/SprintService';
 
-
 export type TServices = {
-  lang: LangService,
-  audioGame: AudioGameService
-  sprint: SprintService
+  lang: LangService;
+  audioGame: AudioGameService;
+  sprint: SprintService;
 };
 
 export type TWord = {
@@ -51,9 +49,9 @@ export type TUserStatistic = {
           date: Date;
           newWords: number;
           learnedWords: number;
-        }
-      ]
-    }
+        },
+      ];
+    };
   };
 };
 
@@ -65,7 +63,7 @@ export type TUserSetting = {
     learnedWords: number;
     audioCall: TGameStatistic;
     sprint: TGameStatistic;
-  }
+  };
 };
 
 export type TUserWord = {
@@ -74,23 +72,13 @@ export type TUserWord = {
   difficulty: 'new' | 'learn' | 'hard';
   optional: {
     count: number;
-    maxCount: 3 | 5,
+    maxCount: 3 | 5;
     guessed: number;
     shown: number;
-  }
-}
-
-export type TLearnWords = {
-  learn: boolean;
-  word: TWord;
-}
+  };
+};
 
 export type TDifficulty = 0 | 1 | 2 | 3 | 4 | 5 | 6;
-
-export type TSprintAnswers = {
-  correct: TWord[];
-  incorrect: TWord[];
-};
 
 export type TGameAnswer = {
   correct: boolean;
@@ -103,7 +91,7 @@ export type TAuthData = {
   refreshToken: string;
   token: string;
   userId: string;
-}
+};
 
 export type TParams = string | number | boolean | object | null;
 
@@ -112,4 +100,4 @@ export type TGameStatistic = {
   answersCount: number;
   correctAnswers: number;
   streak: number;
-}
+};

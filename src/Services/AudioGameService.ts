@@ -1,10 +1,10 @@
 import { Observer } from "../Abstract/Observer";
 import { HOST } from "../config";
-import { TLearnWords, TWord } from "../Interfaces/Types";
+import { TGameAnswer, TWord } from "../Interfaces/Types";
 import APIService from "./APIService";
 
 export class AudioGameService extends Observer {
-  
+
   private roundGame = 0;
 
   private score = 0;
@@ -17,8 +17,8 @@ export class AudioGameService extends Observer {
 
   private wordsGame = [] as TWord[][];
 
-  private learnWords = [] as TLearnWords[];
-  
+  private learnWords = [] as TGameAnswer[];
+
   private async getWordsByBook(group: number): Promise<TWord[][] | null> {
     const numberPage = Math.floor(Math.random() * 30);
     const wordsPage = await APIService.getWords(numberPage, group);
@@ -36,9 +36,9 @@ export class AudioGameService extends Observer {
   private shuffleArray<Type>(array: Array<Type>): Array<Type> {
     return array.slice().sort(() => {
       const result = Math.random();
-      if (result > 0.5) return 1; 
+      if (result > 0.5) return 1;
       if (result < 0.5) return -1;
-      return 0; 
+      return 0;
     })
   }
 
@@ -94,14 +94,14 @@ export class AudioGameService extends Observer {
       this.countTrueWords = 0;
     }
     this.learnWords.push({
-      learn: word === trueWord,
+      correct: word === trueWord,
       word: this.wordsGame[this.roundGame][0]
     });
-    
+
     this.dispatch('score', this.score);
     this.dispatch('bonus', this.countTrueWords);
     this.dispatch('birds', this.multiBonus);
-    
+
     if (this.countError === 5 || this.roundGame === 19) {
       return this.resultGame();
     }
@@ -115,7 +115,7 @@ export class AudioGameService extends Observer {
     this.dispatch('audioCallGame', 'result');
   }
 
-  getResultGame(): TLearnWords[] | null {
+  getResultGame(): TGameAnswer[] | null {
     return this.learnWords.length ? this.learnWords : null;
   }
 }

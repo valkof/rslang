@@ -44,13 +44,28 @@ export type TAuthResponse = {
 export type TUserStatistic = {
   id?: string;
   learnedWords: number;
-  optional: object;
+  optional: {
+    data: {
+      dataPerDay: [
+        {
+          date: Date;
+          newWords: number;
+          learnedWords: number;
+        }
+      ]
+    }
+  };
 };
 
 export type TUserSetting = {
   id?: string;
   wordsPerDay: number;
-  optional: object;
+  optional: {
+    date: Date;
+    learnedWords: number;
+    audioCall: TGameStatistic;
+    sprint: TGameStatistic;
+  }
 };
 
 export type TUserWord = {
@@ -88,22 +103,8 @@ export type TAuthData = {
 export type TParams = string | number | boolean | object | null;
 
 export type TGameStatistic = {
-  date: Date;
-  newWordsCount: number;
-  incorrectAnswers: number;
+  newWords: number;
+  answersCount: number;
   correctAnswers: number;
-  streak?: number;
+  streak: number;
 }
-
-/*
-export type TUserStatistic = {
-  id?: string;
-  learnedWords: number;
-  optional: {
-    sprint: TGameStatistic;
-    audiocall: TGameStatistic;
-    globalStat: TGameStatistic; // без streak
-    archive: Array<TGameStatistic>;
-  }
-};
-*/

@@ -45,7 +45,7 @@ export default class SprintService extends Observer {
     let array: TWord[] = [];
     for (let i = 0; i < pages.length; i++) {
       const words = await APIService.getWords(pages[i], difficulty);
-      array = words ? [...words.data] : array;
+      array = words ? [...array,...words.data] : array;
     }
     shuffle(array);
     this.currentWords = [...array];

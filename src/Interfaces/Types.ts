@@ -51,8 +51,6 @@ export type TUserStatistic = {
           date: Date;
           newWords: number;
           learnedWords: number;
-          allWords: number;  // Нужно для подсчёта % угадываний
-          correctWords: number;
         }
       ]
     }
@@ -108,5 +106,5 @@ export type TGameStatistic = {
   newWords: number;
   answersCount: number;
   correctAnswers: number;
-  streak?: number;
+  streak: number;
 }

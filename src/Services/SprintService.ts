@@ -1,5 +1,5 @@
 import { PAGES_COUNT, SPRINT_DURATION } from '../config';
-import { TDifficulty, TWord } from '../Interfaces/Types';
+import { TDifficulty, TGameAnswer, TWord } from '../Interfaces/Types';
 import { getRandomNumber, shuffle } from '../utils';
 import APIService from './APIService';
 import { Observer } from './../Abstract/Observer';
@@ -15,11 +15,6 @@ export enum ESprintEvents {
   renderStatistic = 'statistic',
 }
 
-type TAnswers = {
-  correct: boolean;
-  word: TWord | null;
-};
-
 export default class SprintService extends Observer {
   private currentWords: TWord[] = [];
 
@@ -27,7 +22,7 @@ export default class SprintService extends Observer {
 
   private incorrectVariants: string[] = [];
 
-  private answers: TAnswers[] = [];
+  private answers: TGameAnswer[] = [];
 
   private rightChoise = true;
 
@@ -145,7 +140,7 @@ export default class SprintService extends Observer {
       if (answer === this.rightChoise) {
         this.answers.push({
           correct: true,
-          word: this.currentWord,
+          word: this.currentWord as TWord,
         });
         if (this.combo < 3) {
           this.combo++;
@@ -157,7 +152,7 @@ export default class SprintService extends Observer {
       } else {
         this.answers.push({
           correct: false,
-          word: this.currentWord,
+          word: this.currentWord as TWord,
         });
         this.combo = 0;
         this.bonusScore = 0;

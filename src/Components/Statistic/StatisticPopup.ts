@@ -1,9 +1,13 @@
 import { Component } from '../../Abstract/component';
-import { TWord } from '../../Interfaces/Types';
+import { TGameAnswer, TWord } from '../../Interfaces/Types';
 import './StatisticPopup.scss';
 
 export default class StatisticPopup extends Component {
-  correctAnswers: TWord[];
+  answers: TGameAnswer[];
+
+  correctAnswers: TWord[] =[];
+
+  incorrectAnswers: TWord[] =[];
 
   repeatbtn: Component | undefined;
 
@@ -13,13 +17,13 @@ export default class StatisticPopup extends Component {
 
   constructor(
     parent: HTMLElement,
-    correctAnswers: TWord[],
-    incorrectAnswers: TWord[],
+    answers: TGameAnswer[],
+
     repeatGame?: () => void,
     back?: () => void) {
 
     super(parent, 'div', ['statistic-popup']);
-    this.correctAnswers = correctAnswers;
+    this.answers = answers;
 
     this.btnContainer = new Component(this.root, 'div', ['statistic-popup__btnContainer']);
 
@@ -33,13 +37,14 @@ export default class StatisticPopup extends Component {
       this.backBtn.root.onclick = back;
     }
 
-    this.renderAnswers(correctAnswers, true);
-    this.renderAnswers(incorrectAnswers, false);
+    this.makeAnswersArrays(this.answers);
+    this.renderAnswers(this.correctAnswers, true);
+    this.renderAnswers(this.incorrectAnswers, false);
   }
 
   private renderAnswers(answers: TWord[], iCorrect: boolean) {
-    const answer = iCorrect ? 'Правильных ответов:' : 'Неправильных ответов:';
-    const title = new Component(this.root, 'h2', ['statistic-title'], `${answer} ${answers.length}`);
+    const text = iCorrect ? 'Правильных ответов:' : 'Неправильных ответов:';
+    const title = new Component(this.root, 'h2', ['statistic-title'], `${text} ${answers.length}`);
     for (let i = 1; i < answers.length + 1; i++) {
       this.renderRow(answers[i - 1], i, iCorrect);
     }
@@ -52,5 +57,13 @@ export default class StatisticPopup extends Component {
     const enWord = new Component(container.root, 'h3', ['row-word'], ` ${word.word}`);
     const enTranscription = new Component(container.root, 'h3', ['row-word'], ` ${word.transcription}`);
     const enTranslate = new Component(container.root, 'h3', ['row-word'], ` ${word.wordTranslate}`);
+  }
+
+  private makeAnswersArrays(answers: TGameAnswer[]) {
+    answers.forEach((el) =>{
+      if(el.correct) {
+        this.correctAnswers.push(el.word);
+      } else this.incorrectAnswers.push(el.word);
+    } )
   }
 }

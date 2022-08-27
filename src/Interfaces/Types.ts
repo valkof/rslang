@@ -56,7 +56,7 @@ export type TUserSetting = {
 export type TUserWord = {
   wordId?: string;
   id?: string;
-  difficulty: 'new' | 'learn' | 'hard';
+  difficulty: 'easy' | 'learned' | 'hard';
   optional: {
     count: number;
     maxCount: 3 | 5,
@@ -86,6 +86,11 @@ export type TAuthData = {
 }
 
 export type TParams = string | number | boolean | object | null;
+
+export type TGameAnswer = {
+  correct: boolean;
+  word: TWord;
+};
 
 export type TGameStatistic = {
   date: Date;

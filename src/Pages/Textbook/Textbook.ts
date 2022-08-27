@@ -13,10 +13,6 @@ export class TextBook extends Component {
   constructor(parent: HTMLElement, private readonly services: TServices) {
     super(parent, 'div', ['textbook-wrapper']);
     this.pagination = new Pagination(this.root);
-
-    this.pagination.changeBackg = (color: string) => {
-      this.cardsBlock.root.style.backgroundColor = color;
-    }
     
     this.pagination.changeCategory = data => {      
       if (data.glossary) {

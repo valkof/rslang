@@ -180,7 +180,7 @@ export default abstract class APIService {
     }
   }
 
-  static async createUserWord(userId: string, wordId: string, word: TUserWord, token: string) {
+  static async createUserWord(userId: string, wordId: string, word: IData, token: string) {
     try {
       const rawResponse = await fetch(`${HOST}/users/${userId}/words/${wordId}`, {
         method: 'POST',
@@ -202,7 +202,7 @@ export default abstract class APIService {
     }
   }
 
-  static async updateUserWord(userId: string, wordId: string, word: TUserWord, token: string) {
+  static async updateUserWord(userId: string, wordId: string, word: IData, token: string) {
     try {
       const rawResponse = await fetch(`${HOST}/users/${userId}/words/${wordId}`, {
         method: 'PUT',

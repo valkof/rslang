@@ -1,11 +1,13 @@
-import { AudioGameService } from '../Services/AudioGameService';
-import { LangService } from '../Services/LangService';
+
+import { AudioGameService } from "../Services/AudioGameService";
+import { LangService } from "../Services/LangService";
 import SprintService from './../Services/SprintService';
 
+
 export type TServices = {
-  lang: LangService;
-  audioGame: AudioGameService;
-  sprint: SprintService;
+  lang: LangService,
+  audioGame: AudioGameService
+  sprint: SprintService
 };
 
 export type TWord = {
@@ -42,51 +44,37 @@ export type TAuthResponse = {
 export type TUserStatistic = {
   id?: string;
   learnedWords: number;
-  optional: {
-    data: {
-      dataPerDay: [
-        {
-          date: Date;
-          newWords: number;
-          learnedWords: number;
-        },
-      ];
-    };
-  };
+  optional: object;
 };
 
 export type TUserSetting = {
   id?: string;
   wordsPerDay: number;
-  optional: {
-    date: Date;
-    learnedWords: number;
-    audioCall: TGameStatistic;
-    sprint: TGameStatistic;
-  };
+  optional: object;
 };
-
 
 export type TUserWord = {
   wordId?: string;
   id?: string;
-  difficulty?: 'easy' | 'learned' | 'hard';
-  optional?: {
+  difficulty: 'new' | 'learn' | 'hard';
+  optional: {
     count: number;
-    maxCount: 3 | 5;
+    maxCount: 3 | 5,
     guessed: number;
     shown: number;
-    isHardWord: boolean;
-    isLearningWord: boolean;
-    cardData: TWord
-  };
-};
+  }
+}
+
+export type TLearnWords = {
+  learn: boolean;
+  word: TWord;
+}
 
 export type TDifficulty = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
-export type TGameAnswer = {
-  correct: boolean;
-  word: TWord;
+export type TSprintAnswers = {
+  correct: TWord[];
+  incorrect: TWord[];
 };
 
 export type TAuthData = {
@@ -95,13 +83,27 @@ export type TAuthData = {
   refreshToken: string;
   token: string;
   userId: string;
-};
+}
 
 export type TParams = string | number | boolean | object | null;
 
 export type TGameStatistic = {
-  newWords: number;
-  answersCount: number;
+  date: Date;
+  newWordsCount: number;
+  incorrectAnswers: number;
   correctAnswers: number;
-  streak: number;
+  streak?: number;
+}
+
+/*
+export type TUserStatistic = {
+  id?: string;
+  learnedWords: number;
+  optional: {
+    sprint: TGameStatistic;
+    audiocall: TGameStatistic;
+    globalStat: TGameStatistic; // без streak
+    archive: Array<TGameStatistic>;
+  }
 };
+*/

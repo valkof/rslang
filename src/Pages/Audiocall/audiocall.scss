@@ -13,13 +13,22 @@
   padding: 30px 100px;
 }
 
-.process__score {
+.process__criteria {
   display: flex;
-  justify-content: right;
+  justify-content: space-between;
   width: 100%;
 }
 
-.score {
+.process__time,
+.process__score {
+  display: flex;
+  gap: 10px;
+}
+
+.time,
+.time-text,
+.score,
+.score-text {
   display: inline-block;
   font-size: 30px;
   color: white;
@@ -68,6 +77,27 @@
   display: flex;
   justify-content: center;
   gap: 50px;
+  margin-top: 20px;
+}
+
+.container_version {
+  position: relative;
+}
+
+.span_version {
+  position: absolute;
+  z-index: 1;
+  top: -10px;
+  left: -10px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: coral;
+  color: aliceblue;
 }
 
 .button_version {

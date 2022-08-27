@@ -1,12 +1,16 @@
 import { Component } from "../../Abstract/component";
-import { TServices } from "../../Interfaces/Types";
+import { TGameAnswer, TServices } from "../../Interfaces/Types";
 import { AudioCallGame } from "./Components/AudioCallGame";
-import { ResultGame } from "./Components/ResultGame";
 import './audiocall.scss';
 import { SelectDifficultGame } from "../../Components/SelectDifficult/SelectDifficult";
+import StatisticPopup from "../../Components/Statistic/StatisticPopup";
+import APIService from "../../Services/APIService";
+import WriteStatisticService from "../../Services/WriteStatisticService";
 
 export class AudioCall extends Component {
   
+  private statistic: StatisticPopup | undefined;
+
   constructor(parent: HTMLElement, private readonly services: TServices) {
     super(parent, 'div', ['audiocall-wrapper']);
 
@@ -17,9 +21,7 @@ export class AudioCall extends Component {
       (group) => this.services.audioGame.startGame(group)
     );
     
-    new AudioCallGame(this.root, services);
-    
-    new ResultGame(this.root, services);
+    new AudioCallGame(this.root, services);    
     
     this.startGame();
 
@@ -29,11 +31,25 @@ export class AudioCall extends Component {
 
     this.services.audioGame.addListener('audioCallGame', (stage) => {
       if (stage === 'select') {
+        this.statistic?.remove();
         selectDifficultGame.render();
       } else {
         selectDifficultGame.remove();
       }
     });
+
+    this.services.audioGame.addListener('result', (words) => {
+      if (APIService.getAuthUser() && APIService.isAuthorizedUser()) {
+        WriteStatisticService.writeResults(words as TGameAnswer[]);
+      }
+      this.statistic = new StatisticPopup(
+        this.root,
+        words as TGameAnswer[],
+        this.startGame.bind(this)
+        // this.render.bind(this)
+      );
+    });
+
   }
   
   startGame(): void {
@@ -41,7 +57,6 @@ export class AudioCall extends Component {
   }
 
   startGameFromTexbook(cat: number, page: number) {
-    //тут реализуйте старт игры с указанной сложностью слов
-    console.log(`Старт игры Аудиоколл с уровнем сложности - ${cat}, страница - ${page}`)
+    this.services.audioGame.startGame(cat, page);
   }
 }

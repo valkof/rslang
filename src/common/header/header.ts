@@ -37,8 +37,9 @@ export class Header extends Component {
         links.forEach(el => el.root.classList.remove('active-link'));
         navigation.root.classList.add('active-link'); 
       }
-      return navigation
-    });
+      return navigation;
+      
+      });
 
         this.autorisationButton = new AuturizationButton(this.headerWrapper.root);
   }

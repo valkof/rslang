@@ -21,20 +21,25 @@ export class Header extends Component {
     this.pathTitle = new Component(this.headerWrapper.root, 'a', [], null, 'href', '#')
     this.title = new Component(this.pathTitle.root, 'img', [], null,'src', 'assets/logo.png');
   
-
     this.navigationWrapper = new Component(this.headerWrapper.root, 'div', ['navigation-wrapper']);
-    
-    
+        
     const nav = [
       {name: 'Наша команда', href: 'developers'},
       {name: 'Учебник', href: 'textbook'},
       {name:'Спринт', href: 'sprint'},
       {name: 'Аудиовызов', href: 'audiocall'},
       {name:'Статистика', href: 'statistic'}];
-    nav.forEach(({name, href}) => {
-      const navigation = new Component(this.navigationWrapper.root, 'a', [], name, 'href', '#' + href)
+
+    const links = nav.map(({name, href}) => {
+      const navigation = new Component(this.navigationWrapper.root, 'a', [], name, 'href', '#' + href);
+
+      navigation.root.onclick = () => {
+        links.forEach(el => el.root.classList.remove('active-link'));
+        navigation.root.classList.add('active-link'); 
+      }
+      return navigation
     });
 
-    this.autorisationButton = new AuturizationButton(this.headerWrapper.root);
+        this.autorisationButton = new AuturizationButton(this.headerWrapper.root);
   }
 }

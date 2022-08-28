@@ -1,3 +1,5 @@
+import { TWord } from "./Types";
+
 export interface IBaseInterface {
   render: () => void;
 }

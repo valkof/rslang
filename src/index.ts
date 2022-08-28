@@ -61,9 +61,14 @@ class App {
       sprint: this.sprint,
       statistic: this.statistic,
       autorization: this.authorization,
-    };
+    };   
 
     new Router(pages, this.footer);
+
+    this.textBook.pagination.emitGame = (game: string, cat: number, page: number) => {
+      if (game === 'audiocall') this.audiocall.startGameFromTexbook(cat, page);
+      if (game === 'sprint') this.sprint.startGameFromTexbook(cat, page)
+    }
   }
 }
 

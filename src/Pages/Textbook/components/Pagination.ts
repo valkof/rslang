@@ -7,8 +7,10 @@ export class Pagination extends Component {
     currentCategory = 0;
     currentPage = 0;
     pageNumber: Component;
+    
     changeCategory: (data: {page: number, group: number, glossary?: boolean | undefined}) => void = () => {};
     changeBackg:  (color: string) => void = () => {};
+    emitGame: (type: string, cat: number, page: number) => void = () => {};
 
     constructor(parent: HTMLElement) {
         super(parent, 'div', ['pagination-wrapper']);
@@ -18,10 +20,26 @@ export class Pagination extends Component {
         this.pageNumber.remove();
         this.createCategories();
         this.createPageControl(); 
+
     }
 
     private createCategories() {
-        const names = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Словарь'];
+        const trening = new Component(this.catWrapper.root, 'div', ['trening']);
+        const label = new Component(trening.root, 'label', [], null, 'for', 'tren');
+        const selectTrening = new Component(label.root, 'select', [], null, 'name', 'tren');
+
+        const nameSelect = new Component(selectTrening.root, 'option', [], 'Тренировка', 'disabled', '');
+        nameSelect.root.setAttribute('selected', '');
+        const optionAudioCall = new Component(selectTrening.root, 'option', [], 'Аудиовызов', 'value', 'audiocall');
+        const optionSprint = new Component(selectTrening.root, 'option', [], 'Спринт', 'value', 'sprint'); 
+        
+        selectTrening.root.onchange = (e) => {
+            const currentGame = (e.target as HTMLSelectElement).value;
+            document.location = '#' + currentGame;
+            this.emitGame(currentGame, this.currentCategory, this.currentPage);
+        };
+
+        const names = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Сложные сова'];
         const backgrColor = ['#8f8282', '#a0c3a0', '#9494b3', '#cdcd7a', '#624510', '#662323', '#402140'];
         this.categories = names.map((cat, i) => { 
             const category = new Component(this.catWrapper.root, 'div', ['category' + i], cat);

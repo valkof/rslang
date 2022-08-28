@@ -39,4 +39,9 @@ export class AudioCall extends Component {
   startGame(): void {
     this.services.audioGame.selectGame();
   }
+
+  startGameFromTexbook(cat: number, page: number) {
+    //тут реализуйте старт игры с указанной сложностью слов
+    console.log(`Старт игры Аудиоколл с уровнем сложности - ${cat}, страница - ${page}`)
+  }
 }

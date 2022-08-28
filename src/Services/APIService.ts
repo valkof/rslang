@@ -177,7 +177,7 @@ export default abstract class APIService {
       };
     } catch (error) {
       logError('APIService.getUserWords', error);
-      return null;  
+      return null;
     }
   }
 

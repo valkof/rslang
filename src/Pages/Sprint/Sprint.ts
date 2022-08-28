@@ -1,8 +1,9 @@
 import { Component } from '../../Abstract/component';
 import { SelectDifficultGame } from '../../Components/SelectDifficult/SelectDifficult';
-import { SPRINT_DURATION } from '../../config';
+import { PAGES_COUNT_IN_GAME, SPRINT_DURATION } from '../../config';
 import { TDifficulty, TGameAnswer, TParams, TServices } from '../../Interfaces/Types';
 import { ESprintEvents } from '../../Services/SprintService';
+import { generateRandomNums } from '../../utils';
 import StatisticPopup from './../../Components/Statistic/StatisticPopup';
 
 export class Sprint extends Component {
@@ -67,10 +68,12 @@ export class Sprint extends Component {
     this.service = services;
 
     this.dificulty = new SelectDifficultGame(
-      this.root, 'sprint', 'Спринт',
+      this.root,
+      'sprint',
+      'Спринт',
       `<p>Тренирует навык быстрого перевода с английского языка на русский.
       Вам нужно выбрать соответствует ли перевод предложенному слову.</p>`,
-      this.startGameWithDificulty.bind(this)
+      this.startGameWithDificulty.bind(this),
     );
 
     this.rewardBranch = new Component(
@@ -152,7 +155,9 @@ export class Sprint extends Component {
 
   private startGameWithDificulty(i: number): void {
     const dificultyLevel = i < 7 && i >= 0 ? i : 0;
-    this.service.sprint.generateWords(dificultyLevel as TDifficulty).then(() => this.service.sprint.startGame());
+    this.service.sprint
+      .generateWords(dificultyLevel as TDifficulty, generateRandomNums(PAGES_COUNT_IN_GAME))
+      .then(() => this.service.sprint.startGame());
   }
 
   private start() {
@@ -250,7 +255,7 @@ export class Sprint extends Component {
       this.root,
       data as TGameAnswer[],
       this.service.sprint.refreshGame.bind(this.service.sprint),
-      this.render.bind(this)
+      this.render.bind(this),
     );
   }
 
@@ -262,7 +267,7 @@ export class Sprint extends Component {
   }
 
   startGameFromTexbook(cat: number, page: number) {
-  //тут реализуйте старт игры с указанной сложностью слов
-    console.log(`Старт игры Спринт с уровнем сложности - ${cat}, страница - ${page}`)
+    //тут реализуйте старт игры с указанной сложностью слов
+    console.log(`Старт игры Спринт с уровнем сложности - ${cat}, страница - ${page}`);
   }
 }

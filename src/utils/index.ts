@@ -1,3 +1,4 @@
+import { PAGES_COUNT } from "../config";
 import { TAuthData } from "../Interfaces/Types";
 import APIService from '../Services/APIService';
 
@@ -39,4 +40,16 @@ export async function isAuthorizated(data: TAuthData | null): Promise<boolean> {
 
 export function createDate(): string {
   return new Date().toLocaleString().split(',')[0];
+}
+
+// генерация случайного массива n элементов
+export function generateRandomNums(count:number): number[] {
+  const arr: number[] = [];
+  while (arr.length < count) {
+    const num = getRandomNumber(PAGES_COUNT);
+    if (!arr.includes(num)) {
+      arr.push(num);
+    }
+  }
+  return arr;
 }

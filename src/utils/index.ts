@@ -36,3 +36,7 @@ export async function isAuthorizated(data: TAuthData | null): Promise<boolean> {
   const resp =  await APIService.getUser(data.userId!,data.token)
   return (resp?.status === 200) ? true : false;
 }
+
+export function createDate(): string {
+  return new Date().toLocaleString().split(',')[0];
+}

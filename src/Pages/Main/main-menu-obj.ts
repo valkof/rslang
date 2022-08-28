@@ -2,7 +2,7 @@ export const mainMenu: IMainMenu[] = [
   {
     title: 'Учебник',
     src: 'assets/icon/dictionary.png',
-    hash: "textBook",
+    hash: "textbook",
   },
   {
     title: 'Саванна',

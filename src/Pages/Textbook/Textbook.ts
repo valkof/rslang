@@ -1,13 +1,16 @@
 import { Component } from '../../Abstract/component';
-import { IUserWords } from '../../Interfaces/Interfaces';
-import { TServices } from '../../Interfaces/Types';
+import { IResponse } from '../../Interfaces/Interfaces';
+import { TAggregatedWords, TAuthData, TServices } from '../../Interfaces/Types';
 import APIService from '../../Services/APIService';
 import { Card } from './components/Card';
 import { Pagination } from './components/Pagination';
 
 export class TextBook extends Component {
+  
   cardsBlock: Component;
+  
   cards: Card[] = [];
+  
   pagination: Pagination;
 
   constructor(parent: HTMLElement, private readonly services: TServices) {
@@ -21,26 +24,38 @@ export class TextBook extends Component {
     };
 
     this.cardsBlock = new Component(this.root, 'div', ['cards-block']);
+    this.pagination.changeBackg = (color: string) => {
+      this.cardsBlock.root.style.backgroundColor = color;
+    }
 
     this.renderCards();
   }
 
   async renderCards(data?: { group: number; page: number; glossary?: boolean }) {
-    const [cardsData, glossData] = await Promise.all([APIService.getWords(data?.page ?? 0, data?.group ?? 0), this.getGlossaryData()]);
+    const [cardsData, glossData] = await Promise.all(
+      [APIService.getWords(data?.page ?? 0, data?.group ?? 0), this.getGlossaryData(
+        `{"$or":[{"$and":[{"group":${data?.group ?? 0}, "page":${data?.page ?? 0}}]},{"userWord.difficulty":"hard"}]}`
+      )]
+    );
     if (cardsData == null) return;
     this.cardsBlock.root.innerHTML = '';
-    
+
     this.cards = cardsData.data.map(cardData => {
+      if (glossData) {
+        const glossaryData = glossData.data[0].paginatedResults.find(el => el._id === cardData.id);      
+        if (glossaryData != null) {        
+          const card = new Card(this.cardsBlock.root, glossaryData);
+          card.renderInputs();
+
+          const difficulty = glossaryData.userWord?.difficulty;
+          card.hardWord.setInputs(difficulty === 'hard', difficulty === 'learned');
+          return card
+        }  
+      };
+      
       const card = new Card(this.cardsBlock.root, cardData);
       card.hardWord.checkCardsDashboard = () => this.checkForLearningWord();
-      if (glossData == null) { card.removeInputs() } else card.renderInputs();
-
-      const glossaryData = glossData?.data.find(el => el.wordId == card.data.id);      
-      if (glossaryData != null) {        
-        const {optional: {isHardWord, isLearningWord}} = glossaryData;
-        card.hardWord.setInputs(isHardWord, isLearningWord)
-      }
-
+      card.removeInputs()
       return card
     });
 
@@ -58,23 +73,25 @@ export class TextBook extends Component {
     this.pagination.addRemoveGlossary();
   }
 
-  async renderGlossary() {
+  async renderGlossary(): Promise<void> {
     this.cardsBlock.root.innerHTML = '';
     this.cardsBlock.root.classList.remove('cards-all-learning')
-    const glosData = await this.getGlossaryData();  
-    if (glosData == null) return;  
-    const cards = glosData.data.map(({optional}) => optional).filter(({isHardWord}) => isHardWord);
-    cards.forEach(({cardData, isHardWord, isLearningWord}) => {
-    const card = new Card(this.cardsBlock.root, cardData);
-    card.hardWord.setInputs(isHardWord, isLearningWord);
+    const glosData = await this.getGlossaryData(`{"$and":[{"userWord.difficulty":"hard"}]}`);  
+    if (glosData == null || glosData.data[0].totalCount.length === 0) return;  
+    glosData.data[0].paginatedResults.forEach(cardData => {
+      const card = new Card(this.cardsBlock.root, cardData);
+      card.hardWord.setInputs(cardData.userWord?.difficulty === 'hard', cardData.userWord?.difficulty === 'learned');
     });   
   }
 
-  async getGlossaryData(): Promise<IUserWords | undefined> {
+  async getGlossaryData(filter: string): Promise<IResponse<TAggregatedWords[]> | null> {
     const authData = window.localStorage.getItem('rslang');
-    if (authData == null) return;
-    const {userId, token} = JSON.parse(authData);
-    return await APIService.getUserWords(userId, token);      
+    if (authData == null) return null;
+    const {userId, token} = JSON.parse(authData) as TAuthData;
+    return await APIService.getAgrWords(userId, token, {
+      filter,
+      wordsPerPage: '3600'
+    }) as IResponse<TAggregatedWords[]>;    
   }
 
   checkForLearningWord(glossary?: boolean) {

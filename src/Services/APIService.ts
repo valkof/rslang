@@ -1,5 +1,5 @@
-import { IAgrParams, IData, IResponse, IUserWords } from '../Interfaces/Interfaces';
-import { TAuthResponse, TUser, TUserSetting, TUserStatistic, TUserWord, TWord } from '../Interfaces/Types';
+import { IAgrParams, IResponse } from '../Interfaces/Interfaces';
+import { TAggregatedWord, TAggregatedWords, TAuthResponse, TUser, TUserSetting, TUserStatistic, TUserWord, TWord } from '../Interfaces/Types';
 import { HOST } from '../config/index';
 import { logError } from '../utils';
 
@@ -160,7 +160,7 @@ export default abstract class APIService {
   }
 
   // Users/Words
-  static async getUserWords(userId: string, token: string): Promise<IUserWords | undefined> {
+  static async getUserWords(userId: string, token: string): Promise<IResponse<TUserWord[]> | null> {
     try {
       const rawResponse = await fetch(`${HOST}/users/${userId}/words`, {
         method: 'GET',
@@ -176,11 +176,17 @@ export default abstract class APIService {
         data
       };
     } catch (error) {
-      logError('APIService.getUserWords', error);      
+      logError('APIService.getUserWords', error);
+      return null;  
     }
   }
 
-  static async createUserWord(userId: string, wordId: string, word: IData, token: string) {
+  static async createUserWord(
+    userId: string,
+    wordId: string,
+    word: TUserWord,
+    token: string
+  ): Promise<IResponse<TUserWord> | null> {
     try {
       const rawResponse = await fetch(`${HOST}/users/${userId}/words/${wordId}`, {
         method: 'POST',
@@ -202,7 +208,12 @@ export default abstract class APIService {
     }
   }
 
-  static async updateUserWord(userId: string, wordId: string, word: IData, token: string) {
+  static async updateUserWord(
+    userId: string,
+    wordId: string,
+    word: TUserWord,
+    token: string
+  ): Promise<IResponse<TUserWord> | null> {
     try {
       const rawResponse = await fetch(`${HOST}/users/${userId}/words/${wordId}`, {
         method: 'PUT',
@@ -241,7 +252,7 @@ export default abstract class APIService {
     }
   }
 
-  static async getUserWordsById(userId: string, wordId: string, token: string) {
+  static async getUserWordsById(userId: string, wordId: string, token: string): Promise<IResponse<TUserWord> | null> {
     try {
       const rawResponse = await fetch(`${HOST}/users/${userId}/words/${wordId}`, {
         method: 'GET',
@@ -283,7 +294,11 @@ export default abstract class APIService {
     }
   }
 
-  static async upsertUserStatistics(userId: string, stat: TUserStatistic, token: string): Promise<IResponse<TUserStatistic> | null> {
+  static async upsertUserStatistics(
+    userId: string,
+    stat: TUserStatistic,
+    token: string
+  ): Promise<IResponse<TUserStatistic> | null> {
     try {
       const rawResponse = await fetch(`${HOST}/users/${userId}/statistics`, {
         method: 'PUT',
@@ -326,7 +341,11 @@ export default abstract class APIService {
     }
   }
 
-  static async upsertUserSetting(userId: string, stat: TUserSetting, token: string): Promise<IResponse<TUserSetting> | null> {
+  static async upsertUserSetting(
+    userId: string,
+    stat: TUserSetting,
+    token: string
+  ): Promise<IResponse<TUserSetting> | null> {
     try {
       const rawResponse = await fetch(`${HOST}/users/${userId}/settings`, {
         method: 'PUT',
@@ -348,7 +367,11 @@ export default abstract class APIService {
     }
   }
 
-  static async getAgrWordById(userId: string, wordId: string, token: string): Promise<IResponse<TUserWord> | null> {
+  static async getAgrWordById(
+    userId: string,
+    wordId: string,
+    token: string
+  ): Promise<IResponse<TAggregatedWord> | null> {
     try {
       const rawResponse = await fetch(`${HOST}/users/${userId}/aggregatedWords/${wordId}`, {
         method: 'GET',
@@ -358,10 +381,10 @@ export default abstract class APIService {
           'Content-Type': 'application/json',
         },
       });
-      const data = await rawResponse.json();
+      const data = await rawResponse.json() as TAggregatedWord[];
       return {
         status: rawResponse.status,
-        data
+        data: data[0]
       };
     } catch (error) {
       logError('APIService.getAgrWordById', error);
@@ -369,7 +392,11 @@ export default abstract class APIService {
     }
   }
 
-  static async getAgrWord(userId: string, token: string, params?: IAgrParams) {
+  static async getAgrWords(
+    userId: string,
+    token: string,
+    params?: IAgrParams
+  ): Promise<IResponse<TAggregatedWords[]> | null> {
     try {
       const base = `${HOST}/users/${userId}/aggregatedWords`;
       const buf = params ? Object.entries(params).map((item) => [`${item[0]}=${item[1]}`]) : [];
@@ -382,7 +409,7 @@ export default abstract class APIService {
           'Content-Type': 'application/json',
         },
       });
-      const data = await rawResponse.json();
+      const data = await rawResponse.json() as TAggregatedWords[];
       return {
         status: rawResponse.status,
         data

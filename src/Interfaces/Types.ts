@@ -5,9 +5,9 @@ import SprintService from './../Services/SprintService';
 
 
 export type TServices = {
-  lang: LangService,
-  audioGame: AudioGameService
-  sprint: SprintService
+  lang: LangService;
+  audioGame: AudioGameService;
+  sprint: SprintService;
 };
 
 export type TWord = {
@@ -44,13 +44,28 @@ export type TAuthResponse = {
 export type TUserStatistic = {
   id?: string;
   learnedWords: number;
-  optional: object;
+  optional: {
+    data: {
+      dataPerDay: [
+        {
+          date: Date;
+          newWords: number;
+          learnedWords: number;
+        },
+      ];
+    };
+  };
 };
 
 export type TUserSetting = {
   id?: string;
   wordsPerDay: number;
-  optional: object;
+  optional: {
+    date: Date;
+    learnedWords: number;
+    audioCall: TGameStatistic;
+    sprint: TGameStatistic;
+  };
 };
 
 export type TUserWord = {
@@ -59,7 +74,7 @@ export type TUserWord = {
   difficulty: 'easy' | 'learned' | 'hard';
   optional: {
     count: number;
-    maxCount: 3 | 5,
+    maxCount: 3 | 5;
     guessed: number;
     shown: number;
   }
@@ -97,18 +112,40 @@ export type TGameStatistic = {
   newWordsCount: number;
   incorrectAnswers: number;
   correctAnswers: number;
-  streak?: number;
+  streak: number;
 }
 
-/*
-export type TUserStatistic = {
-  id?: string;
-  learnedWords: number;
-  optional: {
-    sprint: TGameStatistic;
-    audiocall: TGameStatistic;
-    globalStat: TGameStatistic; // без streak
-    archive: Array<TGameStatistic>;
+export type TAggregatedWord = {
+  _id: string;
+  group: number;
+  page: number;
+  word: string;
+  image: string;
+  audio: string;
+  audioMeaning: string;
+  audioExample: string;
+  textMeaning: string;
+  textExample: string;
+  transcription: string;
+  textExampleTranslate: string;
+  textMeaningTranslate: string;
+  wordTranslate: string;
+  userWord?: {
+    difficulty: 'easy' | 'learned' | 'hard';
+    optional: {
+      count: number;
+      maxCount: 3 | 5;
+      guessed: number;
+      shown: number;
+    }
   }
-};
-*/
+}
+
+type TCount = {
+  count: number;
+}
+
+export type TAggregatedWords = {
+  paginatedResults: TAggregatedWord[];
+  totalCount: TCount[];
+}

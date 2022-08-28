@@ -48,7 +48,7 @@ export type TUserStatistic = {
     data: {
       dataPerDay: [
         {
-          date: Date;
+          date: string;
           newWords: number;
           learnedWords: number;
         },
@@ -61,7 +61,7 @@ export type TUserSetting = {
   id?: string;
   wordsPerDay: number;
   optional: {
-    date: Date;
+    date: string;
     learnedWords: number;
     audioCall: TGameStatistic;
     sprint: TGameStatistic;
@@ -104,16 +104,15 @@ export type TParams = string | number | boolean | object | null;
 
 export type TGameAnswer = {
   correct: boolean;
-  word: TWord;
+  word: TWord | TAggregatedWord;
 };
 
 export type TGameStatistic = {
-  date: Date;
-  newWordsCount: number;
-  incorrectAnswers: number;
+  newWords: number;
+  answersCount: number;
   correctAnswers: number;
   streak: number;
-}
+};
 
 export type TAggregatedWord = {
   _id: string;

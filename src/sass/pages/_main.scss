@@ -13,6 +13,8 @@
     font-size: 7rem;
     margin-bottom: 2%;
     font-family: cursive;
+    text-shadow: 5px 8px 6px white;
+    color: rgba(191, 136, 33, 0.8);
 }
 
 .about-site p {
@@ -76,6 +78,9 @@
 .menu-img0, .menu-img1, .menu-img2, .menu-img3 {
     width: 300px;
     height: 300px;
+    -moz-box-shadow: 0px 6px 0px rgba(187, 141, 141, 0.8);
+    -webkit-border-radius: 100%;
+    box-shadow: 9px 14px 10px rgb(104 75 21 / 80%);
 }
 
 .menu-img0 button, .menu-img1 button,  .menu-img2 button, .menu-img3 button {
@@ -83,8 +88,7 @@
     height: 100%;
     background-size: cover;
     cursor: pointer;
-    border: 9px double grey;
-    
+    border: 5px ridge rgb(191 136 33 / 80%);
     transition: 1.5s; 
     border-radius: 50%;
 }

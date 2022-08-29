@@ -35,8 +35,8 @@ export class Main extends Component {
         
     mainMenu.forEach((el, i) => {
       const a = new Component(this.mainMenu.root, 'div', ['menu-img' + i], null, 'data-title', el.title);
-      const b = new Component(a.root, 'button', [], null)
-      b.root.style.backgroundImage = `url(${el.src})`
+      const b = new Component(a.root, 'button', [], null);
+      b.root.style.backgroundImage = `url(${el.src})`;
       b.root.onclick = () => {
         document.location = `#${el.hash}`
       }       

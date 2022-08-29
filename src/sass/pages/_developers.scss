@@ -11,9 +11,13 @@
 }
 
 .developers-wrapper h2 {
-    font-size: 5rem;
+    font-size: 7rem;
     text-align: center;
     margin-bottom: 3%;
+    margin-top: 1%;
+    font-family: cursive;
+    text-shadow: 5px 5px 6px white;
+    color: rgba(191, 136, 33, 0.8);
 }
 
 .developer {
@@ -35,6 +39,9 @@
 .developers img {
     transition: 1.7s; 
     border-radius: 180px;
+    -webkit-border-radius: 100%;
+    -moz-box-shadow: 0px 6px 0px rgba(187, 141, 141, 0.8);
+    box-shadow: 9px 14px 10px rgb(104 75 21 / 80%);
 }
 
 .developers img:hover {
@@ -46,14 +53,18 @@
 }
 
 .developer h3 {
-    font-size: 3rem;
+    font-size: 4rem;
     margin-top: 10%;
     margin-bottom: 2%;
+    font-family: cursive;
     text-align: center;
+    color: rgba(191, 136, 33, 0.8);
+    text-shadow: 5px 5px 6px white;
 }
 
 .developer p {
     font-size: 3rem;
     text-align: center;
+    font-family: cursive;
 }
 

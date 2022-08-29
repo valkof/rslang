@@ -5,9 +5,9 @@ export const mainMenu: IMainMenu[] = [
     hash: "textbook",
   },
   {
-    title: 'Саванна',
-    src: 'assets/icon/savanna.png',
-    hash: "savanna",
+    title: 'Статистика',
+    src: 'assets/icon/6.png',
+    hash: "statistic",
   },
   {
     title: 'Спринт',

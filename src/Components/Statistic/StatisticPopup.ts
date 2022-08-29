@@ -62,8 +62,8 @@ export default class StatisticPopup extends Component {
   private makeAnswersArrays(answers: TGameAnswer[]) {
     answers.forEach((el) =>{
       if(el.correct) {
-        this.correctAnswers.push(el.word);
-      } else this.incorrectAnswers.push(el.word);
+        this.correctAnswers.push(el.word as TWord);
+      } else this.incorrectAnswers.push(el.word as TWord);
     } )
   }
 }

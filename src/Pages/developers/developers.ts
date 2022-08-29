@@ -9,7 +9,7 @@ export class Developers extends Component {
         
   constructor(parent: HTMLElement, private readonly services: TServices) {
     super(parent, 'div', ['developers-wrapper']);
-    this.titleDevelopers = new Component(this.root, 'h2', [], 'Наши разработчики');
+    this.titleDevelopers = new Component(this.root, 'h2', [], 'Наша команда');
     this.developers = new Component(this.root, 'div', ['developers']);
        
     developers.forEach((el, i) => {

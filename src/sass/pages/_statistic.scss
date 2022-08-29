@@ -7,26 +7,27 @@
 .statistic-wrapper h2 {
 text-align: center;
 font-size: 7rem;
-margin-bottom: 5%;
+margin-bottom: 3%;
 font-family: cursive;
 text-align: center;
-color: rgba(191, 136, 33, 0.8);
-text-shadow: 5px 5px 6px white;
+color: #f5a329;
+text-shadow: 5px 5px 6px #604513;
+margin-left: 7%;
 }
 
 .avatar-wrapper {
    justify-content: center;
-  width: 25%;
+  width: 20%;
 }
 
 .avatar-wrapper img {
-    width: 350px;
+    width: 77%;
     cursor: pointer;
 }
 
 .avatar-content {
     padding: 20px;
-    width: 400px;
+    
     box-sizing: border-box;
     background: #f5a329;
     border-radius: 30px;
@@ -91,7 +92,7 @@ text-shadow: 5px 5px 6px white;
     border: 2px solid #fff;
    
     border-radius: 15px;
-    width: 25%;
+    width: 31%;
     height: 40px;
     -webkit-align-self: center;
     align-self: center;
@@ -121,8 +122,13 @@ margin-right: 3%;
 font-family: cursive;
 }
 
+.statistics {
+    width: 60%;
+    margin-bottom: 4%;
+}
+
 .words-statistic-wrapper, .games-statistic-wrapper {
-   width: 25%;
+    width: 60%;
 }
 .count-words {
     display: flex;
@@ -135,11 +141,11 @@ font-family: cursive;
 }
 
 .learned-words, .count-words  {
-    margin-bottom: 4%;
+    margin-bottom: 2%;
 }
 
 .percent-right-ancwers {
-    margin-bottom: 4%;
+    margin-bottom: 2%;
 }
 
 .percent-right-words {
@@ -151,6 +157,172 @@ font-family: cursive;
     font-size: 3rem;
     font-family: cursive;
     text-align: center;
-    margin-bottom: 3%;
+    margin-bottom: 2%;
     color: black;
+}
+
+.words-statistic-wrapper {
+    margin-top: 4%;
+}
+
+@media (max-width: 1820px) {
+    .select-game button {
+        width: 26%;
+    }
+
+    .words-statistic-wrapper, .games-statistic-wrapper {
+        width: 75%;
+    }
+
+    .statistic-games, .statistic-words  {
+        padding: 20px;
+    }
+    .learned-words, .count-words {
+        margin-bottom: 1%;
+    }
+
+    .statistic-games p, .statistic-words p {
+        font-size: 2.5rem
+    }
+
+}
+
+@media (max-width: 1600px) {
+    .statistic-games p, .statistic-words p {
+        font-size: 2.5rem;
+    }
+
+    .avatar-name button {
+        font-size: 2rem;
+        width: 54%;
+        height: 30px;
+    }
+
+    .avatar-name input {
+       font-size: 2.4rem;
+    }
+
+    .avatar-content a {
+        text-decoration: none;
+        color: black;
+        font-size: 2rem;
+    }
+
+    .avatar-wrapper {
+        margin: auto;
+    }
+
+    .select-game button {
+        width: 22%;
+        font-size: 2rem;
+        height: 31px;
+    }
+
+    
+
+}
+
+@media (max-width: 1280px)  {
+    .statistic-games p, .statistic-words p {
+        font-size: 2rem;
+    }
+
+    .statistic-wrapper h2 {
+        font-size: 5rem;
+        margin-top: 3%;
+    }
+
+    .avatar-name input {
+      font-size: 2rem;
+    }
+
+    .avatar-name button {
+       font-size: 1.8rem;
+       width: 70%;
+       height: 28px;
+    }
+
+    .avatar-content a {
+      font-size: 2rem;
+    }
+
+    .select-game button {
+        font-size: 1.8rem;
+    }
+
+    .statistic-games, .statistic-words  {
+        padding: 17px;
+    }
+    
+    .words-statistic-wrapper h3, .games-statistic-wrapper h3 {
+        font-size: 2rem;
+    }
+
+    .select-game button {
+        font-size: 1.8rem;
+        width: 26%;
+        height: 28px;
+    }
+
+    .avatar-statistics-block {
+        margin-bottom: 4%;
+    }
+
+}
+
+@media (max-width: 1200px) {
+
+   
+
+    .avatar-content a {
+        font-size: 1.6rem;
+    }
+
+    .avatar-name button {
+        font-size: 1.6rem;
+    }
+
+    .select-game button {
+        font-size: 1.6rem;
+    }
+
+    .statistic-games p, .statistic-words p {
+        font-size: 1.8rem;
+    }
+
+    .avatar-statistics-block {
+        margin-bottom: 7%;
+    }
+
+    .avatar-name input {
+        width: 81%;
+    }
+
+}
+
+@media (max-width: 990px) {
+    .avatar-name input {
+        width: 91%;
+    }
+
+    .avatar-name button {
+        font-size: 1.4rem;
+    }
+
+    .statistic-wrapper h2 {
+        font-size: 4rem;
+        margin-bottom: 5%;
+    }
+
+    .statistic-wrapper {
+        margin-bottom: 11%;
+    }
+
+    .select-game button {
+        font-size: 1.4rem;
+    }
+
+    .avatar-name button {
+        font-size: 1.4rem;
+    }
 }

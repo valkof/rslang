@@ -16,8 +16,8 @@
     margin-bottom: 3%;
     margin-top: 1%;
     font-family: cursive;
-    text-shadow: 5px 5px 6px white;
-    color: rgba(191, 136, 33, 0.8);
+    text-shadow: 5px 5px 6px #604513;
+    color: #f5a329;
 }
 
 .developer {
@@ -41,7 +41,7 @@
     border-radius: 180px;
     -webkit-border-radius: 100%;
     -moz-box-shadow: 0px 6px 0px rgba(187, 141, 141, 0.8);
-    box-shadow: 9px 14px 10px rgb(104 75 21 / 80%);
+    box-shadow: 1px 14px 14px 10px rgb(195 185 172), 0 0px 4px 2px rgb(231 230 217 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 27px #d7c48f;
 }
 
 .developers img:hover {
@@ -58,8 +58,8 @@
     margin-bottom: 2%;
     font-family: cursive;
     text-align: center;
-    color: rgba(191, 136, 33, 0.8);
-    text-shadow: 5px 5px 6px white;
+    color: #f5a329;
+    text-shadow: 3px 6px 4px #604513;
 }
 
 .developer p {
@@ -68,3 +68,72 @@
     font-family: cursive;
 }
 
+
+@media (max-width: 1600px) {
+    .developer0, .developer1, .developer2 {
+        width: 340px;
+        height: 340px;
+    }
+
+    .developer p {
+        font-size: 2.5rem;
+    }
+}
+
+
+@media (max-width: 1480px) {
+    .developers-wrapper h2 {
+        font-size: 6rem;
+        margin-top: 0px;
+    }
+
+    .developer h3 {
+        font-size: 3rem;
+    }
+
+    .developer0, .developer1, .developer2 {
+        width: 300px;
+        height: 300px;
+    }
+   
+
+}
+
+@media (max-width: 1200px) {
+    .developers-wrapper h2 {
+        font-size: 5rem;
+    }
+
+    .developer0, .developer1, .developer2 {
+        width: 200px;
+        height: 200px;
+    }
+
+    .developer h3 {
+        font-size: 2.5rem;
+    }
+
+    .developer p {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 980px) {
+    .developers-wrapper h2 {
+        font-size: 4rem;
+    }
+
+    .developers {
+        display: block;
+    }
+
+    .developer {
+        margin: auto;
+        width: 100%;
+        margin-bottom: 9%;
+    }
+    
+    .developer h3 {
+        margin-top: 6%;
+    }
+}

@@ -1,13 +1,16 @@
 .about-us-wrapper {
      width: 90%;
      margin: auto;
-     margin-bottom: 6%;
+     margin-bottom: 3%;
 }
 
 .about-us-wrapper h2 {
-    font-size: 5rem;
+    font-size: 7rem;
     text-align: center;
     margin-bottom: 3%;
+    font-family: cursive;
+    text-shadow: 5px 5px 6px #604513;
+    color: #f5a329;
 }
 
 .info-wrapper {
@@ -17,10 +20,14 @@
 
 .info img {
     width: 300px;
+    border: none;
+    transition: 1.5s;
+    border-radius: 50%;
+    box-shadow: 1px 14px 14px 10px rgb(195 185 172), 0 0px 4px 2px rgb(231 230 217 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 27px #d7c48f;
 }
 
 .info {
-    text-align: center;
+  text-align: center;
   margin-right: 2%;
   width: 25%;
 }
@@ -29,10 +36,18 @@
     font-size: 3rem;
     margin-bottom: 3%;
     margin-top: 3%;
+    font-family: cursive;
+    text-shadow: 1px -1px 1px #604513;
+    color: #f5a329;
 }
 
 .info p {
     font-size: 3rem;
-    text-align: justify;
+    font-family: cursive;
     line-height: 42px;
+    border: 2px solid white;
+    border-radius: 40px;
+    padding: 30px;
+    background: #f5a329;
+    box-shadow: 0 5px 11px 11px rgb(0 0 0 / 25%), 0 2px 4px 2px rgb(0 0 0 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 10px rgb(0 0 0 / 10%);
 }

@@ -25,14 +25,13 @@ footer {
   .footer-developers a {
     color: black;
     text-decoration: none;
-    font-size: 3rem;
     color: white;
     letter-spacing: 3px;
     font-family: cursive;
     font-weight: bold;
   background: #f5a329;
   text-shadow: 0px 2px 0px rgb(209 151 51 / 30%);
-  font-size: 22px;
+  font-size: 2rem;
   overflow: hidden;
   display: block;
   text-align: center;
@@ -107,3 +106,135 @@ background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
 
     
  
+
+  @media(max-width: 1680px) {
+    .footer-developers a {
+      font-size: 1.8rem;
+      line-height: 48px;
+    }
+
+    .rolling-name img {
+      width: 38%;
+  }
+
+    .footer-developer0, .footer-developer1, .footer-developer2 {
+      width: 155px;
+      height: 48px;
+      margin: 0 20px;
+    }
+
+    .footer-copy {
+      font-size: 1rem;
+    }
+
+    .footer-copy span {
+      font-size: 2rem;
+    }
+  }
+
+  @media(max-width: 1280px) {
+    .footer-developer0, .footer-developer1, .footer-developer2 {
+      width: 150px;
+      height: 48px;
+      margin: 0 30px;
+    }
+
+    .footer-developers a {
+      line-height: 32px;
+    }
+
+    .footer-copy {
+      font-size: 1rem;
+    }
+
+    .footer-copy span {
+      font-size: 2rem;
+    }
+    
+    .rolling-name img {
+      width: 36%;
+  }
+  
+
+  }
+
+
+
+  @media(max-width: 1200px) {
+  .footer-developers a {
+    line-height: 38px;
+}
+
+.footer-developer0, .footer-developer1, .footer-developer2 {
+  width: 122px;
+ }
+
+.footer-developers a {
+  font-size: 1.3rem;
+}
+
+.rolling-name img {
+  width: 27%;
+}
+
+.footer-copy {
+  font-size: 0.7rem;
+}
+
+.footer-copy span {
+  font-size: 1.6rem;
+}
+  }
+
+  @media (max-width: 995px) {
+  
+    .footer-developers a {
+      font-size: 1rem;
+      line-height: 28px;
+    }
+
+    .footer-developer2 {
+      width: 108px;
+  }
+
+  .footer-developer0, .footer-developer1, .footer-developer2 {
+    width: 110px;
+    margin: 0 19px;
+}
+
+.rolling-name {
+  width: 9%;
+}
+
+.rolling-name img {
+  width: 100%;
+}
+  }
+
+
+
+  @media (max-width: 700px) {
+    .footer-developer0, .footer-developer1, .footer-developer2 {
+      width: 96px;
+      margin: 0 11px;
+  }
+
+
+  }
+
+  @media (max-width: 550px) {
+    .footer-developer0, .footer-developer1, .footer-developer2 {
+      width: 80px;
+      margin: 0 8px;
+     
+  }
+
+  .footer-developers a {
+    font-size: 0.8rem;
+    line-height: 20px;
+}
+
+.footer-copy span {
+  font-size: 1.3rem;
+}
+  }

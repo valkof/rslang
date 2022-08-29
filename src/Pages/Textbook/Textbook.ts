@@ -26,20 +26,22 @@ export class TextBook extends Component {
     this.cardsBlock = new Component(this.root, 'div', ['cards-block']);
     this.pagination.changeBackg = (color: string) => {
       this.cardsBlock.root.style.backgroundColor = color;
+      this.cardsBlock.root.classList.add('active-page')
     }
 
     this.renderCards();
   }
 
   async renderCards(data?: { group: number; page: number; glossary?: boolean }) {
-    const [cardsData, glossData] = await Promise.all(
-      [APIService.getWords(data?.page ?? 0, data?.group ?? 0), this.getGlossaryData(
+    const [cardsData, glossData] = await Promise.all([APIService.getWords(data?.page ?? 0, data?.group ?? 0), this.getGlossaryData(
         `{"$or":[{"$and":[{"group":${data?.group ?? 0}, "page":${data?.page ?? 0}}]},{"userWord.difficulty":"hard"}]}`
       )]
     );
+
     if (cardsData == null) return;
     this.cardsBlock.root.innerHTML = '';
 
+    console.log(glossData);
     this.cards = cardsData.data.map(cardData => {
       if (glossData) {
         const glossaryData = glossData.data[0].paginatedResults.find(el => el._id === cardData.id);      
@@ -76,7 +78,8 @@ export class TextBook extends Component {
   async renderGlossary(): Promise<void> {
     this.cardsBlock.root.innerHTML = '';
     this.cardsBlock.root.classList.remove('cards-all-learning')
-    const glosData = await this.getGlossaryData(`{"$and":[{"userWord.difficulty":"hard"}]}`);  
+    const glosData = await this.getGlossaryData(`{"$and":[{"userWord.difficulty":"hard"}]}`);
+    console.log(glosData);
     if (glosData == null || glosData.data[0].totalCount.length === 0) return;  
     glosData.data[0].paginatedResults.forEach(cardData => {
       const card = new Card(this.cardsBlock.root, cardData);

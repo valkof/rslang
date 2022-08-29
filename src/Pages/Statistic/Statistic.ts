@@ -25,6 +25,8 @@ export class Statistic extends Component {
   exit: Component;
   
   avatarContent: Component;
+
+  statistic: Component;
   
   gamesStatistic: GamesStatistic;
  
@@ -46,9 +48,11 @@ export class Statistic extends Component {
       this.buttonSaveName = new Component(this.nameWrapper.root, 'button', [], 'Сохранить');
       this.exit = new Component(this.avatarContent.root, 'a', [], 'Выйти из аккаунта','href');
 
-      this.gamesStatistic = new GamesStatistic(this.avatarStatisticsBlock.root);
+      this.statistic = new Component(this.avatarStatisticsBlock.root, 'div', ['statistics']);
 
-      this.wordsStatistic = new WordsStatistic(this.avatarStatisticsBlock.root);
+      this.gamesStatistic = new GamesStatistic(this.statistic.root);
+
+      this.wordsStatistic = new WordsStatistic(this.statistic.root);
 
       
 

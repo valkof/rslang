@@ -21,6 +21,7 @@ import { TServices } from './Interfaces/Types';
 import { LangService } from './Services/LangService';
 import { AudioGameService } from './Services/AudioGameService';
 import SprintService from './Services/SprintService';
+import APIService from './Services/APIService';
 
 class App {
   private readonly services = {
@@ -70,6 +71,13 @@ class App {
       if (game === 'sprint') this.sprint.startGameFromTexbook(cat, page)
     }
   }
+
+  static async updateUser(): Promise<void> {
+    return APIService.updateUserToken();
+  }
 }
 
-window.app = new App(document.body);
+App.updateUser()
+  .then(() => {
+    window.app = new App(document.body);
+  })

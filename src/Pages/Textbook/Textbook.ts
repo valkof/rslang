@@ -17,22 +17,22 @@ export class TextBook extends Component {
     super(parent, 'div', ['textbook-wrapper']);
     this.pagination = new Pagination(this.root);
     
-    this.pagination.changeCategory = data => {      
+    this.pagination.changeCategory = async data => {      
       if (data.glossary) {
-        this.renderGlossary();
-      } else this.renderCards(data);
+        await this.renderGlossary();
+      } else await this.renderCards(data);
     };
-
+  
     this.cardsBlock = new Component(this.root, 'div', ['cards-block']);
     this.pagination.changeBackg = (color: string) => {
       this.cardsBlock.root.style.backgroundColor = color;
       this.cardsBlock.root.classList.add('active-page')
     }
-
+  
     this.renderCards();
   }
 
-  async renderCards(data?: { group: number; page: number; glossary?: boolean }) {
+  async renderCards(data?: { group: number; page: number; glossary?: boolean }): Promise<void> {
     const [cardsData, glossData] = await Promise.all([APIService.getWords(data?.page ?? 0, data?.group ?? 0), this.getGlossaryData(
         `{"$or":[{"$and":[{"group":${data?.group ?? 0}, "page":${data?.page ?? 0}}]},{"userWord.difficulty":"hard"}]}`
       )]
@@ -66,10 +66,11 @@ export class TextBook extends Component {
 
   async render(): Promise<void> {
     this.parent!.append(this.root);
-    const authData = window.localStorage.getItem('rslang');
-    if (authData == null) return this.pagination.addRemoveGlossary(false);
-    const { userId, token } = JSON.parse(authData);
-    const isAuthorized = await APIService.getUserWords(userId, token);
+    // const authData = window.localStorage.getItem('rslang');
+    // if (authData == null) return this.pagination.addRemoveGlossary(false);
+    // const { userId, token } = JSON.parse(authData);
+    const isAuthorized = await APIService.getUserWords();
+    
     if (isAuthorized == null) return this.pagination.addRemoveGlossary(false);
 
     this.pagination.addRemoveGlossary();
@@ -88,13 +89,7 @@ export class TextBook extends Component {
   }
 
   async getGlossaryData(filter: string): Promise<IResponse<TAggregatedWords[]> | null> {
-    const authData = window.localStorage.getItem('rslang');
-    if (authData == null) return null;
-    const {userId, token} = JSON.parse(authData) as TAuthData;
-    return await APIService.getAgrWords(userId, token, {
-      filter,
-      wordsPerPage: '3600'
-    }) as IResponse<TAggregatedWords[]>;    
+    return await APIService.getAgrWords({ filter, wordsPerPage: '3600' }) as IResponse<TAggregatedWords[]> | null;    
   }
 
   checkForLearningWord(glossary?: boolean) {

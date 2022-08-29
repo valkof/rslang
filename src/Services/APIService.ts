@@ -1,9 +1,13 @@
 import { IAgrParams, IResponse } from '../Interfaces/Interfaces';
-import { TAggregatedWord, TAggregatedWords, TAuthResponse, TUser, TUserSetting, TUserStatistic, TUserWord, TWord } from '../Interfaces/Types';
+import { TAggregatedWord, TAggregatedWords, TAuthResponse, TUser, TUserSetting,
+  TUserStatistic, TUserWord, TWord } from '../Interfaces/Types';
 import { HOST } from '../config/index';
 import { logError } from '../utils';
 
 export default abstract class APIService {
+
+  private static dataAuthUser = {} as TAuthResponse;
+
   // Words
   static async getWords(page = 0, group = 0): Promise<IResponse<TWord[]> | null> {
     try {
@@ -34,8 +38,10 @@ export default abstract class APIService {
   }
 
   // Users
-  static async getUser(userId: string, token: string): Promise<IResponse<TUser> | null> {
+  static async getUser(): Promise<IResponse<TUser> | null> {
     try {
+      const {token, userId} = this.dataAuthUser;
+      if (!token || token === '') return null;
       const rawResponse = await fetch(`${HOST}/users/${userId}`, {
         method: 'GET',
         headers: {
@@ -44,6 +50,12 @@ export default abstract class APIService {
           'Content-Type': 'application/json',
         },
       });
+
+      if (rawResponse.status === 401) {
+        this.removeAuthUser();
+        return null;
+      };
+
       const data = await rawResponse.json();
       return {
         status: rawResponse.status,
@@ -76,8 +88,10 @@ export default abstract class APIService {
     }
   }
 
-  static async updateUser(userId: string, user: TUser, token: string): Promise<IResponse<TUser> | null> {
+  static async updateUser(user: TUser): Promise<IResponse<TUser> | null> {
     try {
+      const {token, userId} = this.dataAuthUser;
+      if (!token || token === '') return null;
       const rawResponse = await fetch(`${HOST}/users/${userId}`, {
         method: 'PUT',
         headers: {
@@ -87,6 +101,12 @@ export default abstract class APIService {
         },
         body: JSON.stringify(user),
       });
+
+      if (rawResponse.status === 401) {
+        this.removeAuthUser();
+        return null;
+      };
+
       const data = await rawResponse.json();
       return {
         status: rawResponse.status,
@@ -98,8 +118,10 @@ export default abstract class APIService {
     }
   }
 
-  static async deleteUser(userId: string, token: string): Promise<number | null> {
+  static async deleteUser(): Promise<number | null> {
     try {
+      const {token, userId} = this.dataAuthUser;
+      if (!token || token === '') return null;
       const rawResponse = await fetch(`${HOST}/users/${userId}`, {
         method: 'DELETE',
         headers: {
@@ -108,6 +130,11 @@ export default abstract class APIService {
           'Content-Type': 'application/json',
         },
       });
+      
+      if (rawResponse.status === 401) {
+        this.removeAuthUser();
+        return null;
+      };
 
       return rawResponse.status;
     } catch (error) {
@@ -116,17 +143,21 @@ export default abstract class APIService {
     }
   }
 
-  static async getNewToken(userId: string, token: string): Promise<IResponse<TAuthResponse> | null> {
+  private static async getNewToken(): Promise<IResponse<TAuthResponse> | null> {
     try {
+      const {refreshToken, userId} = this.dataAuthUser;
+      if (!refreshToken || refreshToken === '') return null;
       const rawResponse = await fetch(`${HOST}/users/${userId}/tokens`, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${refreshToken}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
       });
-      const data = await rawResponse.json();
+
+      const data = await rawResponse.json() as TAuthResponse;
+
       return {
         status: rawResponse.status,
         data
@@ -148,7 +179,12 @@ export default abstract class APIService {
         },
         body: JSON.stringify(user),
       });
-      const data = await rawResponse.json();
+      const data = await rawResponse.json() as TAuthResponse;
+
+      if (rawResponse.status === 200) {
+        this.addAuthUser(data);
+      };
+
       return {
         status: rawResponse.status,
         data
@@ -160,8 +196,10 @@ export default abstract class APIService {
   }
 
   // Users/Words
-  static async getUserWords(userId: string, token: string): Promise<IResponse<TUserWord[]> | null> {
+  static async getUserWords(): Promise<IResponse<TUserWord[]> | null> {
     try {
+      const {token, userId} = this.dataAuthUser;
+      if (!token || token === '') return null;
       const rawResponse = await fetch(`${HOST}/users/${userId}/words`, {
         method: 'GET',
         headers: {
@@ -170,7 +208,14 @@ export default abstract class APIService {
           'Content-Type': 'application/json',
         },
       });
+      
+      if (rawResponse.status === 401) {
+        this.removeAuthUser();
+        return null;
+      };
+
       const data = await rawResponse.json();
+
       return {
         status: rawResponse.status,
         data
@@ -182,12 +227,12 @@ export default abstract class APIService {
   }
 
   static async createUserWord(
-    userId: string,
     wordId: string,
-    word: TUserWord,
-    token: string
+    word: TUserWord
   ): Promise<IResponse<TUserWord> | null> {
     try {
+      const {token, userId} = this.dataAuthUser;
+      if (!token || token === '') return null;
       const rawResponse = await fetch(`${HOST}/users/${userId}/words/${wordId}`, {
         method: 'POST',
         headers: {
@@ -197,6 +242,12 @@ export default abstract class APIService {
         },
         body: JSON.stringify(word),
       });
+
+      if (rawResponse.status === 401) {
+        this.removeAuthUser();
+        return null;
+      };
+
       const data = await rawResponse.json();
       return {
         status: rawResponse.status,
@@ -209,12 +260,12 @@ export default abstract class APIService {
   }
 
   static async updateUserWord(
-    userId: string,
     wordId: string,
-    word: TUserWord,
-    token: string
+    word: TUserWord
   ): Promise<IResponse<TUserWord> | null> {
     try {
+      const {token, userId} = this.dataAuthUser;
+      if (!token || token === '') return null;
       const rawResponse = await fetch(`${HOST}/users/${userId}/words/${wordId}`, {
         method: 'PUT',
         headers: {
@@ -224,6 +275,12 @@ export default abstract class APIService {
         },
         body: JSON.stringify(word),
       });
+
+      if (rawResponse.status === 401) {
+        this.removeAuthUser();
+        return null;
+      };
+
       const data = await rawResponse.json();
       return {
         status: rawResponse.status,
@@ -235,8 +292,10 @@ export default abstract class APIService {
     }
   }
 
-  static async deleteUserWord(userId: string, wordId: string, token: string): Promise<number | null> {
+  static async deleteUserWord(wordId: string): Promise<number | null> {
     try {
+      const {token, userId} = this.dataAuthUser;
+      if (!token || token === '') return null;
       const rawResponse = await fetch(`${HOST}/users/${userId}/words/${wordId}`, {
         method: 'DELETE',
         headers: {
@@ -245,6 +304,12 @@ export default abstract class APIService {
           'Content-Type': 'application/json',
         },
       });
+
+      if (rawResponse.status === 401) {
+        this.removeAuthUser();
+        return null;
+      };
+
       return rawResponse.status;
     } catch (error) {
       logError('APIService.deleteUserWord', error);
@@ -252,8 +317,10 @@ export default abstract class APIService {
     }
   }
 
-  static async getUserWordsById(userId: string, wordId: string, token: string): Promise<IResponse<TUserWord> | null> {
+  static async getUserWordsById(wordId: string): Promise<IResponse<TUserWord> | null> {
     try {
+      const {token, userId} = this.dataAuthUser;
+      if (!token || token === '') return null;
       const rawResponse = await fetch(`${HOST}/users/${userId}/words/${wordId}`, {
         method: 'GET',
         headers: {
@@ -262,6 +329,12 @@ export default abstract class APIService {
           'Content-Type': 'application/json',
         },
       });
+
+      if (rawResponse.status === 401) {
+        this.removeAuthUser();
+        return null;
+      };
+
       const data = await rawResponse.json();
       return {
         status: rawResponse.status,
@@ -273,8 +346,10 @@ export default abstract class APIService {
     }
   }
 
-  static async getUserStatistics(userId: string, token: string): Promise<IResponse<TUserStatistic> | null> {
+  static async getUserStatistics(): Promise<IResponse<TUserStatistic> | null> {
     try {
+      const {token, userId} = this.dataAuthUser;
+      if (!token || token === '') return null;
       const rawResponse = await fetch(`${HOST}/users/${userId}/statistics`, {
         method: 'GET',
         headers: {
@@ -283,6 +358,12 @@ export default abstract class APIService {
           'Content-Type': 'application/json',
         },
       });
+
+      if (rawResponse.status === 401) {
+        this.removeAuthUser();
+        return null;
+      };
+
       const data = await rawResponse.json();
       return {
         status: rawResponse.status,
@@ -295,11 +376,11 @@ export default abstract class APIService {
   }
 
   static async upsertUserStatistics(
-    userId: string,
-    stat: TUserStatistic,
-    token: string
+    stat: TUserStatistic
   ): Promise<IResponse<TUserStatistic> | null> {
     try {
+      const {token, userId} = this.dataAuthUser;
+      if (!token || token === '') return null;
       const rawResponse = await fetch(`${HOST}/users/${userId}/statistics`, {
         method: 'PUT',
         headers: {
@@ -309,6 +390,12 @@ export default abstract class APIService {
         },
         body: JSON.stringify(stat),
       });
+
+      if (rawResponse.status === 401) {
+        this.removeAuthUser();
+        return null;
+      };
+
       const data = await rawResponse.json();
       return {
         status: rawResponse.status,
@@ -320,8 +407,10 @@ export default abstract class APIService {
     }
   }
 
-  static async getUserSetting(userId: string, token: string): Promise<IResponse<TUserSetting> | null> {
+  static async getUserSetting(): Promise<IResponse<TUserSetting> | null> {
     try {
+      const {token, userId} = this.dataAuthUser;
+      if (!token || token === '') return null;
       const rawResponse = await fetch(`${HOST}/users/${userId}/settings`, {
         method: 'GET',
         headers: {
@@ -330,6 +419,12 @@ export default abstract class APIService {
           'Content-Type': 'application/json',
         },
       });
+
+      if (rawResponse.status === 401) {
+        this.removeAuthUser();
+        return null;
+      };
+
       const data = await rawResponse.json();
       return {
         status: rawResponse.status,
@@ -342,11 +437,11 @@ export default abstract class APIService {
   }
 
   static async upsertUserSetting(
-    userId: string,
-    stat: TUserSetting,
-    token: string
+    stat: TUserSetting
   ): Promise<IResponse<TUserSetting> | null> {
     try {
+      const {token, userId} = this.dataAuthUser;
+      if (!token || token === '') return null;
       const rawResponse = await fetch(`${HOST}/users/${userId}/settings`, {
         method: 'PUT',
         headers: {
@@ -356,6 +451,12 @@ export default abstract class APIService {
         },
         body: JSON.stringify(stat),
       });
+
+      if (rawResponse.status === 401) {
+        this.removeAuthUser();
+        return null;
+      };
+
       const data = await rawResponse.json();
       return {
         status: rawResponse.status,
@@ -368,11 +469,11 @@ export default abstract class APIService {
   }
 
   static async getAgrWordById(
-    userId: string,
-    wordId: string,
-    token: string
+    wordId: string
   ): Promise<IResponse<TAggregatedWord> | null> {
     try {
+      const {token, userId} = this.dataAuthUser;
+      if (!token || token === '') return null;
       const rawResponse = await fetch(`${HOST}/users/${userId}/aggregatedWords/${wordId}`, {
         method: 'GET',
         headers: {
@@ -381,6 +482,12 @@ export default abstract class APIService {
           'Content-Type': 'application/json',
         },
       });
+
+      if (rawResponse.status === 401) {
+        this.removeAuthUser();
+        return null;
+      };
+
       const data = await rawResponse.json() as TAggregatedWord[];
       return {
         status: rawResponse.status,
@@ -393,11 +500,11 @@ export default abstract class APIService {
   }
 
   static async getAgrWords(
-    userId: string,
-    token: string,
     params?: IAgrParams
   ): Promise<IResponse<TAggregatedWords[]> | null> {
     try {
+      const {token, userId} = this.dataAuthUser;
+      if (!token || token === '') return null;
       const base = `${HOST}/users/${userId}/aggregatedWords`;
       const buf = params ? Object.entries(params).map((item) => [`${item[0]}=${item[1]}`]) : [];
       const paramsStr = buf[0] ? `?${buf.join('&')}` : '';
@@ -409,6 +516,12 @@ export default abstract class APIService {
           'Content-Type': 'application/json',
         },
       });
+
+      if (rawResponse.status === 401) {
+        this.removeAuthUser();
+        return null;
+      };
+
       const data = await rawResponse.json() as TAggregatedWords[];
       return {
         status: rawResponse.status,
@@ -418,5 +531,36 @@ export default abstract class APIService {
       logError('APIService.getAgrWord', error);
       return null;
     }
+  }
+
+  static isAuthorizedUser(): boolean {
+    return !!this.dataAuthUser.token && this.dataAuthUser.token !== ''
+  }
+
+  private static updateUserFromLocalSrorage(): void {
+    const userLocalStorage = localStorage.getItem('rslang');
+    if (userLocalStorage) {
+      Object.assign(this.dataAuthUser, JSON.parse(userLocalStorage));
+    }
+  }
+
+  static async updateUserToken(): Promise<void> {
+    this.updateUserFromLocalSrorage();
+    const userAuthor = await this.getNewToken();
+    if (userAuthor && userAuthor.status === 200) {
+      this.addAuthUser(userAuthor.data);
+    } else {
+      this.removeAuthUser();
+    }
+  }
+
+  private static addAuthUser(data: TAuthResponse): void {
+    Object.assign(this.dataAuthUser, data);
+    localStorage.setItem('rslang', JSON.stringify(this.dataAuthUser));
+  }
+  
+  private static removeAuthUser(): void {
+    this.dataAuthUser = {} as TAuthResponse;
+    localStorage.removeItem('rslang');
   }
 }

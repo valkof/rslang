@@ -563,4 +563,8 @@ export default abstract class APIService {
     this.dataAuthUser = {} as TAuthResponse;
     localStorage.removeItem('rslang');
   }
+
+  static getAuthUser(): TAuthResponse {
+    return this.dataAuthUser;
+  }
 }

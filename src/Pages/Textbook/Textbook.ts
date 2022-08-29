@@ -66,9 +66,7 @@ export class TextBook extends Component {
 
   async render(): Promise<void> {
     this.parent!.append(this.root);
-    // const authData = window.localStorage.getItem('rslang');
-    // if (authData == null) return this.pagination.addRemoveGlossary(false);
-    // const { userId, token } = JSON.parse(authData);
+
     const isAuthorized = await APIService.getUserWords();
     
     if (isAuthorized == null) return this.pagination.addRemoveGlossary(false);

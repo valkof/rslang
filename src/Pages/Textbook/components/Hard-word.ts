@@ -27,10 +27,9 @@ export class HardWord extends Component {
     const isHardWord = (this.inputHardWord.root as HTMLInputElement).checked;
     const isLearningWord = (this.inputIsLearning.root as HTMLInputElement).checked;
     const difficulty = isHardWord ? 'hard' : isLearningWord ? 'learned' : 'easy';
-    const authData = window.localStorage.getItem('rslang');
-    if (authData == null) return;
+    const authData = APIService.isAuthorizedUser();
+    if (!authData) return;
     
-    const {userId, token} = JSON.parse(authData) as TAuthData;
     const hasCardId = await APIService.getUserWordsById(this.cardData._id);
 
     if (hasCardId == null) {

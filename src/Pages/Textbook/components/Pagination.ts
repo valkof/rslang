@@ -39,7 +39,7 @@ export class Pagination extends Component {
             this.emitGame(currentGame, this.currentCategory, this.currentPage);
         };
 
-        const names = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Сложные сова'];
+        const names = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Сложные слова'];
         const backgrColor = ['#8f8282', '#a0c3a0', '#9494b3', '#cdcd7a', '#624510', '#662323', '#402140'];
         this.categories = names.map((cat, i) => { 
             const category = new Component(this.catWrapper.root, 'div', ['category' + i], cat);

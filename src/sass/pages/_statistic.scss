@@ -1,0 +1,156 @@
+.statistic-wrapper {
+    width: 90%;
+    margin: auto;
+    
+}
+
+.statistic-wrapper h2 {
+text-align: center;
+font-size: 7rem;
+margin-bottom: 5%;
+font-family: cursive;
+text-align: center;
+color: rgba(191, 136, 33, 0.8);
+text-shadow: 5px 5px 6px white;
+}
+
+.avatar-wrapper {
+   justify-content: center;
+  width: 25%;
+}
+
+.avatar-wrapper img {
+    width: 350px;
+    cursor: pointer;
+}
+
+.avatar-content {
+    padding: 20px;
+    width: 400px;
+    box-sizing: border-box;
+    background: #f5a329;
+    border-radius: 30px;
+    height: auto;
+    position: relative;
+    box-shadow: 0 5px 14px 11px rgb(0 0 0 / 25%), 0 2px 4px 2px rgb(0 0 0 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 27px rgb(0 0 0 / 10%);
+}
+
+.avatar-name {
+    text-align: center;
+}
+
+.avatar-name input {
+    text-align: center;
+    font-size: 3rem;
+    width: 75%;
+    margin-bottom: 5%;
+    background-color: transparent;
+   
+    border-radius: 15px;
+    border: #fff;
+    box-shadow: 0 5px 11px 11px rgb(0 0 0 / 25%), 0 2px 4px 2px rgb(0 0 0 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 10px rgb(0 0 0 / 10%);
+}
+
+.avatar-name button {
+    background-color: transparent;
+    font-size: 2.5rem;
+    text-align: center;
+    border: 2px solid #fff;
+    border-radius: 15px;
+    width: 60%;
+    height: 35px;
+    -webkit-align-self: center;
+    align-self: center;
+    
+    margin-bottom: 5%;
+    cursor: pointer;
+    box-shadow: 0 5px 11px 11px rgb(0 0 0 / 25%), 0 2px 4px 2px rgb(0 0 0 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 10px rgb(0 0 0 / 10%);
+}
+
+.avatar-content a {
+    text-decoration: none;
+   color: black;
+    font-size: 2.5rem;
+}
+
+.avatar-statistics-block {
+    display: flex;
+    justify-content: space-between;
+}
+
+.select-game {
+    text-align: center;
+    margin-top: 3%;
+   
+}
+
+.select-game button {
+    background: #f5a329;
+    font-size: 2.5rem;
+    text-align: center;
+    border: 2px solid #fff;
+   
+    border-radius: 15px;
+    width: 25%;
+    height: 40px;
+    -webkit-align-self: center;
+    align-self: center;
+    cursor: pointer;
+   box-shadow: 0 5px 11px 11px rgb(0 0 0 / 25%), 0 2px 4px 2px rgb(0 0 0 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 10px rgb(0 0 0 / 10%);
+    
+}
+
+.select-audio-call {
+    margin-right: 3%;
+}
+
+.statistic-games,
+.statistic-words {
+    margin: auto;
+    border: 2px solid white;
+    border-radius: 40px;
+    padding: 30px;  
+    background: #f5a329;
+    box-shadow: 0 5px 11px 11px rgb(0 0 0 / 25%), 0 2px 4px 2px rgb(0 0 0 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 10px rgb(0 0 0 / 10%);
+}
+
+.statistic-games p,
+.statistic-words p {
+font-size: 3rem;
+margin-right: 3%;
+font-family: cursive;
+}
+
+.words-statistic-wrapper, .games-statistic-wrapper {
+   width: 25%;
+}
+.count-words {
+    display: flex;
+    justify-content: space-between;
+}
+
+.percent-right-ancwers {
+    display: flex;
+    justify-content: space-between;
+}
+
+.learned-words, .count-words  {
+    margin-bottom: 4%;
+}
+
+.percent-right-ancwers {
+    margin-bottom: 4%;
+}
+
+.percent-right-words {
+    display: flex;
+    justify-content: space-between;
+}
+
+.words-statistic-wrapper h3, .games-statistic-wrapper h3 {
+    font-size: 3rem;
+    font-family: cursive;
+    text-align: center;
+    margin-bottom: 3%;
+    color: black;
+}

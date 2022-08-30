@@ -1,6 +1,5 @@
 import { Observer } from "../Abstract/Observer";
-import { IResponse } from "../Interfaces/Interfaces";
-import { TAuthResponse, TWord } from "../Interfaces/Types";
+import { TUserStatistic } from "../Interfaces/Types";
 import  APIService  from "./APIService";
 
 
@@ -42,5 +41,13 @@ export class LangService extends Observer {
   updateStatisticPage(): void {
     const {name} = APIService.getAuthUser();
     this.dispatch('updateName', name);
+  }
+
+  async getStatisticDataChart(): Promise<TUserStatistic | null> {
+    const response = await APIService.getUserStatistics();
+    if (response && response.data.optional.data.dataPerDay.length > 0) {
+      return response.data;
+    };
+    return null;
   }
 }

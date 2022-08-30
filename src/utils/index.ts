@@ -21,7 +21,7 @@ export function getRandomNumber(max: number) {
 }
 
 export function createDate(): string {
-  return new Date().toLocaleString().split(',')[0];
+  return new Date().toLocaleDateString().split('.').reverse().join('-');
 }
 
 // генерация случайного массива n элементов

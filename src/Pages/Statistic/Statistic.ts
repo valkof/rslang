@@ -56,5 +56,16 @@ export class Statistic extends Component {
 
     this.exit.root.onclick = () => this.services.lang.userLogout();
 
+    this.buttonSaveName.root.onclick = () => {
+      const nameUser = (this.nameAvatar.root as HTMLInputElement).value;
+      this.services.lang.updatePropertiesUser(nameUser);
+    }
+
+    this.services.lang.addListener('updateName', (nameUser) => {
+      (this.nameAvatar.root as HTMLInputElement).value = nameUser as string;
+    })
+
+    this.services.lang.updateStatisticPage();
+
   }
 }

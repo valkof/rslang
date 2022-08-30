@@ -559,7 +559,7 @@ export default abstract class APIService {
     localStorage.setItem('rslang', JSON.stringify(this.dataAuthUser));
   }
   
-  private static removeAuthUser(): void {
+  static removeAuthUser(): void {
     this.dataAuthUser = {} as TAuthResponse;
     localStorage.removeItem('rslang');
   }

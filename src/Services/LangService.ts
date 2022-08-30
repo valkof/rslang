@@ -23,4 +23,9 @@ export class LangService extends Observer {
     this.dispatch('authorization', 'finish');
     document.location = '';
   }
+
+  userLogout(): void {
+    APIService.removeAuthUser();
+    window.location.hash = '';
+  }
 }

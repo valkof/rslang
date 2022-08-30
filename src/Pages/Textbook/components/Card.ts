@@ -30,9 +30,12 @@ export class Card extends Component {
   
   hardWord: HardWord;
 
+  stat: Component | null = null;
+
   constructor(parent: HTMLElement, public data: TWord | TAggregatedWord) {
     super(parent, 'div', ['card']);
-            
+
+               
     this.wordBlock = new Component(this.root, 'div', ['word-block']);
     this.wordBlock.root.style.backgroundImage = `url(${HOST}/${this.data?.image})`;
     
@@ -56,7 +59,12 @@ export class Card extends Component {
     new Component(this.exampleTranslate.root, 'p', ['example-translate-two'], data.textExampleTranslate);
     
     this.hardWord = new HardWord(this.root, data as TAggregatedWord);
-      
+
+    const {userWord} = data as TAggregatedWord || {};
+
+    if (userWord) {
+      this.stat = new Component(this.root, 'p', ['card-stat'], `Слово угадано: ${userWord.optional.shown} раз, Ошибки: ${userWord.optional.guessed}`);
+    }          
   }
 
   playAudio() {

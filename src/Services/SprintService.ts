@@ -9,7 +9,7 @@ import {
   TUserWord,
   TWord,
 } from '../Interfaces/Types';
-import { createDate, getUserInfo, isAuthorizated, shuffle } from '../utils';
+import { createDate, shuffle } from '../utils';
 import APIService from './APIService';
 import { Observer } from './../Abstract/Observer';
 
@@ -54,19 +54,19 @@ export default class SprintService extends Observer {
   private difficulty: TDifficulty = 0;
 
   async generateWords(difficulty: TDifficulty, pages: number[]) {
-    this.user = getUserInfo();
+    this.user = APIService.getAuthUser();
     let array: TAggregatedWord[] | TWord[] = [];
     this.randomPages = [...pages];
     this.difficulty = difficulty;
 
-    if (await isAuthorizated(this.user)) {
+    if (APIService.isAuthorizedUser()) {
       const qerry = [];
       for (let i = 0; i < pages.length; i++) {
         qerry.push(`{"page": ${pages[i]}}`);
       }
       const qerry2 = `{"$and": [{ "group": ${difficulty} }, { "$or": [${qerry.join(',')}] }]}`;
       //const qerry2 = `{"$and": [{ "group": ${difficulty} }, { "$or": [{"page": 0}] }]}`; // Это для тестов
-      const wordsRaw = await APIService.getAgrWords(this.user?.userId as string, this.user?.token as string, {
+      const wordsRaw = await APIService.getAgrWords({
         wordsPerPage: '100',
         filter: qerry2,
       });
@@ -84,8 +84,8 @@ export default class SprintService extends Observer {
   }
 
   async startGame() {
-    const user = getUserInfo();
-    if (user && (await isAuthorizated(user))) {
+    const user = APIService.getAuthUser();
+    if (user && APIService.isAuthorizedUser()) {
       const words = this.currentWords as TAggregatedWord[];
       this.incorrectVariants = words.map(el => el.wordTranslate) as string[];
     } else {
@@ -155,8 +155,8 @@ export default class SprintService extends Observer {
   async stopGame() {
     this.isGame = false;
     this.dispatch(ESprintEvents.renderStatistic, this.answers);
-    const user = getUserInfo();
-    if (user && (await isAuthorizated(user))) {
+    const user = APIService.getAuthUser();
+    if (user && APIService.isAuthorizedUser()) {
       this.writeResults(this.answers);
     }
   }
@@ -208,7 +208,7 @@ export default class SprintService extends Observer {
   }
 
   private async writeResults(answers: TGameAnswer[]) {
-    const user = getUserInfo();
+    const user = APIService.getAuthUser();
     const date = createDate();
     let newWords = 0;
     let learned = 0;
@@ -217,7 +217,7 @@ export default class SprintService extends Observer {
     let streak = 0;
     let maxStreak = 0;
 
-    if (user && (await isAuthorizated(user))) {
+    if (user && APIService.isAuthorizedUser()) {
       for (let i = 0; i < answers.length; i++) {
         const word = answers[i].word as TAggregatedWord;
         if (!word.userWord) {
@@ -249,7 +249,7 @@ export default class SprintService extends Observer {
     correctAnswers: number,
     learned: number,
   ) {
-    const rawSetting = await APIService.getUserSetting(user!.userId, user!.token);
+    const rawSetting = await APIService.getUserSetting();
     const setting: TUserSetting = rawSetting
       ? (rawSetting.data as TUserSetting)
       : JSON.parse(JSON.stringify(INIT_USER_SETTING));
@@ -272,12 +272,12 @@ export default class SprintService extends Observer {
       setting.optional.sprint.answersCount = answersCount;
       setting.optional.learnedWords = learned;
     }
-    await APIService.upsertUserSetting(this.user!.userId, setting, this.user!.token);
+    await APIService.upsertUserSetting(setting);
   }
 
   // Запись статистики в БД
   private async writeStatistic(user: TAuthData, date: string, newWords: number, learned: number) {
-    const rawStatistic = await APIService.getUserStatistics(user.userId, user.token);
+    const rawStatistic = await APIService.getUserStatistics();
     let statistic: TUserStatistic = rawStatistic ? rawStatistic.data : JSON.parse(JSON.stringify(INIT_USER_STATISTIC));
     statistic = statistic.optional ? statistic : JSON.parse(JSON.stringify(INIT_USER_STATISTIC));
     statistic.learnedWords += learned;
@@ -298,7 +298,7 @@ export default class SprintService extends Observer {
       });
     }
     delete statistic.id;
-    APIService.upsertUserStatistics(user.userId, statistic, user.token);
+    APIService.upsertUserStatistics(statistic);
   }
 
   private async writeUserWord(user: TAuthData, word: TAggregatedWord, isTrue: boolean): Promise<number> {
@@ -322,12 +322,12 @@ export default class SprintService extends Observer {
             }
           }
 
-          APIService.updateUserWord(user.userId!, word._id!, word.userWord, user.token);
+          APIService.updateUserWord(word._id!, word.userWord);
         } else {
           const init = JSON.parse(JSON.stringify(INIT_USER_WORD)) as TUserWord;
           init.optional.guessed = 1;
           init.optional.count = 1;
-          APIService.createUserWord(user.userId!, word._id!, init, user.token);
+          APIService.createUserWord(word._id!, init);
         }
         break;
       case false:
@@ -342,8 +342,8 @@ export default class SprintService extends Observer {
             word.userWord.difficulty = word.userWord.optional.maxCount === 3 ? 'easy' : 'hard';
           }
 
-          APIService.updateUserWord(user.userId!, word._id!, word.userWord, user.token);
-        } else APIService.createUserWord(user.userId!, word._id!, INIT_USER_WORD, user.token);
+          APIService.updateUserWord(word._id!, word.userWord);
+        } else APIService.createUserWord(word._id!, INIT_USER_WORD);
         break;
     }
     return learned;

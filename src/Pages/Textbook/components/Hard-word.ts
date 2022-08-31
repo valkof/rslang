@@ -27,14 +27,13 @@ export class HardWord extends Component {
     const isHardWord = (this.inputHardWord.root as HTMLInputElement).checked;
     const isLearningWord = (this.inputIsLearning.root as HTMLInputElement).checked;
     const difficulty = isHardWord ? 'hard' : isLearningWord ? 'learned' : 'easy';
-    const authData = window.localStorage.getItem('rslang');
-    if (authData == null) return;
+    const authData = APIService.isAuthorizedUser();
+    if (!authData) return;
     
-    const {userId, token} = JSON.parse(authData) as TAuthData;
-    const hasCardId = await APIService.getUserWordsById(userId, this.cardData._id, token);
+    const hasCardId = await APIService.getUserWordsById(this.cardData._id);
 
     if (hasCardId == null) {
-      await APIService.createUserWord(userId, this.cardData._id, {
+      await APIService.createUserWord(this.cardData._id, {
         difficulty: difficulty,
         optional: {
           count: 0,
@@ -42,12 +41,12 @@ export class HardWord extends Component {
           guessed: 0,
           shown: 1
         }
-      }, token);       
+      });
     } else {
       if (difficulty === 'easy') {
-        await APIService.deleteUserWord(userId, this.cardData._id, token);
+        await APIService.deleteUserWord(this.cardData._id);
       } else {
-        await APIService.updateUserWord(userId, this.cardData._id, {
+        await APIService.updateUserWord(this.cardData._id, {
           difficulty: difficulty,
           optional: {
             count: hasCardId.data.optional.count,
@@ -55,7 +54,7 @@ export class HardWord extends Component {
             guessed: hasCardId.data.optional.guessed,
             shown: hasCardId.data.optional.shown
           }
-        }, token);
+        });
       }
     }
   }

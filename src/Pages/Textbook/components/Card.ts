@@ -35,7 +35,6 @@ export class Card extends Component {
   constructor(parent: HTMLElement, public data: TWord | TAggregatedWord) {
     super(parent, 'div', ['card']);
 
-               
     this.wordBlock = new Component(this.root, 'div', ['word-block']);
     this.wordBlock.root.style.backgroundImage = `url(${HOST}/${this.data?.image})`;
     

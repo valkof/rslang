@@ -9,6 +9,7 @@ export class HardWord extends Component {
   inputIsLearning: Component;
   
   checkCardsDashboard: () => void = () => {};
+  changeColorHardCar: () => void = () => {};
 
   constructor(parent: HTMLElement, private cardData: TAggregatedWord) {
     super(parent, 'div', ['add-word']);

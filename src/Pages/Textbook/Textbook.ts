@@ -24,6 +24,7 @@ export class TextBook extends Component {
     };
   
     this.cardsBlock = new Component(this.root, 'div', ['cards-block']);
+    
     this.pagination.changeBackg = (color: string) => {
       this.cardsBlock.root.style.backgroundColor = color;
       this.cardsBlock.root.classList.add('active-page')

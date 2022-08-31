@@ -103,20 +103,8 @@ export default class SprintService extends Observer {
     this.isGame = true;
     this.reset();
     this.dispatch(ESprintEvents.startGame);
-
     this.changeWord();
-    this.interval = setInterval(() => {
-      if (!this.isGame) {
-        if (this.interval) clearInterval(this.interval);
-      }
-      if (this.timer > 0) {
-        this.timer--;
-      } else {
-        if (this.interval) clearInterval(this.interval);
-        this.stopGame();
-      }
-      this.dispatch(ESprintEvents.timerTick, this.timer.toString());
-    }, 1000);
+    this.setInterval();
   }
 
   async startFromDict(group: number, page: number) {
@@ -134,24 +122,13 @@ export default class SprintService extends Observer {
       await this.generateWords(this.difficulty, this.randomPages);
     } else {
       this.currentWords = await getWordsFromDict(this.difficulty, this.pageFromDictionary) as TAggregatedWord[];
+      shuffle(this.currentWords);
     }
 
     this.isGame = true;
     this.dispatch(ESprintEvents.startGame);
-
     this.changeWord();
-    this.interval = setInterval(() => {
-      if (!this.isGame) {
-        if (this.interval) clearInterval(this.interval);
-      }
-      if (this.timer > 0) {
-        this.timer--;
-      } else {
-        if (this.interval) clearInterval(this.interval);
-        this.stopGame();
-      }
-      this.dispatch(ESprintEvents.timerTick, this.timer.toString());
-    }, 1000);
+    this.setInterval();
   }
 
   changeWord() {
@@ -366,5 +343,20 @@ export default class SprintService extends Observer {
         break;
     }
     return learned;
+  }
+
+  private setInterval() {
+    this.interval = setInterval(() => {
+      if (!this.isGame) {
+        if (this.interval) clearInterval(this.interval);
+      }
+      if (this.timer > 0) {
+        this.timer--;
+      } else {
+        if (this.interval) clearInterval(this.interval);
+        this.stopGame();
+      }
+      this.dispatch(ESprintEvents.timerTick, this.timer.toString());
+    }, 1000);
   }
 }

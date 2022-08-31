@@ -28,8 +28,8 @@ export type TWord = {
 };
 
 export type TUser = {
-  email: string;
-  password: string;
+  email?: string;
+  password?: string;
   name?: string;
 };
 

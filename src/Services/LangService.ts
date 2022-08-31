@@ -23,4 +23,24 @@ export class LangService extends Observer {
     this.dispatch('authorization', 'finish');
     document.location = '';
   }
+
+  userLogout(): void {
+    APIService.removeAuthUser();
+    window.location.hash = '';
+  }
+
+  async updatePropertiesUser(name: string): Promise<void> {
+    const response = await APIService.updateUser({name: name});
+    if (response) {
+      const dataUser = APIService.getAuthUser();
+      dataUser.name = name;
+      APIService.addAuthUser(dataUser);
+    }
+
+  }
+
+  updateStatisticPage(): void {
+    const {name} = APIService.getAuthUser();
+    this.dispatch('updateName', name);
+  }
 }

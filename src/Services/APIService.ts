@@ -554,12 +554,12 @@ export default abstract class APIService {
     }
   }
 
-  private static addAuthUser(data: TAuthResponse): void {
+  static addAuthUser(data: TAuthResponse): void {
     Object.assign(this.dataAuthUser, data);
     localStorage.setItem('rslang', JSON.stringify(this.dataAuthUser));
   }
   
-  private static removeAuthUser(): void {
+  static removeAuthUser(): void {
     this.dataAuthUser = {} as TAuthResponse;
     localStorage.removeItem('rslang');
   }

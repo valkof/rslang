@@ -40,7 +40,7 @@ export class Pagination extends Component {
         };
 
         const names = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Сложные слова'];
-        const backgrColor = ['rgb(237 202 163)', 'rgb(135 243 135)', 'rgb(160 160 255)', 'rgb(225 225 138)', 'rgb(229 165 49)', 'rgb(249 130 130)', '#402140'];
+        const backgrColor = ['rgb(237 202 163)', 'rgb(115 177 115)', 'rgb(125 125 167)', 'rgb(225 225 138)', 'rgb(149 110 130)', 'rgb(249 130 130)', 'rgb(114 72 114)'];
         this.categories = names.map((cat, i) => { 
             const category = new Component(this.catWrapper.root, 'div', ['category' + i], cat);
             

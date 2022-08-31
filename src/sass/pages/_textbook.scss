@@ -10,8 +10,10 @@ justify-content: space-between;
 flex-wrap: wrap;
 }
 
-.card{
+.card {
     width: 20%;
+    //height: 260px;
+    background-color: #dda450;
     background-size: cover;
     margin: 40px;
     padding: 1%;
@@ -23,7 +25,6 @@ flex-wrap: wrap;
     -webkit-align-items: center;
     align-items: center;
     border-radius: 25px;
-    background-color: #fff;
     box-shadow: 0 1px 2px 1px rgb(0 0 0 / 30%), 0 2px 4px 1px rgb(0 0 0 / 25%), 0 2px 8px 2px rgb(0 0 0 / 20%), 0 4px 16px 4px rgb(0 0 0 / 15%);
     transition: box-shadow .3s;
 }
@@ -34,7 +35,7 @@ flex-wrap: wrap;
 
 .word-block {
     width: 100%;
-    height: 260px;
+    
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -67,8 +68,6 @@ flex-wrap: wrap;
 }
 
 .word {
-    display: flex;
-    justify-content: space-between;
     font-size: 3rem;
     align-items: center;
     font-weight: bold;
@@ -77,19 +76,20 @@ flex-wrap: wrap;
 
 .audio {
     cursor: pointer;
+    text-align: end;
 }
 
 .example-block {
      display: flex;
     -webkit-flex-direction: column;
     flex-direction: column;
-    padding: 10px 15px 15px;
+    padding: 7px 7px 10px;
     width: 100%;
     box-sizing: border-box;
 }
 
 .text-example {
-    font-size: 3rem;
+    font-size: 2rem;
     margin-top: 4%;
     margin-bottom: 6%;
     border-bottom: 2px solid black;
@@ -101,7 +101,7 @@ flex-wrap: wrap;
 }
 
 .example-translate {
-    font-size: 2.5rem;
+    font-size: 2rem;
     text-align: right;
 }
 
@@ -163,7 +163,7 @@ flex-wrap: wrap;
 }
 
 .category6 {
-    width: 20%;
+    width: 22%;
     height:58px;
     
 }
@@ -261,14 +261,59 @@ margin-right: 50%;
     box-shadow: 0 5px 11px 11px rgb(0 0 0 / 25%), 0 2px 4px 2px rgb(0 0 0 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 10px rgb(0 0 0 / 10%);
 }
 
-@media (max-width: 1480px) {
+.hard-style {
+  background-color: green;
+}
 
+@media (max-width: 1860px) {
+  .cat-wrapper {
+    width: 51%;
+  }
+
+  .card {
+    width: 28%;
+    margin: 23px
+  }
+
+  .category0, .category1, .category2, .category3, .category4, .category5 {
+    height: 50px;
+    padding-top: 1%;
+}
+
+.category6 {
+  height: 52px;
+  padding-top: 1%;
+}
+
+.trening select {
+  height: 49px;
+}
+
+}
+
+@media (max-width: 1650px)  {
   .category0, .category1, .category2, .category3, .category4, .category5, .category6 {
-    height: 48px;
+   font-size: 1.9rem;
   }
 
   .trening select {
-    height: 47px;
+    font-size: 1.9rem;
+  }
+
+  .card {
+    width: 30%;
+    margin: 18px;
+}
+}
+
+@media (max-width: 1480px) {
+
+  .category0, .category1, .category2, .category3, .category4, .category5, .category6 {
+    height: 41px;
+  }
+
+  .trening select {
+    height: 45px;
   }
 
   .pages-wrapper div {
@@ -281,23 +326,28 @@ margin-right: 50%;
   }
 
   .card {
-    width: 26%;
+    width: 29%;
+    margin: 20px;
   }
 
   .card h2 {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 
   .word {
     font-size: 2rem;
   }
 
+  .word-title {
+   margin-bottom: 1%;
+}
+
   .text-example {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 
   .example-translate {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 
 }
@@ -335,11 +385,26 @@ margin-right: 50%;
 }
 
 .card {
-  width: 35%;
+  width: 30%;
+  margin: 16px;
 }
 
 .word-block  {
-  height: 229px;
+  height: 145px;
+}
+
+.text-example {
+  font-size: 1.4rem;
+}
+
+.example-translate {
+  font-size: 1.4rem;
+}
+
+.add-word input {
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
 }
 }
 
@@ -349,17 +414,27 @@ margin-right: 50%;
 }
 
 .text-example {
-  font-size: 1.8rem;
+  font-size: 1.3rem;
 }
 
 .example-translate {
-  font-size: 1.8rem;
+  font-size: 1.3rem;
 }
 
 .add-word input {
   width: 38px;
   height: 38px;
 }
+
+.card {
+  width: 45%;
+}
+
+.word-block {
+  height: 176px;
+}
+
+
 
 
 
@@ -393,7 +468,7 @@ margin-right: 50%;
 
 
 .word-block {
-  height: 182px;
+  height: 158px;
 }
 
 .text-example {
@@ -405,8 +480,9 @@ margin-right: 50%;
 }
 
 .card {
-  width: 40%;
+  width: 43%;
   margin-bottom: 1%;
+  padding: 2%;
 }
 }
 
@@ -415,9 +491,17 @@ margin-right: 50%;
     width: 73%;
 }
 
-  .card {
-    width: 47%;
-  }
+.text-example {
+  font-size: 1.5rem;
+}
+
+.example-translate {
+  font-size: 1.5rem;
+}
+
+.word-block {
+  height: 131px;
+}
 }
   
 @media (max-width: 788px) {
@@ -426,8 +510,18 @@ margin-right: 50%;
 }
 
 .card {
-  width: 52%;
+  width: 60%;
 }
+
+.category6 {
+  width: 117px;
+  font-size: 1.3rem;
+  }
+
+  .trening select {
+    width: 109px;
+    font-size: 1.3rem;
+  }
 
 
 }

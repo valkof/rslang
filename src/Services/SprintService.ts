@@ -9,7 +9,7 @@ import {
   TUserWord,
   TWord,
 } from '../Interfaces/Types';
-import { createDate, shuffle } from '../utils';
+import { createDate, getWordsFromDict, shuffle } from '../utils';
 import APIService from './APIService';
 import { Observer } from './../Abstract/Observer';
 
@@ -51,9 +51,14 @@ export default class SprintService extends Observer {
 
   private randomPages: number[] = [];
 
+  private pageFromDictionary = 0;
+
   private difficulty: TDifficulty = 0;
 
+  private isFromDict = false;
+
   async generateWords(difficulty: TDifficulty, pages: number[]) {
+    this.isFromDict = false;
     this.user = APIService.getAuthUser();
     let array: TAggregatedWord[] | TWord[] = [];
     this.randomPages = [...pages];
@@ -114,9 +119,23 @@ export default class SprintService extends Observer {
     }, 1000);
   }
 
+  async startFromDict(group: number, page: number) {
+    this.isFromDict = true;
+    this.difficulty = group as TDifficulty;
+    this.pageFromDictionary = page;
+    this.isFromDict = true;
+    this.currentWords = await getWordsFromDict(group, page) as TAggregatedWord[];
+    this.startGame();
+  }
+
   async refreshGame() {
     this.reset();
-    await this.generateWords(this.difficulty, this.randomPages);
+    if (!this.isFromDict) {
+      await this.generateWords(this.difficulty, this.randomPages);
+    } else {
+      this.currentWords = await getWordsFromDict(this.difficulty, this.pageFromDictionary) as TAggregatedWord[];
+    }
+
     this.isGame = true;
     this.dispatch(ESprintEvents.startGame);
 

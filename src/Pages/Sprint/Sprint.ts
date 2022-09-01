@@ -266,8 +266,8 @@ export class Sprint extends Component {
     this.dificulty.render();
   }
 
+  //Старт игры Спринт с уровнем сложности - ${cat}, страница - ${page}
   startGameFromTexbook(cat: number, page: number) {
-    //тут реализуйте старт игры с указанной сложностью слов
-    console.log(`Старт игры Спринт с уровнем сложности - ${cat}, страница - ${page}`);
+    this.service.sprint.startFromDict(cat,page);
   }
 }

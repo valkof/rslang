@@ -62,7 +62,7 @@ class App {
       sprint: this.sprint,
       statistic: this.statistic,
       autorization: this.authorization,
-    };   
+    };
 
     new Router(pages, this.footer);
 

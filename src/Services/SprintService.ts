@@ -84,7 +84,8 @@ export default class SprintService extends Observer {
   }
 
   async startGame() {
-    this.makeIncorrectVariants();
+    this.incorrectVariants = this.currentWords.map(el => el.wordTranslate) as string[];
+    shuffle(this.currentWords as TWord[]);
     this.isGame = true;
     this.reset();
     this.dispatch(ESprintEvents.startGame);
@@ -108,7 +109,7 @@ export default class SprintService extends Observer {
     } else {
       this.currentWords = (await getWordsFromDict(this.difficulty, this.pageFromDictionary)) as TAggregatedWord[];
     }
-    this.makeIncorrectVariants();
+    shuffle(this.currentWords as TWord[]);
     this.isGame = true;
     this.dispatch(ESprintEvents.startGame);
     this.changeWord();
@@ -126,7 +127,7 @@ export default class SprintService extends Observer {
         this.dispatch(ESprintEvents.changeTranslate, JSON.stringify(word.wordTranslate));
       } else {
         this.rightChoise = false;
-        const incorectWord = this.incorrectVariants[this.currentWords.length];
+        const incorectWord= this.getIncorrect(word.wordTranslate);
         this.dispatch(ESprintEvents.changeTranslate, JSON.stringify(incorectWord));
       }
     } else this.stopGame();
@@ -344,9 +345,10 @@ export default class SprintService extends Observer {
     }, 1000);
   }
 
-  private makeIncorrectVariants() {
-    shuffle(this.currentWords as TWord[]);
-    this.incorrectVariants = this.currentWords.map(el => el.wordTranslate) as string[];
-    this.incorrectVariants.reverse();
+  private getIncorrect(word:string) {
+    const index =  this.incorrectVariants.indexOf(word);
+    if(index >= this.incorrectVariants.length - 1) {
+      return this.incorrectVariants[0];
+    } else return this.incorrectVariants[index+1];
   }
 }

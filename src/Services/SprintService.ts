@@ -47,8 +47,6 @@ export default class SprintService extends Observer {
 
   private interval: NodeJS.Timer | null = null;
 
-  private user: TAuthData | null = null;
-
   private randomPages: number[] = [];
 
   private pageFromDictionary = 0;
@@ -59,7 +57,6 @@ export default class SprintService extends Observer {
 
   async generateWords(difficulty: TDifficulty, pages: number[]) {
     this.isFromDict = false;
-    this.user = APIService.getAuthUser();
     let array: TAggregatedWord[] | TWord[] = [];
     this.randomPages = [...pages];
     this.difficulty = difficulty;
@@ -87,7 +84,6 @@ export default class SprintService extends Observer {
   }
 
   async startGame() {
-    const user = APIService.getAuthUser();
     this.makeIncorrectVariants();
     this.isGame = true;
     this.reset();

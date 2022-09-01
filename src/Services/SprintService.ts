@@ -76,13 +76,11 @@ export default class SprintService extends Observer {
         filter: qerry2,
       });
       array = wordsRaw?.data[0] ? wordsRaw?.data[0].paginatedResults : [];
-      shuffle(array as TAggregatedWord[]);
       this.currentWords = [...array];
     } else {
       for (let i = 0; i < pages.length; i++) {
         const words = await APIService.getWords(pages[i], difficulty);
         array = words ? [...(array as TWord[]), ...words.data] : array;
-        shuffle(array as TWord[]);
         this.currentWords = [...array] as TWord[];
       }
     }
@@ -90,8 +88,7 @@ export default class SprintService extends Observer {
 
   async startGame() {
     const user = APIService.getAuthUser();
-    this.incorrectVariants = this.currentWords.map(el => el.wordTranslate) as string[];
-    this.incorrectVariants.reverse();
+    this.makeIncorrectVariants();
     this.isGame = true;
     this.reset();
     this.dispatch(ESprintEvents.startGame);
@@ -115,7 +112,7 @@ export default class SprintService extends Observer {
     } else {
       this.currentWords = (await getWordsFromDict(this.difficulty, this.pageFromDictionary)) as TAggregatedWord[];
     }
-
+    this.makeIncorrectVariants();
     this.isGame = true;
     this.dispatch(ESprintEvents.startGame);
     this.changeWord();
@@ -349,5 +346,11 @@ export default class SprintService extends Observer {
       }
       this.dispatch(ESprintEvents.timerTick, this.timer.toString());
     }, 1000);
+  }
+
+  private makeIncorrectVariants() {
+    shuffle(this.currentWords as TWord[]);
+    this.incorrectVariants = this.currentWords.map(el => el.wordTranslate) as string[];
+    this.incorrectVariants.reverse();
   }
 }

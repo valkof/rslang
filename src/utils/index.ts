@@ -39,11 +39,11 @@ export function generateRandomNums(count: number): number[] {
 export async function getWordsFromDict(group: number, page: number): Promise<TAggregatedWord[]> {
   const qerry = `{"$and": [{ "$or": [{ "userWord.difficulty":"easy" },{ "userWord.difficulty":"hard" },{"userWord":null}] },{ "group": ${group} }, { "$or": [{"page": ${page}}] }]}`;
   let wordsRaw = await APIService.getAgrWords({
-    wordsPerPage: '100',
+    wordsPerPage: '40',
     filter: qerry,
   });
   if (!wordsRaw) return [];
-  if (wordsRaw && wordsRaw.data[0].paginatedResults.length > 2) {
+  if (wordsRaw && wordsRaw.data[0].paginatedResults.length >= 2) {
     return wordsRaw.data[0].paginatedResults
   } else {
     if (page === 0) return []
@@ -53,10 +53,10 @@ export async function getWordsFromDict(group: number, page: number): Promise<TAg
     }
     const qerry2 = `{"$and": [{ "$or": [{ "userWord.difficulty":"easy" },{ "userWord.difficulty":"hard" },{"userWord":null}] },{ "group": ${group} }, { "$or": [${template.join(",")}] }]}`;
     wordsRaw = await APIService.getAgrWords({
-      wordsPerPage: '100',
+      wordsPerPage: '40',
       filter: qerry2,
     });
-    return wordsRaw!.data[0].paginatedResults.splice(0, 40)
+    return wordsRaw!.data[0].paginatedResults
   }
 
 }

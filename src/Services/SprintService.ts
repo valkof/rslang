@@ -90,14 +90,6 @@ export default class SprintService extends Observer {
 
   async startGame() {
     const user = APIService.getAuthUser();
-    if (user && APIService.isAuthorizedUser()) {
-      const words = this.currentWords as TAggregatedWord[];
-      this.incorrectVariants = words.map(el => el.wordTranslate) as string[];
-    } else {
-      const words = this.currentWords as TWord[];
-      this.incorrectVariants = words.map(el => el.wordTranslate) as string[];
-    }
-
     this.incorrectVariants = this.currentWords.map(el => el.wordTranslate) as string[];
     this.incorrectVariants.reverse();
     this.isGame = true;
@@ -112,7 +104,7 @@ export default class SprintService extends Observer {
     this.difficulty = group as TDifficulty;
     this.pageFromDictionary = page;
     this.isFromDict = true;
-    this.currentWords = await getWordsFromDict(group, page) as TAggregatedWord[];
+    this.currentWords = (await getWordsFromDict(group, page)) as TAggregatedWord[];
     this.startGame();
   }
 
@@ -121,8 +113,7 @@ export default class SprintService extends Observer {
     if (!this.isFromDict) {
       await this.generateWords(this.difficulty, this.randomPages);
     } else {
-      this.currentWords = await getWordsFromDict(this.difficulty, this.pageFromDictionary) as TAggregatedWord[];
-      shuffle(this.currentWords);
+      this.currentWords = (await getWordsFromDict(this.difficulty, this.pageFromDictionary)) as TAggregatedWord[];
     }
 
     this.isGame = true;

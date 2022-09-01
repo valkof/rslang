@@ -8,9 +8,7 @@
   background-color: #f5a329;
   border-radius: 20px;
   color: white;
-  font-size: 28px;
-  max-height: 80vh;
-  overflow: scroll;
+  font-size: 22px;
 }
 
 .statistic-title {
@@ -43,7 +41,7 @@
 
 .row-word {
   text-align: center;
-  width: 25%;
+  width: 30%;
   font-size: 20px;
 }
 
@@ -63,7 +61,7 @@
 }
 
 .repeat-btn {
-  transition: .2s;
+  transition: 0.2s;
   cursor: pointer;
   width: 180px;
   margin-top: 20px;
@@ -82,5 +80,62 @@
 
   &:hover {
     background-color: #ecdf2b;
+  }
+}
+
+@media (max-width: 1000px) {
+  .statistic-popup {
+    width: 70%;
+  }
+  .row-word {
+    font-size: 17px;
+  }
+  .row-index {
+    font-size: 17px;
+  }
+  .repeat-btn {
+    width: 150px;
+  }
+}
+
+@media (max-width: 820px) {
+  .row-word {
+    font-size: 12px;
+  }
+  .row-index {
+    font-size: 12px;
+  }
+  .repeat-btn {
+    width: 120px;
+  }
+}
+
+@media (max-width: 590px) {
+  .statistic-popup {
+    font-size: 12px;
+  }
+  .row-word {
+    font-size: 10px;
+  }
+  .row-index {
+    font-size: 10px;
+  }
+  .repeat-btn {
+    width: 100px;
+  }
+}
+
+@media (max-width: 450px) {
+  .statistic-popup {
+    font-size: 11px;
+  }
+  .row-word {
+    font-size: 8px;
+  }
+  .row-index {
+    font-size: 8px;
+  }
+  .repeat-btn {
+    width: 80px;
   }
 }

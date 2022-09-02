@@ -268,6 +268,6 @@ export class Sprint extends Component {
 
   //Старт игры Спринт с уровнем сложности - ${cat}, страница - ${page}
   startGameFromTexbook(cat: number, page: number) {
-    this.service.sprint.startFromDict(cat,page);
+    this.service.sprint.startFromDict(cat, page);
   }
 }

@@ -47,8 +47,6 @@ export default class SprintService extends Observer {
 
   private interval: NodeJS.Timer | null = null;
 
-  private user: TAuthData | null = null;
-
   private randomPages: number[] = [];
 
   private pageFromDictionary = 0;
@@ -59,7 +57,6 @@ export default class SprintService extends Observer {
 
   async generateWords(difficulty: TDifficulty, pages: number[]) {
     this.isFromDict = false;
-    this.user = APIService.getAuthUser();
     let array: TAggregatedWord[] | TWord[] = [];
     this.randomPages = [...pages];
     this.difficulty = difficulty;
@@ -76,22 +73,19 @@ export default class SprintService extends Observer {
         filter: qerry2,
       });
       array = wordsRaw?.data[0] ? wordsRaw?.data[0].paginatedResults : [];
-      shuffle(array as TAggregatedWord[]);
       this.currentWords = [...array];
     } else {
       for (let i = 0; i < pages.length; i++) {
         const words = await APIService.getWords(pages[i], difficulty);
         array = words ? [...(array as TWord[]), ...words.data] : array;
-        shuffle(array as TWord[]);
         this.currentWords = [...array] as TWord[];
       }
     }
   }
 
   async startGame() {
-    const user = APIService.getAuthUser();
     this.incorrectVariants = this.currentWords.map(el => el.wordTranslate) as string[];
-    this.incorrectVariants.reverse();
+    shuffle(this.currentWords as TWord[]);
     this.isGame = true;
     this.reset();
     this.dispatch(ESprintEvents.startGame);
@@ -115,7 +109,7 @@ export default class SprintService extends Observer {
     } else {
       this.currentWords = (await getWordsFromDict(this.difficulty, this.pageFromDictionary)) as TAggregatedWord[];
     }
-
+    shuffle(this.currentWords as TWord[]);
     this.isGame = true;
     this.dispatch(ESprintEvents.startGame);
     this.changeWord();
@@ -133,7 +127,7 @@ export default class SprintService extends Observer {
         this.dispatch(ESprintEvents.changeTranslate, JSON.stringify(word.wordTranslate));
       } else {
         this.rightChoise = false;
-        const incorectWord = this.incorrectVariants[this.currentWords.length];
+        const incorectWord= this.getIncorrect(word.wordTranslate);
         this.dispatch(ESprintEvents.changeTranslate, JSON.stringify(incorectWord));
       }
     } else this.stopGame();
@@ -349,5 +343,12 @@ export default class SprintService extends Observer {
       }
       this.dispatch(ESprintEvents.timerTick, this.timer.toString());
     }, 1000);
+  }
+
+  private getIncorrect(word:string) {
+    const index =  this.incorrectVariants.indexOf(word);
+    if(index >= this.incorrectVariants.length - 1) {
+      return this.incorrectVariants[0];
+    } else return this.incorrectVariants[index+1];
   }
 }

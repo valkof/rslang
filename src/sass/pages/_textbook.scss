@@ -523,5 +523,55 @@ margin-right: 50%;
     font-size: 1.3rem;
   }
 
+  .pages-wrapper div {
+    margin-left: 7%;
+    margin-right: 7%;
+  }
+}
 
+@media (max-width: 636px) {
+  .category0, .category1, .category2, .category3, .category4, .category5 {
+    font-size: 1.5rem;
+  }
+
+  .category6 {
+    padding-top: 2%;
+  }
+
+  .category0, .category1, .category2, .category3, .category4, .category5 {
+    width: 35px;
+  }
+
+  .category6 {
+    width: 108px;
+  }
+
+  .pagination-wrapper {
+    width: 99%;
+  }
+
+  .card {
+    width: 69%;
+}
+
+}
+
+@media (max-width: 520px) {
+  .category0, .category1, .category2, .category3, .category4, .category5 {
+    width: 28px;
+}
+
+.trening select {
+  width: 98px;
+}
+}
+
+@media (max-width: 400px) {
+  .cat-wrapper {
+    flex-wrap: wrap;
+  }
+
+  .trening {
+    margin-bottom: 3%;
+  }
 }

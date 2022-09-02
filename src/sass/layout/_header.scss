@@ -210,7 +210,18 @@ background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
     }
 }
 
+@media (max-width: 1000px) {
+    .navigation-wrapper a {
+       height: 34px;
+       font-size: 1.25rem;
+    }
 
+    .enter-wrapper button {
+        width: 120px;
+        height: 34px; 
+        font-size: 1.25rem;
+    }
+}
 
 @media (max-width: 995px) {
     .navigation-wrapper {
@@ -227,8 +238,49 @@ background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
 
 }
 
+@media(max-width: 829px) {
+    .navigation-wrapper {
+        width: 67%;
+    }
+
+    .navigation-wrapper a {
+        font-size: 1rem;
+    }
+
+    .navigation-wrapper a {
+        width: 164px;
+        height: 31px;
+        line-height: 35px;
+    }
+
+    .enter-wrapper button {
+        font-size: 1.1rem;
+        height: 31px;
+    }
+}
 
 
+@media(max-width: 720px) {
+.header-wrapper a {
+    width: 9%;
+}
+
+.enter-wrapper button {
+    width: 100px;
+    font-size: 0.9rem;
+}
+}
+
+@media(max-width: 440px) {
+    .header-wrapper a {
+        width: 12%;
+    }
+
+    .enter-wrapper button {
+        font-size: 1rem;
+        height: 26px;
+}
+}
 
 
    

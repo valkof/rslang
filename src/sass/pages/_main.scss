@@ -322,8 +322,39 @@
 .about-site p {
     font-size: 2rem;
 }
+
+.menu-img0, .menu-img1, .menu-img2, .menu-img3 {
+   box-shadow: 1px 14px 14px 10px rgb(195 185 172), 0 0px 4px 2px rgb(231 230 217 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 20px #d7c48f;
+   width: 60px;
+   height: 60px
+}
 }
 
+@media(max-width:440px) {
+    .about-site p {
+        font-size: 1.9rem;
+    }
 
+    .menu-img0, .menu-img1, .menu-img2, .menu-img3 {
+         width: 50px;
+        height: 50px;
+    }
+
+    .about-site button {
+        
+        height: 25px;
+    }
+}
+
+@media(max-width: 380px) {
+    .about-site h2 {
+        font-size: 3rem;
+    }
+
+    .about-site p {
+        font-size: 1.7rem;
+        line-height: 30px;
+    }
+}
 
 

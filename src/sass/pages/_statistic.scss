@@ -325,4 +325,156 @@ font-family: cursive;
     .avatar-name button {
         font-size: 1.4rem;
     }
+
+    .avatar-wrapper {
+        justify-content: center;
+        width: 24%;
+    }
+
+    .words-statistic-wrapper, .games-statistic-wrapper {
+        width: 85%;
+    }
+}
+
+@media (max-width: 780px) {
+    .avatar-wrapper {
+        width: 29%;
+    }
+
+    .games-statistic-wrapper, .words-statistic-wrapper {
+        width: 96%;
+    }
+
+    .statistic-games p, .statistic-words p {
+        font-size: 1.6rem;
+    }
+
+    .words-statistic-wrapper h3, .games-statistic-wrapper h3 {
+        font-size: 1.8rem;
+    }
+
+    .avatar-content a {
+        font-size: 1.5rem;
+    }
+
+    .avatar-name input {
+        font-size: 1.9rem;
+    }
+
+
+}
+
+@media (max-width: 680px)  {
+    .avatar-wrapper {
+        width: 38%;
+    }
+
+    .avatar-statistics-block {
+        display: block;
+    }
+
+    .statistics {
+        width: 100%;
+        margin-top: 4%;
+    }
+
+    .words-statistic-wrapper, .games-statistic-wrapper {
+        width: 70%;
+        margin: auto;
+    }
+
+    .words-statistic-wrapper {
+        margin-top: 4%;
+    }
+
+}
+
+@media (max-width: 580px) {
+    .avatar-wrapper {
+        width: 48%;
+    }
+
+    .words-statistic-wrapper, .games-statistic-wrapper {
+        width: 81%;
+    }
+
+    .avatar-name button {
+        width: 83%;
+        }
+
+        .select-game button {
+          width: 32%;
+        }
+}
+
+@media (max-width: 460px) {
+    .avatar-wrapper {
+        width: 57%;
+    }
+
+    .words-statistic-wrapper, .games-statistic-wrapper {
+        width: 90%;
+    }
+
+    .statistic-games p, .statistic-words p {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 330px) {
+    .avatar-wrapper {
+        width: 62%;
+    }
+
+    .words-statistic-wrapper, .games-statistic-wrapper {
+        width: 98%;
+    }
+
+    .select-game button {
+        width: 37%;
+    }
+
+    .statistic-games p, .statistic-words p {
+        font-size: 1.3rem;
+    }
+
+    .words-statistic-wrapper h3, .games-statistic-wrapper h3 {
+        font-size: 1.6rem;
+    }
+
+    .select-game button {
+        font-size: 1.3rem;
+    }
+
+    
+    .avatar-content a {
+        font-size: 1.4rem;
+    }
+
+    .avatar-name input {
+        width: 102%;
+    }
+
+    .avatar-name input {
+        width: 107%;
+        font-size: 1.5rem;
+    }
+
+    .avatar-name button {
+        font-size: 1.6rem;
+        width: 106%;
+        height: 25px;
+    }
+
+    .avatar-content a {
+        font-size: 1.4rem;
+    }
+
+    .avatar-name {
+        margin-bottom: 4%;
+    }
+
+    .chart-wrapper h3 {
+        font-size: 1.4rem;
+    }
 }

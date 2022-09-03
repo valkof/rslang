@@ -130,13 +130,11 @@ export class AudioGameService extends Observer {
     this.learnWords = [];
     this.wordsGame = words;
     this.timer = SPRINT_DURATION;
-    // console.log(words)
     this.stageGame();
     this.isStartGame = true;
     this.dispatch('time', '60');
     this.setInterval();
     this.maxRoundGame = words.length - 1;
-
     this.dispatch('bonus', 0);
     this.dispatch('status', 0);
     this.dispatch('audioCallGame', 'start');
@@ -174,7 +172,7 @@ export class AudioGameService extends Observer {
   stageGame(): void {
     this.dispatch('audio', `${HOST}/${this.wordsGame[this.roundGame][0].audio}`);
     const shuffleVersion = this.shuffleArray<TWord | TAggregatedWord>(this.wordsGame[this.roundGame]);
-    console.log(this.wordsGame[this.roundGame][0].wordTranslate);
+    // console.log(this.wordsGame[this.roundGame][0].wordTranslate);
     const shuffleWords = shuffleVersion.map(word => word.wordTranslate);
     this.dispatch('vesrsion', shuffleWords);
   }

@@ -150,4 +150,44 @@ export default abstract class WriteStatisticService {
     return learned;
   }
 
+  static async writeInitialStatistic(): Promise<void> {
+    const statistic = {
+      learnedWords: 0,
+      optional: {
+        data: {
+          dataPerDay: [
+            {
+              date: createDate(),
+              newWords: 0,
+              learnedWords: 0
+            }
+          ]
+        }
+      }
+    } as TUserStatistic;
+
+    const settings = {
+      wordsPerDay: 1,
+      optional: {
+        date: createDate(),
+        learnedWords: 0,
+        audioCall: {
+          newWords: 0,
+          answersCount: 0,
+          correctAnswers: 0,
+          streak: 0
+        },
+        sprint: {
+          newWords: 0,
+          answersCount: 0,
+          correctAnswers: 0,
+          streak: 0
+        }
+      }
+    } as TUserSetting;
+    
+    await APIService.upsertUserStatistics(statistic);
+    await APIService.upsertUserSetting(settings);
+  }
+
 }

@@ -1,6 +1,7 @@
 import { Observer } from "../Abstract/Observer";
 import { TUserStatistic } from "../Interfaces/Types";
 import  APIService  from "./APIService";
+import WriteStatisticService from "./WriteStatisticService";
 
 
 export class LangService extends Observer {
@@ -20,6 +21,7 @@ export class LangService extends Observer {
       return;
     }  
     this.dispatch('authorization', 'finish');
+    if (registration) await WriteStatisticService.writeInitialStatistic();
     document.location = '';
   }
 

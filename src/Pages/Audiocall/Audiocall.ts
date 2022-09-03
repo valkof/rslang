@@ -18,7 +18,7 @@ export class AudioCall extends Component {
       this.root, 'audiocall', 'Аудиовызов',
       `<p>Тренировка Аудиовызов развивает словарный запас.</p>
       <p>Вы должны выбрать перевод услышанного слова.</p>`,
-      (group) => this.services.audioGame.startGame(group)
+      (group) => this.services.audioGame.startGame(group, -1)
     );
 
     new AudioCallGame(this.root, services);
@@ -26,7 +26,11 @@ export class AudioCall extends Component {
     this.startGame();
 
     window.addEventListener('hashchange', () => {
-      if (document.location.hash === '#audiocall') this.startGame();
+      if (document.location.hash === '#audiocall') {
+        this.startGame();
+      } else {
+        this.services.audioGame.resetTimer();
+      }
     });
 
     this.services.audioGame.addListener('audioCallGame', (stage) => {
@@ -57,6 +61,6 @@ export class AudioCall extends Component {
   }
 
   startGameFromTexbook(cat: number, page: number) {
-    this.services.audioGame.startGame(cat, page);
+    this.services.audioGame.startGame(cat, page, 'textbook');
   }
 }

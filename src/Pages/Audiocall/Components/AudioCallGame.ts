@@ -16,14 +16,14 @@ export class AudioCallGame extends Component {
     const spanTime = new Component(divTime.root, 'span', ['time'], '60');
     this.services.audioGame.addListener('time', (time) => {
       spanTime.root.innerText = time as string;
-    })
+    });
 
     const divScore = new Component(divCriteria.root, 'div', ['process__score']);
     const spanScore = new Component(divScore.root, 'span', ['score'], '0');
     new Component(divScore.root, 'span', ['score-text'], 'Очков');
     this.services.audioGame.addListener('score', (score) => {
       spanScore.root.innerText = score as string;
-    })
+    });
 
     const divBirds = new Birds(divGame.root, 'progress');
     this.services.audioGame.addListener('birds', (multiBonus) => divBirds.show(multiBonus as number - 1));
@@ -86,6 +86,9 @@ export class AudioCallGame extends Component {
     
     this.services.audioGame.addListener('audioCallGame', (stage) => {
       if (stage === 'start') {
+        spanTime.root.innerText = '60';
+        spanScore.root.innerText = '0';
+        divBirds.show(0);
         this.render();
       } else {
         this.remove();

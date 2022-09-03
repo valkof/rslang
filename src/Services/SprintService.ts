@@ -1,5 +1,6 @@
 import { SPRINT_DURATION } from '../config';
 import {
+  EGames,
   TAggregatedWord,
   TDifficulty,
   TGameAnswer,
@@ -135,7 +136,7 @@ export default class SprintService extends Observer {
     this.dispatch(ESprintEvents.renderStatistic, this.answers);
     const user = APIService.getAuthUser();
     if (user && APIService.isAuthorizedUser()) {
-      WriteStatisticService.writeResults(this.answers);
+      WriteStatisticService.writeResults(this.answers, EGames.sprint);
     }
   }
 

@@ -148,3 +148,8 @@ export type TAggregatedWords = {
   paginatedResults: TAggregatedWord[];
   totalCount: TCount[];
 }
+
+export enum EGames {
+  audioCall = 'audioCall',
+  sprint = 'sprint',
+}

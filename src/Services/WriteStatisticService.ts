@@ -1,11 +1,14 @@
 import { INIT_USER_SETTING, INIT_USER_STATISTIC, INIT_USER_WORD } from "../config";
-import { TAggregatedWord, TAuthData, TGameAnswer, TUserSetting, TUserStatistic, TUserWord } from "../Interfaces/Types";
+import { EGames, TAggregatedWord, TAuthData, TGameAnswer, TUserSetting, TUserStatistic, TUserWord } from "../Interfaces/Types";
 import { createDate } from "../utils";
 import APIService from "./APIService";
 
 export default abstract class WriteStatisticService {
 
-  static async writeResults(answers: TGameAnswer[]) {
+  static game: EGames;
+
+  static async writeResults(answers: TGameAnswer[], game: EGames) {
+    this.game = game;
     const user = APIService.getAuthUser();
     const date = createDate();
     let newWords = 0;
@@ -54,20 +57,20 @@ export default abstract class WriteStatisticService {
     delete setting.id;
     if (setting.optional.date === date) {
       setting.wordsPerDay += newWords;
-      setting.optional.sprint.newWords += newWords;
-      setting.optional.sprint.streak =
-        setting.optional.sprint.streak < maxStreak ? maxStreak : setting.optional.sprint.streak;
-      setting.optional.sprint.correctAnswers += correctAnswers;
-      setting.optional.sprint.answersCount += answersCount;
+      setting.optional[this.game].newWords += newWords;
+      setting.optional[this.game].streak =
+        setting.optional[this.game].streak < maxStreak ? maxStreak : setting.optional[this.game].streak;
+      setting.optional[this.game].correctAnswers += correctAnswers;
+      setting.optional[this.game].answersCount += answersCount;
       setting.optional.learnedWords += learned;
     } else {
       setting.optional.date = createDate();
       setting.wordsPerDay = newWords;
-      setting.optional.sprint.newWords = newWords;
-      setting.optional.sprint.streak =
-        setting.optional.sprint.streak < maxStreak ? maxStreak : setting.optional.sprint.streak;
-      setting.optional.sprint.correctAnswers = correctAnswers;
-      setting.optional.sprint.answersCount = answersCount;
+      setting.optional[this.game].newWords = newWords;
+      setting.optional[this.game].streak =
+        setting.optional[this.game].streak < maxStreak ? maxStreak : setting.optional[this.game].streak;
+      setting.optional[this.game].correctAnswers = correctAnswers;
+      setting.optional[this.game].answersCount = answersCount;
       setting.optional.learnedWords = learned;
     }
     await APIService.upsertUserSetting(setting);

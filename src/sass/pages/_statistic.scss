@@ -1,7 +1,7 @@
 .statistic-wrapper {
     width: 90%;
     margin: auto;
-    
+
 }
 
 .statistic-wrapper h2 {
@@ -46,7 +46,7 @@ margin-left: 7%;
     width: 75%;
     margin-bottom: 5%;
     background-color: transparent;
-   
+
     border-radius: 15px;
     border: #fff;
     box-shadow: 0 5px 11px 11px rgb(0 0 0 / 25%), 0 2px 4px 2px rgb(0 0 0 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 10px rgb(0 0 0 / 10%);
@@ -62,7 +62,7 @@ margin-left: 7%;
     height: 35px;
     -webkit-align-self: center;
     align-self: center;
-    
+
     margin-bottom: 5%;
     cursor: pointer;
     box-shadow: 0 5px 11px 11px rgb(0 0 0 / 25%), 0 2px 4px 2px rgb(0 0 0 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 10px rgb(0 0 0 / 10%);
@@ -85,7 +85,7 @@ margin-left: 7%;
     margin-bottom: 4%;
     border: 2px solid white;
     border-radius: 40px;
-    padding: 30px;  
+    padding: 30px;
     background: #f5a329;
     box-shadow: 0 5px 11px 11px rgb(0 0 0 / 25%), 0 2px 4px 2px rgb(0 0 0 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 10px rgb(0 0 0 / 10%);
 }
@@ -110,16 +110,13 @@ font-family: cursive;
     justify-content: space-between;
 }
 
-.percent-right-ancwers {
+.percent-right-ancwers, .best-game {
     display: flex;
     justify-content: space-between;
-}
-
-.learned-words, .count-words  {
     margin-bottom: 2%;
 }
 
-.percent-right-ancwers {
+.learned-words, .count-words  {
     margin-bottom: 2%;
 }
 
@@ -193,7 +190,7 @@ font-family: cursive;
         height: 31px;
     }
 
-    
+
 
 }
 
@@ -228,7 +225,7 @@ font-family: cursive;
     .statistic-games, .statistic-words  {
         padding: 17px;
     }
-    
+
     .words-statistic-wrapper h3, .games-statistic-wrapper h3 {
         font-size: 2rem;
     }
@@ -247,7 +244,7 @@ font-family: cursive;
 
 @media (max-width: 1200px) {
 
-   
+
 
     .avatar-content a {
         font-size: 1.6rem;
@@ -312,7 +309,7 @@ font-family: cursive;
 }
 
 @media (max-width: 790px) {
-   
+
     .avatar-wrapper {
         width: 38%;
     }
@@ -399,7 +396,7 @@ font-family: cursive;
         font-size: 1.3rem;
     }
 
-    
+
     .avatar-content a {
         font-size: 1.4rem;
     }

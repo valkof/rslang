@@ -71,3 +71,9 @@ export async function getWordsFromDict(group: number, page: number): Promise<TAg
   }
   return [];
 }
+
+export function validateNum(number: number): string {
+  if (!Number.isFinite(number) || Number.isNaN(number)) {
+    return '0';
+  } else return number.toString();
+}

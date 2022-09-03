@@ -10,7 +10,7 @@
 }
 
 .about-site h2 {
-    font-size: 7rem;
+    font-size: 5rem;
     margin-bottom: 2%;
     font-family: cursive;
     text-shadow: 5px 8px 6px #604513;
@@ -19,7 +19,7 @@
 }
 
 .about-site p {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     text-align: justify;
     line-height: 48px;
     font-family: cursive;
@@ -27,7 +27,7 @@
 
 .about-site button {
     cursor: pointer;
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: #916546;
     font-weight: bold;
     color: white;
@@ -36,14 +36,14 @@
     border: none;     
     background: #f5a329;
     text-shadow: 0px 2px 0px rgb(209 151 51 / 30%);
-    font-size: 2rem;
-    height: 58px;
-    width: 240px;
+    font-size: 1.7rem;
+    height: 50px;
+    width: 180px;
     margin: 7% 0 0 12%;
     overflow: hidden;
     display: block;
     text-align: center;
-    line-height: 58px;
+    line-height: 48px;
     -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -77,8 +77,8 @@
 }
 
 .menu-img0, .menu-img1, .menu-img2, .menu-img3 {
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 180px;
     -moz-box-shadow: 0px 6px 0px rgba(187, 141, 141, 0.8);
     -webkit-border-radius: 100%;
     box-shadow: 1px 14px 14px 10px rgb(195 185 172), 0 0px 4px 2px rgb(231 230 217 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 27px #d7c48f;
@@ -109,12 +109,12 @@
 
 .menu-img2 {
     margin-left: 15%;
-    margin-top: -5%;
+    
 }
 
 .menu-img3 {
     margin-left: 60%;
-    margin-top: -10%;
+    margin-top: -7%;
 }
 
 .menu-img0:hover::after, .menu-img1:hover::after, .menu-img2:hover::after, .menu-img3:hover::after { 
@@ -132,45 +132,42 @@
     .main-wrapper {
         margin-top: 2%;
     }
-    .menu-img0, .menu-img1, .menu-img2, .menu-img3 {
-        width: 190px;
-        height: 190px;
-    }
-
+   
     .about-site p {
-        font-size: 3rem;
-        line-height: 40px;
+       line-height: 40px;
     }
 
     .about-site button {
-        height: 45px;
+    height: 45px;
     width: 26%;
     line-height: 48px;
-    font-size: 1.8rem;
     }
 }
 
 
 
-@media (max-width: 1480px) {
+@media (max-width: 1500px) {
     .main-wrapper {
         margin-top: 2%;
         margin-bottom: 3%;
     }
 
     .menu-img0, .menu-img1, .menu-img2, .menu-img3 {
-        width: 182px;
-        height: 182px;
+        width: 160px;
+        height: 160px;
     }
 
     .about-site h2 {
         margin-bottom: 5%;
-        font-size: 6rem;
     }
 
+    .about-site p {
+        font-size: 2.4rem;
+      }
     
     .about-site button {
     line-height: 48px;
+    height: 41px;
     font-size: 1.7rem;
     }
 
@@ -181,29 +178,23 @@
    
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 1320px) {
     .main-wrapper {
         margin-top: 4%;
         margin-bottom: 4%;
     }
 
     .menu-img0, .menu-img1, .menu-img2, .menu-img3 {
-        width: 165px;
-        height: 165px;
+        width: 150px;
+        height: 150px;
     }
 
-    .about-site h2 {
-        font-size: 6rem;
-    }
-
-    .about-site p {
-      font-size: 2.5rem;  
-      line-height: 35px;
+       .about-site p {
+       line-height: 35px;
     }
 
     .about-site button {
-        
-        height: 38px;
+         height: 38px;
         font-size: 1.5rem;
         line-height: 40px;
     }
@@ -213,12 +204,7 @@
 
 @media (max-width: 1200px)  {
     
-    .menu-img0, .menu-img1, .menu-img2, .menu-img3 {
-        width: 163px;
-        height: 163px;
-    }
-
-    .about-site button {
+      .about-site button {
         width: 155px;
         line-height: 0px;
         height: 40px;
@@ -242,7 +228,7 @@
     }
 
     .menu-img0, .menu-img1, .menu-img2, .menu-img3 {
-        width: 130px;
+        width: 140px;
         height: 130px;
     }
 

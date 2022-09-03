@@ -262,7 +262,15 @@ margin-right: 50%;
 }
 
 .hard-style {
-  background-color: green;
+  border: 4px solid red;
+}
+
+.learn-style {
+  border: 4px solid green;
+}
+
+.add-word {
+margin-top: auto;
 }
 
 @media (max-width: 1860px) {
@@ -433,12 +441,8 @@ margin-right: 50%;
 .word-block {
   height: 176px;
 }
-
-
-
-
-
 }
+
 
 @media (max-width: 980px) {
   .category0, .category1, .category2, .category3, .category4, .category5 {
@@ -527,6 +531,10 @@ margin-right: 50%;
     margin-left: 7%;
     margin-right: 7%;
   }
+
+  .word-block {
+    border-radius: 11px;
+  }
 }
 
 @media (max-width: 636px) {
@@ -554,6 +562,10 @@ margin-right: 50%;
     width: 69%;
 }
 
+.word-block {
+  border-radius: 18px;
+}
+
 }
 
 @media (max-width: 520px) {
@@ -574,4 +586,31 @@ margin-right: 50%;
   .trening {
     margin-bottom: 3%;
   }
+
+  .card h2 {
+    font-size: 2.8rem;
+}
+
+.word {
+  font-size: 1.8rem;
+}
+
+.text-example {
+  font-size: 1.4rem;
+}
+
+.example-translate {
+  font-size: 1.4rem;
+}
+
+.add-word input {
+  width: 35px;
+  height: 35px;
+}
+
+.pages-wrapper div {
+  margin-left: 14%;
+  margin-right: 14%;
+  font-size: 2.8rem;
+}
 }

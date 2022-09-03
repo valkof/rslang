@@ -17,16 +17,16 @@ export class Header extends Component {
   pathTitle: Component;
 
   menuBox: MenuBox;
-  
+
   constructor(parent: HTMLElement, private readonly services: TServices) {
     super(parent, "header");
     this.headerWrapper = new Component(this.root, "div", ["header-wrapper"]);
-    this.pathTitle = new Component(this.headerWrapper.root, 'a', [], null, 'href', '#')
+    this.pathTitle = new Component(this.headerWrapper.root, 'a', ['logo'], null, 'href', '#')
     this.title = new Component(this.pathTitle.root, 'img', [], null,'src', 'assets/logo.png');
 
    this.menuBox = new MenuBox(this.headerWrapper.root)
   
-    this.navigationWrapper = new Component(this.headerWrapper.root, 'div', ['navigation-wrapper']);
+    this.navigationWrapper = new Component(this.menuBox.root, 'div', ['navigation-wrapper']);
     
         
     const nav = [

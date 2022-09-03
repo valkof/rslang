@@ -14,7 +14,7 @@
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    width: 15%;
+    width: 20%;
     height: 400px;
     margin: auto;
     border-radius: 10px;
@@ -46,6 +46,7 @@
       font-size: 10px;
       background-color: white;
       padding: 0px 5px;
+      font-size: 1.4rem;
     }
   
     .section__massage {
@@ -91,6 +92,17 @@
   @media(max-width: 1860px) {
     .section_authorization {
       width: 22%;
+    }
+  }
+
+  @media(max-width: 1860px) {
+    .section_authorization .button {
+      font-size: 1.8rem;
+      width: 43%;
+    }
+
+    .section_authorization .email__span, .section_authorization .password__span {
+      font-size: 1.5rem;
     }
   }
 
@@ -153,7 +165,7 @@
 
 @media(max-width: 580px) {
   .section_authorization {
-    width: 52%;
+    width: 60%;
 }
 
 .section_authorization .email__span, .section_authorization .password__span {
@@ -163,4 +175,27 @@
 .section_authorization .button {
   font-size: 1.4rem;
 }
+}
+
+@media(max-width: 400px) {
+  .section_authorization {
+    width: 80%;
+}
+}
+
+@media(max-width: 300px) {
+  .section_authorization {
+    width: 90%;
+}
+
+.section_authorization .email__input, .section_authorization .password__input {
+  font-size: 2.3rem;
+}
+
+.section_authorization .button {
+  width: 46%;
+  height: 36px;
+  font-size: 1.3rem;
+}
+
 }

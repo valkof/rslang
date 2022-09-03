@@ -79,35 +79,10 @@ margin-left: 7%;
     justify-content: space-between;
 }
 
-.select-game {
-    text-align: center;
-    margin-top: 3%;
-   
-}
-
-.select-game button {
-    background: #f5a329;
-    font-size: 2.5rem;
-    text-align: center;
-    border: 2px solid #fff;
-   
-    border-radius: 15px;
-    width: 31%;
-    height: 40px;
-    -webkit-align-self: center;
-    align-self: center;
-    cursor: pointer;
-   box-shadow: 0 5px 11px 11px rgb(0 0 0 / 25%), 0 2px 4px 2px rgb(0 0 0 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 10px rgb(0 0 0 / 10%);
-    
-}
-
-.select-audio-call {
-    margin-right: 3%;
-}
-
 .statistic-games,
 .statistic-words {
     margin: auto;
+    margin-bottom: 4%;
     border: 2px solid white;
     border-radius: 40px;
     padding: 30px;  
@@ -117,7 +92,7 @@ margin-left: 7%;
 
 .statistic-games p,
 .statistic-words p {
-font-size: 3rem;
+font-size: 2.8rem;
 margin-right: 3%;
 font-family: cursive;
 }
@@ -336,35 +311,8 @@ font-family: cursive;
     }
 }
 
-@media (max-width: 780px) {
-    .avatar-wrapper {
-        width: 29%;
-    }
-
-    .games-statistic-wrapper, .words-statistic-wrapper {
-        width: 96%;
-    }
-
-    .statistic-games p, .statistic-words p {
-        font-size: 1.6rem;
-    }
-
-    .words-statistic-wrapper h3, .games-statistic-wrapper h3 {
-        font-size: 1.8rem;
-    }
-
-    .avatar-content a {
-        font-size: 1.5rem;
-    }
-
-    .avatar-name input {
-        font-size: 1.9rem;
-    }
-
-
-}
-
-@media (max-width: 680px)  {
+@media (max-width: 790px) {
+   
     .avatar-wrapper {
         width: 38%;
     }
@@ -421,7 +369,12 @@ font-family: cursive;
     }
 }
 
-@media (max-width: 330px) {
+@media (max-width: 340px) {
+    .statistic-wrapper h2 {
+        font-size: 3.8rem;
+        margin-bottom: 7%;
+    }
+
     .avatar-wrapper {
         width: 62%;
     }
@@ -476,5 +429,23 @@ font-family: cursive;
 
     .chart-wrapper h3 {
         font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 300px) {
+    .avatar-wrapper {
+        width: 67%;
+    }
+
+    .avatar-name button {
+        font-size: 1.4rem;
+    }
+
+    .words-statistic-wrapper, .games-statistic-wrapper {
+        width: 100%;
+    }
+
+    .statistic-games, .statistic-words {
+        padding: 13px;
     }
 }

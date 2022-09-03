@@ -38,7 +38,7 @@
     transform: rotate(90deg);
   }
   #menu-toggle:checked ~ .navigation-wrapper {
-    visibility: visible;
+    visibility: visible !important;
     right: 0;
   }
   #menu-toggle:checked ~ .navigation-wrapper {

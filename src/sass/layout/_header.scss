@@ -1,6 +1,7 @@
 header {
 width: 100%;
 height: 15%;
+margin-bottom: 2%;
 }
 
 .header-wrapper {
@@ -12,9 +13,9 @@ height: 15%;
  align-items: center;
 }
 
-.header-wrapper a {
-    width: 7%;
-    margin-right: 4%;
+.logo {
+    width: 6%;
+   margin-right: 5%;
 }
 
 .header-wrapper img {
@@ -33,10 +34,11 @@ height: 15%;
 .navigation-wrapper {
    display: flex;
     margin: auto;
-    width: 60%;
+   // width: 60%;
 }
 
 .navigation-wrapper a {
+    margin-right: 4%;
     display: flex;
     justify-content: space-between;
     text-decoration: none;
@@ -48,13 +50,13 @@ height: 15%;
     font-family: cursive;
   background: #f5a329;
   text-shadow: 0px 2px 0px rgb(209 151 51 / 30%);
-  font-size: 2rem;
-  height: 58px;
+  font-size: 1.6rem;
+  height: 48px;
   width: 200px;
   overflow: hidden;
   display: block;
   text-align: center;
-  line-height: 58px;
+  line-height: 48px;
   -webkit-border-radius: 5px;
 -moz-border-radius: 5px;
 border-radius: 5px;
@@ -89,7 +91,7 @@ color: rgb(66, 36, 23);
 }
 
 .enter-wrapper button {
-    font-size: 3rem;
+    font-size: 1.6rem;
     cursor: pointer;
     border-radius: 15px;
     border: none;
@@ -98,14 +100,13 @@ color: rgb(66, 36, 23);
     font-family: cursive;
     background: #f5a329;
   text-shadow: 0px 2px 0px rgb(209 151 51 / 30%);
-  font-size: 2rem;
-  height: 58px;
-  width: 200px;
+    height: 48px;
+    width: 200px;
   
   overflow: hidden;
   display: block;
   text-align: center;
-  line-height: 58px;
+  line-height: 48px;
   -webkit-border-radius: 5px;
 -moz-border-radius: 5px;
 border-radius: 5px;
@@ -121,7 +122,7 @@ background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
 
 .enter-wrapper button:hover {
    
-    -webkit-box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.8);
+   -webkit-box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.8);
    -moz-box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.8);
     box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.8);
     background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
@@ -154,7 +155,7 @@ background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
     }
 
     .navigation-wrapper {
-        width: 60%;
+       // width: 60%;
     }
 
     .enter-wrapper button {
@@ -169,19 +170,17 @@ background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
 @media (max-width: 1280px) {
    
     .navigation-wrapper {
-        width: 65%;
+      //  width: 65%;
     }
 
     .enter-wrapper button {
-        width: 167px;
-       
-        font-size: 1.7rem;
+        width: 146px;
+    font-size: 1.5rem;
     }
 
     .navigation-wrapper a {
-       
-       
-        font-size: 1.6rem;
+         width: 140px;
+        font-size: 1.5rem;
     }
  
 
@@ -190,45 +189,82 @@ background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
     
 @media (max-width: 1200px)  {
     .navigation-wrapper a {
-        font-size: 1.5rem;
-        line-height: 49px;
         font-size: 1.3rem;
-    }
-
-    .navigation-wrapper a {
-        width: 180px;
         height: 37px;
         line-height: 39px;
-
     }
 
+    
     .enter-wrapper button {
-        width: 152px;
+        width: 135px;
         height: 37px;
         font-size: 1.3rem;
         line-height: 0px;
     }
 }
 
-
-
 @media (max-width: 995px) {
-    .navigation-wrapper {
-        width: 73%;
-    }
-    
     .navigation-wrapper a {
-        font-size: 1.2rem;
+       height: 34px;
+       font-size: 1.2rem;
+       line-height: 35px;
+       width: 113px;
     }
 
     .enter-wrapper button {
-    width: 115px;
+        width: 113px;
+        height: 34px; 
+        font-size: 1.2rem;
     }
-
 }
 
 
 
+@media(max-width: 880px) {
+    .enter-wrapper button {
+        width: 106px;
+        height: 29px;
+        font-size: 1.1rem;
+    }
+
+    .navigation-wrapper a {
+        font-size: 1.1rem;
+    }
+
+    .navigation-wrapper a {
+        width: 106px;
+        height: 31px;
+        line-height: 32px;
+    }
+
+    .logo {
+        width: 9%;
+    }
+}
+
+@media(max-width: 768px) {
+    .navigation-wrapper a {
+        margin: auto;
+    }
+}
+
+@media(max-width: 720px) {
+.enter-wrapper button {
+    width: 100px;
+    font-size: 0.9rem;
+}
+}
+
+@media(max-width: 440px) {
+    .logo {
+        width: 12%;
+    }
+
+    .enter-wrapper button {
+        font-size: 1rem;
+        height: 26px;
+}
+}
 
 
    

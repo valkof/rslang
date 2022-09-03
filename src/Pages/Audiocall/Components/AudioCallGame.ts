@@ -3,14 +3,24 @@ import { Birds } from "../../../Components/Birds/Birds";
 import { TServices } from "../../../Interfaces/Types";
 
 export class AudioCallGame extends Component {
-  
+
   constructor(parent: HTMLElement, private readonly services: TServices) {
     super(parent, 'div', ['audiocall__game']);
 
     const divGame = new Component(this.root, 'div', ['game__process']);
 
-    const divScore = new Component(divGame.root, 'div', ['process__score']);
+    const divCriteria = new Component(divGame.root, 'div', ['process__criteria']);
+
+    const divTime = new Component(divCriteria.root, 'div', ['process__time']);
+    new Component(divTime.root, 'span', ['time-text'], 'Время:');
+    const spanTime = new Component(divTime.root, 'span', ['time'], '60');
+    this.services.audioGame.addListener('time', (time) => {
+      spanTime.root.innerText = time as string;
+    })
+
+    const divScore = new Component(divCriteria.root, 'div', ['process__score']);
     const spanScore = new Component(divScore.root, 'span', ['score'], '0');
+    new Component(divScore.root, 'span', ['score-text'], 'Очков');
     this.services.audioGame.addListener('score', (score) => {
       spanScore.root.innerText = score as string;
     })
@@ -54,12 +64,24 @@ export class AudioCallGame extends Component {
 
     const divVersions = new Component(divGame.root, 'div', ['process_versions']);
     [0, 1, 2, 3, 4].forEach(el => {
-      const button = new Component(divVersions.root, 'button', ['button_version']);
+      const divButton = new Component(divVersions.root, 'div', ['container_version']);
+      const button = new Component(divButton.root, 'button', ['button_version']);
+      new Component(divButton.root, 'span', ['span_version'], `${el + 1}`);
+      
       this.services.audioGame.addListener('vesrsion', (words) => {
         const word = (words as string[])[el];
         button.root.innerText = word;
         button.root.onclick = () => this.services.audioGame.vereficationStageGame(word);
-      })
+      });
+      
+      document.addEventListener('keydown', (event: KeyboardEvent) => {
+        if (event.code === `Digit${el + 1}` && document.location.hash === '#audiocall'
+        && this.services.audioGame.getIsStartGame()) button.root.click();
+      });
+      
+      this.services.audioGame.addListener('result', () => {
+        button.root.onclick = null;
+      });
     })
     
     this.services.audioGame.addListener('audioCallGame', (stage) => {

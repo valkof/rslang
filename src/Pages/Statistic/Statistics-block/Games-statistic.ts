@@ -1,30 +1,57 @@
 import { Component } from '../../../Abstract/component';
+import { EGames } from '../../../Interfaces/Types';
+import APIService from '../../../Services/APIService';
+import { validateNum } from '../../../utils';
 
 export class GamesStatistic extends Component {
- 
-    constructor(parent: HTMLElement) {
-    super(parent, 'div', ['games-statistic-wrapper']);
-    ['Статистика Спринт', 'Статистика Аудиовызов'].forEach(el => {
-      let gameStatisticTitle = new Component(this.root, 'h3', [], el);
-     
-      let statistiFromGames = new Component(this.root, 'div', ['statistic-games']);
-      let learnedWords = new Component(statistiFromGames.root, 'div', ['learned-words']);
-      let countWords = new Component(learnedWords.root, 'div', ['count-words']);
-      let countTitle = new Component(countWords.root, 'p', [], 'Количество новых слов');
-      let numberPercent = new Component(countWords.root, 'p', [], '');
-  
-      let rightAnswers = new Component(statistiFromGames.root, 'div', ['right-answers']);
-      let percetnrigrhtAnswers = new Component(rightAnswers.root, 'div', ['percent-right-ancwers']);
-      let rightAnswersTitle = new Component(percetnrigrhtAnswers.root, 'p', [], 'Процент правильных ответов');
-      let rightAnswersPercent = new Component(percetnrigrhtAnswers.root, 'p', [], '%');
-  
-      let bestGameBlock = new Component(statistiFromGames.root, 'div', ['best-game-block']);
-      let bestGame = new Component(bestGameBlock.root, 'div', ['best-game']);
-      let bestGameTitle = new Component(bestGame.root, 'p', [], 'Лучшая игра');
-      let bestGameCount = new Component(bestGame.root, 'p', [], '');
-    })
-    
+  game: EGames;
 
-    
- }
+  numberPercent: Component;
+
+  rightAnswersPercent: Component;
+
+  bestGameCount: Component;
+
+  constructor(parent: HTMLElement, title: string, game: EGames) {
+    super(parent, 'div', ['games-statistic-wrapper']);
+
+    this.game = game;
+
+    const gameStatisticTitle = new Component(this.root, 'h3', [], title);
+
+    const statistiFromGames = new Component(this.root, 'div', ['statistic-games']);
+    const learnedWords = new Component(statistiFromGames.root, 'div', ['learned-words']);
+    const countWords = new Component(learnedWords.root, 'div', ['count-words']);
+    const countTitle = new Component(countWords.root, 'p', [], 'Количество новых слов');
+    this.numberPercent = new Component(countWords.root, 'p', [], '0');
+
+    const rightAnswers = new Component(statistiFromGames.root, 'div', ['right-answers']);
+    const percetnrigrhtAnswers = new Component(rightAnswers.root, 'div', ['percent-right-ancwers']);
+    const rightAnswersTitle = new Component(percetnrigrhtAnswers.root, 'p', [], 'Процент правильных ответов');
+    this.rightAnswersPercent = new Component(percetnrigrhtAnswers.root, 'p', [], ` %`);
+
+    const bestGameBlock = new Component(statistiFromGames.root, 'div', ['best-game-block']);
+    const bestGame = new Component(bestGameBlock.root, 'div', ['best-game']);
+    const bestGameTitle = new Component(bestGame.root, 'p', [], 'Лучшая игра');
+    this.bestGameCount = new Component(bestGame.root, 'p', [], '0');
+
+    this.getStatistic();
+  }
+
+  private async getStatistic() {
+    const stat = await APIService.getUserSetting();
+    if (stat) {
+      const percent = Math.floor(
+        (stat.data.optional[this.game].correctAnswers / stat.data.optional[this.game].answersCount) * 100,
+      );
+      this.numberPercent!.root.textContent = validateNum(stat.data.optional[this.game].answersCount);
+      this.rightAnswersPercent!.root.textContent = `${validateNum(percent)} %`;
+      this.bestGameCount!.root.textContent = validateNum(stat.data.optional[this.game].streak);
+    } else {
+      this.numberPercent!.root.textContent = '0';
+      this.rightAnswersPercent!.root.textContent = '0';
+      this.bestGameCount!.root.textContent = '0';
+    }
+  }
+
 }

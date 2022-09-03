@@ -1,5 +1,5 @@
 import { Component } from "../../Abstract/component";
-import { TGameAnswer, TServices } from "../../Interfaces/Types";
+import { EGames, TGameAnswer, TServices } from "../../Interfaces/Types";
 import { AudioCallGame } from "./Components/AudioCallGame";
 import './audiocall.scss';
 import { SelectDifficultGame } from "../../Components/SelectDifficult/SelectDifficult";
@@ -8,7 +8,7 @@ import APIService from "../../Services/APIService";
 import WriteStatisticService from "../../Services/WriteStatisticService";
 
 export class AudioCall extends Component {
-  
+
   private statistic: StatisticPopup | undefined;
 
   constructor(parent: HTMLElement, private readonly services: TServices) {
@@ -20,9 +20,9 @@ export class AudioCall extends Component {
       <p>Вы должны выбрать перевод услышанного слова.</p>`,
       (group) => this.services.audioGame.startGame(group)
     );
-    
-    new AudioCallGame(this.root, services);    
-    
+
+    new AudioCallGame(this.root, services);
+
     this.startGame();
 
     window.addEventListener('hashchange', () => {
@@ -40,7 +40,7 @@ export class AudioCall extends Component {
 
     this.services.audioGame.addListener('result', (words) => {
       if (APIService.getAuthUser() && APIService.isAuthorizedUser()) {
-        WriteStatisticService.writeResults(words as TGameAnswer[]);
+        WriteStatisticService.writeResults(words as TGameAnswer[], EGames.audioCall);
       }
       this.statistic = new StatisticPopup(
         this.root,
@@ -51,7 +51,7 @@ export class AudioCall extends Component {
     });
 
   }
-  
+
   startGame(): void {
     this.services.audioGame.selectGame();
   }

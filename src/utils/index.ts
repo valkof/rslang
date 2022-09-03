@@ -1,10 +1,10 @@
-import { PAGES_COUNT } from "../config";
-import { IResponse } from "../Interfaces/Interfaces";
-import { TAggregatedWord, TAggregatedWords } from "../Interfaces/Types";
-import APIService from "../Services/APIService";
+import { PAGES_COUNT } from '../config';
+import { IResponse } from '../Interfaces/Interfaces';
+import { TAggregatedWord, TAggregatedWords } from '../Interfaces/Types';
+import APIService from '../Services/APIService';
 
 export function logError(message: string, error: unknown) {
-  const errMessage = (error instanceof Error) ? error.message : 'Unknown Error';
+  const errMessage = error instanceof Error ? error.message : 'Unknown Error';
   console.error(`[${message}]: ${errMessage}`);
 }
 
@@ -37,26 +37,37 @@ export function generateRandomNums(count: number): number[] {
 }
 //
 export async function getWordsFromDict(group: number, page: number): Promise<TAggregatedWord[]> {
-  const qerry = `{"$and": [{ "$or": [{ "userWord.difficulty":"easy" },{ "userWord.difficulty":"hard" },{"userWord":null}] },{ "group": ${group} }, { "$or": [{"page": ${page}}] }]}`;
-  let wordsRaw = await APIService.getAgrWords({
-    wordsPerPage: '40',
-    filter: qerry,
-  });
-  if (!wordsRaw) return [];
-  if (wordsRaw && wordsRaw.data[0].paginatedResults.length >= 2) {
-    return wordsRaw.data[0].paginatedResults
-  } else {
-    if (page === 0) return []
-    const template = [];
-    for (let i = 0; i < page; i++) {
-      template.push(`{"page": ${i}}`)
-    }
-    const qerry2 = `{"$and": [{ "$or": [{ "userWord.difficulty":"easy" },{ "userWord.difficulty":"hard" },{"userWord":null}] },{ "group": ${group} }, { "$or": [${template.join(",")}] }]}`;
-    wordsRaw = await APIService.getAgrWords({
+  if (group >= 0 && group < 6) {
+    const qerry = `{"$and": [{ "$or": [{ "userWord.difficulty":"easy" },{ "userWord.difficulty":"hard" },{"userWord":null}] },{ "group": ${group} }, { "$or": [{"page": ${page}}] }]}`;
+    let wordsRaw = await APIService.getAgrWords({
       wordsPerPage: '40',
-      filter: qerry2,
+      filter: qerry,
     });
-    return wordsRaw!.data[0].paginatedResults
+    if (!wordsRaw) return [];
+    if (wordsRaw && wordsRaw.data[0].paginatedResults.length >= 2) {
+      return wordsRaw.data[0].paginatedResults;
+    } else {
+      if (page === 0) return [];
+      const template = [];
+      for (let i = 0; i < page; i++) {
+        template.push(`{"page": ${i}}`);
+      }
+      const qerry2 = `{"$and": [{ "$or": [{ "userWord.difficulty":"easy" },{ "userWord.difficulty":"hard" },{"userWord":null}] },{ "group": ${group} }, { "$or": [${template.join(
+        ',',
+      )}] }]}`;
+      wordsRaw = await APIService.getAgrWords({
+        wordsPerPage: '40',
+        filter: qerry2,
+      });
+      return wordsRaw!.data[0].paginatedResults;
+    }
+  } else if (group === 6) {
+    const qerry = `{"$and":  [{ "userWord.difficulty":"hard" }] } `;
+    const wordsRaw = await APIService.getAgrWords({
+      wordsPerPage: '40',
+      filter: qerry,
+    });
+    return wordsRaw!.data[0].paginatedResults;
   }
-
+  return [];
 }

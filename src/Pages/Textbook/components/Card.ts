@@ -3,7 +3,6 @@ import { HOST } from "../../../config";
 import { TAggregatedWord, TWord } from "../../../Interfaces/Types";
 import { HardWord } from "./Hard-word";
 
-
 export class Card extends Component {
   
   word: Component;
@@ -88,5 +87,5 @@ export class Card extends Component {
   renderInputs() {
     this.hardWord.render();
   }
-    
+
 }

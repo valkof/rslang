@@ -12,7 +12,6 @@ flex-wrap: wrap;
 
 .card {
     width: 20%;
-    //height: 260px;
     background-color: #dda450;
     background-size: cover;
     margin: 40px;
@@ -30,7 +29,7 @@ flex-wrap: wrap;
 }
 
 .card h2 {
-    font-size: 4.5rem;
+    font-size: 3.9rem;
 }
 
 .word-block {
@@ -68,7 +67,7 @@ flex-wrap: wrap;
 }
 
 .word {
-    font-size: 3rem;
+    font-size: 2.8rem;
     align-items: center;
     font-weight: bold;
  
@@ -89,7 +88,7 @@ flex-wrap: wrap;
 }
 
 .text-example {
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-top: 4%;
     margin-bottom: 6%;
     border-bottom: 2px solid black;
@@ -101,7 +100,7 @@ flex-wrap: wrap;
 }
 
 .example-translate {
-    font-size: 2rem;
+    font-size: 1.8rem;
     text-align: right;
 }
 
@@ -150,6 +149,7 @@ flex-wrap: wrap;
   background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
   background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
   background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  border: none;
 }
 
 .category0, 
@@ -234,7 +234,7 @@ margin-right: 50%;
     height: 57px;
     cursor: pointer;
     font-size: 3rem;
-    border: 2px solid black;
+    border: none;
     padding-top: 2%;
     padding-bottom: 2%;
     background: #f5a329;
@@ -299,29 +299,18 @@ margin-top: auto;
 
 }
 
-@media (max-width: 1650px)  {
-  .category0, .category1, .category2, .category3, .category4, .category5, .category6 {
-   font-size: 1.9rem;
-  }
 
-  .trening select {
-    font-size: 1.9rem;
-  }
 
-  .card {
-    width: 30%;
-    margin: 18px;
-}
-}
-
-@media (max-width: 1480px) {
+@media (max-width: 1600px) {
 
   .category0, .category1, .category2, .category3, .category4, .category5, .category6 {
     height: 41px;
+    font-size: 1.8rem;
   }
 
   .trening select {
     height: 45px;
+    font-size: 1.8rem;
   }
 
   .pages-wrapper div {
@@ -419,14 +408,6 @@ margin-top: auto;
 @media (max-width: 1100px) {
   .word-block {
     height: 211px;
-}
-
-.text-example {
-  font-size: 1.3rem;
-}
-
-.example-translate {
-  font-size: 1.3rem;
 }
 
 .add-word input {
@@ -576,20 +557,22 @@ margin-top: auto;
 .trening select {
   width: 98px;
 }
+
+.cat-wrapper {
+  flex-wrap: wrap;
+}
+
+.trening {
+  margin-bottom: 3%;
+}
 }
 
 @media (max-width: 400px) {
-  .cat-wrapper {
-    flex-wrap: wrap;
-  }
-
-  .trening {
-    margin-bottom: 3%;
-  }
-
+    
   .card h2 {
     font-size: 2.8rem;
 }
+
 
 .word {
   font-size: 1.8rem;

@@ -4,6 +4,7 @@ import APIService from '../../../Services/APIService';
 import { validateNum } from '../../../utils';
 
 export class GamesStatistic extends Component {
+
   game: EGames;
 
   numberPercent: Component;
@@ -57,5 +58,6 @@ export class GamesStatistic extends Component {
       this.bestGameCount!.root.textContent = '0';
     }
   }
+
 
 }

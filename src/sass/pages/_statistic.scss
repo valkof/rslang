@@ -6,7 +6,7 @@
 
 .statistic-wrapper h2 {
 text-align: center;
-font-size: 7rem;
+font-size: 5rem;
 margin-bottom: 3%;
 font-family: cursive;
 text-align: center;
@@ -42,11 +42,10 @@ margin-left: 7%;
 
 .avatar-name input {
     text-align: center;
-    font-size: 3rem;
+    font-size: 2.5rem;
     width: 75%;
     margin-bottom: 5%;
     background-color: transparent;
-
     border-radius: 15px;
     border: #fff;
     box-shadow: 0 5px 11px 11px rgb(0 0 0 / 25%), 0 2px 4px 2px rgb(0 0 0 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 10px rgb(0 0 0 / 10%);
@@ -54,7 +53,7 @@ margin-left: 7%;
 
 .avatar-name button {
     background-color: transparent;
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     text-align: center;
     border: 2px solid #fff;
     border-radius: 15px;
@@ -71,7 +70,7 @@ margin-left: 7%;
 .avatar-content a {
     text-decoration: none;
    color: black;
-    font-size: 2.5rem;
+    font-size: 2.4rem;
 }
 
 .avatar-statistics-block {
@@ -85,14 +84,14 @@ margin-left: 7%;
     margin-bottom: 4%;
     border: 2px solid white;
     border-radius: 40px;
-    padding: 30px;
+    padding: 20px;
     background: #f5a329;
     box-shadow: 0 5px 11px 11px rgb(0 0 0 / 25%), 0 2px 4px 2px rgb(0 0 0 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 10px rgb(0 0 0 / 10%);
 }
 
 .statistic-games p,
 .statistic-words p {
-font-size: 2.8rem;
+font-size: 2.5rem;
 margin-right: 3%;
 font-family: cursive;
 }
@@ -308,8 +307,7 @@ font-family: cursive;
     }
 }
 
-@media (max-width: 790px) {
-
+@media (max-width: 850px) {
     .avatar-wrapper {
         width: 38%;
     }
@@ -334,7 +332,7 @@ font-family: cursive;
 
 }
 
-@media (max-width: 580px) {
+@media (max-width: 685px) {
     .avatar-wrapper {
         width: 48%;
     }
@@ -350,9 +348,13 @@ font-family: cursive;
         .select-game button {
           width: 32%;
         }
+
+        .statistic-games, .statistic-words {
+            padding: 10px;
+        }
 }
 
-@media (max-width: 460px) {
+@media (max-width: 575px) {
     .avatar-wrapper {
         width: 57%;
     }
@@ -366,7 +368,11 @@ font-family: cursive;
     }
 }
 
-@media (max-width: 340px) {
+@media (max-width: 440px) {
+    .words-statistic-wrapper, .games-statistic-wrapper {
+        width: 100%;
+    }
+    
     .statistic-wrapper h2 {
         font-size: 3.8rem;
         margin-bottom: 7%;
@@ -445,4 +451,6 @@ font-family: cursive;
     .statistic-games, .statistic-words {
         padding: 13px;
     }
+
 }
+

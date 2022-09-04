@@ -5,7 +5,7 @@ export class Pagination extends Component {
     catWrapper: Component;
     pagesWrapper: Component;
     currentCategory = 0;
-    currentPage = 0;
+    currentPage = 1;
     pageNumber: Component;
     
     changeCategory: (data: {page: number, group: number, glossary?: boolean | undefined}) => void = () => {};
@@ -46,7 +46,7 @@ export class Pagination extends Component {
             
             category.root.onclick = () => {
                 this.currentCategory = names.indexOf(category.root.textContent!);
-                this.currentPage = 0;
+                this.currentPage = 1;
                 this.pageNumber.root.innerHTML = this.currentPage.toString();
                 if (cat != 'Сложные слова') this.changeCategory({page: this.currentPage, group: this.currentCategory});
 
@@ -73,7 +73,7 @@ export class Pagination extends Component {
         const rightRow = new Component(this.pagesWrapper.root, 'div', ['right-row'], ' 🡆');
 
         leftRow.root.onclick = () => {
-            if (this.currentPage == 0) return;
+            if (this.currentPage == 1) return;
             this.currentPage -= 1;
             this.changeCategory({page: this.currentPage, group: this.currentCategory});
             this.pageNumber.root.innerHTML = this.currentPage.toString()

@@ -34,7 +34,7 @@ margin-bottom: 2%;
 .navigation-wrapper {
    display: flex;
     margin: auto;
-   // width: 60%;
+    width: 80%;
 }
 
 .navigation-wrapper a {
@@ -51,12 +51,13 @@ margin-bottom: 2%;
   background: #f5a329;
   text-shadow: 0px 2px 0px rgb(209 151 51 / 30%);
   font-size: 1.6rem;
-  height: 48px;
-  width: 200px;
+
+  height: 43px;
+  width: 248px;
   overflow: hidden;
   display: block;
   text-align: center;
-  line-height: 48px;
+  line-height: 45px;
   -webkit-border-radius: 5px;
 -moz-border-radius: 5px;
 border-radius: 5px;
@@ -100,7 +101,7 @@ color: rgb(66, 36, 23);
     font-family: cursive;
     background: #f5a329;
   text-shadow: 0px 2px 0px rgb(209 151 51 / 30%);
-    height: 48px;
+    height: 43px;
     width: 200px;
   
   overflow: hidden;
@@ -139,14 +140,13 @@ background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
     
 
 @media(max-width: 1600px) {
-
-    
+        
     .navigation-wrapper a {
        letter-spacing: 1px;
        height: 48px;
        line-height: 43px;
-       font-size: 1.6rem;
-       width: 150px;
+       font-size: 1.5rem;
+       width: 210px;
     }
 
     .header-wrapper a {
@@ -155,60 +155,86 @@ background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
     }
 
     .navigation-wrapper {
-       // width: 60%;
+        width: 70%;
+
     }
 
     .enter-wrapper button {
         width: 150px;
         height: 40px;
-        line-height: 48px;
-        font-size: 1.6rem;
+        line-height: 43px;
+        font-size: 1.5rem;
     }
 } 
 
+@media (max-width: 1420px) {
+    .navigation-wrapper {
+        width: 70%;
+    }
+
+    .enter-wrapper button {
+        width: 126px;
+        line-height: 40px;
+        font-size: 1.4rem;
+    }
+
+    .navigation-wrapper a {
+        width: 192px;
+        font-size: 1.4rem;
+    }
+
+}
 
 @media (max-width: 1280px) {
    
     .navigation-wrapper {
-      //  width: 65%;
+        width: 78%;
     }
 
     .enter-wrapper button {
-        width: 146px;
-    font-size: 1.5rem;
+        width: 130px;
+        height: 35px;
+        font-size: 1.4rem;
+        line-height: 37px;
     }
 
     .navigation-wrapper a {
-         width: 140px;
-        font-size: 1.5rem;
+         width: 175px;
+         height: 35px;
+        font-size: 1.4rem;
+        line-height: 35px;
     }
- 
-
-    
+     
 }
     
 @media (max-width: 1200px)  {
-    .navigation-wrapper a {
-        font-size: 1.3rem;
-        height: 37px;
-        line-height: 39px;
+    .navigation-wrapper {
+        width: 82%;
     }
 
+    .navigation-wrapper a {
+        font-size: 1.3rem;
+        width: 146px;
+    }
     
     .enter-wrapper button {
-        width: 135px;
+        width: 115px;
         height: 37px;
         font-size: 1.3rem;
         line-height: 0px;
     }
 }
 
-@media (max-width: 995px) {
+@media (max-width: 1000px) {
+    .navigation-wrapper {
+        width: 86%;
+    }
+
     .navigation-wrapper a {
        height: 34px;
        font-size: 1.2rem;
        line-height: 35px;
-       width: 113px;
+       width: 127px;
     }
 
     .enter-wrapper button {
@@ -219,22 +245,26 @@ background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
 }
 
 
-
-@media(max-width: 880px) {
+@media(max-width: 895px) {
     .enter-wrapper button {
         width: 106px;
         height: 29px;
         font-size: 1.1rem;
     }
 
-    .navigation-wrapper a {
-        font-size: 1.1rem;
+    .navigation-wrapper {
+        width: 92%;
     }
 
+    .navigation-wrapper {
+        width: 92%;
+    }
+    
     .navigation-wrapper a {
         width: 106px;
         height: 31px;
         line-height: 32px;
+        font-size: 1.1rem;
     }
 
     .logo {
@@ -245,7 +275,12 @@ background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
 @media(max-width: 768px) {
     .navigation-wrapper a {
         margin: auto;
-    }
+        margin-top: 5%;
+        width: 185px;
+        font-size: 2rem;
+        height: 40px;
+}
+  
 }
 
 @media(max-width: 720px) {
@@ -264,6 +299,22 @@ background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
         font-size: 1rem;
         height: 26px;
 }
+
+.navigation-wrapper a {
+    margin-top: 9%;
+    width: 196px;
+    font-size: 1.9rem;
+    height: 40px;
+}
+}
+
+@media(max-width: 240px) {
+    .navigation-wrapper a {
+        margin-top: 10%;
+        width: 192px;
+        font-size: 1.7rem;
+        height: 40px;
+    }
 }
 
 

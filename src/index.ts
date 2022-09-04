@@ -64,7 +64,7 @@ class App {
       autorization: this.authorization,
     };
 
-    new Router(pages, this.footer);
+    new Router(pages, this.footer, this.header.statLink!);
 
     this.textBook.pagination.emitGame = (game: string, cat: number, page: number) => {
       if (game === 'audiocall') this.audiocall.startGameFromTexbook(cat, page);

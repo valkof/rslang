@@ -9,9 +9,8 @@ export class HardWord extends Component {
   inputIsLearning: Component;
   
   checkCardsDashboard: () => void = () => {};
-  changeColorHardCar: () => void = () => {};
-
-  constructor(parent: HTMLElement, private cardData: TAggregatedWord) {
+  
+  constructor(parent: HTMLElement, private cardData: TAggregatedWord, private switchActiveStatus: (isHard: boolean, isLearn: boolean) => void) {
     super(parent, 'div', ['add-word']);
     this.inputHardWord = new Component(this.root, 'input', ['hard-word'], null, 'type', 'checkbox');
     this.inputHardWord.root.setAttribute('data-title-word', 'Сложное слово');
@@ -58,10 +57,14 @@ export class HardWord extends Component {
         });
       }
     }
+
+    this.switchActiveStatus((this.inputHardWord.root as HTMLInputElement).checked, (this.inputIsLearning.root as HTMLInputElement).checked)
   }
 
   setInputs(hard: boolean, learn: boolean) {
-    (this.inputHardWord.root as HTMLInputElement).checked = hard;
+    (this.inputHardWord.root as HTMLInputElement).checked = hard; 
     (this.inputIsLearning.root as HTMLInputElement).checked = learn;
+
+    this.switchActiveStatus(hard, learn);
   }
 }

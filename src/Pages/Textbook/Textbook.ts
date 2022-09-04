@@ -42,7 +42,6 @@ export class TextBook extends Component {
     if (cardsData == null) return;
     this.cardsBlock.root.innerHTML = '';
 
-    console.log(glossData);
     this.cards = cardsData.data.map(cardData => {
       if (glossData) {
         const glossaryData = glossData.data[0].paginatedResults.find(el => el._id === cardData.id);      
@@ -79,7 +78,6 @@ export class TextBook extends Component {
     this.cardsBlock.root.innerHTML = '';
     this.cardsBlock.root.classList.remove('cards-all-learning')
     const glosData = await this.getGlossaryData(`{"$and":[{"userWord.difficulty":"hard"}]}`);
-    console.log(glosData);
     if (glosData == null || glosData.data[0].totalCount.length === 0) return;  
     glosData.data[0].paginatedResults.forEach(cardData => {
       const card = new Card(this.cardsBlock.root, cardData);

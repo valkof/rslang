@@ -19,6 +19,12 @@ export class AudioGameService extends Observer {
 
   private multiBonus = 1;
 
+  private isAddWords = false;
+
+  private nunberGroup = 0;
+
+  private numberPage = 0;
+
   private interval: NodeJS.Timer | null = null;
 
   private timer = SPRINT_DURATION;
@@ -27,9 +33,10 @@ export class AudioGameService extends Observer {
 
   private learnWords = [] as TGameAnswer[];
 
-  private async getWordsByBook(group: number): Promise<TWord[][] | null> {
-    const numberPage = Math.floor(Math.random() * 30);
-    const wordsPage = await APIService.getWords(numberPage, group);
+  private async getWordsByBook(group: number, page: number, place: string): Promise<TWord[][] | null> {
+    const randomPage = place === 'textbook' ? page : Math.floor(Math.random() * 30);
+    this.numberPage = place === 'app' ? randomPage : page;
+    const wordsPage = await APIService.getWords(randomPage, group);
     const words = wordsPage && wordsPage.status === 200 ? wordsPage.data : null;
     if (!words) return null;
     const shuffleWords = this.shuffleArray<TWord>(words);
@@ -41,10 +48,11 @@ export class AudioGameService extends Observer {
     return this.shuffleArray<TWord[]>(setWords);
   }
 
-  private async getAgrWordsByBook(group: number, page: number): Promise<TAggregatedWord[][] | null> {
+  private async getAgrWordsByBook(group: number, page: number, place: string): Promise<TAggregatedWord[][] | null> {
+    const randomPage = place === 'textbook' ? page :  Math.floor(Math.random() * 30);
     const response = await Promise.all([
       APIService.getAgrWords({
-        filter: `{"$and":[{"group":${group}, "page":${page}}]}`,
+        filter: `{"$and":[{"group":${group}, "page":${randomPage}}]}`,
         wordsPerPage: '20'
       }),
       APIService.getAgrWords({
@@ -54,7 +62,7 @@ export class AudioGameService extends Observer {
     ]);
     if (response && response[0] && response[1]) {
       const pageWords = response[0].data[0].paginatedResults;
-      const groupWords = response[1].data[0].paginatedResults.filter(word => word.page < page);
+      const groupWords = response[1].data[0].paginatedResults.filter(word => word.page < randomPage);
 
       const shuffleWords = this.shuffleArray<TAggregatedWord>(pageWords);
       const lengthShuffleWords = shuffleWords.length;
@@ -122,12 +130,13 @@ export class AudioGameService extends Observer {
     this.learnWords = [];
     this.wordsGame = words;
     this.timer = SPRINT_DURATION;
-    // console.log(words)
     this.stageGame();
     this.isStartGame = true;
     this.dispatch('time', '60');
     this.setInterval();
     this.maxRoundGame = words.length - 1;
+    this.dispatch('bonus', 0);
+    this.dispatch('status', 0);
     this.dispatch('audioCallGame', 'start');
   }
 
@@ -136,21 +145,24 @@ export class AudioGameService extends Observer {
     this.dispatch('audioCallGame', 'select');
   }
 
-  startGame(group: number, page = 0): void {
+  startGame(group: number, page: number, place = 'app'): void {
     if (APIService.getAuthUser() && APIService.isAuthorizedUser()) {
+      this.isAddWords = false;
       if (group === 6) {
         this.getHardWordsByBook()
           .then(words => {
             if (words) this.resetSettingGame(words);
           })
       } else {
-        this.getAgrWordsByBook(group, page)
+        this.getAgrWordsByBook(group, page, place)
           .then(words => {
             if (words) this.resetSettingGame(words);
           })
       }
     } else {
-      this.getWordsByBook(group)
+      this.isAddWords = true;
+      this.nunberGroup = group;
+      this.getWordsByBook(group, page, place)
         .then(words => {
           if (words) this.resetSettingGame(words);
         })
@@ -191,12 +203,27 @@ export class AudioGameService extends Observer {
     this.dispatch('bonus', this.countTrueWords);
     this.dispatch('birds', this.multiBonus);
 
-    if (this.countError === 5 || this.roundGame === this.maxRoundGame) {
-      return this.resultGame();
+    if (this.countError === 5) return this.resultGame();
+    
+    if (this.roundGame < this.maxRoundGame) {
+      this.roundGame += 1;
+      return this.stageGame();
     }
 
-    this.roundGame += 1;
-    this.stageGame();
+    if (this.isAddWords && this.numberPage > 0) {
+      this.numberPage -= 1;
+      this.getWordsByBook(this.nunberGroup, this.numberPage, 'textbook')
+        .then(words => {
+          if (words) {
+            this.wordsGame = (this.wordsGame as TWord[][]).concat(words);
+            this.maxRoundGame = this.wordsGame.length - 1;
+            this.roundGame += 1;
+            return this.stageGame();
+          }
+        })
+    } else {
+      this.resultGame();
+    }
   }
 
   resultGame(): void {
@@ -205,8 +232,8 @@ export class AudioGameService extends Observer {
     this.dispatch('audioCallGame', 'result');
   }
 
-  getResultGame(): TGameAnswer[] | null {
-    return this.learnWords.length ? this.learnWords : null;
+  getResultGame(): TGameAnswer[] {
+    return this.learnWords.length ? this.learnWords : [];
   }
 
   getIsStartGame(): boolean {
@@ -230,5 +257,9 @@ export class AudioGameService extends Observer {
       }
       this.dispatch('time', this.timer.toString());
     }, 1000);
+  }
+
+  resetTimer(): void {
+    if (this.interval) clearInterval(this.interval);
   }
 }

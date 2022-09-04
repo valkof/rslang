@@ -101,8 +101,9 @@
 }
 
 .button_version {
-  width: 100px;
+  min-width: 100px;
   height: 50px;
+  word-wrap: break-word;
 }
 
 .audiocall__result_game {

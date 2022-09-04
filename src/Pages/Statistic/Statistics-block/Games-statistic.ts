@@ -36,12 +36,16 @@ export class GamesStatistic extends Component {
     this.bestGameCount = new Component(bestGame.root, 'p', [], '0');
 
     this.getStatistic();
+
+    window.addEventListener('hashchange', () => {
+      if (document.location.hash === '#statistic') this.getStatistic();
+    });
   }
 
   private async getStatistic() {
     const stat = await APIService.getUserSetting();
     if (stat) {
-      const percent = Math.floor(
+      const percent = stat.data.optional[this.game].answersCount === 0 ? 0 : Math.floor(
         (stat.data.optional[this.game].correctAnswers / stat.data.optional[this.game].answersCount) * 100,
       );
       this.numberPercent!.root.textContent = validateNum(stat.data.optional[this.game].answersCount);

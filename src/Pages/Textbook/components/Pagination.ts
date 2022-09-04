@@ -36,6 +36,7 @@ export class Pagination extends Component {
         selectTrening.root.onchange = (e) => {
             const currentGame = (e.target as HTMLSelectElement).value;
             document.location = '#' + currentGame;
+            console.log(e);
             this.emitGame(currentGame, this.currentCategory, this.currentPage);
         };
 
@@ -46,7 +47,7 @@ export class Pagination extends Component {
             
             category.root.onclick = () => {
                 this.currentCategory = names.indexOf(category.root.textContent!);
-                this.currentPage = 1;
+                this.currentPage = 0;
                 this.pageNumber.root.innerHTML = this.currentPage.toString();
                 if (cat != 'Сложные слова') this.changeCategory({page: this.currentPage, group: this.currentCategory});
 
@@ -76,14 +77,14 @@ export class Pagination extends Component {
             if (this.currentPage == 1) return;
             this.currentPage -= 1;
             this.changeCategory({page: this.currentPage, group: this.currentCategory});
-            this.pageNumber.root.innerHTML = this.currentPage.toString()
+            this.pageNumber.root.innerHTML = (this.currentPage + 1).toString()
         };
 
         rightRow.root.onclick = () => {
-            if (this.currentPage == 30) return;
+            if (this.currentPage == 29) return;
             this.currentPage += 1;
             this.changeCategory({page: this.currentPage, group: this.currentCategory});
-            this.pageNumber.root.innerHTML = this.currentPage.toString()
+            this.pageNumber.root.innerHTML = (this.currentPage+1).toString()
         }
       }
     

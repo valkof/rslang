@@ -49,8 +49,8 @@ export class AudioCall extends Component {
       this.statistic = new StatisticPopup(
         this.root,
         words as TGameAnswer[],
-        this.startGame.bind(this)
-        // this.render.bind(this)
+        this.startGame.bind(this),
+        () => document.location.hash = '#textbook'
       );
     });
 

@@ -50,29 +50,37 @@ export class AudioGameService extends Observer {
 
   private async getAgrWordsByBook(group: number, page: number, place: string): Promise<TAggregatedWord[][] | null> {
     const randomPage = place === 'textbook' ? page :  Math.floor(Math.random() * 30);
+    const filterPage = place === 'textbook'
+      ? `{"$and":[{"group": ${group}, "page": ${randomPage}},
+        {"$or":[{"userWord": null}, {"userWord.difficulty":"easy"}, {"userWord.difficulty":"hard"}]}]}`
+      : `{"$and":[{"group":${group}, "page":${randomPage}}]}`;
+    const filterGroup = place === 'textbook'
+      ? `{"$and":[{"group":${group}},
+        {"$or":[{"userWord":null}, {"userWord.difficulty":"easy"}, {"userWord.difficulty":"hard"}]}]}`
+      : `{"$and":[{"group":${group}}]}`;
     const response = await Promise.all([
       APIService.getAgrWords({
-        filter: `{"$and":[{"group":${group}, "page":${randomPage}}]}`,
+        filter: filterPage,
         wordsPerPage: '20'
       }),
       APIService.getAgrWords({
-        filter: `{"$and":[{"group":${group}}]}`,
+        filter: filterGroup,
         wordsPerPage: '600'
       })
     ]);
     if (response && response[0] && response[1]) {
+      const setWords = [] as TAggregatedWord[][];
       const pageWords = response[0].data[0].paginatedResults;
       const groupWords = response[1].data[0].paginatedResults.filter(word => word.page < randomPage);
 
-      const shuffleWords = this.shuffleArray<TAggregatedWord>(pageWords);
-      const lengthShuffleWords = shuffleWords.length;
-      shuffleWords.push(...shuffleWords.slice(0, 5));
-      const setWords = [] as TAggregatedWord[][]
-      for (let i = 0; i < lengthShuffleWords; i++) {
-        setWords.push(shuffleWords.slice(i, i + 5))
-      }
-
-      if (groupWords.length > 0) {
+      if (pageWords.length > 4 && groupWords.length > 4) {
+        const shuffleWords = this.shuffleArray<TAggregatedWord>(pageWords);
+        const lengthShuffleWords = shuffleWords.length;
+        shuffleWords.push(...shuffleWords.slice(0, 5));
+        for (let i = 0; i < lengthShuffleWords; i++) {
+          setWords.push(shuffleWords.slice(i, i + 5))
+        }
+       
         const shuffleGroupWords = this.shuffleArray<TAggregatedWord>(groupWords);
         const lengthShuffleGroupWords = shuffleGroupWords.length;
         shuffleGroupWords.push(...shuffleGroupWords.slice(0, 5));
@@ -82,7 +90,18 @@ export class AudioGameService extends Observer {
         }
         return this.shuffleArray<TAggregatedWord[]>(setWords).concat(
           this.shuffleArray<TAggregatedWord[]>(setGroupWords)
-        )
+        );
+      }; 
+
+      if (pageWords.length + groupWords.length < 5) return null; 
+
+      const pageGroupWords = pageWords.concat(groupWords);
+
+      const shuffleWords = this.shuffleArray<TAggregatedWord>(pageGroupWords);
+      const lengthShuffleWords = shuffleWords.length;
+      shuffleWords.push(...shuffleWords.slice(0, 5));
+      for (let i = 0; i < lengthShuffleWords; i++) {
+        setWords.push(shuffleWords.slice(i, i + 5))
       }
 
       return this.shuffleArray<TAggregatedWord[]>(setWords);
@@ -156,7 +175,12 @@ export class AudioGameService extends Observer {
       } else {
         this.getAgrWordsByBook(group, page, place)
           .then(words => {
-            if (words) this.resetSettingGame(words);
+            if (words) {
+              this.resetSettingGame(words);
+            } else {
+              this.learnWords = [];
+              this.resultGame();
+            }
           })
       }
     } else {

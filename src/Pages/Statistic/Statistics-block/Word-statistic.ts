@@ -61,19 +61,17 @@ export class WordsStatistic extends Component {
     this.percetnRigrhtWords = new Component(this.percentWords.root, 'div', ['percent-right-words']);
     this.rightWordsTitle = new Component(this.percetnRigrhtWords.root, 'p', [], 'Процент правильных ответов за день');
     this.rightWordsPercent = new Component(this.percetnRigrhtWords.root, 'p', [], '%');
-
-    this.getStat();
   }
 
-  private async getStat() {
+  async getStat() {
     const stat = await APIService.getUserStatistics();
     const set = await APIService.getUserSetting();
     let correct = 0;
     let answCount = 0;
     const length = stat ? stat?.data.optional.data.dataPerDay.length : 0;
     if (stat && length > 0) {
-      this.numberNew.root.textContent = stat?.data.optional.data.dataPerDay[0].newWords.toString();
-      this.numberLearned.root.textContent = stat?.data.optional.data.dataPerDay[0].learnedWords.toString();
+      this.numberNew.root.textContent = stat?.data.optional.data.dataPerDay[length-1].newWords.toString();
+      this.numberLearned.root.textContent = stat?.data.optional.data.dataPerDay[length-1].learnedWords.toString();
       this.totalNumberLearned .root.textContent = stat?.data.learnedWords.toString();
     }
     if (set) {

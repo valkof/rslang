@@ -34,17 +34,15 @@ export class GamesStatistic extends Component {
     const bestGame = new Component(bestGameBlock.root, 'div', ['best-game']);
     const bestGameTitle = new Component(bestGame.root, 'p', [], 'Лучшая игра');
     this.bestGameCount = new Component(bestGame.root, 'p', [], '0');
-
-    this.getStatistic();
   }
 
-  private async getStatistic() {
+  async getStatistic() {
     const stat = await APIService.getUserSetting();
     if (stat) {
       const percent = Math.floor(
         (stat.data.optional[this.game].correctAnswers / stat.data.optional[this.game].answersCount) * 100,
       );
-      this.numberPercent!.root.textContent = validateNum(stat.data.optional[this.game].answersCount);
+      this.numberPercent!.root.textContent = validateNum(stat.data.optional[this.game].newWords);
       this.rightAnswersPercent!.root.textContent = `${validateNum(percent)} %`;
       this.bestGameCount!.root.textContent = validateNum(stat.data.optional[this.game].streak);
     } else {
@@ -53,5 +51,4 @@ export class GamesStatistic extends Component {
       this.bestGameCount!.root.textContent = '0';
     }
   }
-
 }

@@ -116,4 +116,11 @@ export class Statistic extends Component {
       }
     });
   }
+
+  render(): void {
+    super.render();
+    this.gamesAudiocall.getStatistic();
+    this.gamesSprint.getStatistic();
+    this.wordsStatistic.getStat();
+  }
 }

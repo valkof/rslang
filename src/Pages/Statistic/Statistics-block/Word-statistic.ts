@@ -1,6 +1,6 @@
 import { Component } from '../../../Abstract/component';
 import APIService from '../../../Services/APIService';
-import { createDate } from '../../../utils';
+import { createDate, validateNum } from '../../../utils';
 import { gitDevelopers } from './../../../common/footer/git-developers';
 import { AudioCall } from './../../Audiocall/Audiocall';
 
@@ -82,9 +82,9 @@ export class WordsStatistic extends Component {
 
     if (set) {
       if (set.data.optional.date === createDate()) {
-        correct = set.data.optional.sprint.correctAnswers + set.data.optional.sprint.correctAnswers;
-        answCount = set.data.optional.sprint.answersCount + set.data.optional.sprint.answersCount;
-        this.rightWordsPercent.root.textContent = `${Math.round((correct / answCount) * 100)} %`;
+        correct = set.data.optional.sprint.correctAnswers + set.data.optional.audioCall.correctAnswers;
+        answCount = set.data.optional.sprint.answersCount + set.data.optional.audioCall.answersCount;
+        this.rightWordsPercent.root.textContent = `${validateNum(Math.round((correct / answCount) * 100))} %`;
       } else {
         this.rightWordsPercent.root.textContent = '%';
       }

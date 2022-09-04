@@ -1,10 +1,17 @@
-import { INIT_USER_SETTING, INIT_USER_STATISTIC, INIT_USER_WORD } from "../config";
-import { EGames, TAggregatedWord, TAuthData, TGameAnswer, TUserSetting, TUserStatistic, TUserWord } from "../Interfaces/Types";
-import { createDate } from "../utils";
-import APIService from "./APIService";
+import { INIT_USER_SETTING, INIT_USER_STATISTIC, INIT_USER_WORD } from '../config';
+import {
+  EGames,
+  TAggregatedWord,
+  TAuthData,
+  TGameAnswer,
+  TUserSetting,
+  TUserStatistic,
+  TUserWord,
+} from '../Interfaces/Types';
+import { createDate } from '../utils';
+import APIService from './APIService';
 
 export default abstract class WriteStatisticService {
-
   static game: EGames;
 
   static async writeResults(answers: TGameAnswer[], game: EGames) {
@@ -51,7 +58,7 @@ export default abstract class WriteStatisticService {
     learned: number,
   ) {
     const rawSetting = await APIService.getUserSetting();
-    const setting: TUserSetting = rawSetting
+    let setting: TUserSetting = rawSetting
       ? (rawSetting.data as TUserSetting)
       : JSON.parse(JSON.stringify(INIT_USER_SETTING));
     delete setting.id;
@@ -64,6 +71,7 @@ export default abstract class WriteStatisticService {
       setting.optional[this.game].answersCount += answersCount;
       setting.optional.learnedWords += learned;
     } else {
+      setting = JSON.parse(JSON.stringify(INIT_USER_SETTING));
       setting.optional.date = createDate();
       setting.wordsPerDay = newWords;
       setting.optional[this.game].newWords = newWords;
@@ -159,11 +167,11 @@ export default abstract class WriteStatisticService {
             {
               date: createDate(),
               newWords: 0,
-              learnedWords: 0
-            }
-          ]
-        }
-      }
+              learnedWords: 0,
+            },
+          ],
+        },
+      },
     } as TUserStatistic;
 
     const settings = {
@@ -175,19 +183,18 @@ export default abstract class WriteStatisticService {
           newWords: 0,
           answersCount: 0,
           correctAnswers: 0,
-          streak: 0
+          streak: 0,
         },
         sprint: {
           newWords: 0,
           answersCount: 0,
           correctAnswers: 0,
-          streak: 0
-        }
-      }
+          streak: 0,
+        },
+      },
     } as TUserSetting;
-    
+
     await APIService.upsertUserStatistics(statistic);
     await APIService.upsertUserSetting(settings);
   }
-
 }

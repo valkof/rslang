@@ -160,7 +160,7 @@ font-family: cursive;
 
 @media (max-width: 1600px) {
     .statistic-games p, .statistic-words p {
-        font-size: 2.5rem;
+        font-size: 2.3rem;
     }
 
     .avatar-name button {
@@ -181,6 +181,7 @@ font-family: cursive;
 
     .avatar-wrapper {
         margin: auto;
+        width: 23%;
     }
 
     .select-game button {
@@ -189,8 +190,9 @@ font-family: cursive;
         height: 31px;
     }
 
-
-
+    .statistic-wrapper {
+        width: 96%;
+    }
 }
 
 @media (max-width: 1280px)  {
@@ -242,8 +244,9 @@ font-family: cursive;
 }
 
 @media (max-width: 1200px) {
-
-
+    .avatar-wrapper {
+        width: 23%;
+    }
 
     .avatar-content a {
         font-size: 1.6rem;
@@ -267,6 +270,10 @@ font-family: cursive;
 
     .avatar-name input {
         width: 81%;
+    }
+
+    .statistic-games p, .statistic-words p {
+        font-size: 1.6rem;
     }
 
 }
@@ -299,7 +306,7 @@ font-family: cursive;
 
     .avatar-wrapper {
         justify-content: center;
-        width: 24%;
+        width: 26%
     }
 
     .words-statistic-wrapper, .games-statistic-wrapper {
@@ -435,7 +442,7 @@ font-family: cursive;
     }
 }
 
-@media (max-width: 300px) {
+@media (max-width: 326px) {
     .avatar-wrapper {
         width: 67%;
     }
@@ -452,5 +459,8 @@ font-family: cursive;
         padding: 13px;
     }
 
+    .statistic-games p, .statistic-words p {
+        font-size: 1.2rem;
+    }
 }
 

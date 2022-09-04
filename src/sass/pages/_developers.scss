@@ -12,7 +12,7 @@
 }
 
 .developers-wrapper h2 {
-    font-size: 6rem;
+    font-size: 5rem;
     text-align: center;
     margin-bottom: 3%;
     margin-top: 1%;
@@ -26,8 +26,8 @@
 }
 
 .developer0, .developer1, .developer2 {
-    width: 330px;
-    height: 330px;
+    width: 280px;
+    height: 280px;
     cursor: pointer;
 }
 
@@ -40,7 +40,7 @@
 }
 
 .developers img:hover {
-    transform: scale(1.3);
+    transform: scale(1.1);
 }
 
 .developer {
@@ -48,7 +48,7 @@
 }
 
 .developer h3 {
-    font-size: 3.8rem;
+    font-size: 3rem;
     margin-top: 10%;
     margin-bottom: 2%;
     font-family: cursive;
@@ -58,7 +58,7 @@
 }
 
 .developer p {
-    font-size: 2.7rem;
+    font-size: 2.4rem;
     text-align: center;
     font-family: cursive;
 }
@@ -66,32 +66,25 @@
 
 @media (max-width: 1600px) {
     .developer0, .developer1, .developer2 {
-        width: 340px;
-        height: 340px;
+        width: 260px;
+        height: 260px;
     }
 
     .developer p {
-        font-size: 2.5rem;
+        font-size: 2.3rem;
     }
 }
 
 
 @media (max-width: 1480px) {
     .developers-wrapper h2 {
-        font-size: 6rem;
         margin-top: 0px;
     }
 
     .developer h3 {
         font-size: 3rem;
         text-shadow: 2px 4px 4px #604513;
-    }
-
-    .developer0, .developer1, .developer2 {
-        width: 300px;
-        height: 300px;
-    }
-   
+    } 
 
 }
 
@@ -99,21 +92,22 @@
     .developers-wrapper h2 {
         font-size: 5rem;
         margin-bottom: 5%;
+        margin-top: 2%;
         }
 
     .developer0, .developer1, .developer2 {
-        width: 200px;
-        height: 200px;
+        width: 240px;
+        height: 240px;
     }
 
     .developer h3 {
-        font-size: 2.5rem;
+        font-size: 2.4rem;
         text-shadow: 2px 3px 3px #604513;
         margin-bottom: 4%;
     }
 
     .developer p {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 }
 
@@ -136,6 +130,11 @@
     .developer h3 {
         margin-top: 6%;
     }
+
+    .developer0, .developer1, .developer2 {
+        width: 220px;
+        height: 220px;
+    }
 }
 
 @media (max-width: 600px) {
@@ -146,8 +145,8 @@
     }
 
     .developer0, .developer1, .developer2 {
-        width: 169px;
-        height: 169px;
+        width: 160px;
+        height: 160px;
     }
 
     .developer h3 {
@@ -162,7 +161,7 @@
 @media (max-width: 380px) {
     .developers-wrapper h2 {
        margin-bottom: 13%;
-       font-size: 3.6rem;
+       font-size: 3.5rem;
     }
 
     .developer1, .developer2 {
@@ -185,8 +184,8 @@
      }
 
      .developer0, .developer1, .developer2 {
-        width: 150px;
-        height: 150px;
+        width: 145px;
+        height: 145px;
     }
 
     .developer h3 {

@@ -56,7 +56,7 @@ export class Card extends Component {
     new Component(this.exampleTranslate.root, 'p', ['example-translate-one'], data.textMeaningTranslate);
     new Component(this.exampleTranslate.root, 'p', ['example-translate-two'], data.textExampleTranslate);
     
-    this.hardWord = new HardWord(this.root, data as TAggregatedWord);
+    this.hardWord = new HardWord(this.root, data as TAggregatedWord, this.switchActiveStatus.bind(this));
 
     const {userWord} = data as TAggregatedWord || {};
 
@@ -88,4 +88,13 @@ export class Card extends Component {
     this.hardWord.render();
   }
 
+  switchActiveStatus(isHard: boolean = false, isLearn: boolean = false) {
+    if(isHard) {
+      this.root.classList.add('hard-style');
+    } else this.root.classList.remove('hard-style');
+
+    if(isLearn) {
+      this.root.classList.add('learn-style');
+    } else this.root.classList.remove('learn-style');
+  }
 }

@@ -2,13 +2,15 @@ import { Component } from "../Abstract/component";
 import { Footer } from "../common/footer/footer";
 
 export class Router {
-  constructor(private routes: Record<string, Component>, private footer: Footer) {
+  constructor(private routes: Record<string, Component>, private footer: Footer, private statLink: Component) {
     window.onhashchange = () => this.handleRoute();
     this.handleRoute();
   }
 
   handleRoute(): void {
     this.clearPage();
+    this.checkAuth();
+
     const route = window.location.hash.replace('#', '');
     const page = this.routes[route];
     if (page) {
@@ -25,4 +27,15 @@ export class Router {
   clearPage(): void {
     Object.values(this.routes).forEach(page => page.remove());
   }
+
+  checkAuth() {
+    const authData = localStorage.getItem('rslang');
+
+    if (authData == null) {
+      this.statLink.remove();
+    } else {
+      this.statLink.render();
+    }
+  }
+
 }

@@ -1,10 +1,9 @@
 import { Component } from '../../../Abstract/component';
 import { EGames } from '../../../Interfaces/Types';
 import APIService from '../../../Services/APIService';
-import { validateNum } from '../../../utils';
+import { createDate, validateNum } from '../../../utils';
 
 export class GamesStatistic extends Component {
-
   game: EGames;
 
   numberPercent: Component;
@@ -46,16 +45,25 @@ export class GamesStatistic extends Component {
   private async getStatistic() {
     const stat = await APIService.getUserSetting();
     if (stat) {
-      const percent = stat.data.optional[this.game].answersCount === 0 ? 0 : Math.floor(
-        (stat.data.optional[this.game].correctAnswers / stat.data.optional[this.game].answersCount) * 100,
-      );
-      this.numberPercent!.root.textContent = validateNum(stat.data.optional[this.game].newWords);
-      this.rightAnswersPercent!.root.textContent = `${validateNum(percent)} %`;
-      this.bestGameCount!.root.textContent = validateNum(stat.data.optional[this.game].streak);
-    } else {
-      this.numberPercent!.root.textContent = '0';
-      this.rightAnswersPercent!.root.textContent = '0';
-      this.bestGameCount!.root.textContent = '0';
-    }
+      if (stat.data.optional.date === createDate()) {
+        const percent =
+          stat.data.optional[this.game].answersCount === 0
+            ? 0
+            : Math.floor(
+                (stat.data.optional[this.game].correctAnswers / stat.data.optional[this.game].answersCount) * 100,
+              );
+        this.numberPercent!.root.textContent = validateNum(stat.data.optional[this.game].newWords);
+        this.rightAnswersPercent!.root.textContent = `${validateNum(percent)} %`;
+        this.bestGameCount!.root.textContent = validateNum(stat.data.optional[this.game].streak);
+      } else {
+        this.zeroStat();
+      }
+    } else this.zeroStat();
+  }
+
+  private zeroStat() {
+    this.numberPercent!.root.textContent = '0';
+    this.rightAnswersPercent!.root.textContent = '0';
+    this.bestGameCount!.root.textContent = '0';
   }
 }

@@ -1,5 +1,6 @@
 import { Component } from '../../../Abstract/component';
 import APIService from '../../../Services/APIService';
+import { createDate, validateNum } from '../../../utils';
 import { gitDevelopers } from './../../../common/footer/git-developers';
 import { AudioCall } from './../../Audiocall/Audiocall';
 
@@ -72,14 +73,27 @@ export class WordsStatistic extends Component {
     let answCount = 0;
     const length = stat ? stat?.data.optional.data.dataPerDay.length : 0;
     if (stat && length > 0) {
-      this.numberNew.root.textContent = stat?.data.optional.data.dataPerDay[length-1].newWords.toString();
-      this.numberLearned.root.textContent = stat?.data.optional.data.dataPerDay[length-1].learnedWords.toString();
-      this.totalNumberLearned .root.textContent = stat?.data.learnedWords.toString();
-    }
+      if (stat.data.optional.data.dataPerDay[length - 1].date === createDate()) {
+        this.numberNew.root.textContent = stat?.data.optional.data.dataPerDay[length - 1].newWords.toString();
+        this.numberLearned.root.textContent = stat?.data.optional.data.dataPerDay[length - 1].learnedWords.toString();
+        this.totalNumberLearned.root.textContent = stat?.data.learnedWords.toString();
+      } else this.setZeroStat();
+    } else this.setZeroStat();
+
     if (set) {
-      correct = set.data.optional.sprint.correctAnswers + set.data.optional.sprint.correctAnswers;
-      answCount = set.data.optional.sprint.answersCount + set.data.optional.sprint.answersCount;
-      this.rightWordsPercent.root.textContent = `${Math.round((correct / answCount) * 100)} %`;
-    }
+      if (set.data.optional.date === createDate()) {
+        correct = set.data.optional.sprint.correctAnswers + set.data.optional.audioCall.correctAnswers;
+        answCount = set.data.optional.sprint.answersCount + set.data.optional.audioCall.answersCount;
+        this.rightWordsPercent.root.textContent = `${validateNum(Math.round((correct / answCount) * 100))} %`;
+      } else {
+        this.rightWordsPercent.root.textContent = '%';
+      }
+    } else this.rightWordsPercent.root.textContent = '%';
+  }
+
+  private setZeroStat() {
+    this.numberNew.root.textContent = '0';
+    this.numberLearned.root.textContent = '0';
+    this.totalNumberLearned.root.textContent = '0';
   }
 }

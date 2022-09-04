@@ -15,7 +15,6 @@
     align-items: center;
     gap: 20px;
     width: 17%;
-    height: 400px;
     margin: auto;
     border-radius: 10px;
     border: 1px solid gray;
@@ -23,6 +22,7 @@
     padding: 10px;
     position: relative;
     text-align: center;
+    padding-bottom: 20px;
   
     div {
       position: relative;
@@ -42,11 +42,16 @@
     .password__span {
       position: absolute;
       left: 12%;
-      top: -11px;
+      bottom: 40px;
       font-size: 10px;
       background-color: white;
       padding: 0px 5px;
       font-size: 1.4rem;
+      border-top: 2px solid black;
+      border-left: 2px solid black;
+      border-right: 2px solid black;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
     }
   
     .section__massage {

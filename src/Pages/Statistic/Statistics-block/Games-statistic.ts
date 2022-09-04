@@ -49,7 +49,7 @@ export class GamesStatistic extends Component {
       const percent = stat.data.optional[this.game].answersCount === 0 ? 0 : Math.floor(
         (stat.data.optional[this.game].correctAnswers / stat.data.optional[this.game].answersCount) * 100,
       );
-      this.numberPercent!.root.textContent = validateNum(stat.data.optional[this.game].answersCount);
+      this.numberPercent!.root.textContent = validateNum(stat.data.optional[this.game].newWords);
       this.rightAnswersPercent!.root.textContent = `${validateNum(percent)} %`;
       this.bestGameCount!.root.textContent = validateNum(stat.data.optional[this.game].streak);
     } else {
@@ -58,6 +58,4 @@ export class GamesStatistic extends Component {
       this.bestGameCount!.root.textContent = '0';
     }
   }
-
-
 }

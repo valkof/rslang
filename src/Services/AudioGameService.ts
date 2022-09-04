@@ -175,8 +175,12 @@ export class AudioGameService extends Observer {
       } else {
         this.getAgrWordsByBook(group, page, place)
           .then(words => {
-            if (words) this.resetSettingGame(words);
-            this.resultGame();
+            if (words) {
+              this.resetSettingGame(words);
+            } else {
+              this.learnWords = [];
+              this.resultGame();
+            }
           })
       }
     } else {

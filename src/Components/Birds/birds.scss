@@ -6,6 +6,11 @@
   width: 256px;
   height: 120px;
   overflow: hidden;
+
+  @media (max-width: 600px) {
+    width: 202px;
+    height: 83px;
+  }
 }
 
 .birds__branch {
@@ -15,4 +20,16 @@
   right: 15px;
   width: 209px;
   transform: rotate(45deg);
+
+  @media (max-width: 600px) {
+    top: -3px;
+    right: 22px;
+    width: 152px;
+  }
+}
+
+.birds__bird {
+  @media (max-width: 600px) {
+    width: 48px;
+  }
 }

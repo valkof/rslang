@@ -308,12 +308,23 @@ background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
 }
 }
 
-@media(max-width: 260px) {
+
+@media(max-width:300px) {
+    .logo {
+        width: 15%;
+    }
+}
+
+@media(max-width: 311px) {
     .navigation-wrapper a {
         margin-top: 27%;
         width: 192px;
         font-size: 1.7rem;
         height: 40px;
+    }
+
+    .logo {
+        width: 15%;
     }
 }
 

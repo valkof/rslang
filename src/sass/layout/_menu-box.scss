@@ -148,4 +148,14 @@
         .menu-btn {
             margin-left: 44px;
         }
+
+        .menu-box {
+          margin-left: 22%;
+        }
+    }
+
+    @media (max-width: 380px) {
+      .menu-box {
+        margin-left: 18%;
+      }
     }

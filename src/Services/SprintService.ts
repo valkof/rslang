@@ -66,7 +66,6 @@ export default class SprintService extends Observer {
         qerry.push(`{"page": ${pages[i]}}`);
       }
       const qerry2 = `{"$and": [{ "group": ${difficulty} }, { "$or": [${qerry.join(',')}] }]}`;
-      //const qerry2 = `{"$and": [{ "group": ${difficulty} }, { "$or": [{"page": 0}] }]}`; // Это для тестов
       const wordsRaw = await APIService.getAgrWords({
         wordsPerPage: '100',
         filter: qerry2,

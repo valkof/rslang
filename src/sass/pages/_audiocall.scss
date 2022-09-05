@@ -7,3 +7,15 @@
   width: 90%;
   height: 70vh;
 }
+
+@media(max-width: 780px) {
+  .game__process {
+    margin-top: 12%;
+  }
+}
+
+@media(max-width: 600px) {
+  .game__process {
+    margin-top: 43%;
+  }
+}

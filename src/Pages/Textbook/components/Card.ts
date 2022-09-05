@@ -31,9 +31,11 @@ export class Card extends Component {
 
   stat: Component | null = null;
 
-  constructor(parent: HTMLElement, public data: TWord | TAggregatedWord) {
-    super(parent, 'div', ['card']);
+  isGolosary = false;
 
+  constructor(parent: HTMLElement, public data: TWord | TAggregatedWord, isGolosary = false) {
+    super(parent, 'div', ['card']);
+    this.isGolosary = isGolosary;
     this.wordBlock = new Component(this.root, 'div', ['word-block']);
     this.wordBlock.root.style.backgroundImage = `url(${HOST}/${this.data?.image})`;
 
@@ -91,7 +93,12 @@ export class Card extends Component {
   switchActiveStatus(isHard = false, isLearn = false) {
     if (isHard) {
       this.root.classList.add('hard-style');
-    } else this.root.classList.remove('hard-style');
+    } else {
+      this.root.classList.remove('hard-style');
+      if(this.isGolosary) {
+        this.root.remove();
+      }
+    }
 
     if (isLearn) {
       this.root.classList.add('learn-style');

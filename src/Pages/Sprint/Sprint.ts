@@ -147,6 +147,7 @@ export class Sprint extends Component {
     this.service.sprint.addListener(ESprintEvents.changeCombo, this.setCombo.bind(this));
     this.service.sprint.addListener(ESprintEvents.changeReward, this.setReward.bind(this));
     this.service.sprint.addListener(ESprintEvents.renderStatistic, this.renderStatistic.bind(this));
+    this.service.sprint.addListener(ESprintEvents.renderStatisticDictionary, this.renderStatisticDictionary.bind(this));
 
     this.game.remove();
     window.addEventListener('keydown', this.keyHandler.bind(this));
@@ -247,16 +248,29 @@ export class Sprint extends Component {
   }
 
   private renderStatistic(data: TParams) {
-    this.game.remove();
-    this.dificulty.remove();
-    this.statistic?.remove();
-
+    this.removeGame();
     this.statistic = new StatisticPopup(
       this.root,
       data as TGameAnswer[],
       this.service.sprint.refreshGame.bind(this.service.sprint),
       this.render.bind(this),
     );
+  }
+
+  private renderStatisticDictionary(data: TParams) {
+    this.removeGame();
+    this.statistic = new StatisticPopup(
+      this.root,
+      data as TGameAnswer[],
+      this.service.sprint.refreshGame.bind(this.service.sprint),
+      () => (window.location.hash = '#textbook'),
+    );
+  }
+
+  private removeGame() {
+    this.game.remove();
+    this.dificulty.remove();
+    this.statistic?.remove();
   }
 
   render(): void {

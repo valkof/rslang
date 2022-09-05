@@ -20,6 +20,7 @@ export enum ESprintEvents {
   changeCombo = 'changeCombo',
   changeReward = 'changeReward',
   renderStatistic = 'statistic',
+  renderStatisticDictionary = 'renderStatisticDictionary'
 }
 
 export default class SprintService extends Observer {
@@ -95,7 +96,6 @@ export default class SprintService extends Observer {
     this.isFromDict = true;
     this.difficulty = group as TDifficulty;
     this.pageFromDictionary = page;
-    this.isFromDict = true;
     this.currentWords = (await getWordsFromDict(group, page)) as TAggregatedWord[];
     this.startGame();
   }
@@ -133,7 +133,12 @@ export default class SprintService extends Observer {
 
   async stopGame() {
     this.isGame = false;
-    this.dispatch(ESprintEvents.renderStatistic, this.answers);
+    if(this.isFromDict) {
+      this.dispatch(ESprintEvents.renderStatisticDictionary, this.answers);
+    } else {
+      this.dispatch(ESprintEvents.renderStatistic, this.answers);
+    }
+
     const user = APIService.getAuthUser();
     if (user && APIService.isAuthorizedUser()) {
       WriteStatisticService.writeResults(this.answers, EGames.sprint);

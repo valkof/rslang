@@ -5,7 +5,7 @@ export class Pagination extends Component {
     catWrapper: Component;
     pagesWrapper: Component;
     currentCategory = 0;
-    currentPage = 1;
+    currentPage = 0;
     pageNumber: Component;
     
     changeCategory: (data: {page: number, group: number, glossary?: boolean | undefined}) => void = () => {};
@@ -16,7 +16,7 @@ export class Pagination extends Component {
         super(parent, 'div', ['pagination-wrapper']);
         this.catWrapper= new Component(this.root, 'div', ['cat-wrapper']);
         this.pagesWrapper= new Component(this.root, 'div', ['pages-wrapper']);
-        this.pageNumber = new Component(this.pagesWrapper.root, 'div', ['page-number'], this.currentPage.toString());
+        this.pageNumber = new Component(this.pagesWrapper.root, 'div', ['page-number'], (this.currentPage + 1).toString());
         this.pageNumber.remove();
         this.createCategories();
         this.createPageControl(); 
@@ -48,7 +48,7 @@ export class Pagination extends Component {
             category.root.onclick = () => {
                 this.currentCategory = names.indexOf(category.root.textContent!);
                 this.currentPage = 0;
-                this.pageNumber.root.innerHTML = this.currentPage.toString();
+                this.pageNumber.root.innerHTML = (this.currentPage + 1).toString();
                 if (cat != 'Сложные слова') this.changeCategory({page: this.currentPage, group: this.currentCategory});
 
                 this.categories.forEach(el => { 
@@ -74,7 +74,7 @@ export class Pagination extends Component {
         const rightRow = new Component(this.pagesWrapper.root, 'div', ['right-row'], ' 🡆');
 
         leftRow.root.onclick = () => {
-            if (this.currentPage == 1) return;
+            if (this.currentPage == 0) return;
             this.currentPage -= 1;
             this.changeCategory({page: this.currentPage, group: this.currentCategory});
             this.pageNumber.root.innerHTML = (this.currentPage + 1).toString()
@@ -84,11 +84,11 @@ export class Pagination extends Component {
             if (this.currentPage == 29) return;
             this.currentPage += 1;
             this.changeCategory({page: this.currentPage, group: this.currentCategory});
-            this.pageNumber.root.innerHTML = (this.currentPage+1).toString()
+            this.pageNumber.root.innerHTML = (this.currentPage + 1).toString()
         }
       }
     
-    addRemoveGlossary(add: boolean = true) {
+    addRemoveGlossary(add = true) {
         const glossary = this.categories.find(el => el.root.textContent == 'Сложные слова');
         if (add) {
             glossary?.render() 

@@ -2,7 +2,6 @@ import { INIT_USER_SETTING, INIT_USER_STATISTIC, INIT_USER_WORD } from '../confi
 import {
   EGames,
   TAggregatedWord,
-  TAuthData,
   TGameAnswer,
   TUserSetting,
   TUserStatistic,
@@ -12,7 +11,7 @@ import { createDate } from '../utils';
 import APIService from './APIService';
 
 export default abstract class WriteStatisticService {
-  static game: EGames;
+  static game = EGames.sprint;
 
   static async writeResults(answers: TGameAnswer[], game: EGames) {
     this.game = game;
@@ -36,27 +35,27 @@ export default abstract class WriteStatisticService {
           correctAnswers++;
           streak++;
           maxStreak = maxStreak < streak ? streak : maxStreak;
-          learned += await this.writeUserWord(user, word, true);
+          learned += await this.writeUserWord(word, true);
         } else {
           streak = 0;
-          await this.writeUserWord(user, word, false);
+          await this.writeUserWord(word, false);
         }
       }
 
-      await this.writeSetting(user, date, newWords, maxStreak, answersCount, correctAnswers, learned);
-      await this.writeStatistic(user, date, newWords, learned);
+      await this.writeSetting(date, newWords, maxStreak, answersCount, correctAnswers, learned);
+      await this.writeStatistic(date, newWords, learned);
     }
   }
 
   static async writeSetting(
-    user: TAuthData,
     date: string,
     newWords: number,
     maxStreak: number,
     answersCount: number,
     correctAnswers: number,
     learned: number,
-  ) {
+    textbook = false
+  ): Promise<void> {
     const rawSetting = await APIService.getUserSetting();
     let setting: TUserSetting = rawSetting
       ? (rawSetting.data as TUserSetting)
@@ -64,7 +63,7 @@ export default abstract class WriteStatisticService {
     delete setting.id;
     if (setting.optional.date === date) {
       setting.wordsPerDay += newWords;
-      setting.optional[this.game].newWords += newWords;
+      setting.optional[this.game].newWords += textbook ? 0 : newWords;
       setting.optional[this.game].streak =
         setting.optional[this.game].streak < maxStreak ? maxStreak : setting.optional[this.game].streak;
       setting.optional[this.game].correctAnswers += correctAnswers;
@@ -73,8 +72,8 @@ export default abstract class WriteStatisticService {
     } else {
       setting = JSON.parse(JSON.stringify(INIT_USER_SETTING));
       setting.optional.date = createDate();
-      setting.wordsPerDay = newWords;
-      setting.optional[this.game].newWords = newWords;
+      setting.wordsPerDay += newWords;
+      setting.optional[this.game].newWords = textbook ? 0 : newWords;
       setting.optional[this.game].streak =
         setting.optional[this.game].streak < maxStreak ? maxStreak : setting.optional[this.game].streak;
       setting.optional[this.game].correctAnswers = correctAnswers;
@@ -84,8 +83,7 @@ export default abstract class WriteStatisticService {
     await APIService.upsertUserSetting(setting);
   }
 
-  // Запись статистики в БД
-  static async writeStatistic(user: TAuthData, date: string, newWords: number, learned: number) {
+  static async writeStatistic(date: string, newWords: number, learned: number) {
     const rawStatistic = await APIService.getUserStatistics();
     let statistic: TUserStatistic = rawStatistic ? rawStatistic.data : JSON.parse(JSON.stringify(INIT_USER_STATISTIC));
     statistic = statistic.optional ? statistic : JSON.parse(JSON.stringify(INIT_USER_STATISTIC));
@@ -96,12 +94,12 @@ export default abstract class WriteStatisticService {
       statistic.optional.data.dataPerDay[statistic.optional.data.dataPerDay.length - 1].date === ''
     ) {
       const i = statistic.optional.data.dataPerDay.length - 1;
-      statistic.optional.data.dataPerDay[i].learnedWords += learned;
+      statistic.optional.data.dataPerDay[i].learnedWords = statistic.learnedWords;
       statistic.optional.data.dataPerDay[i].newWords += newWords;
       statistic.optional.data.dataPerDay[i].date = date;
     } else {
       statistic.optional.data.dataPerDay.push({
-        learnedWords: learned,
+        learnedWords: statistic.learnedWords,
         newWords: newWords,
         date: date,
       });
@@ -110,7 +108,7 @@ export default abstract class WriteStatisticService {
     APIService.upsertUserStatistics(statistic);
   }
 
-  static async writeUserWord(user: TAuthData, word: TAggregatedWord, isTrue: boolean): Promise<number> {
+  static async writeUserWord(word: TAggregatedWord, isTrue: boolean): Promise<number> {
     let learned = 0;
     switch (isTrue) {
       case true:

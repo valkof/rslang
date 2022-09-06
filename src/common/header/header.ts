@@ -1,7 +1,6 @@
 import { Component } from '../../Abstract/component';
 import { TServices } from '../../Interfaces/Types';
 import { MenuBox } from '../menu-box/menu-box';
-import { AuturizationButton } from './autorization-btn';
 
 export class Header extends Component {
   headerWrapper: Component;
@@ -10,8 +9,6 @@ export class Header extends Component {
 
   navigationWrapper: Component;
 
-  autorisationButton: AuturizationButton;
-
   pathTitle: Component;
 
   menuBox: MenuBox;
@@ -19,6 +16,8 @@ export class Header extends Component {
   links: Component[] = [];
 
   statLink: Component | undefined;
+
+  authLink: Component | undefined;
 
   constructor(parent: HTMLElement, private readonly services: TServices) {
     super(parent, 'header');
@@ -36,6 +35,7 @@ export class Header extends Component {
       { name: 'Спринт', href: 'sprint' },
       { name: 'Аудиовызов', href: 'audiocall' },
       { name: 'Статистика', href: 'statistic' },
+      { name: 'Авторизация', href: 'authorization' },
     ];
 
     this.links = nav.map(({ name, href }) => {
@@ -48,8 +48,8 @@ export class Header extends Component {
       return navigation;
     });
 
-    this.statLink = this.links.find(l => l.root.textContent === 'Статистика');    
-
-    this.autorisationButton = new AuturizationButton(this.headerWrapper.root);
+    this.statLink = this.links.find(l => l.root.textContent === 'Статистика');  
+    
+    this.authLink = this.links.find(l => l.root.textContent === 'Авторизация');  
   }
 }

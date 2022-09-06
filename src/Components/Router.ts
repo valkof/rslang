@@ -2,7 +2,12 @@ import { Component } from "../Abstract/component";
 import { Footer } from "../common/footer/footer";
 
 export class Router {
-  constructor(private routes: Record<string, Component>, private footer: Footer, private statLink: Component) {
+  constructor(
+    private routes: Record<string, Component>,
+    private footer: Footer,
+    private statLink: Component,
+    private authLink: Component
+  ) {
     window.onhashchange = () => this.handleRoute();
     this.handleRoute();
   }
@@ -33,8 +38,11 @@ export class Router {
 
     if (authData == null) {
       this.statLink.remove();
+      this.authLink.render();
+
     } else {
       this.statLink.render();
+      this.authLink.remove();
     }
   }
 

@@ -92,8 +92,12 @@ export default class SprintService extends Observer {
     if (await APIService.isAuthorizedUser()) {
       this.currentWords = (await getWordsFromDict(group, page)) as TAggregatedWord[];
     } else {
-      const words = await APIService.getWords(page, group);
-      this.currentWords = words ? words.data : [];
+      let words: TWord[] = [];
+      for (let i = page; i >= 0; i--) {
+        const buf = await APIService.getWords(page, group);
+        if (buf?.data) words = [...words, ...buf!.data];
+      }
+      this.currentWords = [...words];
     }
     this.startGame();
   }

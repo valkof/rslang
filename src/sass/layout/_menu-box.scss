@@ -18,7 +18,7 @@
     display: flex;
     transform: translate(-50%, 0);
     width: 50px;
-    height: 25px;
+    height: 37px;
     cursor: pointer;
     z-index: 199;
   }
@@ -55,6 +55,7 @@
     height: 3px;
     background: #f5a329;
     transition-duration: 0.25s;
+    top: 50%;
   }
   .menu-btn > span::before {
     content: "";
@@ -90,7 +91,6 @@
   .menu-btn {
     order: 1;
     margin-right: 24px;
-    margin-top: 20px;
     margin-left: 400px;
 }
 

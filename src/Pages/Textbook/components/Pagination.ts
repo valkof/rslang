@@ -89,9 +89,9 @@ export class Pagination extends Component {
   }
 
   private createPageControl() {
-    const leftRow = new Component(this.pagesWrapper.root, 'div', ['left-row'], '🡄 ');
+    const leftRow = new Component(this.pagesWrapper.root, 'div', ['left-row'], '<< ');
     this.pageNumber.render();
-    const rightRow = new Component(this.pagesWrapper.root, 'div', ['right-row'], ' 🡆');
+    const rightRow = new Component(this.pagesWrapper.root, 'div', ['right-row'], ' >>');
 
     leftRow.root.onclick = () => {
       if (this.currentPage == 0) return;

@@ -58,12 +58,13 @@ export class Card extends Component {
     new Component(this.exampleTranslate.root, 'p', ['example-translate-one'], data.textMeaningTranslate);
     new Component(this.exampleTranslate.root, 'p', ['example-translate-two'], data.textExampleTranslate);
 
-    this.hardWord = new HardWord(this.root, data as TAggregatedWord, this.switchActiveStatus.bind(this));
-
+    const divHard = new Component(this.root, 'div', ['card-check']);
+    this.hardWord = new HardWord(divHard.root, data as TAggregatedWord, this.switchActiveStatus.bind(this));
+    
     const { userWord } = data as TAggregatedWord || {};
-
+    
     if (userWord) {
-      this.stat = new Component(this.root, 'p', ['card-stat'], `Слово угадано: ${userWord.optional.shown} раз, Ошибки: ${userWord.optional.guessed}`);
+      this.stat = new Component(this.root, 'p', ['card-stat'], `Угадано: ${userWord.optional.shown}, Ошибки: ${userWord.optional.guessed}`);
     }
   }
 

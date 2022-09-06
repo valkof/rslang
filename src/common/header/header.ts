@@ -44,6 +44,9 @@ export class Header extends Component {
       navigation.root.onclick = () => {
         this.links.forEach(el => el.root.classList.remove('active-link'));
         navigation.root.classList.add('active-link');
+        if ((this.menuBox.menuInput.root as HTMLInputElement).checked) {
+          (this.menuBox.menuInput.root as HTMLInputElement).checked = false;
+        }
       };
       return navigation;
     });

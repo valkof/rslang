@@ -22,7 +22,8 @@
 .dificulty__set_buttons {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 10px;
   flex-wrap: wrap;
   width: 80%;
   margin-bottom: 20px;

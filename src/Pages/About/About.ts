@@ -14,9 +14,9 @@ export class About extends Component {
        
     aboutUs.forEach(el => {
       const info = new Component(this.infoWrapper.root, 'div', ['info']);
-      const img = new Component(info.root, 'img', [], null, 'src', el.src);
-      const titles = new Component(info.root, 'h3', [], el.title);
-      const text = new Component(info.root, 'p', [],  el.text);
+      new Component(info.root, 'img', [], null, 'src', el.src);
+      new Component(info.root, 'h3', [], el.title);
+      new Component(info.root, 'p', [],  el.text);
             
     });
         

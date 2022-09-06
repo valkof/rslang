@@ -68,7 +68,7 @@ export class AudioGameService extends Observer {
         wordsPerPage: '600'
       })
     ]);
-    console.log(randomPage)
+
     if (response && response[0] && response[1]) {
       const setWords = [] as TAggregatedWord[][];
       const pageWords = response[0].data[0].paginatedResults;
@@ -197,7 +197,6 @@ export class AudioGameService extends Observer {
   stageGame(): void {
     this.dispatch('audio', `${HOST}/${this.wordsGame[this.roundGame][0].audio}`);
     const shuffleVersion = this.shuffleArray<TWord | TAggregatedWord>(this.wordsGame[this.roundGame]);
-    // console.log(this.wordsGame[this.roundGame][0].wordTranslate);
     const shuffleWords = shuffleVersion.map(word => word.wordTranslate);
     this.dispatch('vesrsion', shuffleWords);
   }

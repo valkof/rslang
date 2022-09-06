@@ -35,8 +35,8 @@ export class TextBook extends Component {
 
   async renderCards(data?: { group: number; page: number; glossary?: boolean }): Promise<void> {
     const [cardsData, glossData] = await Promise.all([APIService.getWords(data?.page ?? 0, data?.group ?? 0), this.getGlossaryData(
-        `{"$or":[{"$and":[{"group":${data?.group ?? 0}, "page":${data?.page ?? 0}}]},{"userWord.difficulty":"hard"}]}`
-      )]
+      `{"$or":[{"$and":[{"group":${data?.group ?? 0}, "page":${data?.page ?? 0}}]},{"userWord.difficulty":"hard"}]}`
+    )]
     );
 
     if (cardsData == null) return;

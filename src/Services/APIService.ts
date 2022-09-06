@@ -8,7 +8,6 @@ export default abstract class APIService {
 
   private static dataAuthUser = {} as TAuthResponse;
 
-  // Words
   static async getWords(page = 0, group = 0): Promise<IResponse<TWord[]> | null> {
     try {
       const response = await fetch(`${HOST}/words?group=${group}&page=${page}`);
@@ -37,7 +36,6 @@ export default abstract class APIService {
     }
   }
 
-  // Users
   static async getUser(): Promise<IResponse<TUser> | null> {
     try {
       const {token, userId} = this.dataAuthUser;
@@ -168,7 +166,6 @@ export default abstract class APIService {
     }
   }
 
-  // Login
   static async loginUser(user: TUser): Promise<IResponse<TAuthResponse> | null> {
     try {
       const rawResponse = await fetch(`${HOST}/signin`, {
@@ -195,7 +192,6 @@ export default abstract class APIService {
     }
   }
 
-  // Users/Words
   static async getUserWords(): Promise<IResponse<TUserWord[]> | null> {
     try {
       const {token, userId} = this.dataAuthUser;

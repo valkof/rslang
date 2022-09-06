@@ -15,7 +15,6 @@ export default abstract class WriteStatisticService {
 
   static async writeResults(answers: TGameAnswer[], game: EGames) {
     this.game = game;
-    const user = APIService.getAuthUser();
     const date = createDate();
     let newWords = 0;
     let learned = 0;
@@ -24,7 +23,7 @@ export default abstract class WriteStatisticService {
     let streak = 0;
     let maxStreak = 0;
 
-    if (user && APIService.isAuthorizedUser()) {
+    if (APIService.isAuthorizedUser()) {
       for (let i = 0; i < answers.length; i++) {
         const word = answers[i].word as TAggregatedWord;
         if (!word.userWord) {
@@ -38,7 +37,7 @@ export default abstract class WriteStatisticService {
           learned += await this.writeUserWord(word, true);
         } else {
           streak = 0;
-          await this.writeUserWord(word, false);
+          learned += await this.writeUserWord(word, false);
         }
       }
 
@@ -125,6 +124,8 @@ export default abstract class WriteStatisticService {
               word.userWord.difficulty !== 'learned'
             ) {
               word.userWord.difficulty = 'learned';
+              word.userWord.optional.count = 3;
+              word.userWord.optional.maxCount = 3;
               learned++;
             }
           }
@@ -146,6 +147,10 @@ export default abstract class WriteStatisticService {
               maxCount: word.userWord.optional.maxCount,
               shown: word.userWord.optional.shown + 1,
             };
+            if (word.userWord.difficulty === 'learned') {
+              word.userWord.optional.maxCount = 3;
+              learned -= 1;
+            }
             word.userWord.difficulty = word.userWord.optional.maxCount === 3 ? 'easy' : 'hard';
           }
 

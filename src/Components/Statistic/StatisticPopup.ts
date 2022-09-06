@@ -28,12 +28,12 @@ export default class StatisticPopup extends Component {
     this.btnContainer = new Component(this.root, 'div', ['statistic-popup__btnContainer']);
 
     if (repeatGame) {
-      this.repeatbtn = new Component(this.btnContainer.root, 'div', ['repeat-btn'], 'Повторить');
+      this.repeatbtn = new Component(this.btnContainer.root, 'div', ['repeat-btn'], 'Сложность');
       this.repeatbtn.root.onclick = repeatGame;
     }
 
     if (back) {
-      this.backBtn = new Component(this.btnContainer.root, 'div', ['repeat-btn'], 'Назад');
+      this.backBtn = new Component(this.btnContainer.root, 'div', ['repeat-btn'], 'Учебник');
       this.backBtn.root.onclick = back;
     }
 

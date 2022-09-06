@@ -1,6 +1,6 @@
 import { Component } from '../../Abstract/component';
 import { IResponse } from '../../Interfaces/Interfaces';
-import { TAggregatedWords, TAuthData, TServices } from '../../Interfaces/Types';
+import { TAggregatedWords, TServices } from '../../Interfaces/Types';
 import APIService from '../../Services/APIService';
 import { Card } from './components/Card';
 import { Pagination } from './components/Pagination';

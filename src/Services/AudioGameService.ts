@@ -68,6 +68,7 @@ export class AudioGameService extends Observer {
         wordsPerPage: '600'
       })
     ]);
+    console.log(randomPage)
     if (response && response[0] && response[1]) {
       const setWords = [] as TAggregatedWord[][];
       const pageWords = response[0].data[0].paginatedResults;

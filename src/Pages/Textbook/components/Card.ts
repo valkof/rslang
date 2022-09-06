@@ -64,7 +64,8 @@ export class Card extends Component {
     const { userWord } = data as TAggregatedWord || {};
     
     if (userWord) {
-      this.stat = new Component(this.root, 'p', ['card-stat'], `Угадано: ${userWord.optional.shown}, Ошибки: ${userWord.optional.guessed}`);
+      const percent = ((userWord.optional.guessed / userWord.optional.shown) * 100).toFixed(0);
+      this.stat = new Component(this.root, 'p', ['card-stat'], `Показано: ${userWord.optional.shown}. Угадал: ${percent}%`);
     }
   }
 

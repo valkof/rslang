@@ -252,8 +252,8 @@ export class Sprint extends Component {
     this.statistic = new StatisticPopup(
       this.root,
       data as TGameAnswer[],
-      this.service.sprint.refreshGame.bind(this.service.sprint),
       this.render.bind(this),
+      () => (window.location.hash = '#textbook'),
     );
   }
 
@@ -262,7 +262,7 @@ export class Sprint extends Component {
     this.statistic = new StatisticPopup(
       this.root,
       data as TGameAnswer[],
-      this.service.sprint.refreshGame.bind(this.service.sprint),
+      this.render.bind(this),
       () => (window.location.hash = '#textbook'),
     );
   }
@@ -280,7 +280,6 @@ export class Sprint extends Component {
     this.dificulty.render();
   }
 
-  //Старт игры Спринт с уровнем сложности - ${cat}, страница - ${page}
   startGameFromTexbook(cat: number, page: number) {
     this.service.sprint.startFromDict(cat, page);
   }

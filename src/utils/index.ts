@@ -24,7 +24,6 @@ export function createDate(): string {
   return new Date().toLocaleDateString().split('.').reverse().join('-');
 }
 
-// генерация случайного массива n элементов
 export function generateRandomNums(count: number): number[] {
   const arr: number[] = [];
   while (arr.length < count) {
@@ -35,7 +34,7 @@ export function generateRandomNums(count: number): number[] {
   }
   return arr;
 }
-//
+
 export async function getWordsFromDict(group: number, page: number): Promise<TAggregatedWord[]> {
   if (group >= 0 && group < 6) {
     const qerry = `{"$and": [{ "$or": [{ "userWord.difficulty":"easy" },{ "userWord.difficulty":"hard" },{"userWord":null}] },{ "group": ${group} }, { "$or": [{"page": ${page}}] }]}`;

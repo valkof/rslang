@@ -16,10 +16,8 @@ export class HardWord extends Component {
     super(parent, 'div', ['add-word']);
     new Component(this.root, 'span', ['text-hard'], 'Сложное');
     this.inputHardWord = new Component(this.root, 'input', ['hard-word'], null, 'type', 'checkbox');
-    // this.inputHardWord.root.setAttribute('data-title-word', 'Сложное слово');
     
     this.inputIsLearning = new Component(this.root, 'input', ['learn-word'], null, 'type', 'checkbox');
-    // this.inputIsLearning.root.setAttribute('data-title-word', 'Слово изучено')
     new Component(this.root, 'span', ['text-learned'], 'Изучено');
 
     this.inputHardWord.root.onclick = () => {

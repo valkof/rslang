@@ -48,7 +48,6 @@ export class Pagination extends Component {
     this.selectTrening.root.onchange = e => {
       const currentGame = (e.target as HTMLSelectElement).value;
       document.location = '#' + currentGame;
-      console.log(e);
       this.emitGame(currentGame, this.currentCategory, this.currentPage);
     };
 
@@ -77,7 +76,10 @@ export class Pagination extends Component {
         category.root.classList.add('active-link');
 
         if (cat == 'Сложные слова') {
+          this.pagesWrapper.remove();
           this.changeCategory({ page: this.currentPage, group: this.currentCategory, glossary: true });
+        } else {
+          this.pagesWrapper.render();
         }
 
         this.changeBackg(backgrColor[this.currentCategory]);
@@ -112,6 +114,8 @@ export class Pagination extends Component {
     const glossary = this.categories.find(el => el.root.textContent == 'Сложные слова');
     if (add) {
       glossary?.render();
-    } else glossary?.remove();
+    } else {
+      glossary?.remove();
+    }
   }
 }

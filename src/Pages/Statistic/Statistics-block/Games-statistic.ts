@@ -17,22 +17,22 @@ export class GamesStatistic extends Component {
 
     this.game = game;
 
-    const gameStatisticTitle = new Component(this.root, 'h3', [], title);
+    new Component(this.root, 'h3', [], title);
 
     const statistiFromGames = new Component(this.root, 'div', ['statistic-games']);
     const learnedWords = new Component(statistiFromGames.root, 'div', ['learned-words']);
     const countWords = new Component(learnedWords.root, 'div', ['count-words']);
-    const countTitle = new Component(countWords.root, 'p', [], 'Количество новых слов');
+    new Component(countWords.root, 'p', [], 'Количество новых слов');
     this.numberPercent = new Component(countWords.root, 'p', [], '0');
 
     const rightAnswers = new Component(statistiFromGames.root, 'div', ['right-answers']);
     const percetnrigrhtAnswers = new Component(rightAnswers.root, 'div', ['percent-right-ancwers']);
-    const rightAnswersTitle = new Component(percetnrigrhtAnswers.root, 'p', [], 'Процент правильных ответов');
+    new Component(percetnrigrhtAnswers.root, 'p', [], 'Процент правильных ответов');
     this.rightAnswersPercent = new Component(percetnrigrhtAnswers.root, 'p', [], ` %`);
 
     const bestGameBlock = new Component(statistiFromGames.root, 'div', ['best-game-block']);
     const bestGame = new Component(bestGameBlock.root, 'div', ['best-game']);
-    const bestGameTitle = new Component(bestGame.root, 'p', [], 'Лучшая игра');
+    new Component(bestGame.root, 'p', [], 'Лучшая игра');
     this.bestGameCount = new Component(bestGame.root, 'p', [], '0');
 
     this.getStatistic();
@@ -50,8 +50,8 @@ export class GamesStatistic extends Component {
           stat.data.optional[this.game].answersCount === 0
             ? 0
             : Math.floor(
-                (stat.data.optional[this.game].correctAnswers / stat.data.optional[this.game].answersCount) * 100,
-              );
+              (stat.data.optional[this.game].correctAnswers / stat.data.optional[this.game].answersCount) * 100,
+            );
         this.numberPercent!.root.textContent = validateNum(stat.data.optional[this.game].newWords);
         this.rightAnswersPercent!.root.textContent = `${validateNum(percent)} %`;
         this.bestGameCount!.root.textContent = validateNum(stat.data.optional[this.game].streak);

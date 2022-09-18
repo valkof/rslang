@@ -1,0 +1,286 @@
+.sprint-wrapper {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 70vh;
+}
+
+.sprint-game-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  background: #f5a329;
+  border-radius: 20px;
+}
+
+.sprint-game__header {
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 50px;
+}
+
+.sprint-game__timer-container,
+.sprint-game__score-container {
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.sprint-game__timer-container__text {
+  color: white;
+  font-size: 28px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.sprint-game__center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sprint-game__footer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.sprint-game__button-container {
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.sprint-game__false-btn,
+.sprint-game__true-btn {
+  cursor: pointer;
+  width: 150px;
+  border: 2px solid white;
+  text-align: center;
+  font-size: 28px;
+  color: white;
+  border-radius: 25px;
+}
+
+.sprint-game__false-btn {
+  background-color: #eb5757;
+  transition: 0.25s;
+  &:hover {
+    background-color: #aa1010;
+  }
+}
+
+.sprint-game__true-btn {
+  background-color: #63eb57;
+  transition: 0.25s;
+  &:hover {
+    background-color: #17d306;
+  }
+}
+
+.sprint-game__combo-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+  height: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.sprint-game__combo {
+  width: 35px;
+  height: 35px;
+  border: 3px solid white;
+  border-radius: 50%;
+}
+
+.sprint-game__combo_active {
+  background-color: #17d306;
+}
+
+.sprint-game__word {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 38px;
+  font-family: cursive;
+  color: white;
+}
+
+.sprint-game__translate {
+  color: white;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.sprint-game__reward-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 320px;
+  height: 80px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.sprint-game__reward__branch {
+  position: absolute;
+  z-index: 1;
+  top: -55px;
+  right: 10px;
+  width: 280px;
+  transform: rotate(45deg);
+}
+
+@media (max-width: 1120px) {
+  .sprint-game__button-container {
+    width: 90%;
+  }
+
+  .sprint-wrapper {
+    margin-top: 20px;
+  }
+
+  .sprint-game__button-container {
+    width: 80%;
+  }
+
+  .sprint-game__false-btn,
+  .sprint-game__true-btn {
+    cursor: pointer;
+    width: 150px;
+    border: 2px solid white;
+    text-align: center;
+    font-size: 20px;
+    color: white;
+    border-radius: 25px;
+  }
+}
+
+@media (max-width: 809px) {
+  .sprint-wrapper {
+    margin-top: 20px;
+  }
+
+  .sprint-game__button-container {
+    width: 90%;
+  }
+
+  .sprint-game__false-btn,
+  .sprint-game__true-btn {
+    cursor: pointer;
+    margin-right: 10px;
+    width: 100px;
+    border: 2px solid white;
+    text-align: center;
+    font-size: 12px;
+    color: white;
+    border-radius: 26px;
+  }
+  .sprint-game__reward__branch {
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 20px;
+    width: 150px;
+    transform: rotate(45deg);
+  }
+  .sprint-game__timer-container__text {
+    color: white;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .sprint-game__word {
+    font-size: 22px;
+  }
+
+  .sprint-game__translate {
+    font-size: 16px;
+  }
+  .sprint-game__reward-container {
+    width: 200px;
+  }
+
+  .sprint-game__reward__bird {
+    width: 40px;
+  }
+}
+
+@media (max-width: 420px) {
+
+  .sprint-wrapper {
+    margin-top: 20px;
+  }
+
+  .sprint-game__button-container {
+    width: 80%;
+  }
+
+  .sprint-game__false-btn, .sprint-game__true-btn {
+    cursor: pointer;
+    margin-right: 10px;
+    width: 80px;
+    border: 2px solid white;
+    text-align: center;
+    font-size: 10px;
+    color: white;
+    border-radius: 20px;
+  }
+  .sprint-game__reward__branch {
+    position: absolute;
+    z-index: 1;
+    top: 3px;
+    right: 0px;
+    width: 120px;
+    transform: rotate(45deg);
+  }
+  .sprint-game__timer-container__text {
+    color: white;
+    font-size: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .sprint-game__word {
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 7px;
+  }
+
+  .sprint-game__translate {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  .sprint-game__reward-container {
+    width: 130px;
+    margin: 0 0 0 0;
+  }
+  .sprint-game__reward__bird {
+    width: 30px;
+  }
+.sprint-game__combo-container{
+  width: 90%;
+  margin-bottom: 5px;
+}
+  .sprint-game__combo {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+  }

@@ -1,0 +1,255 @@
+.about-us-wrapper {
+     width: 90%;
+     margin: auto;
+     margin-bottom: 1%;
+     margin-top: -3%;
+}
+
+.about-us-wrapper h2 {
+    font-size: 5rem;
+    text-align: center;
+    margin-bottom: 3%;
+    font-family: cursive;
+    text-shadow: 5px 5px 6px #604513;
+    color: #f5a329;
+}
+
+.info-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info img {
+    width: 190px;
+    border: none;
+    transition: 1.5s;
+    border-radius: 50%;
+    box-shadow: 1px 14px 14px 10px rgb(195 185 172), 0 0px 4px 2px rgb(231 230 217 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 27px #d7c48f;
+}
+
+.info {
+  text-align: center;
+  margin-right: 2%;
+  width: 30%;
+}
+
+.info h3 {
+    font-size: 2.6rem;
+    margin-bottom: 3%;
+    margin-top: 3%;
+    font-family: cursive;
+    text-shadow: 1px -1px 1px #604513;
+    color: #f5a329;
+}
+
+.info p {
+    height: 300px;
+    font-size: 2rem;
+    font-family: cursive;
+    line-height: 37px;
+    border: 2px solid white;
+    border-radius: 40px;
+    padding: 23px;
+    background: #f5a329;
+    box-shadow: 0 5px 11px 11px rgb(0 0 0 / 25%), 0 2px 4px 2px rgb(0 0 0 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 10px rgb(0 0 0 / 10%);
+}
+
+@media(max-width: 1660px) {
+    .info img {
+        width: 170px;
+    }
+
+    .about-us-wrapper h2 {
+        font-size: 4.2rem;
+    }
+
+    .info p {
+    height: 260px;
+    font-size: 1.8rem;
+    line-height: 33px;
+    padding: 13px;
+    }
+}
+
+@media(max-width: 1460px) {
+    .about-us-wrapper {
+        margin-top: 0%;
+        margin-bottom: 2%;
+    }
+    .info img {
+        width: 150px;
+    }
+
+    .info p {
+        line-height: 30px;
+        height: 260px;
+        font-size: 1.7rem;
+    }
+
+    .info h3 {
+        font-size: 2.5rem;
+        margin-bottom: 5%;
+    }
+}
+
+@media(max-width: 1260px) {
+.info p {
+    font-size: 1.6rem;
+    height: 300px;
+}
+
+.info h3 {
+    font-size: 2.2rem;
+}
+}
+
+@media(max-width: 1100px) {
+    .info-wrapper {
+        display: block;
+     }
+
+     .about-us-wrapper h2 {
+        margin-bottom: 5%;
+     }
+
+    .info {
+        margin: auto;
+        width: 62%;
+    }
+
+    .info p {
+        height: 169px; 
+        margin-bottom: 9%;
+    }
+}
+
+@media(max-width: 820px) {
+    .info {
+        width: 75%;
+    }
+
+    .info p {
+        height: 170px;
+    }
+}
+
+@media(max-width: 660px) {
+    .about-us-wrapper h2 {
+        margin-bottom: 10%;
+    }
+
+    .info {
+        width: 95%;
+    }
+
+    .info p {
+        font-size: 1.5rem;
+        margin-bottom: 12%;
+    }
+}
+
+@media(max-width: 500px) {
+    .info {
+        width: 98%;
+    }
+
+    .info p {
+        height: 191px;
+        font-size: 1.4rem;
+        line-height: 25px;
+    }
+
+    .info h3 {
+        margin-top: 9%;
+    }
+
+    .info img {
+        width: 140px;
+    }
+}
+
+@media(max-width: 400px) {
+    .about-us-wrapper h2 {
+        margin-bottom: 13%;
+        font-size: 3.8rem;
+        text-shadow: 5px 5px 4px #604513;
+    }
+
+    .info img {
+        width: 120px;
+    }
+
+    .info h3 {
+        margin-top: 11%;
+    }
+
+    .info p {
+        line-height: 22px;
+    }
+}
+
+@media(max-width: 320px) {
+    .about-us-wrapper h2 {
+        margin-bottom: 16%;
+        font-size: 3.4rem;
+    }
+
+    .info {
+        margin-top: 18%;
+    }
+
+    .info img {
+        width: 110px;
+    }
+
+    .info h3 {
+        font-size: 1.9rem;
+        margin-top: 13%;
+    }
+
+    .info p {
+        height: 230px;
+        font-size: 1.3rem;
+    }
+}
+
+@media(max-width: 270px) {
+    .about-us-wrapper h2 {
+        font-size: 2.9rem;
+    }
+
+    .info h3 {
+        font-size: 1.7rem;
+    }
+
+    .info img {
+        width: 100px;
+    }
+
+    .info p {
+        height: 275px;
+    }
+}
+
+@media(max-width: 230px) {
+    .about-us-wrapper h2 {
+        font-size: 2.6rem;
+    }
+    
+    .info img {
+        width: 95px;
+    }
+
+    .info p {
+        height: 305px;
+    }
+
+    .info {
+        margin-top: 25%;
+    }
+
+.info h3 {
+    margin-top: 17%;
+}
+    
+}

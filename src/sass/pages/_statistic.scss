@@ -1,0 +1,466 @@
+.statistic-wrapper {
+    width: 90%;
+    margin: auto;
+
+}
+
+.statistic-wrapper h2 {
+text-align: center;
+font-size: 5rem;
+margin-bottom: 3%;
+font-family: cursive;
+text-align: center;
+color: #f5a329;
+text-shadow: 5px 5px 6px #604513;
+margin-left: 7%;
+}
+
+.avatar-wrapper {
+   justify-content: center;
+  width: 20%;
+}
+
+.avatar-wrapper img {
+    width: 77%;
+    cursor: pointer;
+}
+
+.avatar-content {
+    padding: 20px;
+    text-align: center;
+    box-sizing: border-box;
+    background: #f5a329;
+    border-radius: 30px;
+    height: auto;
+    position: relative;
+    box-shadow: 0 5px 14px 11px rgb(0 0 0 / 25%), 0 2px 4px 2px rgb(0 0 0 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 27px rgb(0 0 0 / 10%);
+}
+
+.avatar-name {
+    text-align: center;
+}
+
+.avatar-name input {
+    text-align: center;
+    font-size: 2.5rem;
+    width: 75%;
+    margin-bottom: 5%;
+    background-color: transparent;
+    border-radius: 15px;
+    border: #fff;
+    box-shadow: 0 5px 11px 11px rgb(0 0 0 / 25%), 0 2px 4px 2px rgb(0 0 0 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 10px rgb(0 0 0 / 10%);
+}
+
+.avatar-name button {
+    background-color: transparent;
+    font-size: 2.3rem;
+    text-align: center;
+    border: 2px solid #fff;
+    border-radius: 15px;
+    width: 60%;
+    height: 35px;
+    -webkit-align-self: center;
+    align-self: center;
+
+    margin-bottom: 5%;
+    cursor: pointer;
+    box-shadow: 0 5px 11px 11px rgb(0 0 0 / 25%), 0 2px 4px 2px rgb(0 0 0 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 10px rgb(0 0 0 / 10%);
+}
+
+.avatar-content a {
+    text-decoration: none;
+   color: black;
+    font-size: 2.4rem;
+}
+
+.avatar-statistics-block {
+    display: flex;
+    justify-content: space-between;
+}
+
+.statistic-games,
+.statistic-words {
+    margin: auto;
+    margin-bottom: 4%;
+    border: 2px solid white;
+    border-radius: 40px;
+    padding: 20px;
+    background: #f5a329;
+    box-shadow: 0 5px 11px 11px rgb(0 0 0 / 25%), 0 2px 4px 2px rgb(0 0 0 / 20%), 0 4px 8px 4px rgb(0 0 0 / 15%), 0 4px 16px 10px rgb(0 0 0 / 10%);
+}
+
+.statistic-games p,
+.statistic-words p {
+font-size: 2.5rem;
+margin-right: 3%;
+font-family: cursive;
+}
+
+.statistics {
+    width: 60%;
+    margin-bottom: 4%;
+}
+
+.words-statistic-wrapper, .games-statistic-wrapper {
+    width: 60%;
+}
+.count-words {
+    display: flex;
+    justify-content: space-between;
+}
+
+.percent-right-ancwers, .best-game {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2%;
+}
+
+.learned-words, .count-words  {
+    margin-bottom: 2%;
+}
+
+.percent-right-words {
+    display: flex;
+    justify-content: space-between;
+}
+
+.words-statistic-wrapper h3, .games-statistic-wrapper h3 {
+    font-size: 3rem;
+    font-family: cursive;
+    text-align: center;
+    margin-bottom: 2%;
+    color: black;
+}
+
+.words-statistic-wrapper {
+    margin-top: 4%;
+}
+
+@media (max-width: 1820px) {
+    .select-game button {
+        width: 26%;
+    }
+
+    .words-statistic-wrapper, .games-statistic-wrapper {
+        width: 75%;
+    }
+
+    .statistic-games, .statistic-words  {
+        padding: 20px;
+    }
+    .learned-words, .count-words {
+        margin-bottom: 1%;
+    }
+
+    .statistic-games p, .statistic-words p {
+        font-size: 2.5rem
+    }
+
+}
+
+@media (max-width: 1600px) {
+    .statistic-games p, .statistic-words p {
+        font-size: 2.3rem;
+    }
+
+    .avatar-name button {
+        font-size: 2rem;
+        width: 54%;
+        height: 30px;
+    }
+
+    .avatar-name input {
+       font-size: 2.4rem;
+    }
+
+    .avatar-content a {
+        text-decoration: none;
+        color: black;
+        font-size: 2rem;
+    }
+
+    .avatar-wrapper {
+        margin: auto;
+        width: 23%;
+    }
+
+    .select-game button {
+        width: 22%;
+        font-size: 2rem;
+        height: 31px;
+    }
+
+    .statistic-wrapper {
+        width: 96%;
+    }
+}
+
+@media (max-width: 1280px)  {
+    .statistic-games p, .statistic-words p {
+        font-size: 2rem;
+    }
+
+    .statistic-wrapper h2 {
+        font-size: 5rem;
+        margin-top: 3%;
+    }
+
+    .avatar-name input {
+      font-size: 2rem;
+    }
+
+    .avatar-name button {
+       font-size: 1.8rem;
+       width: 70%;
+       height: 28px;
+    }
+
+    .avatar-content a {
+      font-size: 2rem;
+    }
+
+    .select-game button {
+        font-size: 1.8rem;
+    }
+
+    .statistic-games, .statistic-words  {
+        padding: 17px;
+    }
+
+    .words-statistic-wrapper h3, .games-statistic-wrapper h3 {
+        font-size: 2rem;
+    }
+
+    .select-game button {
+        font-size: 1.8rem;
+        width: 26%;
+        height: 28px;
+    }
+
+    .avatar-statistics-block {
+        margin-bottom: 4%;
+    }
+
+}
+
+@media (max-width: 1200px) {
+    .avatar-wrapper {
+        width: 23%;
+    }
+
+    .avatar-content a {
+        font-size: 1.6rem;
+    }
+
+    .avatar-name button {
+        font-size: 1.6rem;
+    }
+
+    .select-game button {
+        font-size: 1.6rem;
+    }
+
+    .statistic-games p, .statistic-words p {
+        font-size: 1.8rem;
+    }
+
+    .avatar-statistics-block {
+        margin-bottom: 7%;
+    }
+
+    .avatar-name input {
+        width: 81%;
+    }
+
+    .statistic-games p, .statistic-words p {
+        font-size: 1.6rem;
+    }
+
+}
+
+@media (max-width: 990px) {
+    .avatar-name input {
+        width: 91%;
+    }
+
+    .avatar-name button {
+        font-size: 1.4rem;
+    }
+
+    .statistic-wrapper h2 {
+        font-size: 4rem;
+        margin-bottom: 5%;
+    }
+
+    .statistic-wrapper {
+        margin-bottom: 11%;
+    }
+
+    .select-game button {
+        font-size: 1.4rem;
+    }
+
+    .avatar-name button {
+        font-size: 1.4rem;
+    }
+
+    .avatar-wrapper {
+        justify-content: center;
+        width: 26%
+    }
+
+    .words-statistic-wrapper, .games-statistic-wrapper {
+        width: 85%;
+    }
+}
+
+@media (max-width: 850px) {
+    .avatar-wrapper {
+        width: 38%;
+    }
+
+    .avatar-statistics-block {
+        display: block;
+    }
+
+    .statistics {
+        width: 100%;
+        margin-top: 4%;
+    }
+
+    .words-statistic-wrapper, .games-statistic-wrapper {
+        width: 70%;
+        margin: auto;
+    }
+
+    .words-statistic-wrapper {
+        margin-top: 4%;
+    }
+
+}
+
+@media (max-width: 685px) {
+    .avatar-wrapper {
+        width: 48%;
+    }
+
+    .words-statistic-wrapper, .games-statistic-wrapper {
+        width: 81%;
+    }
+
+    .avatar-name button {
+        width: 83%;
+        }
+
+        .select-game button {
+          width: 32%;
+        }
+
+        .statistic-games, .statistic-words {
+            padding: 10px;
+        }
+}
+
+@media (max-width: 575px) {
+    .avatar-wrapper {
+        width: 57%;
+    }
+
+    .words-statistic-wrapper, .games-statistic-wrapper {
+        width: 90%;
+    }
+
+    .statistic-games p, .statistic-words p {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 440px) {
+    .words-statistic-wrapper, .games-statistic-wrapper {
+        width: 100%;
+    }
+    
+    .statistic-wrapper h2 {
+        font-size: 3.8rem;
+        margin-bottom: 7%;
+    }
+
+    .avatar-wrapper {
+        width: 62%;
+    }
+
+    .words-statistic-wrapper, .games-statistic-wrapper {
+        width: 98%;
+    }
+
+    .select-game button {
+        width: 37%;
+    }
+
+    .statistic-games p, .statistic-words p {
+        font-size: 1.3rem;
+    }
+
+    .words-statistic-wrapper h3, .games-statistic-wrapper h3 {
+        font-size: 1.6rem;
+    }
+
+    .select-game button {
+        font-size: 1.3rem;
+    }
+
+
+    .avatar-content a {
+        font-size: 1.4rem;
+    }
+
+    .avatar-name input {
+        width: 102%;
+    }
+
+    .avatar-name input {
+        width: 107%;
+        font-size: 1.5rem;
+    }
+
+    .avatar-name button {
+        font-size: 1.6rem;
+        width: 106%;
+        height: 25px;
+    }
+
+    .avatar-content a {
+        font-size: 1.4rem;
+    }
+
+    .avatar-name {
+        margin-bottom: 4%;
+    }
+
+    .chart-wrapper h3 {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 326px) {
+    .avatar-wrapper {
+        width: 67%;
+    }
+
+    .avatar-name button {
+        font-size: 1.4rem;
+    }
+
+    .words-statistic-wrapper, .games-statistic-wrapper {
+        width: 100%;
+    }
+
+    .statistic-games, .statistic-words {
+        padding: 13px;
+    }
+
+    .statistic-games p, .statistic-words p {
+        font-size: 1.2rem;
+    }
+}
+

@@ -5,19 +5,14 @@ export const mainMenu: IMainMenu[] = [
     hash: "textbook",
   },
   {
-    title: 'Статистика',
-    src: 'assets/icon/6.png',
-    hash: "statistic",
+    title: 'Аудиовызов',
+    src: 'assets/icon/audiocall.png',
+    hash: "audiocall",
   },
   {
     title: 'Спринт',
     src: 'assets/icon/3.png',
     hash: "sprint",
-  },
-  {
-    title: 'Аудиовызов',
-    src: 'assets/icon/audiocall.png',
-    hash: "audiocall",
   },
 ]
 export interface IMainMenu{

@@ -1,11 +1,5 @@
 import { SPRINT_DURATION } from '../config';
-import {
-  EGames,
-  TAggregatedWord,
-  TDifficulty,
-  TGameAnswer,
-  TWord,
-} from '../Interfaces/Types';
+import { EGames, TAggregatedWord, TDifficulty, TGameAnswer, TWord } from '../Interfaces/Types';
 import { getWordsFromDict, shuffle } from '../utils';
 import APIService from './APIService';
 import { Observer } from './../Abstract/Observer';
@@ -20,7 +14,7 @@ export enum ESprintEvents {
   changeCombo = 'changeCombo',
   changeReward = 'changeReward',
   renderStatistic = 'statistic',
-  renderStatisticDictionary = 'renderStatisticDictionary'
+  renderStatisticDictionary = 'renderStatisticDictionary',
 }
 
 export default class SprintService extends Observer {
@@ -95,7 +89,16 @@ export default class SprintService extends Observer {
     this.isFromDict = true;
     this.difficulty = group as TDifficulty;
     this.pageFromDictionary = page;
-    this.currentWords = (await getWordsFromDict(group, page)) as TAggregatedWord[];
+    if (await APIService.isAuthorizedUser()) {
+      this.currentWords = (await getWordsFromDict(group, page)) as TAggregatedWord[];
+    } else {
+      let words: TWord[] = [];
+      for (let i = page; i >= 0; i--) {
+        const buf = await APIService.getWords(page, group);
+        if (buf?.data) words = [...words, ...buf!.data];
+      }
+      this.currentWords = [...words];
+    }
     this.startGame();
   }
 
@@ -124,7 +127,7 @@ export default class SprintService extends Observer {
         this.dispatch(ESprintEvents.changeTranslate, JSON.stringify(word.wordTranslate));
       } else {
         this.rightChoise = false;
-        const incorectWord= this.getIncorrect(word.wordTranslate);
+        const incorectWord = this.getIncorrect(word.wordTranslate);
         this.dispatch(ESprintEvents.changeTranslate, JSON.stringify(incorectWord));
       }
     } else this.stopGame();
@@ -132,7 +135,7 @@ export default class SprintService extends Observer {
 
   async stopGame() {
     this.isGame = false;
-    if(this.isFromDict) {
+    if (this.isFromDict) {
       this.dispatch(ESprintEvents.renderStatisticDictionary, this.answers);
     } else {
       this.dispatch(ESprintEvents.renderStatistic, this.answers);
@@ -205,10 +208,10 @@ export default class SprintService extends Observer {
     }, 1000);
   }
 
-  private getIncorrect(word:string) {
-    const index =  this.incorrectVariants.indexOf(word);
-    if(index >= this.incorrectVariants.length - 1) {
+  private getIncorrect(word: string) {
+    const index = this.incorrectVariants.indexOf(word);
+    if (index >= this.incorrectVariants.length - 1) {
       return this.incorrectVariants[0];
-    } else return this.incorrectVariants[index+1];
+    } else return this.incorrectVariants[index + 1];
   }
 }
